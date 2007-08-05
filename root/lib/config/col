@@ -1,0 +1,65 @@
+[% site.rgb = {
+     black   = '#000000'
+     white   = '#ffffff'
+     grey1   = '#484848'
+     grey2   = '#cccccc'
+     grey3   = '#efefef'
+     red     = '#CC4444'
+     green   = '#66AA66'
+     blue    = '#89b8df'
+     orange  = '#f08900'
+     grey2_t = '#cceeee'
+     purple  = '#551a8b'
+     house   = '#12171c'
+     roof    = '#4ca7ab'
+     door    = '#aa1914'
+   };
+
+   site.col = {
+      page    = site.rgb.white
+      text    = site.rgb.grey1
+      head    = site.rgb.grey3
+      line    = site.rgb.door
+      message = site.rgb.green
+      error   = site.rgb.red
+      nav = {
+        background = site.rgb.grey3
+        foreground = site.rgb.white
+        border     = site.rgb.house
+        button = {
+          cur = {
+            background = site.rgb.house
+            foreground = site.rgb.white
+            border     = site.rgb.house
+            hover      = site.rgb.grey2_t
+          }
+          background = site.rgb.roof
+          foreground = site.rgb.black
+          border     = site.rgb.grey3
+          hover      = site.rgb.grey2_t
+        }
+      }
+      crudbutton = {
+        background = site.rgb.roof
+        foreground = site.rgb.black
+        border     = site.rgb.grey1
+        hover      = site.rgb.grey2_t
+      }
+      filterbutton = {
+        background = site.rgb.roof
+        foreground = site.rgb.black
+        border     = site.rgb.grey1
+        hover      = site.rgb.grey2_t
+      }
+      pagebutton = {
+        background = site.rgb.grey2
+        foreground = site.rgb.black
+        border     = site.rgb.grey1
+        hover      = site.rgb.grey2_t
+      }
+      list = {
+        row0 = site.rgb.grey3
+        row1 = site.rgb.white
+      }
+   };
+%]

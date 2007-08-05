@@ -1,0 +1,26 @@
+[% filternav(filters,filter) %]
+[% pagenav(page) %]
+<table class="list-table">
+  <tr class="list-header">
+  [% FOR column = column_order %]
+    <th>[% column %]</th>
+  [% END %]
+    <th/>
+  </tr>
+  [% SET count = 0 %]
+  [% WHILE (item = items.next) %]
+    <tr class="list-row-[% count % 2 %]">
+    [% FOR column = column_order %]
+      <td>[% item.$column %]</td>
+    [% END %]
+      <td>
+        [% crudbutton("state", "view", item.id) %]
+        [% crudbutton("state", "edit", item.id) %]
+        <!-- [% crudbutton("state", "destroy", item.id) %] -->
+      </td>
+    </tr>
+    [% count = count + 1 %]    
+  [% END %]
+</table>
+<hr/>
+[% crudbutton("state", "add", "") %]

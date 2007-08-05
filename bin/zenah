@@ -1,0 +1,84 @@
+#!/usr/bin/perl -w
+
+# $Id$
+
+=head1 NAME
+
+zenah - Perl script for the xPL Engine Zen Automated Home
+
+=head1 SYNOPSIS
+
+  # show usage message
+  zenah -h
+
+  # start the rfxcom application on first ethernet interface in verbose mode
+  zenah -i eth0 -v
+
+=head1 DESCRIPTION
+
+This script is an xPL client that generates xPL messages based on timer
+events and rules for handling incoming xPL messages.  The rules are stored
+in a database.  A web interface is provided.  The web interface also allows
+the database to be edited including editing of the templates for the web
+interface itself.
+
+=cut
+
+use strict;
+use warnings;
+use English qw/-no_match_vars/;
+use FileHandle;
+use Getopt::Std;
+use ZenAH::Engine;
+
+$|=1; # autoflush helps debugging
+
+sub HELP_MESSAGE {
+  my $msg = shift || q{};
+  die
+qq{Usage: $0 [flags] [options]
+where valid flags are:
+  -h - show this help text
+  -v - verbose mode
+and valid options are (default shown in brackets):
+  -i if0 - the inferface for xPL messages (first non-loopback or loopback)
+$msg
+};
+}
+
+my %opt = ();
+getopts('hvi:b:', \%opt);
+if (exists $opt{'h'}) {
+  HELP_MESSAGE()
+}
+
+my %args = ();
+if (exists $opt{'i'}) {
+  $args{interface} = $opt{'i'};
+}
+if (exists $opt{'v'}) {
+  $args{verbose} = $opt{'v'};
+}
+
+# Create an xPL Client object
+my $engine =
+  ZenAH::Engine->new(%args) or die "Failed to create ZenAH::Engine\n";
+$engine->main_loop();
+
+=head1 SEE ALSO
+
+Project website: http://www.zenah.org.uk/
+
+=head1 AUTHOR
+
+Mark Hindess, E<lt>zenah@beanz.uklinux.netE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2006, 2007 by Mark Hindess
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.8.7 or,
+at your option, any later version of Perl 5 you may have available.
+
+=cut

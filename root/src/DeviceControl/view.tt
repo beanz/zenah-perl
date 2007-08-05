@@ -1,0 +1,13 @@
+<table class="view-table">
+[% FOR column = column_order %]
+  <tr>
+    <th class="view-table">[% column %]</th>
+    <td class="view-table" colspan="2">[% item.$column %]</td>
+  </tr>
+[% END %]
+</table>
+[% crudbutton("devicecontrol", "edit", item.id) %]
+[% crudbutton("devicecontrol", "destroy", item.id) %]
+<hr/>
+
+[% crudbutton("devicecontrol", "list", "") %]

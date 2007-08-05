@@ -1,0 +1,9 @@
+
+[% FOR column = column_order %]
+  <b>[% column %]</b><br/>
+  [% item.$column %]<br/><br/>
+[% END %]
+[% crudbutton("deviceattribute", "edit", item.id) %]
+[% crudbutton("deviceattribute", "destroy", item.id) %]
+<hr/>
+[% crudbutton("deviceattribute", "list", "") %]

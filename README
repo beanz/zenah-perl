@@ -1,0 +1,34 @@
+perl Makefile.PL
+make
+
+Copy the sample database to the default location;
+
+  cp -p zenah.sample.db zenah.db
+
+To start the test server on http://hostname:3000/ run:
+
+  perl -Iblib/lib blib/script/zenah_server.pl
+
+THERE IS NO AUTHENTICATION IN THE SERVER CODE SO MAKE SURE IT IS FIREWALLED.
+
+In another terminal, start the xPL rules engine with:
+
+  perl -Iblib/lib blib/script/zenah
+
+THIRD PARTY SOFTWARE
+
+This distribution also contains copies of code from:
+
+  http://script.aculo.us/
+
+and:
+
+  http://www.prototypejs.org/
+
+COPYRIGHT AND LICENSE
+
+Copyright (C) 2006, 2007 by Mark Hindess
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.8.7 or,
+at your option, any later version of Perl 5 you may have available.

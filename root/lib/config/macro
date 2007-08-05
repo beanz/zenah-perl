@@ -1,0 +1,68 @@
+[% MACRO crudbutton(type, action, id, name) BLOCK %]
+  <span class="crudbutton"><a
+    href="[% Catalyst.uri_for("/", type, action, id) %]"
+    >[% IF name %][% name %][% ELSE %][% action FILTER ucfirst %][% END %]</a></span>
+[% END %]
+
+[% MACRO navbutton(type,current) BLOCK %]
+  <span class="navbutton[% type == Catalyst.request.path.split('/|\?').0 ?
+                        "-current" : "" %]"><a
+    href="[% Catalyst.uri_for("/", type) %]"
+    >[% type FILTER ucfirst %]</a></span>
+[% END %]
+
+[% MACRO pagenav(page) BLOCK %]
+[% SET f = Catalyst.request.param("filter") %]
+[% SET pp = page.previous_page %]
+[% SET np = page.next_page %]
+[% IF page.last > 1 %]
+<p class="pagenav" id="pagenav">
+Page:
+  [% IF pp %]
+    <span class="pagebutton"><a
+      href="[% Catalyst.uri_for(".", { page => pp, filter => f }) %]"
+        >&lt;&lt;</a></span>
+  [% ELSE %]
+    <span class="pagebutton">&lt;&lt;</span>
+  [% END %]
+&nbsp;
+
+  [% SET p = 1 %]
+  [% WHILE p <= page.last_page %]
+    [% IF p == page.current_page %]
+      <span class="pagebutton-current">[% p %]</span>
+    [% ELSE %]
+    <span class="pagebutton"><a
+      href="[% Catalyst.uri_for(".", { page => p, filter => f }) %]"
+        >[% p %]</a></span>
+    [% END %]
+    &nbsp;
+    [% SET p = p + 1 %]
+  [% END %]
+
+  [% IF np %]
+    <span class="pagebutton"><a
+      href="[% Catalyst.uri_for(".", { page => np, filter => f }) %]"
+        >&gt;&gt;</a></span>
+  [% ELSE %]
+    <span class="pagebutton">&gt;&gt;</span>
+  [% END %]
+</p>
+[% END %]
+[% END %]
+
+[% MACRO filternav(filters,current) BLOCK %]
+[% SET f = Catalyst.request.param("filter") %]
+<p class="filternav" id="filternav">
+Filter:
+[% FOREACH filter = filters %]
+  [% IF filter == f or (f == "" and filter == "none") %]
+    <span class="filterbutton-current">[% filter %]</span>
+  [% ELSE %]
+    <span class="filterbutton"><a
+      href="[% Catalyst.uri_for(".", { 'filter' => filter }) %]"
+       >[% filter %]</a></span>
+  [% END %]
+[% END %]
+</p>
+[% END %]

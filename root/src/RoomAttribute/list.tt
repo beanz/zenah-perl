@@ -1,0 +1,32 @@
+[% filternav(filters,filter) %]
+[% pagenav(page) %]
+<table class="list-table">
+  <tr class="list-header">
+  [% FOR column = column_order %]
+    <th>[% column %]</th>
+  [% END %]
+    <th>&nbsp;<!-- buttons --></th>
+  </tr>
+  [% SET count = 0 %]
+  [% WHILE (item = items.next) %]
+    <tr class="list-row-[% count % 2 %]">
+    [% FOR column = column_order %]
+      [% IF column == 'active' %]
+        <td>[% item.$column ? "enabled" : "disabled" %]</td>
+      [% ELSIF column == 'action' or column == 'trig' %]
+        <td><small>[% item.$column %]</small></td>
+      [% ELSE %]
+        <td>[% item.$column %]</td>
+      [% END %]
+    [% END %]
+      <td>
+        [% crudbutton("roomattribute", "view", item.id) %]
+        [% crudbutton("roomattribute", "edit", item.id) %]
+        <!-- [% crudbutton("roomattribute", "destroy", item.id) %] -->
+      </td>
+    </tr>
+    [% count = count + 1 %]    
+  [% END %]
+</table>
+<hr/>
+[% crudbutton("roomattribute", "add", "") %]

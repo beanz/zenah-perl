@@ -1,0 +1,12 @@
+
+[% USE table_class = Class('ZenAH::Model::CDBI::Map') %]
+<p>[%message%]</p>
+<form action="[% base _ '/map/do_add' %]" method="post">
+  [% FOR column = column_order %]
+    [% column %]<br/>
+    [% table_class.to_field(column).as_XML %]<br/>
+  [% END %]
+  <input type="submit" value="Add"/>
+</form>
+<hr/>
+[% crudbutton("map", "list", "") %]

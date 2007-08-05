@@ -1,0 +1,4 @@
+<!-- BEGIN site/header -->
+<img id="logo" class="logo" height="50" width="50" src="/images/zenah-50.png" />
+<h1 class="title">[% template.title or site.title %]</h1>
+<!-- END site/header -->

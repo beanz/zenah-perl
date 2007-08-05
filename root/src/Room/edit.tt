@@ -1,0 +1,36 @@
+[% USE attr_table = Class('ZenAH::Model::CDBI::RoomAttribute') %]
+<p>[%message%]</p>
+<form action="[% base _ '/room/do_edit/' _ item.id %]"
+    method="post">
+  <table border="0" width="100%">
+  <tr>
+    <td rowspan="2">
+      [% FOR column = column_order %]
+        [% column %]<br/>
+        [% item.to_field(column).as_XML %]<br/>
+      [% END %]
+    </td>
+    <th valign="top" align="left">Attributes</th>
+  </tr>
+  <tr>
+    <td valign="top" align="left">
+      <select name="attrs" multiple="multiple">
+      [% FOR attr = attr_table.retrieve_all(order_by => "name,value") %]
+        [% IF attrs.$attr %]
+          <option selected="selected"
+                  value="[% attr %]"
+            >[% attr.name _ '&nbsp;= &nbsp;' _ attr.value %]</option>
+        [% ELSE %]
+          <option value="[% attr %]"
+            >[% attr.name _ '&nbsp;= &nbsp;' _ attr.value %]</option>
+        [% END %]
+      [% END %]
+      </select>
+    </td>
+  </tr>
+  </table>
+
+  <input type="submit" value="Edit"/>
+</form>
+<hr/>
+[% crudbutton("room", "list", "") %]

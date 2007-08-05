@@ -1,0 +1,16 @@
+
+[% USE table_class = Class('ZenAH::Model::CDBI::DeviceControl') %]
+<p>[%message%]</p>
+<form action="[% base _ '/devicecontrol/do_add' %]" method="post">
+  [% FOR column = column_order %]
+    [% column %]<br/>
+    [% IF column == 'definition' %]
+      <textarea name="definition" cols="80" rows="4"></textarea><br/>
+    [% ELSE %]
+      [% table_class.to_field(column).as_XML %]<br/>
+    [% END %]
+  [% END %]
+  <input type="submit" value="Add"/>
+</form>
+<hr/>
+[% crudbutton("devicecontrol", "list", "") %]

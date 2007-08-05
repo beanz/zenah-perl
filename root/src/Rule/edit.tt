@@ -1,0 +1,31 @@
+
+<p>[%message%]</p>
+<form action="[% base _ '/rule/do_edit/' _ item.id %]"
+    method="post">
+  [% FOR column = column_order %]
+    [% column %]<br/>
+    [% IF column == 'active' %]
+      <select name="active">
+      [% IF item.active %]
+        <option selected="selected" value="1">Enabled</option>
+        <option value="0">Disabled</option>
+      [% ELSE %]
+        <option selected="selected" value="0">Disabled</option>
+        <option value="1">Enabled</option>
+      [% END %]
+      </select>
+      <br/>
+    [% ELSIF column == 'trig' %]
+      <textarea name="trig" cols="80" rows="2"
+        >[% item.trig %]</textarea><br/>
+    [% ELSIF column == 'action' %]
+      <textarea name="action" cols="80" rows="10"
+        >[% item.action %]</textarea><br/>
+    [% ELSE %]
+      [% item.to_field(column).as_XML %]<br/>
+    [% END %]
+  [% END %]
+  <input type="submit" value="Edit"/>
+</form>
+<hr/>
+[% crudbutton("rule", "list", "") %]

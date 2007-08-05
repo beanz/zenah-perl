@@ -1,0 +1,42 @@
+[% filternav(filters,filter) %]
+[% pagenav(page) %]
+<table class="list-table">
+  <tr class="list-header">
+  [% FOR column = column_order %]
+    <th>[% column %]</th>
+  [% END %]
+    <th>Attributes</th>
+    <th/>
+  </tr>
+  [% SET count = 0 %]
+  [% WHILE (item = items.next) %]
+    <tr class="list-row-[% count % 2 %]">
+    [% FOR column = column_order %]
+      <td>[% item.$column %]</td>
+    [% END %]
+      <td>
+        [% FOR attr = item.device_attributes %]
+          [% attr.name %]=[% attr.value %],&nbsp;
+        [% END %]
+      </td>
+      <td>
+        [% crudbutton("device", "view", item.id) %]
+        [% crudbutton("device", "edit", item.id) %]
+        <!-- [% crudbutton("device", "destroy", item.id) %] -->
+      </td>
+    </tr>
+    [% count = count + 1 %]    
+  [% END %]
+</table>
+<hr/>
+[% crudbutton("device", "add", "") %]
+
+&nbsp;
+
+[% crudbutton("devicecontrol", "list", "", "List Controls") %]
+[% crudbutton("devicecontrol", "add", "", "Add Control") %]
+
+&nbsp;
+
+[% crudbutton("deviceattribute", "list", "", "List Attributes") %]
+[% crudbutton("deviceattribute", "add", "", "Add Attribute") %]

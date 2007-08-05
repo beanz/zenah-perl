@@ -1,0 +1,156 @@
+html {
+    height: 100%;
+}
+
+body { 
+    background-color: [% site.col.page %];
+    color: [% site.col.text %];
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+
+#logo {
+    float: right;
+}
+
+#header {
+    background-color: [% site.col.head %];
+}
+
+#footer {
+    background-color: [% site.col.head %];
+    text-align: center;
+    border-top: 1px solid [% site.col.line %];
+    bottom: 0;
+    left: 0px;
+    width: 100%;
+    padding: 4px;
+}
+
+#content {
+    padding: 10px;
+}
+
+h1.title {
+    padding: 0.1em;
+    margin: 0em;
+    font: Ariel;
+    color: #12171c;
+}
+
+.message {
+    color: [% site.col.message %];
+}
+
+.error {
+    color: [% site.col.error %];
+}
+
+table.view-table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+th.view-table {
+    border: 1px solid black;
+    text-align: left;
+}
+td.view-table {
+    border: 1px solid black;
+}
+
+table.list-table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+th.list-table {
+    border: 1px solid black;
+}
+td.list-table {
+    border: 1px solid black;
+}
+tr.list-row-0 {
+    background-color: [% site.col.list.row0 %];
+}
+tr.list-row-1 {
+    background-color: [% site.col.list.row1 %];
+}
+
+#nav {
+    padding: 2px 0px;
+    border-bottom: 5px solid [% site.col.nav.border %];
+    background-color: [% site.col.nav.background %];
+}
+
+.navbutton-current {
+    border-style: hidden;
+    padding: 3px 3px 2px 3px;
+    border-color: [% site.col.nav.button.cur.border %];
+    background: [% site.col.nav.button.cur.background %];
+}
+
+.navbutton {
+    border-bottom: 1px solid [% site.col.nav.button.border %];
+    padding: 3px 3px 1px 3px;
+    background: [% site.col.nav.button.background %];
+}
+
+.navbutton-current A {
+    color: [% site.col.nav.button.cur.foreground %];
+    font-weight: bold;
+    text-decoration: none;
+} 
+
+.navbutton-current A:hover {
+    color: [% site.col.nav.button.cur.foreground %];
+    font-weight: bold;
+    text-decoration: none;
+} 
+
+.navbutton-current img {
+    border-style: hidden;
+}
+
+.navbutton A {
+    color: [% site.col.nav.button.foreground %];
+    font-weight: bold;
+    text-decoration: none;
+} 
+
+.navbutton A:hover {
+    background: [% site.col.nav.button.hover %];
+} 
+
+.navbutton img {
+    border-style: hidden;
+}
+
+[% FOREACH button = ['pagebutton', 'filterbutton', 'crudbutton'] %]
+.[% button %]-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: [% site.col.$button.border %];
+    background: [% site.col.$button.hover %];
+}
+
+.[% button %] {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: [% site.col.$button.border %];
+    background: [% site.col.$button.background %];
+}
+
+.[% button %] A {
+    color: [% site.col.$button.foreground %];
+    font-weight: bold;
+    text-decoration: none;
+} 
+
+.[% button %] A:hover {
+    background: [% site.col.$button.hover %];
+} 
+
+.[% button %] img {
+    border-style: hidden;
+}
+[% END %]

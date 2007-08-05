@@ -1,0 +1,16 @@
+<table class="view-table">
+[% FOR column = column_order %]
+  <tr>
+    <th class="view-table">[% column %]</th>
+    [% IF column == 'action' %]
+      <td class="view-table"><pre>[% item.$column %]</pre></td>
+    [% ELSE %]
+      <td class="view-table">[% item.$column %]</td>
+    [% END %]
+  </tr>
+[% END %]
+</table>
+[% crudbutton("rule", "edit", item.id) %]
+[% crudbutton("rule", "destroy", item.id) %]
+<hr/>
+[% crudbutton("rule", "list", "") %]

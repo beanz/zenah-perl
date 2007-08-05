@@ -1,0 +1,65 @@
+[% USE room_table = Class('ZenAH::Model::CDBI::Room') %]
+[% USE attr_table = Class('ZenAH::Model::CDBI::DeviceAttribute') %]
+[% USE control_table = Class('ZenAH::Model::CDBI::DeviceControl') %]
+<p>[%message%]</p>
+<form action="[% base _ '/device/do_edit/' _ item.id %]"
+    method="post">
+  [% FOR column = column_order %]
+    [% column %]<br/>
+    [% item.to_field(column).as_XML %]<br/>
+  [% END %]
+  <br/>
+  <table border="0" width="100%">
+  <tr>
+    <th align="left">Rooms</th>
+    <th align="left">Controls</th>
+    <th align="left">Attributes</th>
+  </tr>
+  <tr>
+    <td valign="top" align="left">
+      <select name="rooms" multiple="multiple">
+      [% FOR room = room_table.retrieve_all(order_by => "name") %]
+        [% IF rooms.$room %]
+          <option selected="selected"
+                  value="[% room %]">[% room.name %]</option>
+        [% ELSE %]
+          <option value="[% room %]">[% room.name %]</option>
+        [% END %]
+      [% END %]
+      </select>
+    </td>
+    <td valign="top" align="left">
+      <select name="controls" multiple="multiple">
+      [% FOR control = control_table.retrieve_all(order_by => "name") %]
+        [% IF controls.$control %]
+          <option selected="selected"
+                  value="[% control %]"
+            >[% control.name %]</option>
+        [% ELSE %]
+          <option value="[% control %]"
+            >[% control.name %]</option>
+        [% END %]
+      [% END %]
+      </select>
+    </td>
+    <td valign="top" align="left">
+      <select name="attrs" multiple="multiple">
+      [% FOR attr = attr_table.retrieve_all(order_by => "name,value") %]
+        [% IF attrs.$attr %]
+          <option selected="selected"
+                  value="[% attr %]"
+            >[% attr.name _ '&nbsp;= &nbsp;' _ attr.value %]</option>
+        [% ELSE %]
+          <option value="[% attr %]"
+            >[% attr.name _ '&nbsp;= &nbsp;' _ attr.value %]</option>
+        [% END %]
+      [% END %]
+      </select>
+    </td>
+  </tr>
+  </table>
+
+  <input type="submit" value="Edit"/>
+</form>
+<hr/>
+[% crudbutton("device", "list", "") %]

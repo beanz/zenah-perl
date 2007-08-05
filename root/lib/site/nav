@@ -1,0 +1,11 @@
+<!-- BEGIN site/nav -->
+[% navbutton("device","device") %]
+[% navbutton("history") %]
+[% navbutton("map") %]
+[% navbutton("room") %]
+[% navbutton("rule") %]
+[% navbutton("state") %]
+[% navbutton("template") %]
+  <span class="navbutton"><a href="[% Catalyst.uri_for("/") %]"
+    >UI</a></span>
+<!-- END site/nav -->
