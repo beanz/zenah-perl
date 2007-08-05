@@ -21,8 +21,9 @@ To start the test server on http://hostname:3000/ run:
 
 In another terminal, start the xPL rules engine with:
 
+  export LATITUDE=51  # alter as appropriate for your location
+  export LONGITUDE=-1
   perl -Iblib/lib blib/script/zenah
-
 
 
 THIRD PARTY SOFTWARE
