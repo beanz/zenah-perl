@@ -51,7 +51,7 @@ sub new {
 
   my %p = @_;
   my $engine = $self->{_engine} = $p{engine};
-  exists $p{tz} or $p{tz} = 'Europe/London';
+  exists $p{tz} or $p{tz} = $ENV{TZ} || 'Europe/London';
   my $tz = $self->{_tz} = $p{tz};
 
   $engine->add_action(type => 'sleep',
