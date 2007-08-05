@@ -5,15 +5,25 @@ Copy the sample database to the default location;
 
   cp -p zenah.sample.db zenah.db
 
+CAUTION:
+
+ 1) The rules engine will react to and send x10.basic message.  The
+    sample database uses appliances on house code a, lamps on house codes
+    j, k and l, motion sensors on house code m and an RF remote on house
+    code b.
+
+ 2) There is *NO* authentication on the web interface so be sure it is
+    firewalled.
+
 To start the test server on http://hostname:3000/ run:
 
   perl -Iblib/lib blib/script/zenah_server.pl
 
-THERE IS NO AUTHENTICATION IN THE SERVER CODE SO MAKE SURE IT IS FIREWALLED.
-
 In another terminal, start the xPL rules engine with:
 
   perl -Iblib/lib blib/script/zenah
+
+
 
 THIRD PARTY SOFTWARE
 
