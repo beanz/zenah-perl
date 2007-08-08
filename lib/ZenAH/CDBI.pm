@@ -136,6 +136,16 @@ sub ZenAH::CDBI::Device::types {
   map { $_->type } $_[0]->search_types();
 }
 
+ZenAH::CDBI::Device->set_sql(type_and_attr => q{
+  SELECT device.*
+  FROM device, device_attribute_link, device_attribute
+  WHERE device.type = ? AND
+        device_attribute_link.device = device.id AND
+        device_attribute_link.device_attribute = device_attribute.id AND
+        device_attribute.name = ? AND
+        device_attribute.value = ?
+});
+
 sub ZenAH::CDBI::Device::attribute {
   my $self = shift;
   my $name = shift;
