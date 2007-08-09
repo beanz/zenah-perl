@@ -128,9 +128,7 @@ sub new {
      },
      add_minimal => sub {
        my $old =
-         ZenAH::CDBI::History->search(type => $_[0],
-                                      name => $_[1],
-                                      { order_by => '-ctime' })->first;
+         ZenAH::CDBI::History->search_most_recent($_[0],$_[1])->first;
        if ($old and $old->value eq $_[2]) {
          $old->mtime($_[3] || DateTime->now);
          $old->update();
