@@ -71,7 +71,7 @@ sub new {
        return $attr->devices->first;
      },
      by_type_and_attr => sub {
-       return ZenAH::CDBI::DeviceAttribute->search_type_and_attr(@_)->first;
+       return ZenAH::CDBI::Device->search_type_and_attr(@_)->first;
      },
      by_attr_list => sub {
        my $attr =
