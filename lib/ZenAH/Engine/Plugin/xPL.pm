@@ -30,7 +30,7 @@ use 5.006;
 use strict;
 use warnings;
 use xPL::Message;
-use xPL::Base;
+use xPL::Base qw/simple_tokenizer/;
 
 require Exporter;
 use AutoLoader qw(AUTOLOAD);
@@ -69,10 +69,36 @@ sub add {
   my $rule = $p{rule}->id;
   my $trigger = $p{trigger};
 
+  my %filter = simple_tokenizer($trigger);
+  if (exists $filter{class} && $filter{class} =~ /^(\w+)\.(\w+)$/) {
+    $filter{class} = $1;
+    $filter{class_type} = $2;
+  }
+  if ($filter{'device'} && $filter{'device'} =~ /^lookup_(\w+)\[([^]]+)\]$/) {
+    if ($1 eq 'map') {
+      my $arg = $2;
+      $filter{'device'} =
+        sub { ZenAH::CDBI::Map->search(type => $arg, name => $_[0])->first };
+    } else {
+      my $lookup = 'search_'.$1;
+      my @arg = split /,/, $2;
+      $filter{'device'} =
+        sub {
+          my $res;
+          eval { $res = ZenAH::CDBI::Device->$lookup(@arg, $_[0]) };
+          warn $p{rule}." lookup error: $@\n" if ($@);
+          return $res;
+        };
+    }
+  }
+  foreach (sort keys %filter) {
+    print "  K: $_ => ".$filter{$_}."\n";
+  }
+
   $self->{_engine}->add_xpl_callback(id => 'trigger-for-rule-'.$rule,
                                      targetted => 0,
                                      self_skip => 0,
-                                     filter => $trigger,
+                                     filter => \%filter,
                                      callback => sub {
                                        return $self->fire($rule, @_)
                                      });
