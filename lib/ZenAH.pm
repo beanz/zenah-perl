@@ -13,7 +13,7 @@ use warnings;
 use Catalyst qw/-Debug ConfigLoader Static::Simple FormValidator DefaultEnd
                 SubRequest/;
 
-our $VERSION = '0.00';
+our $VERSION = '0.01';
 
 #
 # Start the application
@@ -22,7 +22,7 @@ __PACKAGE__->setup( qw/Static::Simple/ );
 __PACKAGE__->config->{static}->{dirs} =
   [
    'static',
-   qr/^(images|css|js|dojo)/,
+   qr!^(images|css|js|dojo)\/!,
   ];
 
 =head1 NAME
