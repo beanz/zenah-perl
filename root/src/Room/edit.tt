@@ -1,6 +1,6 @@
 [% USE attr_table = Class('ZenAH::Model::CDBI::RoomAttribute') %]
 <p>[%message%]</p>
-<form action="[% base _ '/room/do_edit/' _ item.id %]"
+<form action="[% base _ '/admin/room/do_edit/' _ item.id %]"
     method="post">
   <table border="0" width="100%">
   <tr>

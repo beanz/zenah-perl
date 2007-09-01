@@ -1,5 +1,5 @@
 <p>[%message%]</p>
-<form action="[% base _ '/template/do_edit/' _ item.id %]"
+<form action="[% base _ '/admin/template/do_edit/' _ item.id %]"
     method="post">
   [% FOR column = column_order %]
     [% column %]<br/>

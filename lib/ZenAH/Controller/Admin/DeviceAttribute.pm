@@ -1,11 +1,11 @@
-package ZenAH::Controller::Map;
+package ZenAH::Controller::Admin::DeviceAttribute;
 
 use strict;
 use base 'Catalyst::Base';
 
 =head1 NAME
 
-ZenAH::Controller::Map - Scaffolding Controller Component
+ZenAH::Controller::Admin::DeviceAttribute - Scaffolding Controller Component
 
 =head1 SYNOPSIS
 
@@ -27,8 +27,8 @@ Sets a template.
 
 sub add : Local {
     my ( $self, $c ) = @_;
-    $c->stash->{column_order} = [qw/type name value/];
-    $c->stash->{template} = 'Map/add.tt';
+    $c->stash->{column_order} = [qw/name value/];
+    $c->stash->{template} = 'DeviceAttribute/add.tt';
 }
 
 =item default
@@ -50,7 +50,7 @@ Destroys a row and forwards to list.
 
 sub destroy : Local {
     my ( $self, $c, $id ) = @_;
-    ZenAH::Model::CDBI::Map->retrieve($id)->delete;
+    ZenAH::Model::CDBI::DeviceAttribute->retrieve($id)->delete;
     $c->forward('list');
 }
 
@@ -62,7 +62,7 @@ Adds a new row to the table and forwards to list.
 
 sub do_add : Local {
     my ( $self, $c ) = @_;
-    $c->form( optional => [ ZenAH::Model::CDBI::Map->columns ] );
+    $c->form( optional => [ ZenAH::Model::CDBI::DeviceAttribute->columns ] );
     if ($c->form->has_missing) {
         $c->stash->{message}='You have to fill in all fields. '.
         'The following are missing: <b>'.
@@ -72,7 +72,7 @@ sub do_add : Local {
         'The following are invalid: <b>'.
 	join(', ',$c->form->invalid()).'</b>';
     } else {
-	ZenAH::Model::CDBI::Map->create_from_form( $c->form );
+	ZenAH::Model::CDBI::DeviceAttribute->create_from_form( $c->form );
     	return $c->forward('list');
     }
     $c->forward('add');
@@ -86,7 +86,7 @@ Edits a row and forwards to edit.
 
 sub do_edit : Local {
     my ( $self, $c, $id ) = @_;
-    $c->form( optional => [ ZenAH::Model::CDBI::Map->columns ] );
+    $c->form( optional => [ ZenAH::Model::CDBI::DeviceAttribute->columns ] );
     if ($c->form->has_missing) {
         $c->stash->{message}='You have to fill in all fields.'.
         'the following are missing: <b>'.
@@ -96,7 +96,7 @@ sub do_edit : Local {
         'the following are invalid: <b>'.
 	join(', ',$c->form->invalid()).'</b>';
     } else {
-	ZenAH::Model::CDBI::Map->retrieve($id)->update_from_form( $c->form );
+	ZenAH::Model::CDBI::DeviceAttribute->retrieve($id)->update_from_form( $c->form );
 	$c->stash->{message}='Updated OK';
     }
     $c->forward('edit');
@@ -110,9 +110,9 @@ Sets a template.
 
 sub edit : Local {
     my ( $self, $c, $id ) = @_;
-    $c->stash->{item} = ZenAH::Model::CDBI::Map->retrieve($id);
-    $c->stash->{column_order} = [qw/type name value/];
-    $c->stash->{template} = 'Map/edit.tt';
+    $c->stash->{item} = ZenAH::Model::CDBI::DeviceAttribute->retrieve($id);
+    $c->stash->{column_order} = [qw/name value/];
+    $c->stash->{template} = 'DeviceAttribute/edit.tt';
 }
 
 =item list
@@ -123,29 +123,30 @@ Sets a template.
 
 sub list : Local {
     my ( $self, $c ) = @_;
-    my %types = map { $_ => 1 } ZenAH::Model::CDBI::Map->types();
+    my %types =
+      map { $_ => $_ } ZenAH::Model::CDBI::DeviceAttribute->types();
     my $page = $c->req->param('page') || 1;
     my $rows = $c->req->param('rows') || 20;
     my %search = ();
     my $filter = $c->req->param('filter');
     if ($filter && exists $types{$filter}) {
-      $search{type} = $filter;
+      $search{name} = { -like => $types{$filter}.'%' };
     } else {
       $filter = 'none';
     }
     ($c->stash->{page},
      $c->stash->{items}) =
-       ZenAH::Model::CDBI::Map->page(\%search,
-                                     {
-                                      order_by => 'type, name',
-                                      page => $page,
-                                      rows => $rows,
-                                     }
-                                    );
+       ZenAH::Model::CDBI::DeviceAttribute->page(\%search,
+                                               {
+                                                order_by => 'name,value',
+                                                page => $page,
+                                                rows => $rows,
+                                               }
+                                              );
     $c->stash->{filters} = ['none', sort keys %types];
     $c->stash->{filter} = $filter;
-    $c->stash->{column_order} = [qw/type name value/];
-    $c->stash->{template} = 'Map/list.tt';
+    $c->stash->{column_order} = [qw/name value/];
+    $c->stash->{template} = 'DeviceAttribute/list.tt';
 }
 
 =item view
@@ -156,9 +157,9 @@ Fetches a row and sets a template.
 
 sub view : Local {
     my ( $self, $c, $id ) = @_;
-    $c->stash->{item} = ZenAH::Model::CDBI::Map->retrieve($id);
-    $c->stash->{column_order} = [qw/type name value/];
-    $c->stash->{template} = 'Map/view.tt';
+    $c->stash->{item} = ZenAH::Model::CDBI::DeviceAttribute->retrieve($id);
+    $c->stash->{column_order} = [qw/name value/];
+    $c->stash->{template} = 'DeviceAttribute/view.tt';
 }
 
 =back

@@ -1,11 +1,17 @@
 package ZenAH::Controller::UI;
 
 use strict;
-use base 'Catalyst::Base';
+use base 'Catalyst::Controller';
 use Template;
 use xPL::Client;
 use URI;
 use URI::QueryParam;
+
+#
+# Sets the actions in this controller to be registered with no prefix
+# so they function identically to actions created in MyApp.pm
+#
+__PACKAGE__->config->{namespace} = '';
 
 =head1 NAME
 
@@ -42,14 +48,13 @@ Shows a UI page
 
 sub show : Local {
     my ( $self, $c ) = @_;
-    my $path = substr(($c->request->path || 'ui/'), 3);
-    my $template = ($path || 'html').'/layout';
+    my $template = ($c->request->path || 'html').'/layout';
     if ($template =~ /xul/) {
       $c->response->content_type('application/vnd.mozilla.xul+xml');
     }
     my $status = $c->request->param('status');
     if (defined $status && !$c->request->user_agent() =~ /PlayStation/) {
-      my $uri = URI->new($c->request->referer());
+      my $uri = URI->new($c->request->referer);
       $uri->query_param_delete('status');
       $c->stash->{meta_refresh} = '5;'.$uri;
     }

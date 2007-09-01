@@ -1,7 +1,7 @@
 
 [% USE table_class = Class('ZenAH::Model::CDBI::DeviceControl') %]
 <p>[%message%]</p>
-<form action="[% base _ '/devicecontrol/do_add' %]" method="post">
+<form action="[% base _ '/admin/devicecontrol/do_add' %]" method="post">
   [% FOR column = column_order %]
     [% column %]<br/>
     [% IF column == 'definition' %]

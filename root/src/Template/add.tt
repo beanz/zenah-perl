@@ -1,7 +1,7 @@
 
 [% USE table_class = Class('ZenAH::Model::CDBI::Template') %]
 <p>[%message%]</p>
-<form action="[% base _ '/template/do_add' %]" method="post">
+<form action="[% base _ '/admin/template/do_add' %]" method="post">
   [% FOR column = column_order %]
     [% column %]<br/>
     [% IF column == 'text' %]

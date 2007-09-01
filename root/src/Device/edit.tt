@@ -2,7 +2,7 @@
 [% USE attr_table = Class('ZenAH::Model::CDBI::DeviceAttribute') %]
 [% USE control_table = Class('ZenAH::Model::CDBI::DeviceControl') %]
 <p>[%message%]</p>
-<form action="[% base _ '/device/do_edit/' _ item.id %]"
+<form action="[% base _ '/admin/device/do_edit/' _ item.id %]"
     method="post">
   [% FOR column = column_order %]
     [% column %]<br/>

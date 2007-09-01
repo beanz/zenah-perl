@@ -1,18 +1,12 @@
-package ZenAH::Controller::Root;
+package ZenAH::Controller::Admin;
 
 use strict;
 use warnings;
 use base 'Catalyst::Controller';
 
-#
-# Sets the actions in this controller to be registered with no prefix
-# so they function identically to actions created in MyApp.pm
-#
-__PACKAGE__->config->{namespace} = '';
-
 =head1 NAME
 
-ZenAH::Controller::Root - Root Controller for this Catalyst based application
+ZenAH::Controller::Admin - Admin Controller for this Catalyst based application
 
 =head1 SYNOPSIS
 
@@ -20,7 +14,7 @@ See L<ZenAH>.
 
 =head1 DESCRIPTION
 
-Root Controller for this Catalyst based application.
+Admin Controller for this Catalyst based application.
 
 =head1 METHODS
 
@@ -37,13 +31,7 @@ sub default : Private {
   my ( $self, $c ) = @_;
 
 #  $c->response->body( $c->welcome_message );
-  $c->forward('ZenAH::Controller::UI', 'default');
-}
-
-sub js : Local {
-  my ( $self, $c ) = @_;
-
-  $c->response->body( $c->welcome_message );
+  $c->forward('ZenAH::Controller::Admin::Device', 'default');
 }
 
 =head1 SEE ALSO

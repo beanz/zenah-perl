@@ -1,4 +1,4 @@
-package ZenAH::Controller::History;
+package ZenAH::Controller::Admin::History;
 
 use strict;
 use base 'Catalyst::Base';
@@ -6,7 +6,7 @@ use Data::Page;
 
 =head1 NAME
 
-ZenAH::Controller::History - Scaffolding Controller Component
+ZenAH::Controller::Admin::History - Scaffolding Controller Component
 
 =head1 SYNOPSIS
 

@@ -1,11 +1,11 @@
-package ZenAH::Controller::Room;
+package ZenAH::Controller::Admin::Room;
 
 use strict;
 use base 'Catalyst::Base';
 
 =head1 NAME
 
-ZenAH::Controller::Room - Scaffolding Controller Component
+ZenAH::Controller::Admin::Room - Scaffolding Controller Component
 
 =head1 SYNOPSIS
 

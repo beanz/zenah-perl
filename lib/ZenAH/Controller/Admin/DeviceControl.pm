@@ -1,11 +1,11 @@
-package ZenAH::Controller::Rule;
+package ZenAH::Controller::Admin::DeviceControl;
 
 use strict;
 use base 'Catalyst::Base';
 
 =head1 NAME
 
-ZenAH::Controller::Rule - Scaffolding Controller Component
+ZenAH::Controller::Admin::DeviceControl - Scaffolding Controller Component
 
 =head1 SYNOPSIS
 
@@ -27,9 +27,8 @@ Sets a template.
 
 sub add : Local {
     my ( $self, $c ) = @_;
-    $c->stash->{column_order} = [qw/name active trig_type trig action
-                                    ftime mtime/];
-    $c->stash->{template} = 'Rule/add.tt';
+    $c->stash->{column_order} = [qw/name string description definition/];
+    $c->stash->{template} = 'DeviceControl/add.tt';
 }
 
 =item default
@@ -51,7 +50,7 @@ Destroys a row and forwards to list.
 
 sub destroy : Local {
     my ( $self, $c, $id ) = @_;
-    ZenAH::Model::CDBI::Rule->retrieve($id)->delete;
+    ZenAH::Model::CDBI::DeviceControl->retrieve($id)->delete;
     $c->forward('list');
 }
 
@@ -63,7 +62,7 @@ Adds a new row to the table and forwards to list.
 
 sub do_add : Local {
     my ( $self, $c ) = @_;
-    $c->form( optional => [ ZenAH::Model::CDBI::Rule->columns ] );
+    $c->form( optional => [ ZenAH::Model::CDBI::DeviceControl->columns ] );
     if ($c->form->has_missing) {
         $c->stash->{message}='You have to fill in all fields. '.
         'The following are missing: <b>'.
@@ -73,7 +72,7 @@ sub do_add : Local {
         'The following are invalid: <b>'.
 	join(', ',$c->form->invalid()).'</b>';
     } else {
-	ZenAH::Model::CDBI::Rule->create_from_form( $c->form );
+	ZenAH::Model::CDBI::DeviceControl->create_from_form( $c->form );
     	return $c->forward('list');
     }
     $c->forward('add');
@@ -87,7 +86,7 @@ Edits a row and forwards to edit.
 
 sub do_edit : Local {
     my ( $self, $c, $id ) = @_;
-    $c->form( optional => [ ZenAH::Model::CDBI::Rule->columns ] );
+    $c->form( optional => [ ZenAH::Model::CDBI::DeviceControl->columns ] );
     if ($c->form->has_missing) {
         $c->stash->{message}='You have to fill in all fields.'.
         'the following are missing: <b>'.
@@ -97,7 +96,7 @@ sub do_edit : Local {
         'the following are invalid: <b>'.
 	join(', ',$c->form->invalid()).'</b>';
     } else {
-	ZenAH::Model::CDBI::Rule->retrieve($id)->update_from_form( $c->form );
+	ZenAH::Model::CDBI::DeviceControl->retrieve($id)->update_from_form( $c->form );
 	$c->stash->{message}='Updated OK';
     }
     $c->forward('edit');
@@ -111,10 +110,9 @@ Sets a template.
 
 sub edit : Local {
     my ( $self, $c, $id ) = @_;
-    $c->stash->{item} = ZenAH::Model::CDBI::Rule->retrieve($id);
-    $c->stash->{column_order} = [qw/name active trig_type trig action
-                                    ftime mtime/];
-    $c->stash->{template} = 'Rule/edit.tt';
+    $c->stash->{item} = ZenAH::Model::CDBI::DeviceControl->retrieve($id);
+    $c->stash->{column_order} = [qw/name string description definition/];
+    $c->stash->{template} = 'DeviceControl/edit.tt';
 }
 
 =item list
@@ -125,30 +123,30 @@ Sets a template.
 
 sub list : Local {
     my ( $self, $c ) = @_;
-    my %triggers = map { $_ => 1 } ZenAH::Model::CDBI::Rule->triggers();
+    my %prefixes =
+      map { $_ => $_ } ZenAH::Model::CDBI::DeviceControl->prefixes();
     my $page = $c->req->param('page') || 1;
     my $rows = $c->req->param('rows') || 10;
     my %search = ();
     my $filter = $c->req->param('filter');
-    if ($filter && exists $triggers{$filter}) {
-      $search{trig_type} = $filter;
+    if ($filter && exists $prefixes{$filter}) {
+      $search{name} = { -like => $prefixes{$filter}.'%' };
     } else {
       $filter = 'none';
     }
     ($c->stash->{page},
      $c->stash->{items}) =
-       ZenAH::Model::CDBI::Rule->page(\%search,
-                                      {
-                                       order_by => 'name',
-                                       page => $page,
-                                       rows => $rows,
-                                      }
-                                      );
-    $c->stash->{filters} = ['none', sort keys %triggers];
+       ZenAH::Model::CDBI::DeviceControl->page(\%search,
+                                               {
+                                                order_by => 'name',
+                                                page => $page,
+                                                rows => $rows,
+                                               }
+                                              );
+    $c->stash->{filters} = ['none', sort keys %prefixes];
     $c->stash->{filter} = $filter;
-    $c->stash->{column_order} = [qw/name active trig_type trig action
-                                    ftime mtime/];
-    $c->stash->{template} = 'Rule/list.tt';
+    $c->stash->{column_order} = [qw/name string description definition/];
+    $c->stash->{template} = 'DeviceControl/list.tt';
 }
 
 =item view
@@ -159,10 +157,9 @@ Fetches a row and sets a template.
 
 sub view : Local {
     my ( $self, $c, $id ) = @_;
-    my $rule = $c->stash->{item} = ZenAH::Model::CDBI::Rule->retrieve($id);
-    $c->stash->{column_order} = [qw/name active trig_type trig action
-                                    ftime mtime/];
-    $c->stash->{template} = 'Rule/view.tt';
+    $c->stash->{item} = ZenAH::Model::CDBI::DeviceControl->retrieve($id);
+    $c->stash->{column_order} = [qw/name string description definition/];
+    $c->stash->{template} = 'DeviceControl/view.tt';
 }
 
 =back

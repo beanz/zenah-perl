@@ -1,11 +1,11 @@
-package ZenAH::Controller::Device;
+package ZenAH::Controller::Admin::Device;
 
 use strict;
 use base 'Catalyst::Base';
 
 =head1 NAME
 
-ZenAH::Controller::Device - Scaffolding Controller Component
+ZenAH::Controller::Admin::Device - Scaffolding Controller Component
 
 =head1 SYNOPSIS
 

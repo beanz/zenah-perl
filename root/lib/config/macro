@@ -1,13 +1,13 @@
 [% MACRO crudbutton(type, action, id, name) BLOCK %]
   <span class="crudbutton"><a
-    href="[% Catalyst.uri_for("/", type, action, id) %]"
+    href="[% Catalyst.uri_for("/", "admin", type, action, id) %]"
     >[% IF name %][% name %][% ELSE %][% action FILTER ucfirst %][% END %]</a></span>
 [% END %]
 
 [% MACRO navbutton(type,current) BLOCK %]
   <span class="navbutton[% type == Catalyst.request.path.split('/|\?').0 ?
                         "-current" : "" %]"><a
-    href="[% Catalyst.uri_for("/", type) %]"
+    href="[% Catalyst.uri_for("/", "admin", type) %]"
     >[% type FILTER ucfirst %]</a></span>
 [% END %]
 

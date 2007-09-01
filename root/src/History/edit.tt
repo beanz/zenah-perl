@@ -1,6 +1,6 @@
 
 <p>[%message%]</p>
-<form action="[% base _ '/history/do_edit/' _ item.id %]"
+<form action="[% base _ '/admin/history/do_edit/' _ item.id %]"
     method="post">
   [% FOR column = column_order %]
     [% column %]<br/>

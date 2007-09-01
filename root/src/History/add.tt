@@ -1,7 +1,7 @@
 
 [% USE table_class = Class('ZenAH::Model::CDBI::History') %]
 <p>[%message%]</p>
-<form action="[% base _ '/history/do_add' %]" method="post">
+<form action="[% base _ '/admin/history/do_add' %]" method="post">
   [% FOR column = column_order %]
     [% column %]<br/>
     [% table_class.to_field(column).as_XML %]<br/>
