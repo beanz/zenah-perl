@@ -18,11 +18,12 @@ our $VERSION = '0.00';
 #
 # Start the application
 #
-__PACKAGE__->setup;
-
-#
-# IMPORTANT: Please look into ZenAH::Controller::Root for more
-#
+__PACKAGE__->setup( qw/Static::Simple/ );
+__PACKAGE__->config->{static}->{dirs} =
+  [
+   'static',
+   qr/^(images|css|js|dojo)/,
+  ];
 
 =head1 NAME
 
