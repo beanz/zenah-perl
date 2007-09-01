@@ -26,16 +26,21 @@ In another terminal, start the xPL rules engine with:
   export TZ=Europe/London
   perl -Iblib/lib blib/script/zenah
 
+Point your browser at one of:
+
+  http://hostname:3000/
+  http://hostname:3000/admin
+  http://hostname:3000/dojo
+  http://hostname:3000/xul
+
 
 THIRD PARTY SOFTWARE
 
 This distribution also contains copies of code from:
 
   http://script.aculo.us/
-
-and:
-
   http://www.prototypejs.org/
+  http://dojotoolkit.org/
 
 COPYRIGHT AND LICENSE
 
