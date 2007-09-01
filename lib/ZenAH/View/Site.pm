@@ -6,8 +6,8 @@ use base 'Catalyst::View::TT';
 __PACKAGE__->config({
     CATALYST_VAR => 'Catalyst',
     INCLUDE_PATH => [
-        ZenAH->path_to( 'root', 'src' ),
-        ZenAH->path_to( 'root', 'lib' )
+        ZenAH->path_to( 'admin', 'src' ),
+        ZenAH->path_to( 'admin', 'lib' )
     ],
     PRE_PROCESS  => 'config/main',
     WRAPPER      => 'site/wrapper',
