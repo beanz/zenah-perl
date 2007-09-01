@@ -125,7 +125,7 @@ Sets a template.
 sub list : Local {
     my ( $self, $c ) = @_;
     my %types = map { $_ => 1 } ZenAH::Model::CDBI::History->types();
-    my $page = $c->req->param('page') || 1;
+    my $page_num = $c->req->param('page') || 1;
     my $rows = $c->req->param('rows') || 20;
     my $like = '%';
     my $filter = $c->req->param('filter');
@@ -136,7 +136,7 @@ sub list : Local {
     }
     my $dist = ZenAH::CDBI::History->distinct($like);
     my $count = scalar @$dist;
-    my $page = Data::Page->new($count, $rows, $page);
+    my $page = Data::Page->new($count, $rows, $page_num);
     my @items;
     foreach my $i ($page->splice($dist)) {
       push @items, ZenAH::CDBI::History->search_most_recent(@$i)->first;
