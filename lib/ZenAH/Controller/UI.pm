@@ -54,7 +54,7 @@ sub show : Local {
     }
     my $status = $c->request->param('status');
     if (defined $status && !$c->request->user_agent() =~ /PlayStation/) {
-      my $uri = URI->new($c->request->referer);
+      my $uri = URI->new($c->request);
       $uri->query_param_delete('status');
       $c->stash->{meta_refresh} = '5;'.$uri;
     }
