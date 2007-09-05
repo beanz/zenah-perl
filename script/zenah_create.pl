@@ -1,6 +1,7 @@
 #!/usr/bin/perl -w
 
 use strict;
+use warnings;
 use Getopt::Long;
 use Pod::Usage;
 use Catalyst::Helper;
@@ -43,8 +44,10 @@ zenah_create.pl [options] model|view|controller name [helper] [options]
    zenah_create.pl view MyView TT
    zenah_create.pl view TT TT
    zenah_create.pl model My::Model
-   zenah_create.pl model SomeDB CDBI dbi:SQLite:/tmp/my.db
-   zenah_create.pl model AnotherDB CDBI dbi:Pg:dbname=foo root 4321
+   zenah_create.pl model SomeDB DBIC::Schema MyApp::Schema create=dynamic\
+   dbi:SQLite:/tmp/my.db
+   zenah_create.pl model AnotherDB DBIC::Schema MyApp::Schema create=static\
+   dbi:Pg:dbname=foo root 4321
 
  See also:
    perldoc Catalyst::Manual
@@ -61,10 +64,9 @@ This behavior can be suppressed with the C<-force> option.
 =head1 AUTHOR
 
 Sebastian Riedel, C<sri@oook.de>
+Maintained by the Catalyst Core Team.
 
 =head1 COPYRIGHT
-
-Copyright 2004 Sebastian Riedel. All rights reserved.
 
 This library is free software, you can redistribute it and/or modify
 it under the same terms as Perl itself.
