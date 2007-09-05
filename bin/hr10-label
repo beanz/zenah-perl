@@ -1,0 +1,197 @@
+#!/usr/bin/perl -w
+
+# $Id: zenah 2 2007-08-05 19:04:44Z beanz $
+
+=head1 NAME
+
+zenah - Perl script to create labels for HR10 Remote Controls
+
+=head1 SYNOPSIS
+
+  # show usage message
+  hr10-label -h
+
+  # create a label
+  hr10-label 'Kettle' 'Light' 'Curtain' 'Blind' 'Music' 'TV' 'Amp' 'Dog'
+
+=head1 DESCRIPTION
+
+This script is creates PDF labels for HR10 (and similar) X10 remote
+controls.
+
+=cut
+
+use strict;
+use PDF::API2;
+use PDF::API2::Util qw/getPaperSizes/;
+use POSIX qw/strftime/;
+use Getopt::Std;
+
+sub USAGE {
+  my $msg = shift || q{};
+  die <<EOM
+Usage: $0 [flags] [options] label1 label2 ... label8
+where valid flags are:
+  -h - show this help text
+and valid options are (default shown in brackets):
+  -o output - the output file (label.pdf)
+  -a author - the author name to record in the PDF ('Mark Hindess')
+  -f font   - the font to use (Helvetica)
+  -i image  - image for the bottom of the label - search for in \@INC
+              (ZenAH/root/images/zenah-300.png)
+  -O orient - orientation (portrait)
+  -p paper  - the paper type (a4)
+The labels default to the rather boring 'Label #1', ..., 'Label #8'.
+$msg
+EOM
+}
+
+my %o;
+getopts('hp:o:f:O:a:i:', \%o) or USAGE;
+$o{'h'} and USAGE;
+
+my $paper = $o{'p'} || 'a4';
+my $fontname = $o{'f'} || 'Helvetica';
+my $output = $o{'o'} || 'label.pdf';
+my $orient = $o{'O'} || 'portrait';
+my $author = $o{'a'} || 'Mark Hindess';
+my $image = $o{'i'} || 'ZenAH/root/images/zenah-300.png';
+unless (-r $image) {
+  foreach (@INC) {
+    my $f = $_.'/'.$image;
+    if (-r $f) {
+      $image = $f;
+      last;
+    }
+  }
+}
+
+my $pdf = PDF::API2->new() || die "PDF::API2->new() failed\n";
+$pdf->info(
+           'Author'       => $author,
+           'CreationDate' => strftime('%Y-%m-%d %H:%H',localtime(time)),
+           'Creator'      => 'HR10 Label Perl Script',
+           'Producer'     => 'ZenAH HR10 Label Generator',
+           'Title'        => 'HR10 Label',
+           'Subject'      => 'HR10 Label',
+           'Keywords'     => 'HR10 label',
+          );
+
+my %sizes = getPaperSizes;
+my $size =
+  $sizes{$paper} || do { warn "Invalid paper type defaulting to \"a4\"\n";
+                         $sizes{'a4'} };
+my ($px, $py);
+if ($orient eq 'landscape') {
+  $px = $size->[1];
+  $py = $size->[0];
+} else {
+  $px = $size->[0];
+  $py = $size->[1];
+}
+
+$pdf->mediabox($px,$py);
+my $page = $pdf->page();
+my $font = $pdf->corefont($fontname);
+my $fontsize = 20;
+my $gfx = $page->gfx;
+my $text = $page->text;
+
+# 210 × 297 mm
+# 595 x 842 px
+my $width = 56.6; # 20mm
+my $offset = 4;
+my $b_height = 29.92;
+my $height = $offset+$b_height*8;
+my $ox = 100;
+my $oy = 100;
+my $cx = $width/2;
+my $cy = 274.51;
+my $cr = $width/2;
+my $pad = 4;
+
+$gfx->move($ox, $py-($oy+$cy));
+$gfx->line($ox, $py-$oy);
+$gfx->line($ox+$width, $py-$oy);
+$gfx->line($ox+$width, $py-($oy+$cy));
+
+$gfx->stroke;
+$gfx->arc($ox+$cx, $py-($oy+$cy), $cr, $cr, 180, 360, 1);
+$gfx->stroke;
+
+my $c1 = '#ffffff';
+my $c2 = '#cbcbcb';
+my $c = $c1;
+
+foreach my $i (0..7) {
+  my $str = $ARGV[$i] || 'Label #'.($i+1);
+  while (($text->advancewidth($str,
+                              font => $font,
+                              fontsize => $fontsize)) > $width-($pad*2)){
+    $fontsize--;
+  }
+}
+
+foreach my $i (0..7) {
+  $gfx->fillcolor($c);
+  $gfx->rect($ox, $py-($oy+$offset+$b_height*($i+1)), $width, $b_height);
+  $gfx->fillstroke(1);
+  $c = $c eq $c1 ? $c2 : $c1;
+  my $str = $ARGV[$i] || 'Label #'.($i+1);
+  centerstring($text,
+               $ox+$pad, $ox+($width-$pad*2),
+               $py-($oy+$offset+$b_height*($i+.6)),
+               $str, $font, $fontsize);
+}
+
+if (-f $image) {
+  my $img = PDF::API2::Resource::XObject::Image::PNG->new_api($pdf, $image);
+  my $ix = $img->width;
+  my $iy = $img->height;
+  my $w = $width*.8;
+  my $s = $w/$ix;
+  $gfx->image($img, $ox+$cx-$w/2, $py-($oy+$cy+$w/2), $s);
+} else {
+  warn "Image file, $image, does not exist, skipping\n";
+}
+
+$pdf->saveas($output);
+$pdf->end();
+
+sub centerstring {
+  my $text = shift;
+  my $x1 = shift;
+  my $x2 = shift;
+  my $y = shift;
+  my $string = shift;
+  my $font = shift;
+  my $fsize = shift;
+  my $aw = $x2 - $x1;
+  my $w;
+  while (($w = $text->advancewidth($string,
+                                   font => $font,
+                                   fontsize => $fsize)) > $aw){
+    $fsize--;
+  }
+  my $x = $x1 + ($aw-$w)/2;
+  $text->textlabel($x, $y, $font, $fsize, $string, -color => '#000000');
+}
+
+=head1 SEE ALSO
+
+Project website: http://www.zenah.org.uk/
+Remote control details: http://www.letsautomate.com/10220.cfm
+
+=head1 AUTHOR
+
+Mark Hindess, E<lt>zenah@beanz.uklinux.netE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2006, 2007 by Mark Hindess
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.8.7 or,
+at your option, any later version of Perl 5 you may have available.
+
+=cut

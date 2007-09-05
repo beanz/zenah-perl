@@ -24,5 +24,6 @@ catalyst;
 
 install_script glob('script/*.pl');
 install_script 'bin/zenah';
+install_script 'bin/hr10-label';
 auto_install;
 WriteAll;
