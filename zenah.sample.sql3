@@ -1078,7 +1078,7 @@ INSERT INTO "template" VALUES(35,'content/garden','<table cellpadding="0" cellsp
 </tr>
 </table>
 ',1185696008);
-INSERT INTO "template" VALUES(36,'error.tt2','[% META title = ''Catalyst/TT Error'' %]
+INSERT INTO "template" VALUES(36,'site/error','[% META title = ''Catalyst/TT Error'' %]
 <p>
   An error has occurred.  We''re terribly sorry about that, but it''s 
   one of those things that happens from time to time.  Let''s just 
