@@ -1,8 +1,9 @@
 perl Makefile.PL
 make
 
-Copy the sample database to the default location;
+Create the sample database and copy it to the default location:
 
+  sqlite3 zenah.sample.db <zenah.sample.sql3
   cp -p zenah.sample.db zenah.db
 
 CAUTION:
