@@ -108,7 +108,7 @@ Shows a UI page
 
 sub action : Local {
     my ( $self, $c, $device_name, $action ) = @_;
-    my $status = $c->subreq('/ui/ajax/'.$device_name.'/'.$action);
+    my $status = $c->subreq('/ajax/'.$device_name.'/'.$action);
     my $uri = URI->new($c->request->referer());
     $uri->query_param(status => $status);
     $c->response->redirect($uri, 303);
