@@ -1,108 +1,255 @@
+--
+-- Table structure for table `device`
+--
+
 CREATE TABLE device (
-  id int(11) not null auto_increment primary key,
-  name varchar(80),
-  string varchar(80),
+  id int(11) NOT NULL,
+  `name` varchar(80) default NULL,
+  `string` varchar(80) default NULL,
   description text,
-  type varchar(80)
+  `type` varchar(80) default NULL,
+  PRIMARY KEY  (id)
 );
+
+--
+-- Table structure for table `device_attribute`
+--
+
 CREATE TABLE device_attribute (
-  id int(11) not null auto_increment primary key,
-  name varchar(30),
-  value varchar(200)
+  id int(11) NOT NULL,
+  `name` varchar(30) default NULL,
+  `value` varchar(200) default NULL,
+  PRIMARY KEY  (id),
+  KEY `name` (`name`),
+  KEY `value` (`value`)
 );
+
+--
+-- Table structure for table `device_attribute_link`
+--
+
 CREATE TABLE device_attribute_link (
-  id int(11) not null auto_increment primary key,
-  device int(11),
-  device_attribute int(11)
+  id int(11) NOT NULL,
+  device int(11) default NULL,
+  device_attribute int(11) default NULL,
+  PRIMARY KEY  (id),
+  KEY device (device),
+  KEY device_attribute (device_attribute)
 );
+
+--
+-- Table structure for table `device_control`
+--
+
 CREATE TABLE device_control (
-  id int(11) not null auto_increment primary key,
-  name varchar(50),
-  description text,
+  id int(11) NOT NULL,
+  `name` varchar(50) default NULL,
   definition text,
-  string varchar(80)
+  `string` varchar(80) default NULL,
+  description text,
+  PRIMARY KEY  (id)
 );
+
+--
+-- Table structure for table `device_control_link`
+--
+
 CREATE TABLE device_control_link (
-  id int(11) not null auto_increment primary key,
-  device int(11),
-  device_control int(11)
+  id int(11) NOT NULL,
+  device int(11) default NULL,
+  device_control int(11) default NULL,
+  PRIMARY KEY  (id),
+  KEY device (device),
+  KEY device_control (device_control)
 );
+
+--
+-- Table structure for table `history`
+--
+
+CREATE TABLE history (
+  id int(11) NOT NULL,
+  `name` varchar(80) default NULL,
+  `type` varchar(20) default NULL,
+  `value` varchar(200) default NULL,
+  mtime int(11) default NULL,
+  ctime int(11) default NULL,
+  PRIMARY KEY  (id),
+  KEY `name` (`name`),
+  KEY `type` (`type`),
+  KEY ctime (ctime),
+  KEY mtime (mtime),
+  KEY type_2 (`type`,`name`,mtime),
+  KEY type_3 (`type`,`name`)
+);
+
+--
+-- Table structure for table `list`
+--
+
 CREATE TABLE list (
-  id int(11) not null auto_increment primary key,
-  name varchar(80),
-  liststate int(11)
+  id int(11) NOT NULL,
+  `name` varchar(80) default NULL,
+  liststate int(11) default NULL,
+  PRIMARY KEY  (id)
 );
+
+--
+-- Table structure for table `listitem`
+--
+
 CREATE TABLE listitem (
-  id int(11) not null auto_increment primary key,
-  name text
+  id int(11) NOT NULL,
+  `name` text,
+  PRIMARY KEY  (id)
 );
+
+--
+-- Table structure for table `listitemlink`
+--
+
 CREATE TABLE listitemlink (
-  id int(11) not null auto_increment primary key,
-  list int(11),
-  listitem int(11)
+  id int(11) NOT NULL,
+  list int(11) default NULL,
+  listitem int(11) default NULL,
+  PRIMARY KEY  (id)
 );
+
+--
+-- Table structure for table `liststate`
+--
+
 CREATE TABLE liststate (
-  id int(11) not null auto_increment primary key,
-  name varchar(20)
+  id int(11) NOT NULL,
+  `name` varchar(20) default NULL,
+  PRIMARY KEY  (id)
 );
+
+--
+-- Table structure for table `map`
+--
+
 CREATE TABLE map (
-  id int(11) not null auto_increment primary key,
-  type varchar(50),
-  name varchar(80),
-  value varchar(255)
+  id int(11) NOT NULL,
+  `type` varchar(50) default NULL,
+  `name` varchar(80) default NULL,
+  `value` varchar(255) default NULL,
+  PRIMARY KEY  (id),
+  KEY `type` (`type`,`name`)
 );
+
+--
+-- Table structure for table `phone_hist`
+--
+
 CREATE TABLE phone_hist (
-  id int(11) not null auto_increment primary key,
-  num varchar(30),
-  ctime int(11)
+  id int(11) NOT NULL,
+  num varchar(30) default NULL,
+  ctime int(11) default NULL,
+  PRIMARY KEY  (id)
 );
+
+--
+-- Table structure for table `room`
+--
+
 CREATE TABLE room (
-  id int(11) not null auto_increment primary key,
-  name varchar(80),
-  string varchar(80),
-  description text
+  id int(11) NOT NULL,
+  `name` varchar(80) default NULL,
+  `string` varchar(80) default NULL,
+  description text,
+  PRIMARY KEY  (id),
+  KEY `name` (`name`)
 );
+
+--
+-- Table structure for table `room_attribute`
+--
+
 CREATE TABLE room_attribute (
-  id int(11) not null auto_increment primary key,
-  name varchar(30),
-  value varchar(200)
+  id int(11) NOT NULL,
+  `name` varchar(30) default NULL,
+  `value` varchar(200) default NULL,
+  PRIMARY KEY  (id)
 );
+
+--
+-- Table structure for table `room_attribute_link`
+--
+
 CREATE TABLE room_attribute_link (
-  id int(11) not null auto_increment primary key,
-  room int(11),
-  room_attribute int(11)
+  id int(11) NOT NULL,
+  room int(11) default NULL,
+  room_attribute int(11) default NULL,
+  PRIMARY KEY  (id)
 );
+
+--
+-- Table structure for table `room_device_link`
+--
+
 CREATE TABLE room_device_link (
-  id int(11) not null auto_increment primary key,
-  room int(11),
-  device int(11)
+  id int(11) NOT NULL,
+  room int(11) default NULL,
+  device int(11) default NULL,
+  PRIMARY KEY  (id),
+  KEY room (room),
+  KEY device (device)
 );
+
+--
+-- Table structure for table `rule`
+--
+
 CREATE TABLE rule (
-  id int(11) not null auto_increment primary key,
-  name varchar(80),
+  id int(11) NOT NULL,
+  `name` varchar(80) default NULL,
   trig text,
-  trig_type varchar(30),
-  action text,
-  active tinyint(1),
-  mtime int(11),
-  ftime int(11)
+  trig_type varchar(30) default NULL,
+  `action` text,
+  active tinyint(1) default NULL,
+  mtime int(11) default NULL,
+  ftime int(11) default NULL,
+  PRIMARY KEY  (id),
+  KEY `name` (`name`)
 );
+
+--
+-- Table structure for table `state`
+--
+
 CREATE TABLE state (
-  id int(11) not null auto_increment primary key,
-  name varchar(80),
-  type varchar(20),
-  value varchar(200),
-  mtime int(11),
-  ctime int(11)
+  id int(11) NOT NULL,
+  `name` varchar(80) default NULL,
+  `type` varchar(20) default NULL,
+  `value` varchar(200) default NULL,
+  mtime int(11) default NULL,
+  ctime int(11) default NULL,
+  PRIMARY KEY  (id),
+  KEY `name` (`name`),
+  KEY `type` (`type`)
 );
+
+--
+-- Table structure for table `template`
+--
+
 CREATE TABLE template (
-  id int(11) not null auto_increment primary key,
-  name varchar(80),
-  text text,
-  mtime int(11)
+  id int(11) NOT NULL,
+  `name` varchar(80) default NULL,
+  `text` text,
+  mtime int(11) default NULL,
+  PRIMARY KEY  (id),
+  KEY `name` (`name`)
 );
-CREATE TABLE timestamp (
-  id int(11) not null auto_increment primary key,
-  name varchar(80),
-  time int(11)
+
+--
+-- Table structure for table `timestamp`
+--
+
+CREATE TABLE `timestamp` (
+  id int(11) NOT NULL,
+  `name` varchar(80) default NULL,
+  `time` int(11) default NULL,
+  PRIMARY KEY  (id)
 );
