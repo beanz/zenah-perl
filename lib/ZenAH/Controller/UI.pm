@@ -65,6 +65,22 @@ sub show : Local {
     $c->forward('ZenAH::View::UI');
 }
 
+=item sql
+
+Shows a UI page
+
+=cut
+
+sub sql : Local {
+    my ( $self, $c ) = @_;
+    my $template = 'sql/'.($c->request->path || 'default');
+    $c->response->content_type('text/plain');
+    $c->stash->{now} = time;
+    $c->stash->{template} = $template;
+    $c->stash->{variant_url} = \&variant_url;
+    $c->forward('ZenAH::View::UI');
+}
+
 =item ajax
 
 Shows a UI page
