@@ -73,7 +73,8 @@ Shows a UI page
 
 sub sql : Local {
     my ( $self, $c ) = @_;
-    my $template = 'sql/'.($c->request->path || 'default');
+    my $template = $c->request->path;
+    $template .= '/default' unless ($template =~ /\//);
     $c->response->content_type('text/plain');
     $c->stash->{now} = time;
     $c->stash->{template} = $template;
