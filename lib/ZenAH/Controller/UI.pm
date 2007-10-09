@@ -6,6 +6,7 @@ use Template;
 use xPL::Client;
 use URI;
 use URI::QueryParam;
+use DateTime;
 
 #
 # Sets the actions in this controller to be registered with no prefix
@@ -59,24 +60,44 @@ sub show : Local {
       $c->stash->{meta_refresh} = '5;'.$uri;
     }
     $c->stash->{now} = time;
+    $c->stash->{dt} = DateTime->now;
     $c->stash->{status} = $status || '&nbsp;';
     $c->stash->{template} = $template;
     $c->stash->{variant_url} = \&variant_url;
     $c->forward('ZenAH::View::UI');
 }
 
-=item sql
+=item text
 
 Shows a UI page
 
 =cut
 
-sub sql : Local {
+sub text : Local {
     my ( $self, $c ) = @_;
     my $template = $c->request->path;
     $template .= '/default' unless ($template =~ /\//);
     $c->response->content_type('text/plain');
     $c->stash->{now} = time;
+    $c->stash->{dt} = DateTime->now;
+    $c->stash->{template} = $template;
+    $c->stash->{variant_url} = \&variant_url;
+    $c->forward('ZenAH::View::UI');
+}
+
+=item json
+
+Shows a UI page
+
+=cut
+
+sub json : Local {
+    my ( $self, $c ) = @_;
+    my $template = $c->request->path;
+    $template .= '/default' unless ($template =~ /\//);
+    $c->response->content_type('text/json');
+    $c->stash->{now} = time;
+    $c->stash->{dt} = DateTime->now;
     $c->stash->{template} = $template;
     $c->stash->{variant_url} = \&variant_url;
     $c->forward('ZenAH::View::UI');
