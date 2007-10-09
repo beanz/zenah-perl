@@ -30,7 +30,7 @@ while (<$fh>) {
 $fh->close;
 
 my $loader = Class::DBI::Loader->new(
-    dsn           => 'dbi:SQLite:zenah.db',    %args,
+    %args,
     options       => {},
     #relationships => 1,
     additional_base_classes => [qw/Class::DBI::FromForm Class::DBI::AsForm/],
