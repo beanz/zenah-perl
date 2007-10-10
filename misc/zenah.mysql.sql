@@ -3,7 +3,7 @@
 --
 
 CREATE TABLE device (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `name` varchar(80) default NULL,
   `string` varchar(80) default NULL,
   description text,
@@ -16,7 +16,7 @@ CREATE TABLE device (
 --
 
 CREATE TABLE device_attribute (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `name` varchar(30) default NULL,
   `value` varchar(200) default NULL,
   PRIMARY KEY  (id),
@@ -29,7 +29,7 @@ CREATE TABLE device_attribute (
 --
 
 CREATE TABLE device_attribute_link (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   device int(11) default NULL,
   device_attribute int(11) default NULL,
   PRIMARY KEY  (id),
@@ -42,7 +42,7 @@ CREATE TABLE device_attribute_link (
 --
 
 CREATE TABLE device_control (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `name` varchar(50) default NULL,
   definition text,
   `string` varchar(80) default NULL,
@@ -55,7 +55,7 @@ CREATE TABLE device_control (
 --
 
 CREATE TABLE device_control_link (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   device int(11) default NULL,
   device_control int(11) default NULL,
   PRIMARY KEY  (id),
@@ -68,7 +68,7 @@ CREATE TABLE device_control_link (
 --
 
 CREATE TABLE history (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `name` varchar(80) default NULL,
   `type` varchar(20) default NULL,
   `value` varchar(200) default NULL,
@@ -88,7 +88,7 @@ CREATE TABLE history (
 --
 
 CREATE TABLE list (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `name` varchar(80) default NULL,
   liststate int(11) default NULL,
   PRIMARY KEY  (id)
@@ -99,7 +99,7 @@ CREATE TABLE list (
 --
 
 CREATE TABLE listitem (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `name` text,
   PRIMARY KEY  (id)
 );
@@ -109,7 +109,7 @@ CREATE TABLE listitem (
 --
 
 CREATE TABLE listitemlink (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   list int(11) default NULL,
   listitem int(11) default NULL,
   PRIMARY KEY  (id)
@@ -120,7 +120,7 @@ CREATE TABLE listitemlink (
 --
 
 CREATE TABLE liststate (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `name` varchar(20) default NULL,
   PRIMARY KEY  (id)
 );
@@ -130,7 +130,7 @@ CREATE TABLE liststate (
 --
 
 CREATE TABLE map (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `type` varchar(50) default NULL,
   `name` varchar(80) default NULL,
   `value` varchar(255) default NULL,
@@ -143,7 +143,7 @@ CREATE TABLE map (
 --
 
 CREATE TABLE phone_hist (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   num varchar(30) default NULL,
   ctime int(11) default NULL,
   PRIMARY KEY  (id)
@@ -154,7 +154,7 @@ CREATE TABLE phone_hist (
 --
 
 CREATE TABLE room (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `name` varchar(80) default NULL,
   `string` varchar(80) default NULL,
   description text,
@@ -167,7 +167,7 @@ CREATE TABLE room (
 --
 
 CREATE TABLE room_attribute (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `name` varchar(30) default NULL,
   `value` varchar(200) default NULL,
   PRIMARY KEY  (id)
@@ -178,7 +178,7 @@ CREATE TABLE room_attribute (
 --
 
 CREATE TABLE room_attribute_link (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   room int(11) default NULL,
   room_attribute int(11) default NULL,
   PRIMARY KEY  (id)
@@ -189,7 +189,7 @@ CREATE TABLE room_attribute_link (
 --
 
 CREATE TABLE room_device_link (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   room int(11) default NULL,
   device int(11) default NULL,
   PRIMARY KEY  (id),
@@ -202,7 +202,7 @@ CREATE TABLE room_device_link (
 --
 
 CREATE TABLE rule (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `name` varchar(80) default NULL,
   trig text,
   trig_type varchar(30) default NULL,
@@ -219,7 +219,7 @@ CREATE TABLE rule (
 --
 
 CREATE TABLE state (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `name` varchar(80) default NULL,
   `type` varchar(20) default NULL,
   `value` varchar(200) default NULL,
@@ -235,7 +235,7 @@ CREATE TABLE state (
 --
 
 CREATE TABLE template (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `name` varchar(80) default NULL,
   `text` text,
   mtime int(11) default NULL,
@@ -248,7 +248,7 @@ CREATE TABLE template (
 --
 
 CREATE TABLE `timestamp` (
-  id int(11) NOT NULL,
+  id int(11) NOT NULL auto_increment,
   `name` varchar(80) default NULL,
   `time` int(11) default NULL,
   PRIMARY KEY  (id)
