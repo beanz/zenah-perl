@@ -78,9 +78,9 @@ sub update_rrd_files {
                   } ZenAH::CDBI::Map->search(type => 'rrd_type');
   foreach my $state (ZenAH::CDBI::State->retrieve_all()) {
     my $definition = $types{$state->type};
-    next unless ($definition);
+    next unless (defined $definition);
     $self->update_rrd($rrd_dir,
-               $time, $state->name, $state->mtime, $state->value,
+               $time, $state->name, $state->mtime->epoch, $state->value,
                $definition);
   }
   return 1;
