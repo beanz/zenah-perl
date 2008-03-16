@@ -102,7 +102,6 @@ sub update_rrd {
     my %map = split /\s*[:=]\s*/, $1;
     $val = exists $map{$val} ? $map{$val} : 0;
   }
-  print STDERR "RRDs::update(", $rrd, ' -t', $var, ", ", $t.':'.$val, ")\n";
   RRDs::update($rrd, '-t', $var, $t.':'.$val);
   my $err = RRDs::error;
   if ($err) {
