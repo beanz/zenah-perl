@@ -333,6 +333,14 @@ sub action_debug {
   return 1;
 }
 
+sub zenah_config {
+  my $self = shift;
+  my $key = shift;
+  my $conf = ZenAH::CDBI::Map->search(type => 'engine_config',
+                                      name => $key)->first or return;
+  return $conf->value;
+}
+
 # Autoload methods go after =cut, and are processed by the autosplit program.
 
 1;
@@ -352,7 +360,7 @@ Mark Hindess, E<lt>zenah@beanz.uklinux.netE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2006, 2007 by Mark Hindess
+Copyright (C) 2007 by Mark Hindess
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.7 or,
