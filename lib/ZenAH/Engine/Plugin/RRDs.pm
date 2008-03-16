@@ -97,6 +97,7 @@ sub update_rrd {
   if ($self->{_last}->{$rrd} && $self->{_last}->{$rrd} >= $t) {
     return 1;
   }
+  $self->{_last}->{$rrd} = $t;
   if ($dstype =~ /^MAP:(?:[^:]+):(.*)$/) {
     my %map = split /\s*[:=]\s*/, $1;
     $val = exists $map{$val} ? $map{$val} : 0;
