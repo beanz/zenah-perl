@@ -1,0 +1,53 @@
+#!/usr/bin/perl -w
+use strict;
+use ZenAH::Google::Chart;
+use RRDs;
+
+# google-chart-from-rrd inside.rrd|Inside\ Temp outside.rrd|Outside\ Temp
+
+my $span = '1d';
+my $rrdres = 3600;
+my $start = int(time/$rrdres)*$rrdres;
+my @chart_data;
+my @legend;
+foreach my $file (@ARGV) {
+  my $legend = $file;
+  if ($legend =~ s/\|([^|]+)$//) {
+    $legend = $1;
+  } else {
+    $legend =~ s!^.*\/!!;
+    $legend =~ s!\.rrd$!!;
+  }
+  push @legend, $legend;
+  my $cf = 'AVERAGE';
+  if ($file =~ s/:([^\/:|]+)(?:\|[^|]*)?$//) {
+    $cf = $1;
+  }
+  print $file, ' ', $cf, ' ', $legend, "\n";
+  my ($start,$step,$names,$data) =
+    RRDs::fetch $file, $cf, '-r', $rrdres, '-e', $start, '-s', 'e-'.$span;
+
+  my $index = 0;
+  foreach my $line (@$data) {
+    unless (defined $chart_data[$index]) {
+      push @{$chart_data[$index]}, $start;
+    }
+    foreach my $val (@$line) {
+      push @{$chart_data[$index]}, $val;
+    }
+    $start += $step;
+    $index++;
+  }
+}
+
+#use Data::Dumper;
+#print Data::Dumper->Dump([\@chart_data], [qw/d/]);
+my $c = ZenAH::Google::Chart->new({width => 680, height => 300,
+                                   type => 'lc', data => \@chart_data,
+                                   xfmt => '!%H', xmod => 6,
+                                   min => 0, legend => \@legend,
+                                   colours => ['ff0000', '00ff00', '00ffff'],
+                                   fill => 1});
+#$c->add_data(data => \@temp, legend => "Temperature", scale => 'l');
+#$c->add_data(data => \@hum, legend => "Humidity", scale => 'r');
+print $c->url,"\n";
