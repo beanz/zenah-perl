@@ -8,17 +8,22 @@ use RRDs;
 my $span = '1d';
 my $rrdres = 3600;
 my $start = int(time/$rrdres)*$rrdres;
-my @chart_data;
-my @legend;
+my %chart_data;
+my %legend;
 foreach my $file (@ARGV) {
-  my $legend = $file;
-  if ($legend =~ s/\|([^|]+)$//) {
+  my $side = 'left';
+  if ($file =~ s/!$//) {
+    $side = 'right';
+  }
+  my $legend;
+  if ($file =~ s/\|([^|]+)$//) {
     $legend = $1;
   } else {
+    $legend = $file;
     $legend =~ s!^.*\/!!;
     $legend =~ s!\.rrd$!!;
   }
-  push @legend, $legend;
+  push @{$legend{$side}}, $legend;
   my $cf = 'AVERAGE';
   if ($file =~ s/:([^\/:|]+)(?:\|[^|]*)?$//) {
     $cf = $1;
@@ -29,25 +34,34 @@ foreach my $file (@ARGV) {
 
   my $index = 0;
   foreach my $line (@$data) {
-    unless (defined $chart_data[$index]) {
-      push @{$chart_data[$index]}, $start;
+    unless (defined $chart_data{$side}->[$index]) {
+      push @{$chart_data{$side}->[$index]}, $start;
     }
     foreach my $val (@$line) {
-      push @{$chart_data[$index]}, $val;
+      push @{$chart_data{$side}->[$index]}, $val;
     }
     $start += $step;
     $index++;
   }
 }
+my @legend = ();
+push @legend, @{$legend{'left'}||[]};
+push @legend, @{$legend{'right'}||[]};
 
 #use Data::Dumper;
 #print Data::Dumper->Dump([\@chart_data], [qw/d/]);
 my $c = ZenAH::Google::Chart->new({width => 680, height => 300,
-                                   type => 'lc', data => \@chart_data,
+                                   type => 'lc',
+
+                                   data => $chart_data{'left'},
+                                   min => 0,
+                                   legend => $legend{'left'},
+
+                                   right_data => $chart_data{'right'},
+                                   right_min => 0,
+                                   right_legend => $legend{'right'},
+
                                    xfmt => '!%H', xmod => 6,
-                                   min => 0, legend => \@legend,
                                    colours => ['ff0000', '00ff00', '00ffff'],
                                    fill => 1});
-#$c->add_data(data => \@temp, legend => "Temperature", scale => 'l');
-#$c->add_data(data => \@hum, legend => "Humidity", scale => 'r');
 print $c->url,"\n";
