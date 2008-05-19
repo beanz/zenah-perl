@@ -1,13 +1,36 @@
 #!/usr/bin/perl -w
 use strict;
+use Getopt::Long;
 use ZenAH::Google::Chart;
 use RRDs;
 
 # google-chart-from-rrd inside.rrd|Inside\ Temp outside.rrd|Outside\ Temp
 
-my $span = '1d';
+my $verbose;
+my $span = 86400;
 my $rrdres = 3600;
-my $start = int(time/$rrdres)*$rrdres;
+my $end;
+my $start;
+my $fill = 0;
+my $xfmt = '!%H';
+GetOptions('verbose+' => \$verbose,
+	   'resolution=i' => \$rrdres,
+	   'span=i' => \$span,
+	   'start=i' => \$start,
+	   'end=i' => \$end,
+	   'fill' => \$fill,
+	   'format=s' => \$xfmt,
+          );
+
+if (defined $start) {
+} elsif (defined $end) {
+} else {
+    $end = int(time/$rrdres)*$rrdres;
+    $start = $end-$rrdres*int(0.5+$span/$rrdres);
+}
+print STDERR "Time: $start - $end\n";
+print STDERR "Samples: ", $span/$rrdres, "\n";
+
 my %chart_data;
 my %legend;
 foreach my $file (@ARGV) {
@@ -20,6 +43,7 @@ foreach my $file (@ARGV) {
     $legend = $1;
   } else {
     $legend = $file;
+    $legend =~ s!/([^/]+)$! $1!;
     $legend =~ s!^.*\/!!;
     $legend =~ s!\.rrd$!!;
   }
@@ -30,23 +54,46 @@ foreach my $file (@ARGV) {
   }
   print $file, ' ', $cf, ' ', $legend, "\n";
   my ($start,$step,$names,$data) =
-    RRDs::fetch $file, $cf, '-r', $rrdres, '-e', $start, '-s', 'e-'.$span;
+    RRDs::fetch $file, $cf, '-r', $rrdres, '-e', $end, '-s', $start;
 
+  my $step_mod = $rrdres/$step;
+  print STDERR "Res: ", $rrdres, " => ", $step, " ", $step_mod, "\n";
   my $index = 0;
+  my $count = 0;
+  my @sum = ();
+  my @num = ();
   foreach my $line (@$data) {
-    unless (defined $chart_data{$side}->[$index]) {
-      push @{$chart_data{$side}->[$index]}, $start;
+    $count++;
+    my $num_values = scalar @$line - 1;
+
+    foreach my $i (0..$num_values) {
+      if (defined $line->[$i]) {
+	$sum[$i] += $line->[$i];
+	$num[$i]++;
+      }
     }
-    foreach my $val (@$line) {
-      push @{$chart_data{$side}->[$index]}, $val;
+    my $sample = (($count%$step_mod) == 0);
+    if ($sample) {
+      unless (defined $chart_data{$side}->[$index]) {
+	push @{$chart_data{$side}->[$index]}, $start;
+      }
+      foreach my $i (0..$num_values) {
+	my $val = $num[$i] ? $sum[$i]/$num[$i] : undef;
+	push @{$chart_data{$side}->[$index]}, $val;
+      }
+      $start += $rrdres;
+      $index++;
+      @sum = ();
+      @num = ();
+    } else {
     }
-    $start += $step;
-    $index++;
   }
 }
 my @legend = ();
 push @legend, @{$legend{'left'}||[]};
 push @legend, @{$legend{'right'}||[]};
+
+print STDERR "Length: ", scalar @{$chart_data{'left'}}, "\n";
 
 #use Data::Dumper;
 #print Data::Dumper->Dump([\@chart_data], [qw/d/]);
@@ -54,14 +101,15 @@ my $c = ZenAH::Google::Chart->new({width => 680, height => 300,
                                    type => 'lc',
 
                                    data => $chart_data{'left'},
-                                   min => 0,
+#                                   min => 0,
                                    legend => $legend{'left'},
 
                                    right_data => $chart_data{'right'},
                                    right_min => 0,
                                    right_legend => $legend{'right'},
 
-                                   xfmt => '!%H', xmod => 6,
-                                   colours => ['ff0000', '00ff00', '00ffff'],
-                                   fill => 1});
+                                   xfmt => $xfmt, xmod => 4,
+                                   colours => ['0000ff', 'ff0000', 'ffff00',
+					       '00ff00', '00ffff', 'ff00ff'],
+                                   fill => $fill});
 print $c->url,"\n";
