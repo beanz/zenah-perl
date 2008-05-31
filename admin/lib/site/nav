@@ -1,6 +1,5 @@
 <!-- BEGIN site/nav -->
 [% navbutton("device","device") %]
-[% navbutton("history") %]
 [% navbutton("map") %]
 [% navbutton("room") %]
 [% navbutton("rule") %]
