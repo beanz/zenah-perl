@@ -64,26 +64,6 @@ CREATE TABLE device_control_link (
 );
 
 --
--- Table structure for table `history`
---
-
-CREATE TABLE history (
-  id int(11) NOT NULL auto_increment,
-  `name` varchar(80) default NULL,
-  `type` varchar(20) default NULL,
-  `value` varchar(200) default NULL,
-  mtime int(11) default NULL,
-  ctime int(11) default NULL,
-  PRIMARY KEY  (id),
-  KEY `name` (`name`),
-  KEY `type` (`type`),
-  KEY ctime (ctime),
-  KEY mtime (mtime),
-  KEY type_2 (`type`,`name`,mtime),
-  KEY type_3 (`type`,`name`)
-);
-
---
 -- Table structure for table `list`
 --
 

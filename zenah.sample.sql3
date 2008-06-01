@@ -327,7 +327,6 @@ INSERT INTO "rule" VALUES(10,'motion_state','message_type="xpl-trig" class="x10.
   [% SET t = zenah.datetime.epoch %]
   [% FOREACH room = dev.rooms %]
     [% CALL zenah.state.set(''motion'', room.name, ''occupied'') %]
-    [% CALL zenah.history.add_minimal(''motion'', room.name, ''occupied'', t) %]
     scene motion_trigger state=on room="[% room.name %]"
   [% END %]
 [% END %]
@@ -339,7 +338,6 @@ INSERT INTO "rule" VALUES(11,'light_state','message_type="xpl-trig" class="x10.b
     [% SET var = room.name %]
     [% SET value = xpl.command == ''on'' ? ''dark'' : ''light'' %]
     [% CALL zenah.state.set(''light'', var, value) %]
-    [% CALL zenah.history.add_minimal(''light'', var, value, t) %]
   [% END %]
 [% END %]',1,1186218870,1186322734);
 INSERT INTO "rule" VALUES(12,'motion_trigger',NULL,'scene','[%# trigger regardless of light state %]
@@ -369,7 +367,6 @@ INSERT INTO "rule" VALUES(13,'motion_check','recurrence freq=minutely seconds=17
   [% NEXT UNLESS motion.mtime.epoch < cutoff %]
   scene motion_trigger state=off room="[% room.name %]"
   [% CALL zenah.state.set(''motion'', room.name, ''empty'') %]
-  [% CALL zenah.history.add_minimal(''motion'', room.name, ''empty'', t) %]
 [% END %]
 
 ',1,1186218660,1186779504);
@@ -377,9 +374,6 @@ INSERT INTO "rule" VALUES(14,'sensor_history','message_type="(xpl-trig|xpl-stat)
 
 [%# Add to state table for quick lookup of latest value %]
 [% CALL zenah.state.set(xpl.type, xpl.device, xpl.current) %]
-
-[%# Add to history table for statistics/graphs %]
-[% CALL zenah.history.add_minimal(xpl.type, xpl.device, xpl.current, t) %]
 
 ',1,1186340259,1186340414);
 CREATE TABLE "state" (
@@ -1305,25 +1299,4 @@ INSERT INTO "device_control" VALUES(19,'blind/open','[% SET relay = device.attri
   error ''invalid device''
 [% END %]
 ','Open',NULL);
-CREATE TABLE history (
-  "id" integer PRIMARY KEY,
-  "name" varchar(80) default NULL,
-  "type" varchar(20) default NULL,
-  "value" varchar(200) default NULL,
-  "mtime" int(11) default NULL,
-  "ctime" int(11) default NULL
-);
-INSERT INTO "history" VALUES(1,'bath','light','light',1186322128,1186322128);
-INSERT INTO "history" VALUES(2,'bed_1','light','light',1186322146,1186322146);
-INSERT INTO "history" VALUES(3,'kitchen','light','light',1186322150,1186322150);
-INSERT INTO "history" VALUES(4,'cloak','light','light',1186322156,1186322156);
-INSERT INTO "history" VALUES(5,'lounge','light','light',1186322168,1186322168);
-INSERT INTO "history" VALUES(6,'bath','motion','occupied',1186322191,1186322191);
-INSERT INTO "history" VALUES(7,'bed_1','motion','occupied',1186322192,1186322192);
-INSERT INTO "history" VALUES(8,'cloak','motion','occupied',1186322734,1186322193);
-INSERT INTO "history" VALUES(9,'kitchen','motion','occupied',1186322194,1186322194);
-INSERT INTO "history" VALUES(10,'lounge','motion','occupied',1186322195,1186322195);
-INSERT INTO "history" VALUES(11,'uv138.55','uv','2',1186340338,1186340338);
-INSERT INTO "history" VALUES(12,'26.6DA373000000','temp','26.7',1186340387,1186340387);
-INSERT INTO "history" VALUES(13,'26.6DA373000000','humidity','55.0025',1186340414,1186340414);
-COMMIT;
+cOMMIT;

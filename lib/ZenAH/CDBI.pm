@@ -59,26 +59,6 @@ ZenAH::CDBI::PhoneHist->has_a(
     deflate => 'epoch'
 );
 
-ZenAH::CDBI::History->has_a(
-    ctime => 'DateTime',
-    inflate => sub {
-      DateTime->from_epoch(epoch => shift,
-                           formatter => $formatter,
-                           time_zone => $time_zone);
-    },
-    deflate => 'epoch'
-);
-
-ZenAH::CDBI::History->has_a(
-    mtime => 'DateTime',
-    inflate => sub {
-      DateTime->from_epoch(epoch => shift,
-                           formatter => $formatter,
-                           time_zone => $time_zone);
-    },
-    deflate => 'epoch'
-);
-
 ZenAH::CDBI::State->has_a(
     ctime => 'DateTime',
     inflate => sub {
@@ -197,33 +177,6 @@ ZenAH::CDBI::Rule->set_sql(triggers => q{
 sub ZenAH::CDBI::Rule::triggers {
   my $class = shift;
   return map { $_->trig_type } $class->search_triggers();
-}
-
-ZenAH::CDBI::History->set_sql(types => q{
-  SELECT distinct type FROM __TABLE__
-});
-sub ZenAH::CDBI::History::types {
-  my $class = shift;
-  return map { $_->type } $class->search_types();
-}
-
-ZenAH::CDBI::History->set_sql('most_recent' => q{
-  SELECT *
-  FROM __TABLE__
-  WHERE type = ? AND name = ?
-  ORDER BY mtime DESC LIMIT 1
-});
-
-ZenAH::CDBI::History->set_sql('distinct' => q{
-  SELECT DISTINCT type,name FROM __TABLE__ WHERE type LIKE ?
-  ORDER by type,name
-});
-sub ZenAH::CDBI::History::distinct {
-  my $class = shift;
-  my $like = shift || '%';
-  my $sth = $class->sql_distinct();
-  $sth->execute($like);
-  return $sth->fetchall_arrayref;
 }
 
 ZenAH::CDBI::State->set_sql(types => q{

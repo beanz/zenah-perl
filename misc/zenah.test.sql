@@ -1085,12 +1085,4 @@ INSERT INTO "device_control" VALUES(17, 'x10/flash', '[% USE String %]
   error ''invalid device''
 [% END %]', 'Flash', 'Flash light (and all others on same housecode)
 ');
-CREATE TABLE history (
-  "id" integer PRIMARY KEY,
-  "name" varchar(80) default NULL,
-  "type" varchar(20) default NULL,
-  "value" varchar(200) default NULL,
-  "mtime" int(11) default NULL,
-  "ctime" int(11) default NULL
-);
 COMMIT;
