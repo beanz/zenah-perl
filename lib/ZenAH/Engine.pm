@@ -107,6 +107,8 @@ sub new {
 sub read_rules {
   my $self = shift;
 
+  ZenAH::CDBI::Rule->clear_object_index();
+
   my $iter = ZenAH::CDBI::Rule->retrieve_all();
 
   while (my $rule = $iter->next) {
