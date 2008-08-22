@@ -1,0 +1,184 @@
+#!/usr/bin/perl -w
+
+# $Id: zenah 2 2007-08-05 19:04:44Z beanz $
+
+=head1 NAME
+
+ss13e-label - Perl script to create labels for SS13E RF Switches
+
+=head1 SYNOPSIS
+
+  # show usage message
+  ss13e-label -h
+
+  # create a label
+  ss13e-label 'Kettle' 'Light' 'Curtain' 'Blind' 'Music' 'TV' 'Amp' 'Dog'
+
+=head1 DESCRIPTION
+
+This script is creates PDF labels for SS13E (and similar) X10 remote
+controls.
+
+=cut
+
+use strict;
+use PDF::API2;
+use PDF::API2::Util qw/getPaperSizes/;
+use POSIX qw/strftime/;
+use Getopt::Std;
+
+sub USAGE {
+  my $msg = shift || q{};
+  die <<EOM
+Usage: $0 [flags] [options] label1 label2 ... label8
+where valid flags are:
+  -h - show this help text
+and valid options are (default shown in brackets):
+  -o output - the output file (label.pdf)
+  -a author - the author name to record in the PDF ('Mark Hindess')
+  -f font   - the font to use (Helvetica)
+  -O orient - orientation (portrait)
+  -p paper  - the paper type (a4)
+The labels default to the rather boring 'Label #1', ..., 'Label #8'.
+$msg
+EOM
+}
+
+my %o;
+getopts('hp:o:f:O:a:', \%o) or USAGE;
+$o{'h'} and USAGE;
+
+my $paper = $o{'p'} || 'a4';
+my $fontname = $o{'f'} || 'Helvetica';
+my $output = $o{'o'} || 'label.pdf';
+my $orient = $o{'O'} || 'portrait';
+my $author = $o{'a'} || 'Mark Hindess';
+
+my $pdf = PDF::API2->new() || die "PDF::API2->new() failed\n";
+$pdf->info(
+           'Author'       => $author,
+           'CreationDate' => strftime('%Y-%m-%d %H:%H',localtime(time)),
+           'Creator'      => 'SS13E Label Perl Script',
+           'Producer'     => 'ZenAH SS13E Label Generator',
+           'Title'        => 'SS13E Label',
+           'Subject'      => 'SS13E Label',
+           'Keywords'     => 'SS13E label',
+          );
+
+my %sizes = getPaperSizes;
+my $size =
+  $sizes{$paper} || do { warn "Invalid paper type defaulting to \"a4\"\n";
+                         $sizes{'a4'} };
+my ($px, $py);
+if ($orient eq 'landscape') {
+  $px = $size->[1];
+  $py = $size->[0];
+} else {
+  $px = $size->[0];
+  $py = $size->[1];
+}
+
+$pdf->mediabox($px,$py);
+my $page = $pdf->page();
+my $font = $pdf->corefont($fontname);
+my $fontsize = 20;
+my $gfx = $page->gfx;
+my $text = $page->text;
+
+# 210 × 297 mm
+# 595 x 842 px
+my $mm2px = 595/210;
+my $width = 22*$mm2px;
+my $height = 6*$mm2px;
+my $ox = 100;
+my $oy = 100;
+my $pad = 4;
+
+my $c = '#ffffff';
+
+foreach my $i (0..7) {
+  my $str = $ARGV[$i] || 'Label #'.($i+1);
+  while (($text->advancewidth($str,
+                              font => $font,
+                              fontsize => $fontsize)) > $width-($pad*2)){
+    $fontsize--;
+  }
+}
+
+foreach my $i (0..2) {
+  $gfx->fillcolor($c);
+  $gfx->rect($ox, $py-($oy+$height*($i+1)), $width, $height);
+  $gfx->fillstroke(1);
+  my $str = $ARGV[$i] || 'Label #'.($i+1);
+  centerstring($text,
+               $ox+$pad, $ox+($width-$pad*2),
+               $py-($oy+$height*($i+.6)),
+               $str, $font, $fontsize);
+  centerstring($text,
+               $ox+$pad, $ox+$pad*4,
+               $py-($oy+$height*($i+.9)),
+               'On', $font, 5);
+  centerstring($text,
+               $ox+$width-$pad*5, $ox+$width-$pad,
+               $py-($oy+$height*($i+.9)),
+               'Off', $font, 5);
+}
+
+$gfx->fillcolor($c);
+$gfx->rect($ox, $py-($oy+$height*4), $width, $height);
+$gfx->fillstroke(1);
+while (($text->advancewidth('Bright',
+                            font => $font,
+                            fontsize => $fontsize)) > $width/2-($pad*2)){
+  $fontsize--;
+}
+
+centerstring($text,
+             $ox+$pad, $ox+(($width/2)-$pad),
+             $py-($oy+$height*(3.7)),
+             'Bright', $font, $fontsize);
+centerstring($text,
+             $ox+$width/2+$pad, $ox+$width-$pad,
+             $py-($oy+$height*(3.7)),
+             'Dim', $font, $fontsize);
+
+$pdf->saveas($output);
+$pdf->end();
+
+sub centerstring {
+  my $text = shift;
+  my $x1 = shift;
+  my $x2 = shift;
+  my $y = shift;
+  my $string = shift;
+  my $font = shift;
+  my $fsize = shift;
+  my $aw = $x2 - $x1;
+  my $w;
+  while (($w = $text->advancewidth($string,
+                                   font => $font,
+                                   fontsize => $fsize)) > $aw){
+    $fsize--;
+  }
+  my $x = $x1 + ($aw-$w)/2;
+  $text->textlabel($x, $y, $font, $fsize, $string, -color => '#000000');
+}
+
+=head1 SEE ALSO
+
+Project website: http://www.zenah.org.uk/
+Remote control details: http://www.letsautomate.com/10220.cfm
+
+=head1 AUTHOR
+
+Mark Hindess, E<lt>zenah@beanz.uklinux.netE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2006, 2007 by Mark Hindess
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.8.7 or,
+at your option, any later version of Perl 5 you may have available.
+
+=cut
