@@ -10,6 +10,7 @@
       [% table_class.to_field(column).as_XML %]<br/>
     [% END %]
   [% END %]
+  <br/>
   <input type="submit" value="Add"/>
 </form>
 <hr/>

@@ -1,12 +1,1 @@
-
-[% USE table_class = Class('ZenAH::Model::CDBI::Device') %]
-<p>[%message%]</p>
-<form action="[% base _ '/admin/device/do_add' %]" method="post">
-  [% FOR column = column_order %]
-    [% column %]<br/>
-    [% table_class.to_field(column).as_XML %]<br/>
-  [% END %]
-  <input type="submit" value="Add"/>
-</form>
-<hr/>
-[% crudbutton("device", "list", "") %]
+[% crud_add('Device') %]

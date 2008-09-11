@@ -66,3 +66,20 @@ Filter:
 [% END %]
 </p>
 [% END %]
+
+[% MACRO crud_add(table) BLOCK %]
+[% USE String(table) %]
+[% SET tlc = String.lower %]
+[% USE table_class = Class('ZenAH::Model::CDBI::' _ table) %]
+<p>[%message%]</p>
+<form action="[% base _ '/admin/' _ tlc _ '/do_add' %]" method="post">
+  [% FOR column = column_order %]
+    [% column %]<br/>
+    [% table_class.to_field(column).as_XML %]<br/>
+  [% END %]
+  <br/>
+  <input type="submit" value="Add"/>
+</form>
+<hr/>
+[% crudbutton(tlc, "list", "") %]
+[% END %]
