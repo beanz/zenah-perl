@@ -1,4 +1,4 @@
-[% filternav(filters,filter) %]
+[% filternav(filters) %]
 [% pagenav(page) %]
 <table class="list-table">
   <tr class="list-header">
