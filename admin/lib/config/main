@@ -13,7 +13,7 @@
    # define a data structure to hold sitewide data
    site = {
      title     => 'Zen Automated Home',
-     copyright => '2006, 2007 Mark Hindess',
+     copyright => '2006, 2008 Mark Hindess',
    };
 
    # load up any other configuration items 
