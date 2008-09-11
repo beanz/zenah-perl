@@ -1,17 +1,1 @@
-
-[% USE table_class = Class('ZenAH::Model::CDBI::Template') %]
-<p>[%message%]</p>
-<form action="[% base _ '/admin/template/do_add' %]" method="post">
-  [% FOR column = column_order %]
-    [% column %]<br/>
-    [% IF column == 'text' %]
-      <textarea name="text" cols="80" rows="10"></textarea><br/>
-    [% ELSE %]
-      [% table_class.to_field(column).as_XML %]<br/>
-    [% END %]
-  [% END %]
-  <br/>
-  <input type="submit" value="Add"/>
-</form>
-<hr/>
-[% crudbutton("template", "list", "") %]
+[% crud_add('Template') %]
