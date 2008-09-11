@@ -4,3 +4,4 @@ inc
 Makefile
 META.yml
 pm_to_blib
+/zenah.db
