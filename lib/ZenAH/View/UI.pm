@@ -6,12 +6,15 @@ use ZenAH::Templates;
 
 __PACKAGE__->config({
     CATALYST_VAR => 'Catalyst',
-    LOAD_TEMPLATES => [ ZenAH::Templates->new() ],
+    LOAD_TEMPLATES => [ ZenAH::Templates->new(
+                                              COMPILE_DIR  => '/tmp/tt',
+                                              COMPILE_EXT  => '.ttc',
+                                             ) ],
     PRE_PROCESS  => 'config/main',
     WRAPPER      => 'site/wrapper',
     ERROR        => 'site/error',
     TRIM         => 1,
-    TIMER        => 0
+    TIMER        => 0,
 });
 
 =head1 NAME

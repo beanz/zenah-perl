@@ -12,7 +12,9 @@ __PACKAGE__->config({
     PRE_PROCESS  => 'config/main',
     WRAPPER      => 'site/wrapper',
     ERROR        => 'error.tt2',
-    TIMER        => 0
+    TIMER        => 0,
+    COMPILE_DIR  => '/tmp/ttsite',
+    COMPILE_EXT  => '.ttc',
 });
 
 =head1 NAME
