@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -274,52 +276,47 @@ tr.list-row-1 {
 
 <div id="content">
 
+
+
 <p></p>
 <form action="http://localhost//admin/room/do_edit/1"
     method="post">
-  <table border="0" width="100%">
-  <tr>
-    <td rowspan="2">
-      
-        name<br/>
-        <input name="name" type="text" value="lounge" />
+  
+    name<br/>
+    <input name="name" type="text" value="lounge" />
 <br/>
-      
-        string<br/>
-        <input name="string" type="text" value="Lounge" />
+  
+    string<br/>
+    <input name="string" type="text" value="Lounge" />
 <br/>
-      
-        description<br/>
-        <textarea cols="22" name="description" rows="3">Main living area</textarea>
+  
+    description<br/>
+    <textarea cols="22" name="description" rows="3">Main living area</textarea>
 <br/>
-      
-    </td>
-    <th valign="top" align="left">Attributes</th>
-  </tr>
-  <tr>
-    <td valign="top" align="left">
-      <select name="attrs" multiple="multiple">
-      
-        
-          <option selected="selected"
-                  value="5"
-            >zone&nbsp;= &nbsp;downstairs</option>
-        
-      
-        
-          <option value="6"
-            >zone&nbsp;= &nbsp;outside</option>
-        
-      
-        
-          <option value="4"
-            >zone&nbsp;= &nbsp;upstairs</option>
-        
-      
-      </select>
-    </td>
-  </tr>
-  </table>
+  
+
+Attributes<br/>
+
+<select name="attrs" multiple="multiple">
+  
+    
+      <option selected="selected"
+              value="2"
+        >zone&nbsp;= &nbsp;downstairs</option>
+    
+  
+    
+      <option value="3"
+        >zone&nbsp;= &nbsp;outside</option>
+    
+  
+    
+      <option value="1"
+        >zone&nbsp;= &nbsp;upstairs</option>
+    
+  
+</select>
+<br/>
 
   <input type="submit" value="Edit"/>
 </form>
@@ -328,6 +325,7 @@ tr.list-row-1 {
   <span class="crudbutton"><a
     href="http://localhost//admin/room/list/"
     >List</a></span>
+
 
 
 </div>

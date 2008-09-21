@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -276,19 +278,19 @@ tr.list-row-1 {
 
 
   <b>name</b><br/>
-  <br/><br/>
+  zone<br/><br/>
 
   <b>value</b><br/>
-  <br/><br/>
+  upstairs<br/><br/>
 
 
   <span class="crudbutton"><a
-    href="http://localhost//admin/roomattribute/edit/"
+    href="http://localhost//admin/roomattribute/edit/1"
     >Edit</a></span>
 
 
   <span class="crudbutton"><a
-    href="http://localhost//admin/roomattribute/destroy/"
+    href="http://localhost//admin/roomattribute/destroy/1"
     >Destroy</a></span>
 
 <hr/>

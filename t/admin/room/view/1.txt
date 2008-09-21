@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -299,7 +301,7 @@ tr.list-row-1 {
     <td class="view-table">
       
   <span class="crudbutton"><a
-    href="http://localhost//admin/roomattribute/view/5"
+    href="http://localhost//admin/roomattribute/view/2"
     >View</a></span>
 
     </td>

@@ -1,17 +1,3 @@
-<p>[%message%]</p>
-<form action="[% base _ '/admin/template/do_edit/' _ item.id %]"
-    method="post">
-  [% FOR column = column_order %]
-    [% column %]<br/>
-    [% IF column == 'text' %]
-      <textarea name="text" cols="80" rows="10"
-        >[% item.text FILTER html %]</textarea><br/>
-    [% ELSE %]
-      [% item.to_field(column).as_XML %]<br/>
-    [% END %]
-  [% END %]
-  <br/>
-  <input type="submit" value="Edit"/>
-</form>
-<hr/>
-[% crudbutton("template", "list", "") %]
+[% WRAPPER crud_edit
+   table = 'Template' %]
+[% END %]

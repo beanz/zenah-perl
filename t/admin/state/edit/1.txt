@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -300,11 +302,11 @@ tr.list-row-1 {
     <input name="mtime" type="text" value="2007-08-05 14:55:28" />
 <br/>
   
+
+
   <input type="submit" value="Edit"/>
 </form>
 <hr/>
-
-
 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/list/"

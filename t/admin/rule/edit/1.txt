@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -274,58 +276,43 @@ tr.list-row-1 {
 
 <div id="content">
 
+
+
 <p></p>
 <form action="http://localhost//admin/rule/do_edit/1"
     method="post">
   
     name<br/>
-    
-      <input name="name" type="text" value="cuckoo" />
+    <input name="name" type="text" value="cuckoo" />
 <br/>
-    
   
     active<br/>
-    
-      <select name="active">
-      
-        <option selected="selected" value="1">Enabled</option>
-        <option value="0">Disabled</option>
-      
-      </select>
-      <br/>
-    
+    <select name="active"><option selected="selected" value="1">Enabled</option><option value="0">Disbled</option></select>
+<br/>
   
     trig_type<br/>
-    
-      <input name="trig_type" type="text" value="at" />
+    <input name="trig_type" type="text" value="at" />
 <br/>
-    
   
     trig<br/>
-    
-      <textarea name="trig" cols="80" rows="2"
-        >recurrence freq=hourly minutes="[0,15,30,45]"</textarea><br/>
-    
+    <textarea cols="80" name="trig" rows="2">recurrence freq=hourly minutes=&quot;[0,15,30,45]&quot;</textarea>
+<br/>
   
     action<br/>
-    
-      <textarea name="action" cols="80" rows="10"
-        >xpl -c osd.basic command=clear text="It is [% zenah.datetime.strftime("%H:%M") %]" delay=10
-</textarea><br/>
-    
+    <textarea cols="80" name="action" rows="10">xpl -c osd.basic command=clear text=&quot;It is [% zenah.datetime.strftime(&quot;%H:%M&quot;) %]&quot; delay=10
+</textarea>
+<br/>
   
     ftime<br/>
-    
-      <input name="ftime" type="text" value="2007-08-10 21:45:02" />
+    <input name="ftime" type="text" value="2007-08-10 21:45:02" />
 <br/>
-    
   
     mtime<br/>
-    
-      <input name="mtime" type="text" value="2007-08-05 14:52:24" />
+    <input name="mtime" type="text" value="2007-08-05 14:52:24" />
 <br/>
-    
   
+
+
   <input type="submit" value="Edit"/>
 </form>
 <hr/>
@@ -333,6 +320,7 @@ tr.list-row-1 {
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/list/"
     >List</a></span>
+
 
 
 </div>

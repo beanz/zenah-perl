@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -275,6 +277,9 @@ tr.list-row-1 {
 <div id="content">
 
 
+
+
+
 <p class="filternav" id="filternav">
 Filter:
 
@@ -346,19 +351,15 @@ Page:
   
     <th>value</th>
   
-    <th>&nbsp;<!-- buttons --></th>
+    <th/>
   </tr>
   
   
     <tr class="list-row-0">
     
-      
-        <td>close_relay</td>
-      
+      <td>close_relay</td>
     
-      
-        <td>o02</td>
-      
+      <td>o02</td>
     
       <td>
         
@@ -382,13 +383,9 @@ Page:
   
     <tr class="list-row-1">
     
-      
-        <td>close_relay</td>
-      
+      <td>close_relay</td>
     
-      
-        <td>o04</td>
-      
+      <td>o04</td>
     
       <td>
         
@@ -412,13 +409,9 @@ Page:
   
     <tr class="list-row-0">
     
-      
-        <td>close_relay</td>
-      
+      <td>close_relay</td>
     
-      
-        <td>o06</td>
-      
+      <td>o06</td>
     
       <td>
         
@@ -442,13 +435,9 @@ Page:
   
     <tr class="list-row-1">
     
-      
-        <td>close_relay</td>
-      
+      <td>close_relay</td>
     
-      
-        <td>o08</td>
-      
+      <td>o08</td>
     
       <td>
         
@@ -472,13 +461,9 @@ Page:
   
     <tr class="list-row-0">
     
-      
-        <td>close_relay</td>
-      
+      <td>close_relay</td>
     
-      
-        <td>o10</td>
-      
+      <td>o10</td>
     
       <td>
         
@@ -502,13 +487,9 @@ Page:
   
     <tr class="list-row-1">
     
-      
-        <td>open_relay</td>
-      
+      <td>open_relay</td>
     
-      
-        <td>o01</td>
-      
+      <td>o01</td>
     
       <td>
         
@@ -532,13 +513,9 @@ Page:
   
     <tr class="list-row-0">
     
-      
-        <td>open_relay</td>
-      
+      <td>open_relay</td>
     
-      
-        <td>o03</td>
-      
+      <td>o03</td>
     
       <td>
         
@@ -562,13 +539,9 @@ Page:
   
     <tr class="list-row-1">
     
-      
-        <td>open_relay</td>
-      
+      <td>open_relay</td>
     
-      
-        <td>o05</td>
-      
+      <td>o05</td>
     
       <td>
         
@@ -592,13 +565,9 @@ Page:
   
     <tr class="list-row-0">
     
-      
-        <td>open_relay</td>
-      
+      <td>open_relay</td>
     
-      
-        <td>o07</td>
-      
+      <td>o07</td>
     
       <td>
         
@@ -622,13 +591,9 @@ Page:
   
     <tr class="list-row-1">
     
-      
-        <td>open_relay</td>
-      
+      <td>open_relay</td>
     
-      
-        <td>o09</td>
-      
+      <td>o09</td>
     
       <td>
         
@@ -652,13 +617,9 @@ Page:
   
     <tr class="list-row-0">
     
-      
-        <td>unit</td>
-      
+      <td>unit</td>
     
-      
-        <td>a1</td>
-      
+      <td>a1</td>
     
       <td>
         
@@ -682,13 +643,9 @@ Page:
   
     <tr class="list-row-1">
     
-      
-        <td>unit</td>
-      
+      <td>unit</td>
     
-      
-        <td>a2</td>
-      
+      <td>a2</td>
     
       <td>
         
@@ -712,13 +669,9 @@ Page:
   
     <tr class="list-row-0">
     
-      
-        <td>unit</td>
-      
+      <td>unit</td>
     
-      
-        <td>a2,a3</td>
-      
+      <td>a2,a3</td>
     
       <td>
         
@@ -742,13 +695,9 @@ Page:
   
     <tr class="list-row-1">
     
-      
-        <td>unit</td>
-      
+      <td>unit</td>
     
-      
-        <td>a3</td>
-      
+      <td>a3</td>
     
       <td>
         
@@ -772,13 +721,9 @@ Page:
   
     <tr class="list-row-0">
     
-      
-        <td>unit</td>
-      
+      <td>unit</td>
     
-      
-        <td>j1</td>
-      
+      <td>j1</td>
     
       <td>
         
@@ -802,13 +747,9 @@ Page:
   
     <tr class="list-row-1">
     
-      
-        <td>unit</td>
-      
+      <td>unit</td>
     
-      
-        <td>k1</td>
-      
+      <td>k1</td>
     
       <td>
         
@@ -832,13 +773,9 @@ Page:
   
     <tr class="list-row-0">
     
-      
-        <td>unit</td>
-      
+      <td>unit</td>
     
-      
-        <td>k2</td>
-      
+      <td>k2</td>
     
       <td>
         
@@ -862,13 +799,9 @@ Page:
   
     <tr class="list-row-1">
     
-      
-        <td>unit</td>
-      
+      <td>unit</td>
     
-      
-        <td>k3</td>
-      
+      <td>k3</td>
     
       <td>
         
@@ -892,13 +825,9 @@ Page:
   
     <tr class="list-row-0">
     
-      
-        <td>unit</td>
-      
+      <td>unit</td>
     
-      
-        <td>k4</td>
-      
+      <td>k4</td>
     
       <td>
         
@@ -922,13 +851,9 @@ Page:
   
     <tr class="list-row-1">
     
-      
-        <td>unit</td>
-      
+      <td>unit</td>
     
-      
-        <td>k5</td>
-      
+      <td>k5</td>
     
       <td>
         
@@ -956,6 +881,7 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/add/"
     >Add</a></span>
+
 
 
 </div>

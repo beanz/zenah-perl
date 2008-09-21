@@ -217,20 +217,20 @@ CREATE TABLE "room_attribute" (
   "name" varchar(30) default NULL,
   "value" varchar(200) default NULL
 );
-INSERT INTO "room_attribute" VALUES(4,'zone','upstairs');
-INSERT INTO "room_attribute" VALUES(5,'zone','downstairs');
-INSERT INTO "room_attribute" VALUES(6,'zone','outside');
+INSERT INTO "room_attribute" VALUES(1,'zone','upstairs');
+INSERT INTO "room_attribute" VALUES(2,'zone','downstairs');
+INSERT INTO "room_attribute" VALUES(3,'zone','outside');
 CREATE TABLE "room_attribute_link" (
   "id" integer PRIMARY KEY,
   "room" int(11) default NULL,
   "room_attribute" int(11) default NULL
 );
-INSERT INTO "room_attribute_link" VALUES(7,4,4);
-INSERT INTO "room_attribute_link" VALUES(8,2,4);
-INSERT INTO "room_attribute_link" VALUES(9,3,5);
-INSERT INTO "room_attribute_link" VALUES(10,6,6);
-INSERT INTO "room_attribute_link" VALUES(11,5,5);
-INSERT INTO "room_attribute_link" VALUES(12,1,5);
+INSERT INTO "room_attribute_link" VALUES(7,4,1);
+INSERT INTO "room_attribute_link" VALUES(8,2,1);
+INSERT INTO "room_attribute_link" VALUES(9,3,2);
+INSERT INTO "room_attribute_link" VALUES(10,6,3);
+INSERT INTO "room_attribute_link" VALUES(11,5,2);
+INSERT INTO "room_attribute_link" VALUES(12,1,2);
 CREATE TABLE "room_device_link" (
   "id" integer PRIMARY KEY,
   "room" int(11) default NULL,
@@ -403,7 +403,7 @@ CREATE TABLE "template" (
   "text" text,
   "mtime" int(11) default NULL
 );
-INSERT INTO "template" VALUES(2,'content/downstairs','<table cellpadding="0" cellspacing="0" width="80%" border="1">
+INSERT INTO "template" VALUES(1,'content/downstairs','<table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
   [% PROCESS room/default room = "kitchen" %]
   [% PROCESS room/default room = "lounge" rowspan="2" %]

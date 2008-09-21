@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -282,31 +284,23 @@ tr.list-row-1 {
   
     
     name<br/>
-    
-      <input name="name" type="text" />
+    <input name="name" type="text" />
 <br/>
-    
   
     
     string<br/>
-    
-      <input name="string" type="text" />
+    <input name="string" type="text" />
 <br/>
-    
   
     
     description<br/>
-    
-      <textarea cols="22" name="description" rows="3"></textarea>
+    <textarea cols="22" name="description" rows="3"></textarea>
 <br/>
-    
   
     
     type<br/>
-    
-      <input name="type" type="text" />
+    <input name="type" type="text" />
 <br/>
-    
   
   <br/>
   <input type="submit" value="Add"/>

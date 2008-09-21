@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -296,282 +298,286 @@ tr.list-row-1 {
     <input name="type" type="text" value="X10Lamp" />
 <br/>
   
-  <br/>
-  <table border="0" width="100%">
-  <tr>
-    <th align="left">Rooms</th>
-    <th align="left">Controls</th>
-    <th align="left">Attributes</th>
-  </tr>
-  <tr>
-    <td valign="top" align="left">
-      <select name="rooms" multiple="multiple">
+
+
+
+
+<br/>
+<table border="0" width="100%">
+<tr>
+  <th align="left">Rooms</th>
+  <th align="left">Controls</th>
+  <th align="left">Attributes</th>
+</tr>
+<tr>
+  <td valign="top" align="left">
+    <select name="rooms" multiple="multiple">
+    
       
-        
-          <option value="4">bath</option>
-        
+        <option value="4">bath</option>
       
-        
-          <option selected="selected"
-                  value="2">bed_1</option>
-        
+    
       
-        
-          <option value="3">cloak</option>
-        
+        <option selected="selected"
+                value="2">bed_1</option>
       
-        
-          <option value="6">garden</option>
-        
+    
       
-        
-          <option value="5">kitchen</option>
-        
+        <option value="3">cloak</option>
       
-        
-          <option value="1">lounge</option>
-        
+    
       
-      </select>
-    </td>
-    <td valign="top" align="left">
-      <select name="controls" multiple="multiple">
+        <option value="6">garden</option>
       
-        
-          <option value="18"
-            >blind/close</option>
-        
+    
       
-        
-          <option value="19"
-            >blind/open</option>
-        
+        <option value="5">kitchen</option>
       
-        
-          <option value="6"
-            >curtain/close</option>
-        
+    
       
-        
-          <option value="5"
-            >curtain/open</option>
-        
+        <option value="1">lounge</option>
       
-        
-          <option selected="selected"
-                  value="3"
-            >x10/bright</option>
-        
+    
+    </select>
+  </td>
+  <td valign="top" align="left">
+    <select name="controls" multiple="multiple">
+    
       
-        
-          <option selected="selected"
-                  value="4"
-            >x10/dim</option>
-        
+        <option value="18"
+          >blind/close</option>
       
-        
-          <option value="17"
-            >x10/flash</option>
-        
+    
       
-        
-          <option selected="selected"
-                  value="16"
-            >x10/full-fast</option>
-        
+        <option value="19"
+          >blind/open</option>
       
-        
-          <option selected="selected"
-                  value="2"
-            >x10/off</option>
-        
+    
       
-        
-          <option selected="selected"
-                  value="1"
-            >x10/on</option>
-        
+        <option value="6"
+          >curtain/close</option>
       
-        
-          <option value="14"
-            >x10/on-override</option>
-        
+    
       
-      </select>
-    </td>
-    <td valign="top" align="left">
-      <select name="attrs" multiple="multiple">
+        <option value="5"
+          >curtain/open</option>
       
-        
-          <option value="15"
-            >close_relay&nbsp;= &nbsp;o02</option>
-        
+    
       
-        
-          <option value="16"
-            >close_relay&nbsp;= &nbsp;o04</option>
-        
+        <option selected="selected"
+                value="3"
+          >x10/bright</option>
       
-        
-          <option value="17"
-            >close_relay&nbsp;= &nbsp;o06</option>
-        
+    
       
-        
-          <option value="18"
-            >close_relay&nbsp;= &nbsp;o08</option>
-        
+        <option selected="selected"
+                value="4"
+          >x10/dim</option>
       
-        
-          <option value="19"
-            >close_relay&nbsp;= &nbsp;o10</option>
-        
+    
       
-        
-          <option value="10"
-            >open_relay&nbsp;= &nbsp;o01</option>
-        
+        <option value="17"
+          >x10/flash</option>
       
-        
-          <option value="11"
-            >open_relay&nbsp;= &nbsp;o03</option>
-        
+    
       
-        
-          <option value="12"
-            >open_relay&nbsp;= &nbsp;o05</option>
-        
+        <option selected="selected"
+                value="16"
+          >x10/full-fast</option>
       
-        
-          <option value="13"
-            >open_relay&nbsp;= &nbsp;o07</option>
-        
+    
       
-        
-          <option value="14"
-            >open_relay&nbsp;= &nbsp;o09</option>
-        
+        <option selected="selected"
+                value="2"
+          >x10/off</option>
       
-        
-          <option value="30"
-            >unit&nbsp;= &nbsp;a1</option>
-        
+    
       
-        
-          <option value="31"
-            >unit&nbsp;= &nbsp;a2</option>
-        
+        <option selected="selected"
+                value="1"
+          >x10/on</option>
       
-        
-          <option value="33"
-            >unit&nbsp;= &nbsp;a2,a3</option>
-        
+    
       
-        
-          <option value="32"
-            >unit&nbsp;= &nbsp;a3</option>
-        
+        <option value="14"
+          >x10/on-override</option>
       
-        
-          <option value="9"
-            >unit&nbsp;= &nbsp;j1</option>
-        
+    
+    </select>
+  </td>
+  <td valign="top" align="left">
+    <select name="attrs" multiple="multiple">
+    
       
-        
-          <option value="4"
-            >unit&nbsp;= &nbsp;k1</option>
-        
+        <option value="15"
+          >close_relay&nbsp;= &nbsp;o02</option>
       
-        
-          <option value="5"
-            >unit&nbsp;= &nbsp;k2</option>
-        
+    
       
-        
-          <option value="6"
-            >unit&nbsp;= &nbsp;k3</option>
-        
+        <option value="16"
+          >close_relay&nbsp;= &nbsp;o04</option>
       
-        
-          <option value="7"
-            >unit&nbsp;= &nbsp;k4</option>
-        
+    
       
-        
-          <option value="8"
-            >unit&nbsp;= &nbsp;k5</option>
-        
+        <option value="17"
+          >close_relay&nbsp;= &nbsp;o06</option>
       
-        
-          <option selected="selected"
-                  value="1"
-            >unit&nbsp;= &nbsp;l1</option>
-        
+    
       
-        
-          <option value="2"
-            >unit&nbsp;= &nbsp;l2</option>
-        
+        <option value="18"
+          >close_relay&nbsp;= &nbsp;o08</option>
       
-        
-          <option value="3"
-            >unit&nbsp;= &nbsp;l3</option>
-        
+    
       
-        
-          <option value="22"
-            >unit&nbsp;= &nbsp;m1</option>
-        
+        <option value="19"
+          >close_relay&nbsp;= &nbsp;o10</option>
       
-        
-          <option value="29"
-            >unit&nbsp;= &nbsp;m10</option>
-        
+    
       
-        
-          <option value="20"
-            >unit&nbsp;= &nbsp;m2</option>
-        
+        <option value="10"
+          >open_relay&nbsp;= &nbsp;o01</option>
       
-        
-          <option value="21"
-            >unit&nbsp;= &nbsp;m3</option>
-        
+    
       
-        
-          <option value="23"
-            >unit&nbsp;= &nbsp;m4</option>
-        
+        <option value="11"
+          >open_relay&nbsp;= &nbsp;o03</option>
       
-        
-          <option value="24"
-            >unit&nbsp;= &nbsp;m5</option>
-        
+    
       
-        
-          <option value="25"
-            >unit&nbsp;= &nbsp;m6</option>
-        
+        <option value="12"
+          >open_relay&nbsp;= &nbsp;o05</option>
       
-        
-          <option value="26"
-            >unit&nbsp;= &nbsp;m7</option>
-        
+    
       
-        
-          <option value="28"
-            >unit&nbsp;= &nbsp;m8</option>
-        
+        <option value="13"
+          >open_relay&nbsp;= &nbsp;o07</option>
       
-        
-          <option value="27"
-            >unit&nbsp;= &nbsp;m9</option>
-        
+    
       
-      </select>
-    </td>
-  </tr>
-  </table>
+        <option value="14"
+          >open_relay&nbsp;= &nbsp;o09</option>
+      
+    
+      
+        <option value="30"
+          >unit&nbsp;= &nbsp;a1</option>
+      
+    
+      
+        <option value="31"
+          >unit&nbsp;= &nbsp;a2</option>
+      
+    
+      
+        <option value="33"
+          >unit&nbsp;= &nbsp;a2,a3</option>
+      
+    
+      
+        <option value="32"
+          >unit&nbsp;= &nbsp;a3</option>
+      
+    
+      
+        <option value="9"
+          >unit&nbsp;= &nbsp;j1</option>
+      
+    
+      
+        <option value="4"
+          >unit&nbsp;= &nbsp;k1</option>
+      
+    
+      
+        <option value="5"
+          >unit&nbsp;= &nbsp;k2</option>
+      
+    
+      
+        <option value="6"
+          >unit&nbsp;= &nbsp;k3</option>
+      
+    
+      
+        <option value="7"
+          >unit&nbsp;= &nbsp;k4</option>
+      
+    
+      
+        <option value="8"
+          >unit&nbsp;= &nbsp;k5</option>
+      
+    
+      
+        <option selected="selected"
+                value="1"
+          >unit&nbsp;= &nbsp;l1</option>
+      
+    
+      
+        <option value="2"
+          >unit&nbsp;= &nbsp;l2</option>
+      
+    
+      
+        <option value="3"
+          >unit&nbsp;= &nbsp;l3</option>
+      
+    
+      
+        <option value="22"
+          >unit&nbsp;= &nbsp;m1</option>
+      
+    
+      
+        <option value="29"
+          >unit&nbsp;= &nbsp;m10</option>
+      
+    
+      
+        <option value="20"
+          >unit&nbsp;= &nbsp;m2</option>
+      
+    
+      
+        <option value="21"
+          >unit&nbsp;= &nbsp;m3</option>
+      
+    
+      
+        <option value="23"
+          >unit&nbsp;= &nbsp;m4</option>
+      
+    
+      
+        <option value="24"
+          >unit&nbsp;= &nbsp;m5</option>
+      
+    
+      
+        <option value="25"
+          >unit&nbsp;= &nbsp;m6</option>
+      
+    
+      
+        <option value="26"
+          >unit&nbsp;= &nbsp;m7</option>
+      
+    
+      
+        <option value="28"
+          >unit&nbsp;= &nbsp;m8</option>
+      
+    
+      
+        <option value="27"
+          >unit&nbsp;= &nbsp;m9</option>
+      
+    
+    </select>
+  </td>
+</tr>
+</table>
 
   <input type="submit" value="Edit"/>
 </form>
@@ -580,6 +586,7 @@ tr.list-row-1 {
   <span class="crudbutton"><a
     href="http://localhost//admin/device/list/"
     >List</a></span>
+
 
 
 </div>

@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -282,38 +284,28 @@ tr.list-row-1 {
   
     
     type<br/>
-    
-      <input name="type" type="text" />
+    <input name="type" type="text" />
 <br/>
-    
   
     
     name<br/>
-    
-      <input name="name" type="text" />
+    <input name="name" type="text" />
 <br/>
-    
   
     
     value<br/>
-    
-      <input name="value" type="text" />
+    <input name="value" type="text" />
 <br/>
-    
   
     
     ctime<br/>
-    
-      <input name="ctime" type="text" />
+    <input name="ctime" type="text" />
 <br/>
-    
   
     
     mtime<br/>
-    
-      <input name="mtime" type="text" />
+    <input name="mtime" type="text" />
 <br/>
-    
   
   <br/>
   <input type="submit" value="Add"/>

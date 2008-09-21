@@ -32,7 +32,7 @@ BEGIN {
     }
     $dh->close;
   }
-  my $dir = 'admin';
+  my $dir = $ENV{ZENAH_ADMIN_TEST_DIR} || 'admin';
   read_request_data($dir, \%request);
   require Test::More;
   import Test::More tests => (1+3*(scalar keys %request));

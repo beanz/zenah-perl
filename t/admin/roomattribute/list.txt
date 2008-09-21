@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -324,7 +326,7 @@ Page:
   
     <th>value</th>
   
-    <th>&nbsp;<!-- buttons --></th>
+    <th/>
   </tr>
   
   
@@ -341,17 +343,17 @@ Page:
       <td>
         
   <span class="crudbutton"><a
-    href="http://localhost//admin/roomattribute/view/5"
+    href="http://localhost//admin/roomattribute/view/2"
     >View</a></span>
 
         
   <span class="crudbutton"><a
-    href="http://localhost//admin/roomattribute/edit/5"
+    href="http://localhost//admin/roomattribute/edit/2"
     >Edit</a></span>
 
         <!-- 
   <span class="crudbutton"><a
-    href="http://localhost//admin/roomattribute/destroy/5"
+    href="http://localhost//admin/roomattribute/destroy/2"
     >Destroy</a></span>
  -->
       </td>
@@ -371,17 +373,17 @@ Page:
       <td>
         
   <span class="crudbutton"><a
-    href="http://localhost//admin/roomattribute/view/6"
+    href="http://localhost//admin/roomattribute/view/3"
     >View</a></span>
 
         
   <span class="crudbutton"><a
-    href="http://localhost//admin/roomattribute/edit/6"
+    href="http://localhost//admin/roomattribute/edit/3"
     >Edit</a></span>
 
         <!-- 
   <span class="crudbutton"><a
-    href="http://localhost//admin/roomattribute/destroy/6"
+    href="http://localhost//admin/roomattribute/destroy/3"
     >Destroy</a></span>
  -->
       </td>
@@ -401,17 +403,17 @@ Page:
       <td>
         
   <span class="crudbutton"><a
-    href="http://localhost//admin/roomattribute/view/4"
+    href="http://localhost//admin/roomattribute/view/1"
     >View</a></span>
 
         
   <span class="crudbutton"><a
-    href="http://localhost//admin/roomattribute/edit/4"
+    href="http://localhost//admin/roomattribute/edit/1"
     >Edit</a></span>
 
         <!-- 
   <span class="crudbutton"><a
-    href="http://localhost//admin/roomattribute/destroy/4"
+    href="http://localhost//admin/roomattribute/destroy/1"
     >Destroy</a></span>
  -->
       </td>

@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -274,40 +276,36 @@ tr.list-row-1 {
 
 <div id="content">
 
+
+
 <p></p>
 <form action="http://localhost//admin/devicecontrol/do_edit/1"
-      method="post">
+    method="post">
   
     name<br/>
-    
-      <input name="name" type="text" value="x10/on" />
+    <input name="name" type="text" value="x10/on" />
 <br/>
-   
   
     string<br/>
-    
-      <input name="string" type="text" value="On" />
+    <input name="string" type="text" value="On" />
 <br/>
-   
   
     description<br/>
-    
-      <textarea cols="22" name="description" rows="3"></textarea>
+    <textarea cols="22" name="description" rows="3"></textarea>
 <br/>
-   
   
     definition<br/>
-    
-      <textarea name="definition" cols="80" rows="4"
-        >[% SET unit = device.attribute('unit') %]
+    <textarea cols="80" name="definition" rows="4">[% SET unit = device.attribute(&#39;unit&#39;) %]
 [% IF unit %]
   xpl -m xpl-cmnd -c x10.basic device=[% unit %] command=on
 [% ELSE %]
-  error 'invalid device'
+  error &#39;invalid device&#39;
 [% END %]
-</textarea><br/>
-    
+</textarea>
+<br/>
   
+
+
   <input type="submit" value="Edit"/>
 </form>
 <hr/>
@@ -315,6 +313,7 @@ tr.list-row-1 {
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/list/"
     >List</a></span>
+
 
 
 </div>

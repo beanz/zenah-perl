@@ -5,7 +5,7 @@
   [% FOR column = column_order %]
     <th>[% column %]</th>
   [% END %]
-    <th>&nbsp;<!-- buttons --></th>
+    <th/>
   </tr>
   [% SET count = 0 %]
   [% WHILE (item = items.next) %]

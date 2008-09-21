@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -275,6 +277,9 @@ tr.list-row-1 {
 <div id="content">
 
 
+
+
+
 <p class="filternav" id="filternav">
 Filter:
 
@@ -488,6 +493,7 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/map/add/"
     >Add</a></span>
+
 
 
 </div>

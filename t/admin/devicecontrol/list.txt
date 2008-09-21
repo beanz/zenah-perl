@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -275,6 +277,9 @@ tr.list-row-1 {
 <div id="content">
 
 
+
+
+
 <p class="filternav" id="filternav">
 Filter:
 
@@ -350,11 +355,11 @@ Page:
   
     <th>definition</th>
   
-     <th>&nbsp;<!-- buttons --></th>
+    <th/>
   </tr>
   
   
-  <tr class="list-row-0">
+    <tr class="list-row-0">
     
       <td>blind/close</td>
     
@@ -390,7 +395,7 @@ Page:
     </tr>
         
   
-  <tr class="list-row-1">
+    <tr class="list-row-1">
     
       <td>blind/open</td>
     
@@ -426,7 +431,7 @@ Page:
     </tr>
         
   
-  <tr class="list-row-0">
+    <tr class="list-row-0">
     
       <td>curtain/close</td>
     
@@ -462,7 +467,7 @@ Page:
     </tr>
         
   
-  <tr class="list-row-1">
+    <tr class="list-row-1">
     
       <td>curtain/open</td>
     
@@ -498,7 +503,7 @@ Page:
     </tr>
         
   
-  <tr class="list-row-0">
+    <tr class="list-row-0">
     
       <td>x10/bright</td>
     
@@ -534,7 +539,7 @@ Page:
     </tr>
         
   
-  <tr class="list-row-1">
+    <tr class="list-row-1">
     
       <td>x10/dim</td>
     
@@ -570,7 +575,7 @@ Page:
     </tr>
         
   
-  <tr class="list-row-0">
+    <tr class="list-row-0">
     
       <td>x10/flash</td>
     
@@ -611,7 +616,7 @@ Page:
     </tr>
         
   
-  <tr class="list-row-1">
+    <tr class="list-row-1">
     
       <td>x10/full-fast</td>
     
@@ -646,7 +651,7 @@ Page:
     </tr>
         
   
-  <tr class="list-row-0">
+    <tr class="list-row-0">
     
       <td>x10/off</td>
     
@@ -682,7 +687,7 @@ Page:
     </tr>
         
   
-  <tr class="list-row-1">
+    <tr class="list-row-1">
     
       <td>x10/on</td>
     
@@ -724,6 +729,7 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/add/"
     >Add</a></span>
+
 
 
 </div>

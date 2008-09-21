@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -273,22 +275,32 @@ tr.list-row-1 {
 </div>
 
 <div id="content">
+
+
+
 <p></p>
-<form action="http://localhost//admin/template/do_edit/"
+<form action="http://localhost//admin/template/do_edit/1"
     method="post">
   
     name<br/>
-    
-      <br/>
-    
+    <input name="name" type="text" value="content/downstairs" />
+<br/>
   
     text<br/>
-    
-      <textarea name="text" cols="80" rows="10"
-        ></textarea><br/>
-    
+    <textarea cols="80" name="text" rows="10">&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;80%&quot; border=&quot;1&quot;&gt;
+&lt;tr&gt;
+  [% PROCESS room/default room = &quot;kitchen&quot; %]
+  [% PROCESS room/default room = &quot;lounge&quot; rowspan=&quot;2&quot; %]
+&lt;/tr&gt;
+&lt;tr&gt;
+  [% PROCESS room/default room = &quot;cloak&quot; %]
+&lt;/tr&gt;
+&lt;/table&gt;
+</textarea>
+<br/>
   
-  <br/>
+
+
   <input type="submit" value="Edit"/>
 </form>
 <hr/>
@@ -296,6 +308,7 @@ tr.list-row-1 {
   <span class="crudbutton"><a
     href="http://localhost//admin/template/list/"
     >List</a></span>
+
 
 
 </div>

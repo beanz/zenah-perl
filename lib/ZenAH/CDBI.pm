@@ -6,11 +6,21 @@ use Class::DBI::Loader;
 use Class::DBI::Loader::Relationship;
 use FileHandle;
 use Template;
+use HTML::Entities;
+use HTML::Element;
 no warnings;
 sub Class::DBI::insert { Class::DBI::create(@_) }
 use warnings;
 
 use DateTime::Format::Strptime;
+
+{
+  package ZenAH::CDBI::Base;
+  sub to_view {
+    my ($self, $field) = @_;
+    $self->$field();
+  }
+}
 
 my $formatter = DateTime::Format::Strptime->new(pattern=>'%Y-%m-%d %H:%M:%S');
 my $time_zone = $ENV{TZ} || "Europe/London";
@@ -33,7 +43,9 @@ my $loader = Class::DBI::Loader->new(
     %args,
     options       => {},
     #relationships => 1,
-    additional_base_classes => [qw/Class::DBI::FromForm Class::DBI::AsForm/],
+    additional_base_classes => [qw/Class::DBI::FromForm
+                                   Class::DBI::AsForm
+                                   ZenAH::CDBI::Base/],
     namespace => "ZenAH::CDBI",
     left_base_classes => [qw(Class::DBI::Sweet)],
 );
@@ -98,6 +110,20 @@ ZenAH::CDBI::Rule->has_a(
     },
     deflate => 'epoch'
 );
+
+sub ZenAH::CDBI::Rule::to_view {
+  my ($self, $field) = @_;
+  if ($field eq 'active') {
+    $self->active ? 'enabled' : 'disabled'
+  } elsif ($field eq 'action' or $field eq 'trig') {
+    my $a = HTML::Element->new('small');
+    $a->push_content($self->$field);
+    $a->as_XML;
+  } else {
+    $self->$field();
+  }
+}
+
 
 ZenAH::CDBI::Template->has_a(
     mtime => 'DateTime',
@@ -179,6 +205,30 @@ sub ZenAH::CDBI::Rule::triggers {
   return map { $_->trig_type } $class->search_triggers();
 }
 
+sub ZenAH::CDBI::Rule::to_field {
+  my ($self, $field, $how) = @_;
+  if ($field eq 'trig' or $field eq 'action') {
+    my $a = $self->Class::DBI::AsForm::to_field($field, 'textarea');
+    $a->attr(cols => 80);
+    $a->attr(rows => $field eq 'trig' ? 2 : 10);
+    if (ref $self) { $a->push_content(encode_entities($self->$field)) }
+    $a;
+  } elsif ($field eq 'active') {
+    my $a = HTML::Element->new('select', name => $field);
+    foreach ([1 => 'Enabled'],[0 => 'Disbled'],) {
+      my $opt = HTML::Element->new('option', value => $_->[0]);
+      $opt->attr('selected' => 'selected')
+        if ( (ref $self && $self->$field == $_->[0]) ||
+             $_->[0] == 1);
+      $opt->push_content($_->[1]);
+      $a->push_content($opt);
+    }
+    $a;
+  } else {
+    $self->Class::DBI::AsForm::to_field($field);
+  }
+}
+
 ZenAH::CDBI::State->set_sql(types => q{
   SELECT distinct type FROM __TABLE__
 });
@@ -196,6 +246,19 @@ sub ZenAH::CDBI::Template::prefixes {
   $sth->execute();
   my %p = map { $_=$_->[0]; s/\/.*//; $_ => 1 } @{$sth->fetchall_arrayref};
   return keys %p;
+}
+
+sub ZenAH::CDBI::Template::to_field {
+  my ($self, $field, $how) = @_;
+  if ($field eq 'text') {
+    my $a = $self->Class::DBI::AsForm::to_field($field, 'textarea');
+    $a->attr(cols => 80);
+    $a->attr(rows => 10);
+    if (ref $self) { $a->push_content(encode_entities($self->$field)) }
+    $a;
+  } else {
+    $self->Class::DBI::AsForm::to_field($field);
+  }
 }
 
 ZenAH::CDBI::DeviceAttribute->set_sql(types => q{
@@ -229,6 +292,19 @@ sub ZenAH::CDBI::DeviceControl::prefixes {
   $sth->execute();
   my %p = map { $_=$_->[0]; s/\/.*//; $_ => 1 } @{$sth->fetchall_arrayref};
   return keys %p;
+}
+
+sub ZenAH::CDBI::DeviceControl::to_field {
+  my ($self, $field, $how) = @_;
+  if ($field eq 'definition') {
+    my $a = $self->Class::DBI::AsForm::to_field($field, 'textarea');
+    $a->attr(cols => 80);
+    $a->attr(rows => 4);
+    if (ref $self) { $a->push_content($self->$field) }
+    $a;
+  } else {
+    $self->Class::DBI::AsForm::to_field($field);
+  }
 }
 
 sub ZenAH::CDBI::Room::attribute {
