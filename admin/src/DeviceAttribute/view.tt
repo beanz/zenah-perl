@@ -1,9 +1,3 @@
-
-[% FOR column = column_order %]
-  <b>[% column %]</b><br/>
-  [% item.$column %]<br/><br/>
+[% WRAPPER crud_view
+   table = 'DeviceAttribute' %]
 [% END %]
-[% crudbutton("deviceattribute", "edit", item.id) %]
-[% crudbutton("deviceattribute", "destroy", item.id) %]
-<hr/>
-[% crudbutton("deviceattribute", "list", "") %]

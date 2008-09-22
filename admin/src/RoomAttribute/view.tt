@@ -1,9 +1,3 @@
-
-[% FOR column = column_order %]
-  <b>[% column %]</b><br/>
-  [% item.$column %]<br/><br/>
+[% WRAPPER crud_view
+   table = 'RoomAttribute' %]
 [% END %]
-[% crudbutton("roomattribute", "edit", item.id) %]
-[% crudbutton("roomattribute", "destroy", item.id) %]
-<hr/>
-[% crudbutton("roomattribute", "list", "") %]

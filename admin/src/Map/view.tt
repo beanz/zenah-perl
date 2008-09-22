@@ -1,12 +1,3 @@
-<table class="view-table">
-[% FOR column = column_order %]
-  <tr>
-    <th class="view-table">[% column %]</th>
-    <td class="view-table" colspan="2">[% item.$column %]</td>
-  </tr>
+[% WRAPPER crud_view
+   table = 'Map' %]
 [% END %]
-</table>
-[% crudbutton("map", "edit", item.id) %]
-[% crudbutton("map", "destroy", item.id) %]
-<hr/>
-[% crudbutton("map", "list", "") %]

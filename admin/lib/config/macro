@@ -143,3 +143,20 @@ Filter:
 <hr/>
 [% crudbutton(tlc, "add", "") %]
 [% END %]
+
+[% BLOCK crud_view %]
+[% USE String(table) %]
+[% SET tlc = String.lower %]
+<table class="view-table">
+[% FOR column = column_order %]
+  <tr>
+    <th class="view-table">[% column %]</th>
+    <td class="view-table" colspan="2">[% item.to_view(column) %]</td>
+  </tr>
+[% END %]
+</table>
+[% crudbutton(tlc, "edit", item.id) %]
+[% crudbutton(tlc, "destroy", item.id) %]
+<hr/>
+[% crudbutton(tlc, "list", "") %]
+[% END %]
