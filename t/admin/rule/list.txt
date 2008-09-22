@@ -12,6 +12,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -375,10 +377,9 @@ Page:
     
       <td>scene</td>
     
-      <td><small></small>
-</td>
+      <td></td>
     
-      <td><small># map &#39;on&#39; =&#62; &#39;open&#39; and &#39;off&#39; to &#39;close&#39;
+      <td><small><pre># map &#39;on&#39; =&#62; &#39;open&#39; and &#39;off&#39; to &#39;close&#39;
 [% SET action = state == &#39;on&#39; ? &#39;open&#39; : (state == &#39;off&#39; ? &#39;close&#39; : state) %]
 [% FOREACH dev = zenah.device.by_type_list(&#34;Curtain&#34;) %]
   [% dev.action(&#34;curtain/$action&#34;) %]
@@ -392,7 +393,7 @@ Page:
   # could be written:
   # device [% dev.name %] blind/[% action %]
 [% END %]
-</small>
+</pre></small>
 </td>
     
       <td>2007-08-10 20:17:45</td>
@@ -428,11 +429,11 @@ Page:
     
       <td>at</td>
     
-      <td><small>recurrence freq=weekly hours=11 minutes=30 days=th</small>
+      <td><small><pre>recurrence freq=weekly hours=11 minutes=30 days=th</pre></small>
 </td>
     
-      <td><small>scene all_windows state=on
-# device washing_machine on</small>
+      <td><small><pre>scene all_windows state=on
+# device washing_machine on</pre></small>
 </td>
     
       <td></td>
@@ -468,11 +469,11 @@ Page:
     
       <td>at</td>
     
-      <td><small>recurrence freq=hourly minutes=&#34;[0,15,30,45]&#34;</small>
+      <td><small><pre>recurrence freq=hourly minutes=&#34;[0,15,30,45]&#34;</pre></small>
 </td>
     
-      <td><small>xpl -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
-</small>
+      <td><small><pre>xpl -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
+</pre></small>
 </td>
     
       <td>2007-08-10 21:45:02</td>
@@ -508,11 +509,11 @@ Page:
     
       <td>at</td>
     
-      <td><small>sunset minutes=&#34;-20&#34;</small>
+      <td><small><pre>sunset minutes=&#34;-20&#34;</pre></small>
 </td>
     
-      <td><small>scene all_windows state=close
-</small>
+      <td><small><pre>scene all_windows state=close
+</pre></small>
 </td>
     
       <td>2007-08-10 20:17:44</td>
@@ -548,16 +549,15 @@ Page:
     
       <td>scene</td>
     
-      <td><small></small>
-</td>
+      <td></td>
     
-      <td><small>[% zenah.device.by_name(&#39;kettle&#39;).action(&#34;x10/$state&#34;) %]
+      <td><small><pre>[% zenah.device.by_name(&#39;kettle&#39;).action(&#34;x10/$state&#34;) %]
 [% IF state == &#39;on&#39; %]
 enable kettle_warn
 [% ELSE %]
 disable kettle_warn
 [% END %]
-</small>
+</pre></small>
 </td>
     
       <td>2007-08-05 14:54:23</td>
@@ -593,11 +593,11 @@ disable kettle_warn
     
       <td>at</td>
     
-      <td><small>30</small>
+      <td><small><pre>30</pre></small>
 </td>
     
-      <td><small>xpl -c osd.basic command=clear row=3 text=&#34;Kettle is on&#34; delay=5
-</small>
+      <td><small><pre>xpl -c osd.basic command=clear row=3 text=&#34;Kettle is on&#34; delay=5
+</pre></small>
 </td>
     
       <td></td>
@@ -633,10 +633,10 @@ disable kettle_warn
     
       <td>xpl</td>
     
-      <td><small>message_type=&#34;xpl-trig&#34; class=&#34;x10.basic&#34; command=(on|off)</small>
+      <td><small><pre>message_type=&#34;xpl-trig&#34; class=&#34;x10.basic&#34; command=(on|off)</pre></small>
 </td>
     
-      <td><small>[% SET dev = zenah.device.by_attr(&#39;unit&#39;, xpl.device) %]
+      <td><small><pre>[% SET dev = zenah.device.by_attr(&#39;unit&#39;, xpl.device) %]
 [% IF dev and dev.type == &#39;X10Light&#39; %]
   [% SET t = zenah.datetime.epoch %]
   [% FOREACH room = dev.rooms %]
@@ -644,7 +644,7 @@ disable kettle_warn
     [% SET value = xpl.command == &#39;on&#39; ? &#39;dark&#39; : &#39;light&#39; %]
     [% CALL zenah.state.set(&#39;light&#39;, var, value) %]
   [% END %]
-[% END %]</small>
+[% END %]</pre></small>
 </td>
     
       <td>2007-08-05 15:05:34</td>
@@ -680,10 +680,10 @@ disable kettle_warn
     
       <td>at</td>
     
-      <td><small>recurrence freq=minutely seconds=17</small>
+      <td><small><pre>recurrence freq=minutely seconds=17</pre></small>
 </td>
     
-      <td><small>[% SET t = zenah.datetime.epoch %]
+      <td><small><pre>[% SET t = zenah.datetime.epoch %]
 [% FOREACH room = zenah.room.all %]
   [% SET timeout = room.attribute(&#39;motion_timeout&#39;) %]
   [% NEXT UNLESS timeout %]
@@ -696,7 +696,7 @@ disable kettle_warn
   [% CALL zenah.state.set(&#39;motion&#39;, room.name, &#39;empty&#39;) %]
 [% END %]
 
-</small>
+</pre></small>
 </td>
     
       <td>2007-08-10 21:58:24</td>
@@ -732,10 +732,10 @@ disable kettle_warn
     
       <td>xpl</td>
     
-      <td><small>message_type=&#34;xpl-trig&#34; class=&#34;x10.basic&#34; command=on</small>
+      <td><small><pre>message_type=&#34;xpl-trig&#34; class=&#34;x10.basic&#34; command=on</pre></small>
 </td>
     
-      <td><small>[% SET dev = zenah.device.by_attr(&#39;unit&#39;, xpl.device) %]
+      <td><small><pre>[% SET dev = zenah.device.by_attr(&#39;unit&#39;, xpl.device) %]
 [% IF dev and dev.type == &#39;X10Motion&#39; %]
   [% SET t = zenah.datetime.epoch %]
   [% FOREACH room = dev.rooms %]
@@ -743,7 +743,7 @@ disable kettle_warn
     scene motion_trigger state=on room=&#34;[% room.name %]&#34;
   [% END %]
 [% END %]
-</small>
+</pre></small>
 </td>
     
       <td>2007-08-05 15:05:34</td>
@@ -779,10 +779,9 @@ disable kettle_warn
     
       <td>scene</td>
     
-      <td><small></small>
-</td>
+      <td></td>
     
-      <td><small>[%# trigger regardless of light state %]
+      <td><small><pre>[%# trigger regardless of light state %]
 [% SET lamp_name = zenah.map.lookup(&#39;motion_trigger&#39;,room) %]
 debug [% lamp_name %] in [% room %]
 [% IF lamp_name %]
@@ -797,7 +796,7 @@ debug [% lamp_name %] in [% room %]
     [% zenah.device.by_name(lamp_name).action(&#34;x10/$state&#34;) %]
   [% END %]
 [% END %]
-</small>
+</pre></small>
 </td>
     
       <td>1970-01-01 01:33:27</td>

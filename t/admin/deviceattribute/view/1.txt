@@ -12,6 +12,8 @@
 
 
 
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
@@ -277,12 +279,20 @@ tr.list-row-1 {
 <div id="content">
 
 
-  <b>name</b><br/>
-  unit<br/><br/>
 
-  <b>value</b><br/>
-  l1<br/><br/>
+<table class="view-table">
 
+  <tr>
+    <th class="view-table">name</th>
+    <td class="view-table" colspan="2">unit</td>
+  </tr>
+
+  <tr>
+    <th class="view-table">value</th>
+    <td class="view-table" colspan="2">l1</td>
+  </tr>
+
+</table>
 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/1"
@@ -298,6 +308,7 @@ tr.list-row-1 {
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/list/"
     >List</a></span>
+
 
 
 </div>
