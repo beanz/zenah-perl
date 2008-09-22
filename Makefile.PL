@@ -20,11 +20,14 @@ build_requires 'Module::Install';
 build_requires 'DBD::SQLite' => undef;
 build_requires 'Class::DBI::SQLite' => undef;
 build_requires  'Test::More' => undef;
+build_requires  'Test::Differences' => undef;
+build_requires  'Test::WWW::Mechanize' => undef;
 
 catalyst;
 
 install_script glob('script/*.pl');
 install_script 'bin/zenah';
 install_script 'bin/hr10-label';
+install_script 'bin/ss13e-label';
 auto_install;
 WriteAll;
