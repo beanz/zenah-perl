@@ -280,6 +280,7 @@ tr.list-row-1 {
 
 
 
+
 <p class="filternav" id="filternav">
 Filter:
 
@@ -351,6 +352,7 @@ Page:
   
     <th>value</th>
   
+    
     <th/>
   </tr>
   
@@ -360,6 +362,7 @@ Page:
       <td>close_relay</td>
     
       <td>o02</td>
+    
     
       <td>
         
@@ -387,6 +390,7 @@ Page:
     
       <td>o04</td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -412,6 +416,7 @@ Page:
       <td>close_relay</td>
     
       <td>o06</td>
+    
     
       <td>
         
@@ -439,6 +444,7 @@ Page:
     
       <td>o08</td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -464,6 +470,7 @@ Page:
       <td>close_relay</td>
     
       <td>o10</td>
+    
     
       <td>
         
@@ -491,6 +498,7 @@ Page:
     
       <td>o01</td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -516,6 +524,7 @@ Page:
       <td>open_relay</td>
     
       <td>o03</td>
+    
     
       <td>
         
@@ -543,6 +552,7 @@ Page:
     
       <td>o05</td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -568,6 +578,7 @@ Page:
       <td>open_relay</td>
     
       <td>o07</td>
+    
     
       <td>
         
@@ -595,6 +606,7 @@ Page:
     
       <td>o09</td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -620,6 +632,7 @@ Page:
       <td>unit</td>
     
       <td>a1</td>
+    
     
       <td>
         
@@ -647,6 +660,7 @@ Page:
     
       <td>a2</td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -672,6 +686,7 @@ Page:
       <td>unit</td>
     
       <td>a2,a3</td>
+    
     
       <td>
         
@@ -699,6 +714,7 @@ Page:
     
       <td>a3</td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -724,6 +740,7 @@ Page:
       <td>unit</td>
     
       <td>j1</td>
+    
     
       <td>
         
@@ -751,6 +768,7 @@ Page:
     
       <td>k1</td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -776,6 +794,7 @@ Page:
       <td>unit</td>
     
       <td>k2</td>
+    
     
       <td>
         
@@ -803,6 +822,7 @@ Page:
     
       <td>k3</td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -829,6 +849,7 @@ Page:
     
       <td>k4</td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -854,6 +875,7 @@ Page:
       <td>unit</td>
     
       <td>k5</td>
+    
     
       <td>
         

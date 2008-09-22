@@ -277,6 +277,10 @@ tr.list-row-1 {
 <div id="content">
 
 
+
+
+
+
 <p class="filternav" id="filternav">
 Filter:
 
@@ -358,53 +362,43 @@ Page:
   
     <th>mtime</th>
   
+    
     <th/>
   </tr>
   
   
     <tr class="list-row-0">
     
-      
-        <td>all_windows</td>
-      
+      <td>all_windows</td>
     
-      
-        <td>enabled</td>
-      
+      <td>enabled</td>
     
-      
-        <td>scene</td>
-      
+      <td>scene</td>
     
-      
-        <td><small></small></td>
-      
+      <td><small></small>
+</td>
     
-      
-        <td><small># map 'on' => 'open' and 'off' to 'close'
-[% SET action = state == 'on' ? 'open' : (state == 'off' ? 'close' : state) %]
-[% FOREACH dev = zenah.device.by_type_list("Curtain") %]
-  [% dev.action("curtain/$action") %]
+      <td><small># map &#39;on&#39; =&#62; &#39;open&#39; and &#39;off&#39; to &#39;close&#39;
+[% SET action = state == &#39;on&#39; ? &#39;open&#39; : (state == &#39;off&#39; ? &#39;close&#39; : state) %]
+[% FOREACH dev = zenah.device.by_type_list(&#34;Curtain&#34;) %]
+  [% dev.action(&#34;curtain/$action&#34;) %]
 [% END %]
-[% FOREACH dev = zenah.device.by_type_list("Blind") %]
+[% FOREACH dev = zenah.device.by_type_list(&#34;Blind&#34;) %]
   # Power supply can only serve 3 blinds at once so we pause a little
   [% IF loop.count AND ( loop.count % 3 ) == 0 %]
     sleep 30
   [% END %]
-  [% dev.action("blind/$action") %]
+  [% dev.action(&#34;blind/$action&#34;) %]
   # could be written:
   # device [% dev.name %] blind/[% action %]
 [% END %]
-</small></td>
-      
+</small>
+</td>
     
-      
-        <td>2007-08-10 20:17:45</td>
-      
+      <td>2007-08-10 20:17:45</td>
     
-      
-        <td>2007-08-05 20:30:42</td>
-      
+      <td>2007-08-05 20:30:42</td>
+    
     
       <td>
         
@@ -428,34 +422,23 @@ Page:
   
     <tr class="list-row-1">
     
-      
-        <td>cleaner_prep</td>
-      
+      <td>cleaner_prep</td>
     
-      
-        <td>enabled</td>
-      
+      <td>enabled</td>
     
-      
-        <td>at</td>
-      
+      <td>at</td>
     
-      
-        <td><small>recurrence freq=weekly hours=11 minutes=30 days=th</small></td>
-      
+      <td><small>recurrence freq=weekly hours=11 minutes=30 days=th</small>
+</td>
     
-      
-        <td><small>scene all_windows state=on
-# device washing_machine on</small></td>
-      
+      <td><small>scene all_windows state=on
+# device washing_machine on</small>
+</td>
     
-      
-        <td></td>
-      
+      <td></td>
     
-      
-        <td>2007-08-05 19:55:54</td>
-      
+      <td>2007-08-05 19:55:54</td>
+    
     
       <td>
         
@@ -479,34 +462,23 @@ Page:
   
     <tr class="list-row-0">
     
-      
-        <td>cuckoo</td>
-      
+      <td>cuckoo</td>
     
-      
-        <td>enabled</td>
-      
+      <td>enabled</td>
     
-      
-        <td>at</td>
-      
+      <td>at</td>
     
-      
-        <td><small>recurrence freq=hourly minutes="[0,15,30,45]"</small></td>
-      
+      <td><small>recurrence freq=hourly minutes=&#34;[0,15,30,45]&#34;</small>
+</td>
     
-      
-        <td><small>xpl -c osd.basic command=clear text="It is [% zenah.datetime.strftime("%H:%M") %]" delay=10
-</small></td>
-      
+      <td><small>xpl -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
+</small>
+</td>
     
-      
-        <td>2007-08-10 21:45:02</td>
-      
+      <td>2007-08-10 21:45:02</td>
     
-      
-        <td>2007-08-05 14:52:24</td>
-      
+      <td>2007-08-05 14:52:24</td>
+    
     
       <td>
         
@@ -530,34 +502,23 @@ Page:
   
     <tr class="list-row-1">
     
-      
-        <td>dusk</td>
-      
+      <td>dusk</td>
     
-      
-        <td>enabled</td>
-      
+      <td>enabled</td>
     
-      
-        <td>at</td>
-      
+      <td>at</td>
     
-      
-        <td><small>sunset minutes="-20"</small></td>
-      
+      <td><small>sunset minutes=&#34;-20&#34;</small>
+</td>
     
-      
-        <td><small>scene all_windows state=close
-</small></td>
-      
+      <td><small>scene all_windows state=close
+</small>
+</td>
     
-      
-        <td>2007-08-10 20:17:44</td>
-      
+      <td>2007-08-10 20:17:44</td>
     
-      
-        <td>2007-08-03 13:53:05</td>
-      
+      <td>2007-08-03 13:53:05</td>
+    
     
       <td>
         
@@ -581,39 +542,28 @@ Page:
   
     <tr class="list-row-0">
     
-      
-        <td>kettle</td>
-      
+      <td>kettle</td>
     
-      
-        <td>enabled</td>
-      
+      <td>enabled</td>
     
-      
-        <td>scene</td>
-      
+      <td>scene</td>
     
-      
-        <td><small></small></td>
-      
+      <td><small></small>
+</td>
     
-      
-        <td><small>[% zenah.device.by_name('kettle').action("x10/$state") %]
-[% IF state == 'on' %]
+      <td><small>[% zenah.device.by_name(&#39;kettle&#39;).action(&#34;x10/$state&#34;) %]
+[% IF state == &#39;on&#39; %]
 enable kettle_warn
 [% ELSE %]
 disable kettle_warn
 [% END %]
-</small></td>
-      
+</small>
+</td>
     
-      
-        <td>2007-08-05 14:54:23</td>
-      
+      <td>2007-08-05 14:54:23</td>
     
-      
-        <td>2007-08-03 15:10:21</td>
-      
+      <td>2007-08-03 15:10:21</td>
+    
     
       <td>
         
@@ -637,34 +587,23 @@ disable kettle_warn
   
     <tr class="list-row-1">
     
-      
-        <td>kettle_warn</td>
-      
+      <td>kettle_warn</td>
     
-      
-        <td>disabled</td>
-      
+      <td>disabled</td>
     
-      
-        <td>at</td>
-      
+      <td>at</td>
     
-      
-        <td><small>30</small></td>
-      
+      <td><small>30</small>
+</td>
     
-      
-        <td><small>xpl -c osd.basic command=clear row=3 text="Kettle is on" delay=5
-</small></td>
-      
+      <td><small>xpl -c osd.basic command=clear row=3 text=&#34;Kettle is on&#34; delay=5
+</small>
+</td>
     
-      
-        <td></td>
-      
+      <td></td>
     
-      
-        <td>2007-08-05 14:54:23</td>
-      
+      <td>2007-08-05 14:54:23</td>
+    
     
       <td>
         
@@ -688,41 +627,30 @@ disable kettle_warn
   
     <tr class="list-row-0">
     
-      
-        <td>light_state</td>
-      
+      <td>light_state</td>
     
-      
-        <td>enabled</td>
-      
+      <td>enabled</td>
     
-      
-        <td>xpl</td>
-      
+      <td>xpl</td>
     
-      
-        <td><small>message_type="xpl-trig" class="x10.basic" command=(on|off)</small></td>
-      
+      <td><small>message_type=&#34;xpl-trig&#34; class=&#34;x10.basic&#34; command=(on|off)</small>
+</td>
     
-      
-        <td><small>[% SET dev = zenah.device.by_attr('unit', xpl.device) %]
-[% IF dev and dev.type == 'X10Light' %]
+      <td><small>[% SET dev = zenah.device.by_attr(&#39;unit&#39;, xpl.device) %]
+[% IF dev and dev.type == &#39;X10Light&#39; %]
   [% SET t = zenah.datetime.epoch %]
   [% FOREACH room = dev.rooms %]
     [% SET var = room.name %]
-    [% SET value = xpl.command == 'on' ? 'dark' : 'light' %]
-    [% CALL zenah.state.set('light', var, value) %]
+    [% SET value = xpl.command == &#39;on&#39; ? &#39;dark&#39; : &#39;light&#39; %]
+    [% CALL zenah.state.set(&#39;light&#39;, var, value) %]
   [% END %]
-[% END %]</small></td>
-      
+[% END %]</small>
+</td>
     
-      
-        <td>2007-08-05 15:05:34</td>
-      
+      <td>2007-08-05 15:05:34</td>
     
-      
-        <td>2007-08-04 10:14:30</td>
-      
+      <td>2007-08-04 10:14:30</td>
+    
     
       <td>
         
@@ -746,46 +674,35 @@ disable kettle_warn
   
     <tr class="list-row-1">
     
-      
-        <td>motion_check</td>
-      
+      <td>motion_check</td>
     
-      
-        <td>enabled</td>
-      
+      <td>enabled</td>
     
-      
-        <td>at</td>
-      
+      <td>at</td>
     
-      
-        <td><small>recurrence freq=minutely seconds=17</small></td>
-      
+      <td><small>recurrence freq=minutely seconds=17</small>
+</td>
     
-      
-        <td><small>[% SET t = zenah.datetime.epoch %]
+      <td><small>[% SET t = zenah.datetime.epoch %]
 [% FOREACH room = zenah.room.all %]
-  [% SET timeout = room.attribute('motion_timeout') %]
+  [% SET timeout = room.attribute(&#39;motion_timeout&#39;) %]
   [% NEXT UNLESS timeout %]
   [% SET cutoff = t - timeout %]
-  [% SET motion = zenah.state.get('motion', room.name) %]
+  [% SET motion = zenah.state.get(&#39;motion&#39;, room.name) %]
   [% NEXT UNLESS motion %]
-  [% NEXT UNLESS motion.value == 'occupied' %]
-  [% NEXT UNLESS motion.mtime.epoch < cutoff %]
-  scene motion_trigger state=off room="[% room.name %]"
-  [% CALL zenah.state.set('motion', room.name, 'empty') %]
+  [% NEXT UNLESS motion.value == &#39;occupied&#39; %]
+  [% NEXT UNLESS motion.mtime.epoch &#60; cutoff %]
+  scene motion_trigger state=off room=&#34;[% room.name %]&#34;
+  [% CALL zenah.state.set(&#39;motion&#39;, room.name, &#39;empty&#39;) %]
 [% END %]
 
-</small></td>
-      
+</small>
+</td>
     
-      
-        <td>2007-08-10 21:58:24</td>
-      
+      <td>2007-08-10 21:58:24</td>
     
-      
-        <td>2007-08-04 10:11:00</td>
-      
+      <td>2007-08-04 10:11:00</td>
+    
     
       <td>
         
@@ -809,41 +726,30 @@ disable kettle_warn
   
     <tr class="list-row-0">
     
-      
-        <td>motion_state</td>
-      
+      <td>motion_state</td>
     
-      
-        <td>enabled</td>
-      
+      <td>enabled</td>
     
-      
-        <td>xpl</td>
-      
+      <td>xpl</td>
     
-      
-        <td><small>message_type="xpl-trig" class="x10.basic" command=on</small></td>
-      
+      <td><small>message_type=&#34;xpl-trig&#34; class=&#34;x10.basic&#34; command=on</small>
+</td>
     
-      
-        <td><small>[% SET dev = zenah.device.by_attr('unit', xpl.device) %]
-[% IF dev and dev.type == 'X10Motion' %]
+      <td><small>[% SET dev = zenah.device.by_attr(&#39;unit&#39;, xpl.device) %]
+[% IF dev and dev.type == &#39;X10Motion&#39; %]
   [% SET t = zenah.datetime.epoch %]
   [% FOREACH room = dev.rooms %]
-    [% CALL zenah.state.set('motion', room.name, 'occupied') %]
-    scene motion_trigger state=on room="[% room.name %]"
+    [% CALL zenah.state.set(&#39;motion&#39;, room.name, &#39;occupied&#39;) %]
+    scene motion_trigger state=on room=&#34;[% room.name %]&#34;
   [% END %]
 [% END %]
-</small></td>
-      
+</small>
+</td>
     
-      
-        <td>2007-08-05 15:05:34</td>
-      
+      <td>2007-08-05 15:05:34</td>
     
-      
-        <td>2007-08-04 10:06:30</td>
-      
+      <td>2007-08-04 10:06:30</td>
+    
     
       <td>
         
@@ -867,48 +773,37 @@ disable kettle_warn
   
     <tr class="list-row-1">
     
-      
-        <td>motion_trigger</td>
-      
+      <td>motion_trigger</td>
     
-      
-        <td>enabled</td>
-      
+      <td>enabled</td>
     
-      
-        <td>scene</td>
-      
+      <td>scene</td>
     
-      
-        <td><small></small></td>
-      
+      <td><small></small>
+</td>
     
-      
-        <td><small>[%# trigger regardless of light state %]
-[% SET lamp_name = zenah.map.lookup('motion_trigger',room) %]
+      <td><small>[%# trigger regardless of light state %]
+[% SET lamp_name = zenah.map.lookup(&#39;motion_trigger&#39;,room) %]
 debug [% lamp_name %] in [% room %]
 [% IF lamp_name %]
-  [% zenah.device.by_name(lamp_name).action("x10/$state") %]
+  [% zenah.device.by_name(lamp_name).action(&#34;x10/$state&#34;) %]
 [% END %]
 
 [%# trigger only if the room is dark %]
-[% SET light = zenah.state.get('light', room) %]
-[% IF light.value == 'dark' OR state == 'off' %]
-  [% SET lamp_name = zenah.map.lookup('motion_dark_trigger',room) %]
+[% SET light = zenah.state.get(&#39;light&#39;, room) %]
+[% IF light.value == &#39;dark&#39; OR state == &#39;off&#39; %]
+  [% SET lamp_name = zenah.map.lookup(&#39;motion_dark_trigger&#39;,room) %]
   [% IF lamp_name %]
-    [% zenah.device.by_name(lamp_name).action("x10/$state") %]
+    [% zenah.device.by_name(lamp_name).action(&#34;x10/$state&#34;) %]
   [% END %]
 [% END %]
-</small></td>
-      
+</small>
+</td>
     
-      
-        <td>1970-01-01 01:33:27</td>
-      
+      <td>1970-01-01 01:33:27</td>
     
-      
-        <td>2007-08-05 18:17:53</td>
-      
+      <td>2007-08-05 18:17:53</td>
+    
     
       <td>
         
@@ -936,6 +831,7 @@ debug [% lamp_name %] in [% room %]
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/add/"
     >Add</a></span>
+
 
 
 </div>

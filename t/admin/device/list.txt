@@ -277,6 +277,10 @@ tr.list-row-1 {
 <div id="content">
 
 
+
+
+
+
 <p class="filternav" id="filternav">
 Filter:
 
@@ -370,7 +374,9 @@ Page:
   
     <th>type</th>
   
-    <th>Attributes</th>
+    
+      <th>Attributes</th>
+    
     <th/>
   </tr>
   
@@ -385,11 +391,13 @@ Page:
     
       <td>X10App</td>
     
+    
       <td>
-        
-          unit=a2,&nbsp;
-        
+      
+        unit=a2,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -420,11 +428,13 @@ Page:
     
       <td>X10App</td>
     
+    
       <td>
-        
-          unit=a3,&nbsp;
-        
+      
+        unit=a3,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -455,11 +465,13 @@ Page:
     
       <td>X10App</td>
     
+    
       <td>
-        
-          unit=a2,a3,&nbsp;
-        
+      
+        unit=a2,a3,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -490,13 +502,15 @@ Page:
     
       <td>Blind</td>
     
+    
       <td>
-        
-          open_relay=o01,&nbsp;
-        
-          close_relay=o02,&nbsp;
-        
+      
+        open_relay=o01,&nbsp;
+      
+        close_relay=o02,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -527,13 +541,15 @@ Page:
     
       <td>Blind</td>
     
+    
       <td>
-        
-          open_relay=o05,&nbsp;
-        
-          close_relay=o06,&nbsp;
-        
+      
+        open_relay=o05,&nbsp;
+      
+        close_relay=o06,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -564,13 +580,15 @@ Page:
     
       <td>Curtain</td>
     
+    
       <td>
-        
-          open_relay=o03,&nbsp;
-        
-          close_relay=o04,&nbsp;
-        
+      
+        open_relay=o03,&nbsp;
+      
+        close_relay=o04,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -601,13 +619,15 @@ Page:
     
       <td>Curtain</td>
     
+    
       <td>
-        
-          open_relay=o07,&nbsp;
-        
-          close_relay=o08,&nbsp;
-        
+      
+        open_relay=o07,&nbsp;
+      
+        close_relay=o08,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -638,13 +658,15 @@ Page:
     
       <td>Curtain</td>
     
+    
       <td>
-        
-          open_relay=o09,&nbsp;
-        
-          close_relay=o10,&nbsp;
-        
+      
+        open_relay=o09,&nbsp;
+      
+        close_relay=o10,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -675,11 +697,13 @@ Page:
     
       <td>X10Lamp</td>
     
+    
       <td>
-        
-          unit=l2,&nbsp;
-        
+      
+        unit=l2,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -710,11 +734,13 @@ Page:
     
       <td>X10Lamp</td>
     
+    
       <td>
-        
-          unit=l1,&nbsp;
-        
+      
+        unit=l1,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -745,11 +771,13 @@ Page:
     
       <td>X10Lamp</td>
     
+    
       <td>
-        
-          unit=l3,&nbsp;
-        
+      
+        unit=l3,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -780,11 +808,13 @@ Page:
     
       <td>X10Lamp</td>
     
+    
       <td>
-        
-          unit=k4,&nbsp;
-        
+      
+        unit=k4,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -815,11 +845,13 @@ Page:
     
       <td>X10Lamp</td>
     
+    
       <td>
-        
-          unit=j1,&nbsp;
-        
+      
+        unit=j1,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -850,11 +882,13 @@ Page:
     
       <td>X10Lamp</td>
     
+    
       <td>
-        
-          unit=k1,&nbsp;
-        
+      
+        unit=k1,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -885,11 +919,13 @@ Page:
     
       <td>X10Lamp</td>
     
+    
       <td>
-        
-          unit=k2,&nbsp;
-        
+      
+        unit=k2,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -916,6 +952,7 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/device/add/"
     >Add</a></span>
+
 
 
 &nbsp;

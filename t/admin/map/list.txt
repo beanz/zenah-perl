@@ -280,6 +280,7 @@ tr.list-row-1 {
 
 
 
+
 <p class="filternav" id="filternav">
 Filter:
 
@@ -343,6 +344,7 @@ Page:
   
     <th>value</th>
   
+    
     <th/>
   </tr>
   
@@ -354,6 +356,7 @@ Page:
       <td>cloak</td>
     
       <td>l_cloak</td>
+    
     
       <td>
         
@@ -383,6 +386,7 @@ Page:
     
       <td>kettle</td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -410,6 +414,7 @@ Page:
       <td>b1</td>
     
       <td>l_bed_1</td>
+    
     
       <td>
         
@@ -439,6 +444,7 @@ Page:
     
       <td>l_bed_1_r</td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -466,6 +472,7 @@ Page:
       <td>b3</td>
     
       <td>l_bath</td>
+    
     
       <td>
         

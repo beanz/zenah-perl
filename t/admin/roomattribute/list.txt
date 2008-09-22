@@ -277,6 +277,10 @@ tr.list-row-1 {
 <div id="content">
 
 
+
+
+
+
 <p class="filternav" id="filternav">
 Filter:
 
@@ -326,19 +330,17 @@ Page:
   
     <th>value</th>
   
+    
     <th/>
   </tr>
   
   
     <tr class="list-row-0">
     
-      
-        <td>zone</td>
-      
+      <td>zone</td>
     
-      
-        <td>downstairs</td>
-      
+      <td>downstairs</td>
+    
     
       <td>
         
@@ -362,13 +364,10 @@ Page:
   
     <tr class="list-row-1">
     
-      
-        <td>zone</td>
-      
+      <td>zone</td>
     
-      
-        <td>outside</td>
-      
+      <td>outside</td>
+    
     
       <td>
         
@@ -392,13 +391,10 @@ Page:
   
     <tr class="list-row-0">
     
-      
-        <td>zone</td>
-      
+      <td>zone</td>
     
-      
-        <td>upstairs</td>
-      
+      <td>upstairs</td>
+    
     
       <td>
         
@@ -426,6 +422,7 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/add/"
     >Add</a></span>
+
 
 
 </div>

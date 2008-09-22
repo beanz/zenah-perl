@@ -105,13 +105,17 @@ Filter:
 [% BLOCK crud_list %]
 [% USE String(table) %]
 [% SET tlc = String.lower %]
-[% filternav(filters) %]
+[% SET attr_method = tlc _ "_attributes" %]
+[% filternav(filters) IF filters %]
 [% pagenav(page) %]
 <table class="list-table">
   <tr class="list-header">
   [% FOR column = column_order %]
     <th>[% column %]</th>
   [% END %]
+    [% IF has_attributes %]
+      <th>Attributes</th>
+    [% END %]
     <th/>
   </tr>
   [% SET count = 0 %]
@@ -119,6 +123,13 @@ Filter:
     <tr class="list-row-[% count % 2 %]">
     [% FOR column = column_order %]
       <td>[% item.to_view(column) %]</td>
+    [% END %]
+    [% IF has_attributes %]
+      <td>
+      [% FOR attr = item.$attr_method %]
+        [% attr.name %]=[% attr.value %],&nbsp;
+      [% END %]
+      </td>
     [% END %]
       <td>
         [% crudbutton(tlc, "view", item.id) %]

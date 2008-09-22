@@ -277,6 +277,10 @@ tr.list-row-1 {
 <div id="content">
 
 
+
+
+
+
 <p class="filternav" id="filternav">
 Filter:
 
@@ -420,32 +424,30 @@ Page:
   
     <th>text</th>
   
-     <th/>
+    
+    <th/>
   </tr>
   
   
-  <tr class="list-row-0">
+    <tr class="list-row-0">
     
-      
-        <td>config/col</td>
-      
+      <td>config/col</td>
     
-      
-        <td><small><pre>[% site.rgb = {
-     black   = '#000000'
-     white   = '#ffffff'
-     grey1   = '#484848'
-     grey2   = '#cccccc'
-     grey3   = '#efefef'
-     red     = '#CC4444'
-     green   = '#66AA66'
-     blue    = '#89b8df'
-     orange  = '#f08900'
-     grey2_t = '#cceeee'
-     purple  = '#551a8b'
-     house   = '#12171c'
-     roof    = '#4ca7ab'
-     door    = '#aa1914'
+      <td><small><pre>[% site.rgb = {
+     black   = &#39;#000000&#39;
+     white   = &#39;#ffffff&#39;
+     grey1   = &#39;#484848&#39;
+     grey2   = &#39;#cccccc&#39;
+     grey3   = &#39;#efefef&#39;
+     red     = &#39;#CC4444&#39;
+     green   = &#39;#66AA66&#39;
+     blue    = &#39;#89b8df&#39;
+     orange  = &#39;#f08900&#39;
+     grey2_t = &#39;#cceeee&#39;
+     purple  = &#39;#551a8b&#39;
+     house   = &#39;#12171c&#39;
+     roof    = &#39;#4ca7ab&#39;
+     door    = &#39;#aa1914&#39;
    };
 
    site.col = {
@@ -496,8 +498,9 @@ Page:
       }
    };
 %]
-</pre></small></td>
-      
+</pre></small>
+</td>
+    
     
       <td>
         
@@ -519,45 +522,43 @@ Page:
     </tr>
         
   
-  <tr class="list-row-1">
+    <tr class="list-row-1">
     
-      
-        <td>config/macro</td>
-      
+      <td>config/macro</td>
     
-      
-        <td><small><pre>[% USE String %]
+      <td><small><pre>[% USE String %]
 [% MACRO variant_button(type, name, variant) BLOCK %]
   [% SET var = Catalyst.request.param(variant.keys.0) %]
-  [% SET cc = variant.values.0 == var ? &quot;-current&quot; : &quot;&quot; %]
- &lt;span class=&quot;[% type %][% cc %]&quot;&gt;[% variant_url(Catalyst, name, variant) %]&lt;/span&gt;
+  [% SET cc = variant.values.0 == var ? &#34;-current&#34; : &#34;&#34; %]
+ &#60;span class=&#34;[% type %][% cc %]&#34;&#62;[% variant_url(Catalyst, name, variant) %]&#60;/span&#62;
 [% END %]
 
 [% MACRO navbutton(type, name) BLOCK %]
-  [% SET room = Catalyst.request.param('room') %]
-  [% SET cc = type == room or ( room == &quot;&quot; and type == &quot;home&quot; ) ?
-         &quot;-current&quot; : &quot;&quot; %]
-  &lt;span class=&quot;navbutton[% cc %]&quot;&gt;&lt;a
-    href=&quot;[% Catalyst.uri_for(&quot;/&quot;, type) %]&quot;
-    &gt;[% IF name %][% name %][% ELSE %][% type FILTER ucfirst %][% END %]&lt;/a&gt;&lt;/span&gt;
+  [% SET room = Catalyst.request.param(&#39;room&#39;) %]
+  [% SET cc = type == room or ( room == &#34;&#34; and type == &#34;home&#34; ) ?
+         &#34;-current&#34; : &#34;&#34; %]
+  &#60;span class=&#34;navbutton[% cc %]&#34;&#62;&#60;a
+    href=&#34;[% Catalyst.uri_for(&#34;/&#34;, type) %]&#34;
+    &#62;[% IF name %][% name %][% ELSE %][% type FILTER ucfirst %][% END %]&#60;/a&#62;&#60;/span&#62;
 [% END %]
 
 [% MACRO filternav(filters,current) BLOCK %]
-&lt;p class=&quot;filternav&quot; id=&quot;filternav&quot;&gt;
+&#60;p class=&#34;filternav&#34; id=&#34;filternav&#34;&#62;
 Filter:
 [% FOREACH filter = filters %]
   [% IF filter == current %]
-    &lt;span class=&quot;filterbutton-current&quot;&gt;[% filter %]&lt;/span&gt;
+    &#60;span class=&#34;filterbutton-current&#34;&#62;[% filter %]&#60;/span&#62;
   [% ELSE %]
-    &lt;span class=&quot;filterbutton&quot;&gt;&lt;a
-      href=&quot;[% Catalyst.uri_for(&quot;.&quot;, { 'filter' =&gt; filter }) %]&quot;
-       &gt;[% filter %]&lt;/a&gt;&lt;/span&gt;
+    &#60;span class=&#34;filterbutton&#34;&#62;&#60;a
+      href=&#34;[% Catalyst.uri_for(&#34;.&#34;, { &#39;filter&#39; =&#62; filter }) %]&#34;
+       &#62;[% filter %]&#60;/a&#62;&#60;/span&#62;
   [% END %]
 [% END %]
-&lt;/p&gt;
+&#60;/p&#62;
 [% END %]
-</pre></small></td>
-      
+</pre></small>
+</td>
+    
     
       <td>
         
@@ -579,14 +580,11 @@ Filter:
     </tr>
         
   
-  <tr class="list-row-0">
+    <tr class="list-row-0">
     
-      
-        <td>config/main</td>
-      
+      <td>config/main</td>
     
-      
-        <td><small><pre>[% # config/main
+      <td><small><pre>[% # config/main
    #
    # This is the main configuration template which is processed before
    # any other page, by virtue of it being defined as a PRE_PROCESS 
@@ -594,15 +592,15 @@ Filter:
    # macros, load plugins, and perform any other template setup.
 
    IF Catalyst.debug;
-     # define a debug() macro directed to Catalyst's log
+     # define a debug() macro directed to Catalyst&#39;s log
      MACRO debug(message) CALL Catalyst.log.debug(message);
    END;
 
    # define a data structure to hold sitewide data
    site = {
-     title     =&gt; 'Zen Automated Home',
-     logo      =&gt; Catalyst.uri_for(&quot;/images/zenah-150.png&quot;),
-     copyright =&gt; '2006, 2007 Mark Hindess',
+     title     =&#62; &#39;Zen Automated Home&#39;,
+     logo      =&#62; Catalyst.uri_for(&#34;/images/zenah-150.png&#34;),
+     copyright =&#62; &#39;2006, 2007 Mark Hindess&#39;,
    };
 
    # load up any other configuration items 
@@ -612,11 +610,12 @@ Filter:
 
    # set defaults for variables, etc.
    DEFAULT 
-     message = '';
+     message = &#39;&#39;;
 
 -%]
-</pre></small></td>
-      
+</pre></small>
+</td>
+    
     
       <td>
         
@@ -638,23 +637,21 @@ Filter:
     </tr>
         
   
-  <tr class="list-row-1">
+    <tr class="list-row-1">
     
-      
-        <td>config/url</td>
-      
+      <td>config/url</td>
     
-      
-        <td><small><pre>[% base = Catalyst.req.base;
+      <td><small><pre>[% base = Catalyst.req.base;
 
    site.url = {
      base    = base
-     home    = &quot;${base}welcome&quot;
-     message = &quot;${base}message&quot;
+     home    = &#34;${base}welcome&#34;
+     message = &#34;${base}message&#34;
    }
 -%]
-</pre></small></td>
-      
+</pre></small>
+</td>
+    
     
       <td>
         
@@ -676,16 +673,14 @@ Filter:
     </tr>
         
   
-  <tr class="list-row-0">
+    <tr class="list-row-0">
     
-      
-        <td>content/default</td>
-      
+      <td>content/default</td>
     
-      
-        <td><small><pre>[% SET t_content = 'content/' _ (Catalyst.request.param('content') || 'house') %]
-[% PROCESS $t_content %]</pre></small></td>
-      
+      <td><small><pre>[% SET t_content = &#39;content/&#39; _ (Catalyst.request.param(&#39;content&#39;) || &#39;house&#39;) %]
+[% PROCESS $t_content %]</pre></small>
+</td>
+    
     
       <td>
         
@@ -713,6 +708,7 @@ Filter:
   <span class="crudbutton"><a
     href="http://localhost//admin/template/add/"
     >Add</a></span>
+
 
 
 </div>

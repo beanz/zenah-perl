@@ -280,6 +280,11 @@ tr.list-row-1 {
 
 
 
+
+
+
+
+
 <p class="pagenav" id="pagenav">
 Page:
   
@@ -311,7 +316,9 @@ Page:
   
     <th>description</th>
   
-    <th>Attributes</th>
+    
+      <th>Attributes</th>
+    
     <th/>
   </tr>
   
@@ -324,11 +331,13 @@ Page:
     
       <td>Bathroom</td>
     
+    
       <td>
-        
-          zone=upstairs,&nbsp;
-        
+      
+        zone=upstairs,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -340,6 +349,11 @@ Page:
     href="http://localhost//admin/room/edit/4"
     >Edit</a></span>
 
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/destroy/4"
+    >Destroy</a></span>
+ -->
       </td>
     </tr>
         
@@ -352,11 +366,13 @@ Page:
     
       <td>Master bedroom</td>
     
+    
       <td>
-        
-          zone=upstairs,&nbsp;
-        
+      
+        zone=upstairs,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -368,6 +384,11 @@ Page:
     href="http://localhost//admin/room/edit/2"
     >Edit</a></span>
 
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/destroy/2"
+    >Destroy</a></span>
+ -->
       </td>
     </tr>
         
@@ -380,11 +401,13 @@ Page:
     
       <td>Downstairs toilet</td>
     
+    
       <td>
-        
-          zone=downstairs,&nbsp;
-        
+      
+        zone=downstairs,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -396,6 +419,11 @@ Page:
     href="http://localhost//admin/room/edit/3"
     >Edit</a></span>
 
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/destroy/3"
+    >Destroy</a></span>
+ -->
       </td>
     </tr>
         
@@ -408,11 +436,13 @@ Page:
     
       <td>Front garden</td>
     
+    
       <td>
-        
-          zone=outside,&nbsp;
-        
+      
+        zone=outside,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -424,6 +454,11 @@ Page:
     href="http://localhost//admin/room/edit/6"
     >Edit</a></span>
 
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/destroy/6"
+    >Destroy</a></span>
+ -->
       </td>
     </tr>
         
@@ -436,11 +471,13 @@ Page:
     
       <td>Kitchen</td>
     
+    
       <td>
-        
-          zone=downstairs,&nbsp;
-        
+      
+        zone=downstairs,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -452,6 +489,11 @@ Page:
     href="http://localhost//admin/room/edit/5"
     >Edit</a></span>
 
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/destroy/5"
+    >Destroy</a></span>
+ -->
       </td>
     </tr>
         
@@ -464,11 +506,13 @@ Page:
     
       <td>Main living area</td>
     
+    
       <td>
-        
-          zone=downstairs,&nbsp;
-        
+      
+        zone=downstairs,&nbsp;
+      
       </td>
+    
       <td>
         
   <span class="crudbutton"><a
@@ -480,6 +524,11 @@ Page:
     href="http://localhost//admin/room/edit/1"
     >Edit</a></span>
 
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/destroy/1"
+    >Destroy</a></span>
+ -->
       </td>
     </tr>
         
@@ -490,6 +539,7 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/room/add/"
     >Add</a></span>
+
 
 
 &nbsp;

@@ -1,30 +1,3 @@
-[% filternav(filters) %]
-[% pagenav(page) %]
-<table class="list-table">
-  <tr class="list-header">
-  [% FOR column = column_order %]
-    <th>[% column %]</th>
-  [% END %]
-     <th/>
-  </tr>
-  [% SET count = 0 %]
-  [% WHILE (item = items.next) %]
-  <tr class="list-row-[% count % 2 %]">
-    [% FOR column = column_order %]
-      [% IF column == 'text' %]
-        <td><small><pre>[% item.$column FILTER html %]</pre></small></td>
-      [% ELSE %]
-        <td>[% item.$column %]</td>
-      [% END %]
-    [% END %]
-      <td>
-        [% crudbutton("template", "view", item.id) %]
-        [% crudbutton("template", "edit", item.id) %]
-        <!-- [% crudbutton("template", "destroy", item.id) %] -->
-      </td>
-    </tr>
-    [% count = count + 1 %]    
-  [% END %]
-</table>
-<hr/>
-[% crudbutton("template", "add", "") %]
+[% WRAPPER crud_list
+   table = 'Template' %]
+[% END %]

@@ -1,33 +1,7 @@
-[% pagenav(page) %]
-<table class="list-table">
-  <tr class="list-header">
-  [% FOR column = column_order %]
-    <th>[% column %]</th>
-  [% END %]
-    <th>Attributes</th>
-    <th/>
-  </tr>
-  [% SET count = 0 %]
-  [% WHILE (item = items.next) %]
-    <tr class="list-row-[% count % 2 %]">
-    [% FOR column = column_order %]
-      <td>[% item.$column %]</td>
-    [% END %]
-      <td>
-        [% FOR attr = item.room_attributes %]
-          [% attr.name %]=[% attr.value %],&nbsp;
-        [% END %]
-      </td>
-      <td>
-        [% crudbutton("room", "view", item.id) %]
-        [% crudbutton("room", "edit", item.id) %]
-      </td>
-    </tr>
-    [% count = count + 1 %]    
-  [% END %]
-</table>
-<hr/>
-[% crudbutton("room", "add", "") %]
+[% WRAPPER crud_list
+   table = 'Room'
+   has_attributes = 1 %]
+[% END %]
 
 &nbsp;
 

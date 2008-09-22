@@ -280,6 +280,7 @@ tr.list-row-1 {
 
 
 
+
 <p class="filternav" id="filternav">
 Filter:
 
@@ -355,6 +356,7 @@ Page:
   
     <th>definition</th>
   
+    
     <th/>
   </tr>
   
@@ -374,6 +376,7 @@ Page:
   error 'invalid device'
 [% END %]
 </td>
+    
     
       <td>
         
@@ -411,6 +414,7 @@ Page:
 [% END %]
 </td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -446,6 +450,7 @@ Page:
   error 'invalid device'
 [% END %]
 </td>
+    
     
       <td>
         
@@ -483,6 +488,7 @@ Page:
 [% END %]
 </td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -519,6 +525,7 @@ Page:
 [% END %]
 </td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -554,6 +561,7 @@ Page:
   error 'invalid device'
 [% END %]
 </td>
+    
     
       <td>
         
@@ -596,6 +604,7 @@ Page:
   error 'invalid device'
 [% END %]</td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -630,6 +639,7 @@ Page:
 [% ELSE %]
   error 'invalid device'
 [% END %]</td>
+    
     
       <td>
         
@@ -667,6 +677,7 @@ Page:
 [% END %]
 </td>
     
+    
       <td>
         
   <span class="crudbutton"><a
@@ -702,6 +713,7 @@ Page:
   error 'invalid device'
 [% END %]
 </td>
+    
     
       <td>
         

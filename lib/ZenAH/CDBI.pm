@@ -135,6 +135,19 @@ ZenAH::CDBI::Template->has_a(
     deflate => 'epoch'
 );
 
+sub ZenAH::CDBI::Template::to_view {
+  my ($self, $field) = @_;
+  if ($field eq 'text') {
+    my $small = HTML::Element->new('small');
+    my $pre = HTML::Element->new('pre');
+    $pre->push_content($self->$field);
+    $small->push_content($pre);
+    $small->as_XML;
+  } else {
+    $self->$field();
+  }
+}
+
 ZenAH::CDBI::Device->set_sql(types => q{
   SELECT distinct type FROM __TABLE__
 });
