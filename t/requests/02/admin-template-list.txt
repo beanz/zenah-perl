@@ -1,0 +1,511 @@
+/admin/template/list
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+ <head>
+  <title>Zen Automated Home</title>
+  <style type="text/css">
+html {
+    height: 100%;
+}
+body { 
+    background-color: #ffffff;
+    color: #484848;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+#logo {
+    float: right;
+}
+#header {
+    background-color: #efefef;
+}
+#footer {
+    background-color: #efefef;
+    text-align: center;
+    border-top: 1px solid #aa1914;
+    bottom: 0;
+    left: 0px;
+    width: 100%;
+    padding: 4px;
+}
+#content {
+    padding: 10px;
+}
+h1.title {
+    padding: 0.1em;
+    margin: 0em;
+    font: Ariel;
+    color: #12171c;
+}
+.message {
+    color: #66AA66;
+}
+.error {
+    color: #CC4444;
+}
+table.view-table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+th.view-table {
+    border: 1px solid black;
+    text-align: left;
+}
+td.view-table {
+    border: 1px solid black;
+}
+table.list-table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+th.list-table {
+    border: 1px solid black;
+}
+td.list-table {
+    border: 1px solid black;
+}
+tr.list-row-0 {
+    background-color: #efefef;
+}
+tr.list-row-1 {
+    background-color: #ffffff;
+}
+#nav {
+    padding: 2px 0px;
+    border-bottom: 5px solid #12171c;
+    background-color: #efefef;
+}
+.navbutton-current {
+    border-style: hidden;
+    padding: 3px 3px 2px 3px;
+    border-color: #12171c;
+    background: #12171c;
+}
+.navbutton {
+    border-bottom: 1px solid #efefef;
+    padding: 3px 3px 1px 3px;
+    background: #4ca7ab;
+}
+.navbutton-current A {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton-current A:hover {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton-current img {
+    border-style: hidden;
+}
+.navbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton A:hover {
+    background: #cceeee;
+} 
+.navbutton img {
+    border-style: hidden;
+}
+.pagebutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.pagebutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cccccc;
+}
+.pagebutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.pagebutton A:hover {
+    background: #cceeee;
+} 
+.pagebutton img {
+    border-style: hidden;
+}
+.filterbutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.filterbutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #4ca7ab;
+}
+.filterbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.filterbutton A:hover {
+    background: #cceeee;
+} 
+.filterbutton img {
+    border-style: hidden;
+}
+.crudbutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.crudbutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #4ca7ab;
+}
+.crudbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.crudbutton A:hover {
+    background: #cceeee;
+} 
+.crudbutton img {
+    border-style: hidden;
+}
+  </style>
+ </head>
+ <body>
+<div id="header"><!-- BEGIN site/header -->
+<img id="logo" class="logo" height="50" width="50" src="http://localhost/images/zenah-50.png" />
+<h1 class="title">Zen Automated Home</h1>
+<!-- END site/header -->
+</div>
+<div id="nav"><!-- BEGIN site/nav -->
+  <span class="navbutton"><a
+    href="http://localhost//admin/device"
+    >Device</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/map"
+    >Map</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/room"
+    >Room</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/rule"
+    >Rule</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/state"
+    >State</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/template"
+    >Template</a></span>
+  <span class="navbutton"><a href="http://localhost/"
+    >UI</a></span>
+<!-- END site/nav -->
+</div>
+<div id="content">
+<p class="filternav" id="filternav">
+Filter:
+    <span class="filterbutton-current">none</span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template/.?filter=config"
+       >config</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template/.?filter=content"
+       >content</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template/.?filter=dojo"
+       >dojo</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template/.?filter=html"
+       >html</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template/.?filter=room"
+       >room</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template/.?filter=site"
+       >site</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template/.?filter=xul"
+       >xul</a></span>
+</p>
+<p class="pagenav" id="pagenav">
+Page:
+    <span class="pagebutton">&lt;&lt;</span>
+&nbsp;
+      <span class="pagebutton-current">1</span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template/.?page=2&filter="
+        >2</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template/.?page=3&filter="
+        >3</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template/.?page=4&filter="
+        >4</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template/.?page=5&filter="
+        >5</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template/.?page=6&filter="
+        >6</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template/.?page=7&filter="
+        >7</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template/.?page=8&filter="
+        >8</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template/.?page=2&filter="
+        >&gt;&gt;</a></span>
+</p>
+<table class="list-table">
+  <tr class="list-header">
+    <th>name</th>
+    <th>text</th>
+    <th/>
+  </tr>
+    <tr class="list-row-0">
+      <td>config/col</td>
+      <td><small><pre>[% site.rgb = {
+     black   = &#39;#000000&#39;
+     white   = &#39;#ffffff&#39;
+     grey1   = &#39;#484848&#39;
+     grey2   = &#39;#cccccc&#39;
+     grey3   = &#39;#efefef&#39;
+     red     = &#39;#CC4444&#39;
+     green   = &#39;#66AA66&#39;
+     blue    = &#39;#89b8df&#39;
+     orange  = &#39;#f08900&#39;
+     grey2_t = &#39;#cceeee&#39;
+     purple  = &#39;#551a8b&#39;
+     house   = &#39;#12171c&#39;
+     roof    = &#39;#4ca7ab&#39;
+     door    = &#39;#aa1914&#39;
+   };
+   site.col = {
+      page    = site.rgb.white
+      text    = site.rgb.grey1
+      head    = site.rgb.grey3
+      line    = site.rgb.door
+      message = site.rgb.green
+      error   = site.rgb.red
+      nav = {
+        background = site.rgb.grey3
+        foreground = site.rgb.white
+        border     = site.rgb.house
+        button = {
+          cur = {
+            background = site.rgb.house
+            foreground = site.rgb.white
+            border     = site.rgb.house
+            hover      = site.rgb.grey2_t
+          }
+          background = site.rgb.roof
+          foreground = site.rgb.black
+          border     = site.rgb.grey3
+          hover      = site.rgb.grey2_t
+        }
+      }
+      crudbutton = {
+        background = site.rgb.roof
+        foreground = site.rgb.black
+        border     = site.rgb.grey1
+        hover      = site.rgb.grey2_t
+      }
+      filterbutton = {
+        background = site.rgb.roof
+        foreground = site.rgb.black
+        border     = site.rgb.grey1
+        hover      = site.rgb.grey2_t
+      }
+      pagebutton = {
+        background = site.rgb.grey2
+        foreground = site.rgb.black
+        border     = site.rgb.grey1
+        hover      = site.rgb.grey2_t
+      }
+      list = {
+        row0 = site.rgb.grey3
+        row1 = site.rgb.white
+      }
+   };
+%]
+</pre></small>
+</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/view/24"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/edit/24"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/destroy/24"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>config/macro</td>
+      <td><small><pre>[% USE String %]
+[% MACRO variant_button(type, name, variant) BLOCK %]
+  [% SET var = Catalyst.request.param(variant.keys.0) %]
+  [% SET cc = variant.values.0 == var ? &#34;-current&#34; : &#34;&#34; %]
+ &#60;span class=&#34;[% type %][% cc %]&#34;&#62;[% variant_url(Catalyst, name, variant) %]&#60;/span&#62;
+[% END %]
+[% MACRO navbutton(type, name) BLOCK %]
+  [% SET room = Catalyst.request.param(&#39;room&#39;) %]
+  [% SET cc = type == room or ( room == &#34;&#34; and type == &#34;home&#34; ) ?
+         &#34;-current&#34; : &#34;&#34; %]
+  &#60;span class=&#34;navbutton[% cc %]&#34;&#62;&#60;a
+    href=&#34;[% Catalyst.uri_for(&#34;/&#34;, type) %]&#34;
+    &#62;[% IF name %][% name %][% ELSE %][% type FILTER ucfirst %][% END %]&#60;/a&#62;&#60;/span&#62;
+[% END %]
+[% MACRO filternav(filters,current) BLOCK %]
+&#60;p class=&#34;filternav&#34; id=&#34;filternav&#34;&#62;
+Filter:
+[% FOREACH filter = filters %]
+  [% IF filter == current %]
+    &#60;span class=&#34;filterbutton-current&#34;&#62;[% filter %]&#60;/span&#62;
+  [% ELSE %]
+    &#60;span class=&#34;filterbutton&#34;&#62;&#60;a
+      href=&#34;[% Catalyst.uri_for(&#34;.&#34;, { &#39;filter&#39; =&#62; filter }) %]&#34;
+       &#62;[% filter %]&#60;/a&#62;&#60;/span&#62;
+  [% END %]
+[% END %]
+&#60;/p&#62;
+[% END %]
+</pre></small>
+</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/view/25"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/edit/25"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/destroy/25"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-0">
+      <td>config/main</td>
+      <td><small><pre>[% # config/main
+   #
+   # This is the main configuration template which is processed before
+   # any other page, by virtue of it being defined as a PRE_PROCESS 
+   # template.  This is the place to define any extra template variables,
+   # macros, load plugins, and perform any other template setup.
+   IF Catalyst.debug;
+     # define a debug() macro directed to Catalyst&#39;s log
+     MACRO debug(message) CALL Catalyst.log.debug(message);
+   END;
+   # define a data structure to hold sitewide data
+   site = {
+     title     =&#62; &#39;Zen Automated Home&#39;,
+     logo      =&#62; Catalyst.uri_for(&#34;/images/zenah-150.png&#34;),
+     copyright =&#62; &#39;2006, 2008 Mark Hindess&#39;,
+   };
+   # load up any other configuration items 
+   PROCESS config/col
+         + config/macro
+         + config/url;
+   # set defaults for variables, etc.
+   DEFAULT 
+     message = &#39;&#39;;
+-%]
+</pre></small>
+</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/view/22"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/edit/22"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/destroy/22"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>config/url</td>
+      <td><small><pre>[% base = Catalyst.req.base;
+   site.url = {
+     base    = base
+     home    = &#34;${base}welcome&#34;
+     message = &#34;${base}message&#34;
+   }
+-%]
+</pre></small>
+</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/view/26"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/edit/26"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/destroy/26"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-0">
+      <td>content/default</td>
+      <td><small><pre>[% SET t_content = &#39;content/&#39; _ (Catalyst.request.param(&#39;content&#39;) || &#39;house&#39;) %]
+[% PROCESS $t_content %]</pre></small>
+</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/view/33"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/edit/33"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/destroy/33"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+</table>
+<hr/>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/add/"
+    >Add</a></span>
+</div>
+<div id="footer"><!-- BEGIN site/footer -->
+<div id="copyright">&copy; 2006, 2008 Mark Hindess</div>
+<!-- END site/footer -->
+</div>
+ </body>
+</html>

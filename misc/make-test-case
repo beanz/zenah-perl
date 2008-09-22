@@ -1,0 +1,35 @@
+#!/usr/bin/perl -w
+use strict;
+use FileHandle;
+use IO::Pipe;
+
+my $file = shift;
+my $req = shift;
+
+if (-f $file) {
+  die $file." already exists" if (defined $req);
+  my $fh = FileHandle->new($file);
+  $req = <$fh>;
+  chomp $req;
+  $fh->close;
+}
+
+my $pipe =
+  IO::Pipe->reader($^X, '-Iblib/lib', 'blib/script/zenah_test.pl', $req) or
+    die "zenah_test.pl pipe error: $! $@\n";
+my $content;
+{
+  local $/;
+  undef $/;
+  $content = <$pipe>;
+  $pipe->close or die "zenah_test.pl pipe error: $! $@\n";
+}
+
+$content =~ s/\n\s*\n/\n/mg;
+$content =~ s/\s+\n$/\n/mg;
+my $fh = FileHandle->new('>'.$file);
+
+print $fh $req, "\n\n";
+print $fh $content;
+
+$fh->close or die "$file close error: $!\n";
