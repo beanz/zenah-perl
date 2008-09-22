@@ -9,7 +9,15 @@ use FileHandle;
 my %request;
 my $has_test_difference;
 
+END {
+  unlink 't/zenah.db';
+}
+
 BEGIN {
+  $ENV{ZENAH_DBI_CONFIG}='t/dbi.conf';
+  unlink 't/zenah.db';
+  0 == system 'sqlite3 t/zenah.db <zenah.sample.sql3' or
+    die "sqlite3 failed to create database: $! $@\n";
   sub read_request_data {
     my ($dir, $req) = @_;
     my $rd = 't/'.$dir;
@@ -51,10 +59,18 @@ foreach my $file (keys %request) {
   my $req = '/'.$file;
   my $resp = request($req);
   ok($resp->is_success, $req.' - is success');
-  my $content = $resp->content."\n";
+  my $got = squash_whitespace($resp->content."\n");
+  my $expected = squash_whitespace($request{$file});
   if ($has_test_difference) {
-    eq_or_diff $content, $request{$file}, $req.' - content';
+    eq_or_diff $got, $expected, $req.' - content';
   } else {
-    is($content, $request{$file}, $req.' - content');
+    is($got, $expected, $req.' - content');
   }
+}
+
+sub squash_whitespace {
+  my $s = $_[0];
+  $s =~ s/\n\s*\n/\n/g;
+  $s =~ s/^\s+//mg;
+  $s;
 }
