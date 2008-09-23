@@ -23,7 +23,7 @@ BEGIN {
     my $rd = 't/'.$dir;
     my $dh = DirHandle->new('t/'.$dir) or
       die "Open of t/$dir directory: $ERRNO\n";
-    foreach (sort $dh->read) {
+    foreach ($dh->read) {
       next if (/^\./);
       if (-d $rd.'/'.$_) {
         read_request_data($dir.'/'.$_, $tests);

@@ -333,9 +333,13 @@ sub ZenAH::CDBI::Room::attribute {
   return $attr && $attr->value;
 }
 
+sub which_mtime {
+  exists $ENV{HARNESS_ACTIVE} ? 'fakemtime' : 'mtime';
+}
+
 sub set_mtime {
   if ($_[0]->is_changed()) {
-    $_[0]->_attribute_set(mtime=>time);
+    $_[0]->_attribute_set(which_mtime() => time);
   }
 }
 
@@ -343,12 +347,11 @@ sub set_mtime_sometimes {
   my @changed = $_[0]->is_changed();
   my $ftime = scalar @changed ==1 && $changed[0] eq "ftime";
   if (@changed && !$ftime) {
-    $_[0]->_attribute_set(mtime=>time);
+    $_[0]->_attribute_set(which_mtime() => time);
   }
 }
 sub set_time {
-  $_[0]->_attribute_set(ctime=>time);
-  $_[0]->_attribute_set(mtime=>time);
+  $_[0]->_attribute_set(which_mtime() => time) unless ($_[0]->mtime);
 }
 ZenAH::CDBI::Rule->add_trigger(before_create => \&set_time);
 ZenAH::CDBI::Rule->add_trigger(before_update => \&set_mtime_sometimes);

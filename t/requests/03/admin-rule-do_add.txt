@@ -1,0 +1,559 @@
+/admin/rule/do_add?name=callerid&active=1&trig=message_type%3d%22xpl-trig%22%20class%3d%22cid.basic%22%20calltype%3dinbound&action=%5b%25%20SET%20name%20%3d%20zenah.map.reverse(%27phonebook%27%2c%20xpl.phone)%20%25%5d%0axpl%20-c%20osd.basic%20command%3dclear%20text%3d%22%20Call%20%5b%25%20name%20%3f%20name%20%3a%20xpl.phone%20%25%5d%22%0a&ftime=&mtime=1222123816
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+ <head>
+  <title>Zen Automated Home</title>
+  <style type="text/css">
+html {
+    height: 100%;
+}
+body { 
+    background-color: #ffffff;
+    color: #484848;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+#logo {
+    float: right;
+}
+#header {
+    background-color: #efefef;
+}
+#footer {
+    background-color: #efefef;
+    text-align: center;
+    border-top: 1px solid #aa1914;
+    bottom: 0;
+    left: 0px;
+    width: 100%;
+    padding: 4px;
+}
+#content {
+    padding: 10px;
+}
+h1.title {
+    padding: 0.1em;
+    margin: 0em;
+    font: Ariel;
+    color: #12171c;
+}
+.message {
+    color: #66AA66;
+}
+.error {
+    color: #CC4444;
+}
+table.view-table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+th.view-table {
+    border: 1px solid black;
+    text-align: left;
+}
+td.view-table {
+    border: 1px solid black;
+}
+table.list-table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+th.list-table {
+    border: 1px solid black;
+}
+td.list-table {
+    border: 1px solid black;
+}
+tr.list-row-0 {
+    background-color: #efefef;
+}
+tr.list-row-1 {
+    background-color: #ffffff;
+}
+#nav {
+    padding: 2px 0px;
+    border-bottom: 5px solid #12171c;
+    background-color: #efefef;
+}
+.navbutton-current {
+    border-style: hidden;
+    padding: 3px 3px 2px 3px;
+    border-color: #12171c;
+    background: #12171c;
+}
+.navbutton {
+    border-bottom: 1px solid #efefef;
+    padding: 3px 3px 1px 3px;
+    background: #4ca7ab;
+}
+.navbutton-current A {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton-current A:hover {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton-current img {
+    border-style: hidden;
+}
+.navbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton A:hover {
+    background: #cceeee;
+} 
+.navbutton img {
+    border-style: hidden;
+}
+.pagebutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.pagebutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cccccc;
+}
+.pagebutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.pagebutton A:hover {
+    background: #cceeee;
+} 
+.pagebutton img {
+    border-style: hidden;
+}
+.filterbutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.filterbutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #4ca7ab;
+}
+.filterbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.filterbutton A:hover {
+    background: #cceeee;
+} 
+.filterbutton img {
+    border-style: hidden;
+}
+.crudbutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.crudbutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #4ca7ab;
+}
+.crudbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.crudbutton A:hover {
+    background: #cceeee;
+} 
+.crudbutton img {
+    border-style: hidden;
+}
+  </style>
+ </head>
+ <body>
+<div id="header"><!-- BEGIN site/header -->
+<img id="logo" class="logo" height="50" width="50" src="http://localhost/images/zenah-50.png" />
+<h1 class="title">Zen Automated Home</h1>
+<!-- END site/header -->
+</div>
+<div id="nav"><!-- BEGIN site/nav -->
+  <span class="navbutton"><a
+    href="http://localhost//admin/device"
+    >Device</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/map"
+    >Map</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/room"
+    >Room</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/rule"
+    >Rule</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/state"
+    >State</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/template"
+    >Template</a></span>
+  <span class="navbutton"><a href="http://localhost/"
+    >UI</a></span>
+<!-- END site/nav -->
+</div>
+<div id="content">
+<p class="filternav" id="filternav">
+Filter:
+    <span class="filterbutton-current">none</span>
+    <span class="filterbutton-current"></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/rule/.?filter=at"
+       >at</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/rule/.?filter=scene"
+       >scene</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/rule/.?filter=xpl"
+       >xpl</a></span>
+</p>
+<p class="pagenav" id="pagenav">
+Page:
+    <span class="pagebutton">&lt;&lt;</span>
+&nbsp;
+      <span class="pagebutton-current">1</span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/rule/.?page=2&filter="
+        >2</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/rule/.?page=2&filter="
+        >&gt;&gt;</a></span>
+</p>
+<table class="list-table">
+  <tr class="list-header">
+    <th>name</th>
+    <th>active</th>
+    <th>trig_type</th>
+    <th>trig</th>
+    <th>action</th>
+    <th>ftime</th>
+    <th>mtime</th>
+    <th/>
+  </tr>
+    <tr class="list-row-0">
+      <td>all_windows</td>
+      <td>enabled</td>
+      <td>scene</td>
+      <td></td>
+      <td><small><pre># map &#39;on&#39; =&#62; &#39;open&#39; and &#39;off&#39; to &#39;close&#39;
+[% SET action = state == &#39;on&#39; ? &#39;open&#39; : (state == &#39;off&#39; ? &#39;close&#39; : state) %]
+[% FOREACH dev = zenah.device.by_type_list(&#34;Curtain&#34;) %]
+  [% dev.action(&#34;curtain/$action&#34;) %]
+[% END %]
+[% FOREACH dev = zenah.device.by_type_list(&#34;Blind&#34;) %]
+  # Power supply can only serve 3 blinds at once so we pause a little
+  [% IF loop.count AND ( loop.count % 3 ) == 0 %]
+    sleep 30
+  [% END %]
+  [% dev.action(&#34;blind/$action&#34;) %]
+  # could be written:
+  # device [% dev.name %] blind/[% action %]
+[% END %]
+</pre></small>
+</td>
+      <td>2007-08-10 20:17:45</td>
+      <td>2007-08-05 20:30:42</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/view/5"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/edit/5"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/destroy/5"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>callerid</td>
+      <td>enabled</td>
+      <td></td>
+      <td><small><pre>message_type=&#34;xpl-trig&#34; class=&#34;cid.basic&#34; calltype=inbound</pre></small>
+</td>
+      <td><small><pre>[% SET name = zenah.map.reverse(&#39;phonebook&#39;, xpl.phone) %]
+xpl -c osd.basic command=clear text=&#34; Call [% name ? name : xpl.phone %]&#34;
+</pre></small>
+</td>
+      <td></td>
+      <td>2008-09-22 23:50:16</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/view/15"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/edit/15"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/destroy/15"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-0">
+      <td>cleaner_prep</td>
+      <td>enabled</td>
+      <td>at</td>
+      <td><small><pre>recurrence freq=weekly hours=11 minutes=30 days=th</pre></small>
+</td>
+      <td><small><pre>scene all_windows state=on
+# device washing_machine on</pre></small>
+</td>
+      <td></td>
+      <td>2007-08-05 19:55:54</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/view/9"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/edit/9"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/destroy/9"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>cuckoo</td>
+      <td>enabled</td>
+      <td>at</td>
+      <td><small><pre>recurrence freq=hourly minutes=&#34;[0,15,30,45]&#34;</pre></small>
+</td>
+      <td><small><pre>xpl -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
+</pre></small>
+</td>
+      <td>2007-08-10 21:45:02</td>
+      <td>2007-08-05 14:52:24</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/view/1"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/edit/1"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/destroy/1"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-0">
+      <td>dusk</td>
+      <td>enabled</td>
+      <td>at</td>
+      <td><small><pre>sunset minutes=&#34;-20&#34;</pre></small>
+</td>
+      <td><small><pre>scene all_windows state=close
+</pre></small>
+</td>
+      <td>2007-08-10 20:17:44</td>
+      <td>2007-08-03 13:53:05</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/view/4"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/edit/4"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/destroy/4"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>kettle</td>
+      <td>enabled</td>
+      <td>scene</td>
+      <td></td>
+      <td><small><pre>[% zenah.device.by_name(&#39;kettle&#39;).action(&#34;x10/$state&#34;) %]
+[% IF state == &#39;on&#39; %]
+enable kettle_warn
+[% ELSE %]
+disable kettle_warn
+[% END %]
+</pre></small>
+</td>
+      <td>2007-08-05 14:54:23</td>
+      <td>2007-08-03 15:10:21</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/view/6"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/edit/6"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/destroy/6"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-0">
+      <td>kettle_warn</td>
+      <td>disabled</td>
+      <td>at</td>
+      <td><small><pre>30</pre></small>
+</td>
+      <td><small><pre>xpl -c osd.basic command=clear row=3 text=&#34;Kettle is on&#34; delay=5
+</pre></small>
+</td>
+      <td></td>
+      <td>2007-08-05 14:54:23</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/view/8"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/edit/8"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/destroy/8"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>light_state</td>
+      <td>enabled</td>
+      <td>xpl</td>
+      <td><small><pre>message_type=&#34;xpl-trig&#34; class=&#34;x10.basic&#34; command=(on|off)</pre></small>
+</td>
+      <td><small><pre>[% SET dev = zenah.device.by_attr(&#39;unit&#39;, xpl.device) %]
+[% IF dev and dev.type == &#39;X10Light&#39; %]
+  [% SET t = zenah.datetime.epoch %]
+  [% FOREACH room = dev.rooms %]
+    [% SET var = room.name %]
+    [% SET value = xpl.command == &#39;on&#39; ? &#39;dark&#39; : &#39;light&#39; %]
+    [% CALL zenah.state.set(&#39;light&#39;, var, value) %]
+  [% END %]
+[% END %]</pre></small>
+</td>
+      <td>2007-08-05 15:05:34</td>
+      <td>2007-08-04 10:14:30</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/view/11"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/edit/11"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/destroy/11"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-0">
+      <td>motion_check</td>
+      <td>enabled</td>
+      <td>at</td>
+      <td><small><pre>recurrence freq=minutely seconds=17</pre></small>
+</td>
+      <td><small><pre>[% SET t = zenah.datetime.epoch %]
+[% FOREACH room = zenah.room.all %]
+  [% SET timeout = room.attribute(&#39;motion_timeout&#39;) %]
+  [% NEXT UNLESS timeout %]
+  [% SET cutoff = t - timeout %]
+  [% SET motion = zenah.state.get(&#39;motion&#39;, room.name) %]
+  [% NEXT UNLESS motion %]
+  [% NEXT UNLESS motion.value == &#39;occupied&#39; %]
+  [% NEXT UNLESS motion.mtime.epoch &#60; cutoff %]
+  scene motion_trigger state=off room=&#34;[% room.name %]&#34;
+  [% CALL zenah.state.set(&#39;motion&#39;, room.name, &#39;empty&#39;) %]
+[% END %]
+</pre></small>
+</td>
+      <td>2007-08-10 21:58:24</td>
+      <td>2007-08-04 10:11:00</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/view/13"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/edit/13"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/destroy/13"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>motion_state</td>
+      <td>enabled</td>
+      <td>xpl</td>
+      <td><small><pre>message_type=&#34;xpl-trig&#34; class=&#34;x10.basic&#34; command=on</pre></small>
+</td>
+      <td><small><pre>[% SET dev = zenah.device.by_attr(&#39;unit&#39;, xpl.device) %]
+[% IF dev and dev.type == &#39;X10Motion&#39; %]
+  [% SET t = zenah.datetime.epoch %]
+  [% FOREACH room = dev.rooms %]
+    [% CALL zenah.state.set(&#39;motion&#39;, room.name, &#39;occupied&#39;) %]
+    scene motion_trigger state=on room=&#34;[% room.name %]&#34;
+  [% END %]
+[% END %]
+</pre></small>
+</td>
+      <td>2007-08-05 15:05:34</td>
+      <td>2007-08-04 10:06:30</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/view/10"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/edit/10"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/destroy/10"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+</table>
+<hr/>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/add/"
+    >Add</a></span>
+</div>
+<div id="footer"><!-- BEGIN site/footer -->
+<div id="copyright">&copy; 2006, 2008 Mark Hindess</div>
+<!-- END site/footer -->
+</div>
+ </body>
+</html>

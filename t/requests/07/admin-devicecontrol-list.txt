@@ -1,0 +1,327 @@
+/admin/devicecontrol?rows=2&page=2&filter=x10
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+ <head>
+  <title>Zen Automated Home</title>
+  <style type="text/css">
+html {
+    height: 100%;
+}
+body { 
+    background-color: #ffffff;
+    color: #484848;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+#logo {
+    float: right;
+}
+#header {
+    background-color: #efefef;
+}
+#footer {
+    background-color: #efefef;
+    text-align: center;
+    border-top: 1px solid #aa1914;
+    bottom: 0;
+    left: 0px;
+    width: 100%;
+    padding: 4px;
+}
+#content {
+    padding: 10px;
+}
+h1.title {
+    padding: 0.1em;
+    margin: 0em;
+    font: Ariel;
+    color: #12171c;
+}
+.message {
+    color: #66AA66;
+}
+.error {
+    color: #CC4444;
+}
+table.view-table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+th.view-table {
+    border: 1px solid black;
+    text-align: left;
+}
+td.view-table {
+    border: 1px solid black;
+}
+table.list-table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+th.list-table {
+    border: 1px solid black;
+}
+td.list-table {
+    border: 1px solid black;
+}
+tr.list-row-0 {
+    background-color: #efefef;
+}
+tr.list-row-1 {
+    background-color: #ffffff;
+}
+#nav {
+    padding: 2px 0px;
+    border-bottom: 5px solid #12171c;
+    background-color: #efefef;
+}
+.navbutton-current {
+    border-style: hidden;
+    padding: 3px 3px 2px 3px;
+    border-color: #12171c;
+    background: #12171c;
+}
+.navbutton {
+    border-bottom: 1px solid #efefef;
+    padding: 3px 3px 1px 3px;
+    background: #4ca7ab;
+}
+.navbutton-current A {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton-current A:hover {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton-current img {
+    border-style: hidden;
+}
+.navbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton A:hover {
+    background: #cceeee;
+} 
+.navbutton img {
+    border-style: hidden;
+}
+.pagebutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.pagebutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cccccc;
+}
+.pagebutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.pagebutton A:hover {
+    background: #cceeee;
+} 
+.pagebutton img {
+    border-style: hidden;
+}
+.filterbutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.filterbutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #4ca7ab;
+}
+.filterbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.filterbutton A:hover {
+    background: #cceeee;
+} 
+.filterbutton img {
+    border-style: hidden;
+}
+.crudbutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.crudbutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #4ca7ab;
+}
+.crudbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.crudbutton A:hover {
+    background: #cceeee;
+} 
+.crudbutton img {
+    border-style: hidden;
+}
+  </style>
+ </head>
+ <body>
+<div id="header"><!-- BEGIN site/header -->
+<img id="logo" class="logo" height="50" width="50" src="http://localhost/images/zenah-50.png" />
+<h1 class="title">Zen Automated Home</h1>
+<!-- END site/header -->
+</div>
+<div id="nav"><!-- BEGIN site/nav -->
+  <span class="navbutton"><a
+    href="http://localhost//admin/device"
+    >Device</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/map"
+    >Map</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/room"
+    >Room</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/rule"
+    >Rule</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/state"
+    >State</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/template"
+    >Template</a></span>
+  <span class="navbutton"><a href="http://localhost/"
+    >UI</a></span>
+<!-- END site/nav -->
+</div>
+<div id="content">
+<p class="filternav" id="filternav">
+Filter:
+    <span class="filterbutton"><a
+      href="http://localhost/admin/devicecontrol/.?filter=none"
+       >none</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/devicecontrol/.?filter=blind"
+       >blind</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/devicecontrol/.?filter=curtain"
+       >curtain</a></span>
+    <span class="filterbutton-current">x10</span>
+</p>
+<p class="pagenav" id="pagenav">
+Page:
+    <span class="pagebutton"><a
+      href="http://localhost/admin/devicecontrol/.?page=1&filter=x10"
+        >&lt;&lt;</a></span>
+&nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/devicecontrol/.?page=1&filter=x10"
+        >1</a></span>
+    &nbsp;
+      <span class="pagebutton-current">2</span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/devicecontrol/.?page=3&filter=x10"
+        >3</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/devicecontrol/.?page=4&filter=x10"
+        >4</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/devicecontrol/.?page=3&filter=x10"
+        >&gt;&gt;</a></span>
+</p>
+<table class="list-table">
+  <tr class="list-header">
+    <th>name</th>
+    <th>string</th>
+    <th>description</th>
+    <th>definition</th>
+    <th/>
+  </tr>
+    <tr class="list-row-0">
+      <td>x10/flash</td>
+      <td>Flash</td>
+      <td>Flash light (and all others on same housecode)
+</td>
+      <td>[% USE String %]
+[% SET unit = device.attribute('unit') %]
+[% IF unit %]
+  [% FOREACH count = [ 1, 2, 3, 4, 5 ] %]
+    xpl -m xpl-cmnd -c x10.basic house=[% unit.substr(0,1) %] command=all_lights_on
+    sleep 1
+    xpl -m xpl-cmnd -c x10.basic house=[% unit.substr(0,1) %] command=all_lights_off
+  [% END %]
+[% ELSE %]
+  error 'invalid device'
+[% END %]</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/view/17"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/edit/17"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/destroy/17"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>x10/full-fast</td>
+      <td>FullFast</td>
+      <td></td>
+      <td>[% SET unit = device.attribute('unit') %]
+[% IF unit %]
+  xpl -m xpl-cmnd -c x10.basic device=[% unit %] command=extended data1=49 data2=63
+[% ELSE %]
+  error 'invalid device'
+[% END %]</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/view/16"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/edit/16"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/destroy/16"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+</table>
+<hr/>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/add/"
+    >Add</a></span>
+</div>
+<div id="footer"><!-- BEGIN site/footer -->
+<div id="copyright">&copy; 2006, 2008 Mark Hindess</div>
+<!-- END site/footer -->
+</div>
+ </body>
+</html>

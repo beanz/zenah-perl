@@ -1,0 +1,622 @@
+/admin/device/destroy/27
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+ <head>
+  <title>Zen Automated Home</title>
+  <style type="text/css">
+html {
+    height: 100%;
+}
+body { 
+    background-color: #ffffff;
+    color: #484848;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+#logo {
+    float: right;
+}
+#header {
+    background-color: #efefef;
+}
+#footer {
+    background-color: #efefef;
+    text-align: center;
+    border-top: 1px solid #aa1914;
+    bottom: 0;
+    left: 0px;
+    width: 100%;
+    padding: 4px;
+}
+#content {
+    padding: 10px;
+}
+h1.title {
+    padding: 0.1em;
+    margin: 0em;
+    font: Ariel;
+    color: #12171c;
+}
+.message {
+    color: #66AA66;
+}
+.error {
+    color: #CC4444;
+}
+table.view-table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+th.view-table {
+    border: 1px solid black;
+    text-align: left;
+}
+td.view-table {
+    border: 1px solid black;
+}
+table.list-table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+th.list-table {
+    border: 1px solid black;
+}
+td.list-table {
+    border: 1px solid black;
+}
+tr.list-row-0 {
+    background-color: #efefef;
+}
+tr.list-row-1 {
+    background-color: #ffffff;
+}
+#nav {
+    padding: 2px 0px;
+    border-bottom: 5px solid #12171c;
+    background-color: #efefef;
+}
+.navbutton-current {
+    border-style: hidden;
+    padding: 3px 3px 2px 3px;
+    border-color: #12171c;
+    background: #12171c;
+}
+.navbutton {
+    border-bottom: 1px solid #efefef;
+    padding: 3px 3px 1px 3px;
+    background: #4ca7ab;
+}
+.navbutton-current A {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton-current A:hover {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton-current img {
+    border-style: hidden;
+}
+.navbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton A:hover {
+    background: #cceeee;
+} 
+.navbutton img {
+    border-style: hidden;
+}
+.pagebutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.pagebutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cccccc;
+}
+.pagebutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.pagebutton A:hover {
+    background: #cceeee;
+} 
+.pagebutton img {
+    border-style: hidden;
+}
+.filterbutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.filterbutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #4ca7ab;
+}
+.filterbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.filterbutton A:hover {
+    background: #cceeee;
+} 
+.filterbutton img {
+    border-style: hidden;
+}
+.crudbutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.crudbutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #4ca7ab;
+}
+.crudbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.crudbutton A:hover {
+    background: #cceeee;
+} 
+.crudbutton img {
+    border-style: hidden;
+}
+  </style>
+ </head>
+ <body>
+<div id="header"><!-- BEGIN site/header -->
+<img id="logo" class="logo" height="50" width="50" src="http://localhost/images/zenah-50.png" />
+<h1 class="title">Zen Automated Home</h1>
+<!-- END site/header -->
+</div>
+<div id="nav"><!-- BEGIN site/nav -->
+  <span class="navbutton"><a
+    href="http://localhost//admin/device"
+    >Device</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/map"
+    >Map</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/room"
+    >Room</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/rule"
+    >Rule</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/state"
+    >State</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/template"
+    >Template</a></span>
+  <span class="navbutton"><a href="http://localhost/"
+    >UI</a></span>
+<!-- END site/nav -->
+</div>
+<div id="content">
+<p class="filternav" id="filternav">
+Filter:
+    <span class="filterbutton-current">none</span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/device/.?filter=Blind"
+       >Blind</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/device/.?filter=Curtain"
+       >Curtain</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/device/.?filter=X10App"
+       >X10App</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/device/.?filter=X10Lamp"
+       >X10Lamp</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/device/.?filter=X10Light"
+       >X10Light</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/device/.?filter=X10Motion"
+       >X10Motion</a></span>
+</p>
+<p class="pagenav" id="pagenav">
+Page:
+    <span class="pagebutton">&lt;&lt;</span>
+&nbsp;
+      <span class="pagebutton-current">1</span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/device/.?page=2&filter="
+        >2</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/device/.?page=2&filter="
+        >&gt;&gt;</a></span>
+</p>
+<table class="list-table">
+  <tr class="list-header">
+    <th>name</th>
+    <th>string</th>
+    <th>description</th>
+    <th>type</th>
+      <th>Attributes</th>
+    <th/>
+  </tr>
+    <tr class="list-row-0">
+      <td>a_amp</td>
+      <td>Amplifier</td>
+      <td>Amplifier</td>
+      <td>X10App</td>
+      <td>
+        unit=a2,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/25"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/25"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/25"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>a_plasma</td>
+      <td>Plasma</td>
+      <td>Plasma TV</td>
+      <td>X10App</td>
+      <td>
+        unit=a3,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/24"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/24"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/24"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-0">
+      <td>a_tv</td>
+      <td>TV</td>
+      <td>Plasma TV and Amplifier combined device</td>
+      <td>X10App</td>
+      <td>
+        unit=a2,a3,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/26"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/26"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/26"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>b_bath</td>
+      <td>Blind</td>
+      <td>Blind</td>
+      <td>Blind</td>
+      <td>
+        open_relay=o01,&nbsp;
+        close_relay=o02,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/9"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/9"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/9"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-0">
+      <td>b_bed_1</td>
+      <td>Blind</td>
+      <td>Blind</td>
+      <td>Blind</td>
+      <td>
+        open_relay=o05,&nbsp;
+        close_relay=o06,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/11"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/11"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/11"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>c_bed_1</td>
+      <td>Curtain</td>
+      <td>Curtain</td>
+      <td>Curtain</td>
+      <td>
+        open_relay=o03,&nbsp;
+        close_relay=o04,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/10"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/10"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/10"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-0">
+      <td>c_kitchen</td>
+      <td>Curtain</td>
+      <td>Curtain</td>
+      <td>Curtain</td>
+      <td>
+        open_relay=o07,&nbsp;
+        close_relay=o08,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/12"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/12"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/12"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>c_lounge</td>
+      <td>Curtain</td>
+      <td>Curtain</td>
+      <td>Curtain</td>
+      <td>
+        open_relay=o09,&nbsp;
+        close_relay=o10,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/13"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/13"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/13"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-0">
+      <td>l_bath</td>
+      <td>Light</td>
+      <td>Main Light</td>
+      <td>X10Lamp</td>
+      <td>
+        unit=l2,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/2"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/2"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/2"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>l_bed_1</td>
+      <td>Light</td>
+      <td>Main light</td>
+      <td>X10Lamp</td>
+      <td>
+        unit=l1,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/1"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/1"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/1"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-0">
+      <td>l_bed_1_r</td>
+      <td>Reading Light</td>
+      <td>Bedside Light</td>
+      <td>X10Lamp</td>
+      <td>
+        unit=l3,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/4"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/4"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/4"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>l_cloak</td>
+      <td>Light</td>
+      <td>Main light</td>
+      <td>X10Lamp</td>
+      <td>
+        unit=k4,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/7"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/7"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/7"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-0">
+      <td>l_garden</td>
+      <td>Light</td>
+      <td>Security Light</td>
+      <td>X10Lamp</td>
+      <td>
+        unit=j1,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/8"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/8"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/8"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>l_kitchen</td>
+      <td>Spots</td>
+      <td>Main Lights</td>
+      <td>X10Lamp</td>
+      <td>
+        unit=k1,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/3"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/3"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/3"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-0">
+      <td>l_kitchen_under</td>
+      <td>Under Lights</td>
+      <td>Under Cabinet Lights</td>
+      <td>X10Lamp</td>
+      <td>
+        unit=k2,&nbsp;
+      </td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/view/6"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/edit/6"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/destroy/6"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+</table>
+<hr/>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/add/"
+    >Add</a></span>
+&nbsp;
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/list/"
+    >List Controls</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/add/"
+    >Add Control</a></span>
+&nbsp;
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/list/"
+    >List Attributes</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/add/"
+    >Add Attribute</a></span>
+</div>
+<div id="footer"><!-- BEGIN site/footer -->
+<div id="copyright">&copy; 2006, 2008 Mark Hindess</div>
+<!-- END site/footer -->
+</div>
+ </body>
+</html>
