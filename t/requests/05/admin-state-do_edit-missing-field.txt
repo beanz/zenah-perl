@@ -1,4 +1,4 @@
-/admin/devicecontrol/do_edit/20?name=door%2Fopen&string=Open&definition=%5b%25%20SET%20relay%20%3d%20device.attribute(%27open_relay%27)%20%25%5d%0a%5b%25%20IF%20relay%20%25%5d%0a%20%20xpl%20-c%20control.basic%20device%3d%5b%25%20relay%20%25%5d%20type%3doutput%20current%3dpulse%0a%5b%25%20ELSE%20%25%5d%0a%20%20error%20%27invalid%20door%20device%27%0a%5b%25%20END%20%25%5d%0a
+/admin/state/do_edit/14?type=motion&value=empty&mtime=1222123916&ctime=1222123816
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -214,32 +214,29 @@ tr.list-row-1 {
 <!-- END site/nav -->
 </div>
 <div id="content">
-<p>Updated OK</p>
-<form action="http://localhost//admin/devicecontrol/do_edit/20"
+<p>You have to fill in all fields.the following are missing: <b>name</b></p>
+<form action="http://localhost//admin/state/do_edit/14"
     method="post">
+    type<br/>
+    <input name="type" type="text" value="motion" />
+<br/>
     name<br/>
-    <input name="name" type="text" value="door/open" />
+    <input name="name" type="text" value="node_0" />
 <br/>
-    string<br/>
-    <input name="string" type="text" value="Open" />
+    value<br/>
+    <input name="value" type="text" value="empty" />
 <br/>
-    description<br/>
-    <textarea cols="22" name="description" rows="3"></textarea>
+    ctime<br/>
+    <input name="ctime" type="text" value="2008-09-22 23:50:16" />
 <br/>
-    definition<br/>
-    <textarea cols="80" name="definition" rows="4">[% SET relay = device.attribute(&#39;open_relay&#39;) %]
-[% IF relay %]
-  xpl -c control.basic device=[% relay %] type=output current=pulse
-[% ELSE %]
-  error &#39;invalid door device&#39;
-[% END %]
-</textarea>
+    mtime<br/>
+    <input name="mtime" type="text" value="2008-09-22 23:51:56" />
 <br/>
   <input type="submit" value="Edit"/>
 </form>
 <hr/>
   <span class="crudbutton"><a
-    href="http://localhost//admin/devicecontrol/list/"
+    href="http://localhost//admin/state/list/"
     >List</a></span>
 </div>
 <div id="footer"><!-- BEGIN site/footer -->

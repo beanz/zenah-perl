@@ -1,4 +1,4 @@
-/admin/devicecontrol/do_edit/20?name=door%2Fopen&string=Open&definition=%5b%25%20SET%20relay%20%3d%20device.attribute(%27open_relay%27)%20%25%5d%0a%5b%25%20IF%20relay%20%25%5d%0a%20%20xpl%20-c%20control.basic%20device%3d%5b%25%20relay%20%25%5d%20type%3doutput%20current%3dpulse%0a%5b%25%20ELSE%20%25%5d%0a%20%20error%20%27invalid%20door%20device%27%0a%5b%25%20END%20%25%5d%0a
+/admin/device/do_edit/27?name=front_door&string=Front%20Door&description=Front%20Door&rooms=1&rooms=6&controls=20&attrs=34
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -214,32 +214,151 @@ tr.list-row-1 {
 <!-- END site/nav -->
 </div>
 <div id="content">
-<p>Updated OK</p>
-<form action="http://localhost//admin/devicecontrol/do_edit/20"
+<p>You have to fill in all fields.the following are missing: <b>type</b></p>
+<form action="http://localhost//admin/device/do_edit/27"
     method="post">
     name<br/>
-    <input name="name" type="text" value="door/open" />
+    <input name="name" type="text" value="front_door" />
 <br/>
     string<br/>
-    <input name="string" type="text" value="Open" />
+    <input name="string" type="text" value="Front Door" />
 <br/>
     description<br/>
-    <textarea cols="22" name="description" rows="3"></textarea>
+    <textarea cols="22" name="description" rows="3">Front Door</textarea>
 <br/>
-    definition<br/>
-    <textarea cols="80" name="definition" rows="4">[% SET relay = device.attribute(&#39;open_relay&#39;) %]
-[% IF relay %]
-  xpl -c control.basic device=[% relay %] type=output current=pulse
-[% ELSE %]
-  error &#39;invalid door device&#39;
-[% END %]
-</textarea>
+    type<br/>
+    <input name="type" type="text" value="Door" />
 <br/>
+<br/>
+<table border="0" width="100%">
+<tr>
+  <th align="left">Rooms</th>
+  <th align="left">Controls</th>
+  <th align="left">Attributes</th>
+</tr>
+<tr>
+  <td valign="top" align="left">
+    <select name="rooms" multiple="multiple">
+        <option value="4">bath</option>
+        <option value="2">bed_1</option>
+        <option value="3">cloak</option>
+        <option selected="selected"
+                value="6">garden</option>
+        <option value="5">kitchen</option>
+        <option selected="selected"
+                value="1">lounge</option>
+        <option value="7">node_0</option>
+    </select>
+  </td>
+  <td valign="top" align="left">
+    <select name="controls" multiple="multiple">
+        <option value="18"
+          >blind/close</option>
+        <option value="19"
+          >blind/open</option>
+        <option value="6"
+          >curtain/close</option>
+        <option value="5"
+          >curtain/open</option>
+        <option selected="selected"
+                value="20"
+          >door/open</option>
+        <option value="3"
+          >x10/bright</option>
+        <option value="4"
+          >x10/dim</option>
+        <option value="17"
+          >x10/flash</option>
+        <option value="16"
+          >x10/full-fast</option>
+        <option value="2"
+          >x10/off</option>
+        <option value="1"
+          >x10/on</option>
+        <option value="14"
+          >x10/on-override</option>
+    </select>
+  </td>
+  <td valign="top" align="left">
+    <select name="attrs" multiple="multiple">
+        <option value="15"
+          >close_relay&nbsp;= &nbsp;o02</option>
+        <option value="16"
+          >close_relay&nbsp;= &nbsp;o04</option>
+        <option value="17"
+          >close_relay&nbsp;= &nbsp;o06</option>
+        <option value="18"
+          >close_relay&nbsp;= &nbsp;o08</option>
+        <option value="19"
+          >close_relay&nbsp;= &nbsp;o10</option>
+        <option selected="selected"
+                value="34"
+          >open_relay&nbsp;= &nbsp;05.667788000001</option>
+        <option value="10"
+          >open_relay&nbsp;= &nbsp;o01</option>
+        <option value="11"
+          >open_relay&nbsp;= &nbsp;o03</option>
+        <option value="12"
+          >open_relay&nbsp;= &nbsp;o05</option>
+        <option value="13"
+          >open_relay&nbsp;= &nbsp;o07</option>
+        <option value="14"
+          >open_relay&nbsp;= &nbsp;o09</option>
+        <option value="30"
+          >unit&nbsp;= &nbsp;a1</option>
+        <option value="31"
+          >unit&nbsp;= &nbsp;a2</option>
+        <option value="33"
+          >unit&nbsp;= &nbsp;a2,a3</option>
+        <option value="32"
+          >unit&nbsp;= &nbsp;a3</option>
+        <option value="9"
+          >unit&nbsp;= &nbsp;j1</option>
+        <option value="4"
+          >unit&nbsp;= &nbsp;k1</option>
+        <option value="5"
+          >unit&nbsp;= &nbsp;k2</option>
+        <option value="6"
+          >unit&nbsp;= &nbsp;k3</option>
+        <option value="7"
+          >unit&nbsp;= &nbsp;k4</option>
+        <option value="8"
+          >unit&nbsp;= &nbsp;k5</option>
+        <option value="1"
+          >unit&nbsp;= &nbsp;l1</option>
+        <option value="2"
+          >unit&nbsp;= &nbsp;l2</option>
+        <option value="3"
+          >unit&nbsp;= &nbsp;l3</option>
+        <option value="22"
+          >unit&nbsp;= &nbsp;m1</option>
+        <option value="29"
+          >unit&nbsp;= &nbsp;m10</option>
+        <option value="20"
+          >unit&nbsp;= &nbsp;m2</option>
+        <option value="21"
+          >unit&nbsp;= &nbsp;m3</option>
+        <option value="23"
+          >unit&nbsp;= &nbsp;m4</option>
+        <option value="24"
+          >unit&nbsp;= &nbsp;m5</option>
+        <option value="25"
+          >unit&nbsp;= &nbsp;m6</option>
+        <option value="26"
+          >unit&nbsp;= &nbsp;m7</option>
+        <option value="28"
+          >unit&nbsp;= &nbsp;m8</option>
+        <option value="27"
+          >unit&nbsp;= &nbsp;m9</option>
+    </select>
+  </td>
+</tr>
+</table>
   <input type="submit" value="Edit"/>
 </form>
 <hr/>
   <span class="crudbutton"><a
-    href="http://localhost//admin/devicecontrol/list/"
+    href="http://localhost//admin/device/list/"
     >List</a></span>
 </div>
 <div id="footer"><!-- BEGIN site/footer -->

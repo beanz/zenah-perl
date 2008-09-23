@@ -1,4 +1,4 @@
-/admin/devicecontrol/do_edit/20?name=door%2Fopen&string=Open&definition=%5b%25%20SET%20relay%20%3d%20device.attribute(%27open_relay%27)%20%25%5d%0a%5b%25%20IF%20relay%20%25%5d%0a%20%20xpl%20-c%20control.basic%20device%3d%5b%25%20relay%20%25%5d%20type%3doutput%20current%3dpulse%0a%5b%25%20ELSE%20%25%5d%0a%20%20error%20%27invalid%20door%20device%27%0a%5b%25%20END%20%25%5d%0a
+/admin/template/do_edit/41?name=content/basement
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -214,32 +214,25 @@ tr.list-row-1 {
 <!-- END site/nav -->
 </div>
 <div id="content">
-<p>Updated OK</p>
-<form action="http://localhost//admin/devicecontrol/do_edit/20"
+<p>You have to fill in all fields.the following are missing: <b>text</b></p>
+<form action="http://localhost//admin/template/do_edit/41"
     method="post">
     name<br/>
-    <input name="name" type="text" value="door/open" />
+    <input name="name" type="text" value="content/basement" />
 <br/>
-    string<br/>
-    <input name="string" type="text" value="Open" />
-<br/>
-    description<br/>
-    <textarea cols="22" name="description" rows="3"></textarea>
-<br/>
-    definition<br/>
-    <textarea cols="80" name="definition" rows="4">[% SET relay = device.attribute(&#39;open_relay&#39;) %]
-[% IF relay %]
-  xpl -c control.basic device=[% relay %] type=output current=pulse
-[% ELSE %]
-  error &#39;invalid door device&#39;
-[% END %]
+    text<br/>
+    <textarea cols="80" name="text" rows="10">&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;90%&quot; border=&quot;1&quot;&gt;
+&lt;tr&gt;
+  [% PROCESS room/default room = &quot;node_0&quot; %]
+&lt;/tr&gt;
+&lt;/table&gt;
 </textarea>
 <br/>
   <input type="submit" value="Edit"/>
 </form>
 <hr/>
   <span class="crudbutton"><a
-    href="http://localhost//admin/devicecontrol/list/"
+    href="http://localhost//admin/template/list/"
     >List</a></span>
 </div>
 <div id="footer"><!-- BEGIN site/footer -->

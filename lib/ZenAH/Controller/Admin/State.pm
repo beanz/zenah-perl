@@ -62,7 +62,7 @@ Adds a new row to the table and forwards to list.
 
 sub do_add : Local {
     my ( $self, $c ) = @_;
-    $c->form( optional => [ ZenAH::Model::CDBI::State->columns ] );
+    $c->form(required => [ qw/type name value ctime mtime/ ]);
     if ($c->form->has_missing) {
         $c->stash->{message}='You have to fill in all fields. '.
         'The following are missing: <b>'.
@@ -86,7 +86,7 @@ Edits a row and forwards to edit.
 
 sub do_edit : Local {
     my ( $self, $c, $id ) = @_;
-    $c->form( optional => [ ZenAH::Model::CDBI::State->columns ] );
+    $c->form(required => [ qw/type name value ctime mtime/ ]);
     if ($c->form->has_missing) {
         $c->stash->{message}='You have to fill in all fields.'.
         'the following are missing: <b>'.
