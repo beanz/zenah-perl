@@ -53,15 +53,9 @@ sub show : Local {
     if ($template =~ /xul/) {
       $c->response->content_type('application/vnd.mozilla.xul+xml');
     }
-    my $status = $c->request->param('status');
-    if (defined $status && !$c->request->user_agent() =~ /PlayStation/) {
-      my $uri = URI->new($c->request);
-      $uri->query_param_delete('status');
-      $c->stash->{meta_refresh} = '5;'.$uri;
-    }
     $c->stash->{now} = time;
     $c->stash->{dt} = DateTime->now;
-    $c->stash->{status} = $status || '&nbsp;';
+    $c->stash->{status} = $c->request->param('status') || '&nbsp;';
     $c->stash->{template} = $template;
     $c->stash->{variant_url} = \&variant_url;
     $c->forward('ZenAH::View::UI');
