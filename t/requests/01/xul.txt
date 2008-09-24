@@ -1,0 +1,312 @@
+/xul
+
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<window id="zenah-xul-window" title="Zen Automated Home"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script src="http://localhost/js/ajax.js" type="text/javascript" />
+<description><html:h1>ZenAH</html:h1></description>
+<box>
+    <html:div id="zenah_status">No Value</html:div>
+</box>
+<tabbox id="houseTabList" >
+ <tabs>
+   <tab height="30" label="Upstairs" />
+   <tab label="Downstairs" />
+ </tabs>
+ <tabpanels>
+   <tabpanel id="upstairs">
+     <tabbox id="upstairsTabList">
+       <tabs>
+         <tab label="Bathroom" />
+         <tab label="Bedroom 1" />
+       </tabs>
+       <tabpanels>
+         <tabpanel id="bath">
+  <grid flex="1">
+    <columns>
+      <column/>
+      <column flex="1"/>
+    </columns>
+    <rows>
+      <row>
+  <label value="Light"/>
+  <hbox flex="1" >
+        <button label="On"
+           oncommand="device_func(['args__l_bath','args__x10/on'],['zenah_status']);return false;" />
+        <button label="Off"
+           oncommand="device_func(['args__l_bath','args__x10/off'],['zenah_status']);return false;" />
+        <button label="Bright"
+           oncommand="device_func(['args__l_bath','args__x10/bright'],['zenah_status']);return false;" />
+        <button label="Dim"
+           oncommand="device_func(['args__l_bath','args__x10/dim'],['zenah_status']);return false;" />
+        <button label="FullFast"
+           oncommand="device_func(['args__l_bath','args__x10/full-fast'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+      <row>
+  <label value="Blind"/>
+  <hbox flex="1" >
+        <button label="Close"
+           oncommand="device_func(['args__b_bath','args__blind/close'],['zenah_status']);return false;" />
+        <button label="Open"
+           oncommand="device_func(['args__b_bath','args__blind/open'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+    </rows>
+  </grid>
+         </tabpanel>
+         <tabpanel id="bed_1">
+  <grid flex="1">
+    <columns>
+      <column/>
+      <column flex="1"/>
+    </columns>
+    <rows>
+      <row>
+  <label value="Light"/>
+  <hbox flex="1" >
+        <button label="On"
+           oncommand="device_func(['args__l_bed_1','args__x10/on'],['zenah_status']);return false;" />
+        <button label="Off"
+           oncommand="device_func(['args__l_bed_1','args__x10/off'],['zenah_status']);return false;" />
+        <button label="Bright"
+           oncommand="device_func(['args__l_bed_1','args__x10/bright'],['zenah_status']);return false;" />
+        <button label="Dim"
+           oncommand="device_func(['args__l_bed_1','args__x10/dim'],['zenah_status']);return false;" />
+        <button label="FullFast"
+           oncommand="device_func(['args__l_bed_1','args__x10/full-fast'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+      <row>
+  <label value="Reading Light"/>
+  <hbox flex="1" >
+        <button label="On"
+           oncommand="device_func(['args__l_bed_1_r','args__x10/on'],['zenah_status']);return false;" />
+        <button label="Off"
+           oncommand="device_func(['args__l_bed_1_r','args__x10/off'],['zenah_status']);return false;" />
+        <button label="Bright"
+           oncommand="device_func(['args__l_bed_1_r','args__x10/bright'],['zenah_status']);return false;" />
+        <button label="Dim"
+           oncommand="device_func(['args__l_bed_1_r','args__x10/dim'],['zenah_status']);return false;" />
+        <button label="FullFast"
+           oncommand="device_func(['args__l_bed_1_r','args__x10/full-fast'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+      <row>
+  <label value="Curtain"/>
+  <hbox flex="1" >
+        <button label="Open"
+           oncommand="device_func(['args__c_bed_1','args__curtain/open'],['zenah_status']);return false;" />
+        <button label="Close"
+           oncommand="device_func(['args__c_bed_1','args__curtain/close'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+      <row>
+  <label value="Blind"/>
+  <hbox flex="1" >
+        <button label="Close"
+           oncommand="device_func(['args__b_bed_1','args__blind/close'],['zenah_status']);return false;" />
+        <button label="Open"
+           oncommand="device_func(['args__b_bed_1','args__blind/open'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+    </rows>
+  </grid>
+         </tabpanel>
+       </tabpanels>
+     </tabbox>
+   </tabpanel>
+   <tabpanel id="downstairs">
+     <tabbox id="downstairsTabList">
+       <tabs>
+         <tab label="Cloak Room" />
+         <tab label="Kitchen" />
+         <tab label="Lounge" />
+         <tab label="Garden" />
+       </tabs>
+       <tabpanels>
+         <tabpanel id="cloak">
+  <grid flex="1">
+    <columns>
+      <column/>
+      <column flex="1"/>
+    </columns>
+    <rows>
+      <row>
+  <label value="Light"/>
+  <hbox flex="1" >
+        <button label="On"
+           oncommand="device_func(['args__l_cloak','args__x10/on'],['zenah_status']);return false;" />
+        <button label="Off"
+           oncommand="device_func(['args__l_cloak','args__x10/off'],['zenah_status']);return false;" />
+        <button label="Bright"
+           oncommand="device_func(['args__l_cloak','args__x10/bright'],['zenah_status']);return false;" />
+        <button label="Dim"
+           oncommand="device_func(['args__l_cloak','args__x10/dim'],['zenah_status']);return false;" />
+        <button label="FullFast"
+           oncommand="device_func(['args__l_cloak','args__x10/full-fast'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+    </rows>
+  </grid>
+         </tabpanel>
+         <tabpanel id="kitchen">
+  <grid flex="1">
+    <columns>
+      <column/>
+      <column flex="1"/>
+    </columns>
+    <rows>
+      <row>
+  <label value="Spots"/>
+  <hbox flex="1" >
+        <button label="On"
+           oncommand="device_func(['args__l_kitchen','args__x10/on'],['zenah_status']);return false;" />
+        <button label="Off"
+           oncommand="device_func(['args__l_kitchen','args__x10/off'],['zenah_status']);return false;" />
+        <button label="Bright"
+           oncommand="device_func(['args__l_kitchen','args__x10/bright'],['zenah_status']);return false;" />
+        <button label="Dim"
+           oncommand="device_func(['args__l_kitchen','args__x10/dim'],['zenah_status']);return false;" />
+        <button label="FullFast"
+           oncommand="device_func(['args__l_kitchen','args__x10/full-fast'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+      <row>
+  <label value="Under Lights"/>
+  <hbox flex="1" >
+        <button label="On"
+           oncommand="device_func(['args__l_kitchen_under','args__x10/on'],['zenah_status']);return false;" />
+        <button label="Off"
+           oncommand="device_func(['args__l_kitchen_under','args__x10/off'],['zenah_status']);return false;" />
+        <button label="Bright"
+           oncommand="device_func(['args__l_kitchen_under','args__x10/bright'],['zenah_status']);return false;" />
+        <button label="Dim"
+           oncommand="device_func(['args__l_kitchen_under','args__x10/dim'],['zenah_status']);return false;" />
+        <button label="FullFast"
+           oncommand="device_func(['args__l_kitchen_under','args__x10/full-fast'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+      <row>
+  <label value="Curtain"/>
+  <hbox flex="1" >
+        <button label="Open"
+           oncommand="device_func(['args__c_kitchen','args__curtain/open'],['zenah_status']);return false;" />
+        <button label="Close"
+           oncommand="device_func(['args__c_kitchen','args__curtain/close'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+    </rows>
+  </grid>
+         </tabpanel>
+         <tabpanel id="lounge">
+  <grid flex="1">
+    <columns>
+      <column/>
+      <column flex="1"/>
+    </columns>
+    <rows>
+      <row>
+  <label value="Light"/>
+  <hbox flex="1" >
+        <button label="On"
+           oncommand="device_func(['args__l_lounge','args__x10/on'],['zenah_status']);return false;" />
+        <button label="Off"
+           oncommand="device_func(['args__l_lounge','args__x10/off'],['zenah_status']);return false;" />
+        <button label="Bright"
+           oncommand="device_func(['args__l_lounge','args__x10/bright'],['zenah_status']);return false;" />
+        <button label="Dim"
+           oncommand="device_func(['args__l_lounge','args__x10/dim'],['zenah_status']);return false;" />
+        <button label="FullFast"
+           oncommand="device_func(['args__l_lounge','args__x10/full-fast'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+      <row>
+  <label value="Curtain"/>
+  <hbox flex="1" >
+        <button label="Open"
+           oncommand="device_func(['args__c_lounge','args__curtain/open'],['zenah_status']);return false;" />
+        <button label="Close"
+           oncommand="device_func(['args__c_lounge','args__curtain/close'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+      <row>
+  <label value="Amplifier"/>
+  <hbox flex="1" >
+        <button label="On"
+           oncommand="device_func(['args__a_amp','args__x10/on'],['zenah_status']);return false;" />
+        <button label="Off"
+           oncommand="device_func(['args__a_amp','args__x10/off'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+      <row>
+  <label value="Plasma"/>
+  <hbox flex="1" >
+        <button label="On"
+           oncommand="device_func(['args__a_plasma','args__x10/on'],['zenah_status']);return false;" />
+        <button label="Off"
+           oncommand="device_func(['args__a_plasma','args__x10/off'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+      <row>
+  <label value="TV"/>
+  <hbox flex="1" >
+        <button label="On"
+           oncommand="device_func(['args__a_tv','args__x10/on'],['zenah_status']);return false;" />
+        <button label="Off"
+           oncommand="device_func(['args__a_tv','args__x10/off'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+    </rows>
+  </grid>
+         </tabpanel>
+         <tabpanel id="garden">
+  <grid flex="1">
+    <columns>
+      <column/>
+      <column flex="1"/>
+    </columns>
+    <rows>
+      <row>
+  <label value="Light"/>
+  <hbox flex="1" >
+        <button label="On"
+           oncommand="device_func(['args__l_garden','args__x10/on'],['zenah_status']);return false;" />
+        <button label="Off"
+           oncommand="device_func(['args__l_garden','args__x10/off'],['zenah_status']);return false;" />
+        <button label="FullFast"
+           oncommand="device_func(['args__l_garden','args__x10/full-fast'],['zenah_status']);return false;" />
+        <button label="Flash"
+           oncommand="device_func(['args__l_garden','args__x10/flash'],['zenah_status']);return false;" />
+    <spacer flex="1"/>
+  </hbox>
+</row>
+    </rows>
+  </grid>
+         </tabpanel>
+       </tabpanels>
+     </tabbox>
+   </tabpanel>
+ </tabpanels>
+</tabbox>
+<statusbar>
+  <statusbarpanel label="Status" flex="1" />
+</statusbar>
+</window>
