@@ -113,8 +113,7 @@ ZenAH::CDBI::Rule->has_a(
 
 sub ZenAH::CDBI::Rule::to_view {
   my ($self, $field) = @_;
-  return '' unless (defined $self->$field &&
-                    $self->$field ne '');
+  return '' unless (defined $self->$field);
   if ($field eq 'active') {
     $self->active ? 'enabled' : 'disabled'
   } elsif ($field eq 'action' or $field eq 'trig') {
@@ -141,8 +140,7 @@ ZenAH::CDBI::Template->has_a(
 
 sub ZenAH::CDBI::Template::to_view {
   my ($self, $field) = @_;
-  return '' unless (defined $self->$field &&
-                    $self->$field ne '');
+  return '' unless (defined $self->$field);
   if ($field eq 'text') {
     my $small = HTML::Element->new('small');
     my $pre = HTML::Element->new('pre');
