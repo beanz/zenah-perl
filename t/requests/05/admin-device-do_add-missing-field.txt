@@ -1,4 +1,6 @@
 /admin/device/do_add?name=front_door&description=Front%20Door&type=Door
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

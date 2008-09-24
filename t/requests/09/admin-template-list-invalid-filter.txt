@@ -1,4 +1,6 @@
 /admin/template?rows=2&page=2&filter=invalid
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

@@ -1,4 +1,6 @@
 /admin/device/edit/1
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -231,9 +233,9 @@ tr.list-row-1 {
 <br/>
 <table border="0" width="100%">
 <tr>
-  <th align="left">Rooms</th>
-  <th align="left">Controls</th>
-  <th align="left">Attributes</th>
+    <th align="left">Rooms</th>
+    <th align="left">Controls</th>
+    <th align="left">Attributes</th>
 </tr>
 <tr>
   <td valign="top" align="left">

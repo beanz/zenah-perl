@@ -1,50 +1,52 @@
 /admin/device/do_edit/27?name=front_door&string=Front%20Door&description=Front%20Door&rooms=1&rooms=6&controls=20&attrs=34
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<head>
-<title>Zen Automated Home</title>
-<style type="text/css">
+ <head>
+  <title>Zen Automated Home</title>
+  <style type="text/css">
 html {
-height: 100%;
+    height: 100%;
 }
 body { 
-background-color: #ffffff;
-color: #484848;
-margin: 0px;
-padding: 0px;
-height: 100%;
+    background-color: #ffffff;
+    color: #484848;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
 }
 #logo {
-float: right;
+    float: right;
 }
 #header {
-background-color: #efefef;
+    background-color: #efefef;
 }
 #footer {
-background-color: #efefef;
-text-align: center;
-border-top: 1px solid #aa1914;
-bottom: 0;
-left: 0px;
-width: 100%;
-padding: 4px;
+    background-color: #efefef;
+    text-align: center;
+    border-top: 1px solid #aa1914;
+    bottom: 0;
+    left: 0px;
+    width: 100%;
+    padding: 4px;
 }
 #content {
-padding: 10px;
+    padding: 10px;
 }
 h1.title {
-padding: 0.1em;
-margin: 0em;
-font: Ariel;
-color: #12171c;
+    padding: 0.1em;
+    margin: 0em;
+    font: Ariel;
+    color: #12171c;
 }
 .message {
-color: #66AA66;
+    color: #66AA66;
 }
 .error {
-color: #CC4444;
+    color: #CC4444;
 }
 table.view-table {
     border-collapse: collapse;
@@ -231,9 +233,9 @@ tr.list-row-1 {
 <br/>
 <table border="0" width="100%">
 <tr>
-  <th align="left">Rooms</th>
-  <th align="left">Controls</th>
-  <th align="left">Attributes</th>
+    <th align="left">Rooms</th>
+    <th align="left">Controls</th>
+    <th align="left">Attributes</th>
 </tr>
 <tr>
   <td valign="top" align="left">

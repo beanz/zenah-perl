@@ -1,4 +1,6 @@
 /admin/state/do_edit/14?type=motion&name=node_0&value=empty&mtime=1222123916&ctime=1222123816
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

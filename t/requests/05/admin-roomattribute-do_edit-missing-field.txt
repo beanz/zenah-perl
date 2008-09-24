@@ -1,4 +1,6 @@
 /admin/roomattribute/do_edit/4?name=motion_timeout
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

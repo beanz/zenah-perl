@@ -1,4 +1,6 @@
 /admin/deviceattribute/destroy/34
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

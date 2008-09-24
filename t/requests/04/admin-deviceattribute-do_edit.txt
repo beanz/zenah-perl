@@ -1,4 +1,6 @@
 /admin/deviceattribute/do_edit/34?name=open_relay&value=05.667788000001
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

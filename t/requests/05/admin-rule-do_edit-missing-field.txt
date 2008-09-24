@@ -1,4 +1,6 @@
 /admin/rule/do_edit/15?active=1&trig=message_type%3d%22xpl-trig%22%20class%3d%22cid.basic%22%20calltype%3dinbound&action=%5b%25%20SET%20name%20%3d%20zenah.map.reverse(%27phonebook%27%2c%20xpl.phone)%20%25%5d%0axpl%20-c%20osd.basic%20command%3dwrite%20text%3d%22%20Call%20%5b%25%20name%20%3f%20name%20%3a%20xpl.phone%20%25%5d%22%0a&ftime=&mtime=1222123916
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

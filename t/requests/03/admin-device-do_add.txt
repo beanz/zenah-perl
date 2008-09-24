@@ -1,4 +1,6 @@
 /admin/device/do_add?name=front_door&string=Front%20Door&description=Front%20Door&type=Door
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -601,14 +603,14 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/device/add/"
     >Add</a></span>
-&nbsp;
+  &nbsp;
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/list/"
     >List Controls</a></span>
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/add/"
     >Add Control</a></span>
-&nbsp;
+  &nbsp;
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/list/"
     >List Attributes</a></span>

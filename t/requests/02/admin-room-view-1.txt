@@ -1,4 +1,6 @@
 /admin/room/view/1
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -230,17 +232,17 @@ tr.list-row-1 {
   <tr>
     <th class="view-table" colspan="3"">Attributes</th>
   </tr>
-  <tr>
-    <th class="view-table">zone</th>
-    <td class="view-table">
-      downstairs
-    </td>
-    <td class="view-table">
+    <tr>
+      <th class="view-table">zone</th>
+      <td class="view-table">
+        downstairs
+      </td>
+      <td class="view-table">
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/view/2"
     >View</a></span>
-    </td>
-  </tr>
+      </td>
+    </tr>
   <tr>
     <th class="view-table" colspan="3">Devices</th>
   </tr>
@@ -253,8 +255,8 @@ tr.list-row-1 {
     href="http://localhost//admin/device/view/5"
     >View</a></span>
     </td>
-    </tr>
-    <tr>
+  </tr>
+  <tr>
     <td class="view-table" colspan="2">
       c_lounge
     </td>
@@ -263,8 +265,8 @@ tr.list-row-1 {
     href="http://localhost//admin/device/view/13"
     >View</a></span>
     </td>
-    </tr>
-    <tr>
+  </tr>
+  <tr>
     <td class="view-table" colspan="2">
       m_lounge
     </td>
@@ -273,8 +275,8 @@ tr.list-row-1 {
     href="http://localhost//admin/device/view/20"
     >View</a></span>
     </td>
-    </tr>
-    <tr>
+  </tr>
+  <tr>
     <td class="view-table" colspan="2">
       m_lounge_l
     </td>
@@ -283,8 +285,8 @@ tr.list-row-1 {
     href="http://localhost//admin/device/view/23"
     >View</a></span>
     </td>
-    </tr>
-    <tr>
+  </tr>
+  <tr>
     <td class="view-table" colspan="2">
       a_amp
     </td>
@@ -293,8 +295,8 @@ tr.list-row-1 {
     href="http://localhost//admin/device/view/25"
     >View</a></span>
     </td>
-    </tr>
-    <tr>
+  </tr>
+  <tr>
     <td class="view-table" colspan="2">
       a_plasma
     </td>
@@ -303,8 +305,8 @@ tr.list-row-1 {
     href="http://localhost//admin/device/view/24"
     >View</a></span>
     </td>
-    </tr>
-    <tr>
+  </tr>
+  <tr>
     <td class="view-table" colspan="2">
       a_tv
     </td>
@@ -313,7 +315,7 @@ tr.list-row-1 {
     href="http://localhost//admin/device/view/26"
     >View</a></span>
     </td>
-    </tr>
+  </tr>
 </table>
   <span class="crudbutton"><a
     href="http://localhost//admin/room/edit/1"
@@ -325,7 +327,7 @@ tr.list-row-1 {
   <span class="crudbutton"><a
     href="http://localhost//admin/room/list/"
     >List</a></span>
-  &nbsp;
+&nbsp;
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/list/"
     >List Attributes</a></span>

@@ -1,4 +1,6 @@
 /xul
+application/vnd.mozilla.xul+xml
+200 OK
 
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>

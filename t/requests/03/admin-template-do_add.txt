@@ -1,4 +1,6 @@
 /admin/template/do_add?name=content/basement&text=%3ctable%20cellpadding%3d%220%22%20cellspacing%3d%220%22%20width%3d%2280%25%22%20border%3d%221%22%3e%0a%3ctr%3e%0a%20%20%5b%25%20PROCESS%20room%2fdefault%20room%20%3d%20%22node_0%22%20%25%5d%0a%3c%2ftr%3e%0a%3c%2ftable%3e%0a
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

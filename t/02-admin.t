@@ -33,16 +33,21 @@ BEGIN {
       my $name = $LAST_PAREN_MATCH;
       my $f = $rd.'/'.$_;
       my $fh = FileHandle->new($f) or die "Failed to open $f: $ERRNO\n";
-      local $RS = "\n\n";
       my $request = <$fh>;
       chomp($request);
-      undef $RS;
+      my $content_type = <$fh>;
+      chomp($content_type);
+      my $status = <$fh>;
+      chomp($status);
+      local $RS; undef $RS;
       my $content = <$fh>;
       $fh->close;
       $tests->{$dir.'/'.$name} =
         {
          request => $request,
          content => $content,
+         content_type => $content_type,
+         status => $status,
         };
     }
     $dh->close;
@@ -50,7 +55,7 @@ BEGIN {
   my $dir = $ENV{ZENAH_ADMIN_TEST_DIR} || 'requests';
   read_request_data($dir, \%tests);
   require Test::More;
-  import Test::More tests => (1+2*(scalar keys %tests));
+  import Test::More tests => (1+3*(scalar keys %tests));
   eval { require Test::Differences; import Test::Differences; };
   $has_test_difference = !$@;
 }
@@ -60,9 +65,10 @@ use_ok 'Catalyst::Test', 'ZenAH';
 foreach my $file (sort keys %tests) {
   my $req = $tests{$file}->{request};
   my $resp = request($req);
-  ok($resp->is_success, $req.' - is success');
-  my $got = squash_whitespace($resp->content."\n");
-  my $expected = squash_whitespace($tests{$file}->{content});
+  is($resp->status_line, $tests{$file}->{status}, $req.' - status');
+  is($resp->content_type, $tests{$file}->{content_type}, $req.' - status');
+  my $got = canonical_content($resp->content);
+  my $expected = canonical_content($tests{$file}->{content});
   if ($has_test_difference) {
     eq_or_diff $got, $expected, $file.' - content';
   } else {
@@ -70,9 +76,11 @@ foreach my $file (sort keys %tests) {
   }
 }
 
-sub squash_whitespace {
+sub canonical_content {
   my $s = $_[0];
   $s =~ s/\n\s*\n/\n/g;
   $s =~ s/^\s+//mg;
+  $s =~ s/now =\&gt; \d+/now =\&gt; 1222295230/mg;
+  $s =~ s/dt =\&gt; bless\({.*}, \&quot;DateTime\&quot;\),/dt =\&gt [snip],/msg;
   $s;
 }

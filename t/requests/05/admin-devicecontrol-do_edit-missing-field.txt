@@ -1,4 +1,6 @@
 /admin/devicecontrol/do_edit/20?name=door%2Fopen&description=Open
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

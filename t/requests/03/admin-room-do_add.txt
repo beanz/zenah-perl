@@ -1,4 +1,6 @@
 /admin/room/do_add?name=node_0&string=Node%200&description=Node%20Zero
+text/html
+200 OK
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -381,7 +383,7 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/room/add/"
     >Add</a></span>
-&nbsp;
+  &nbsp;
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/list/"
     >List Attributes</a></span>
