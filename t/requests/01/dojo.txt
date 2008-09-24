@@ -1,0 +1,351 @@
+/dojo
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+ <head>
+  <title>Zen Automated Home</title>
+  <script type="text/javascript"
+          src="http://ajax.googleapis.com/ajax/libs/dojo/1.1.1/dojo/dojo.xd.js"
+          djConfig="parseOnLoad: true, isDebug: false"></script>
+  <script type="text/javascript">
+    dojo.require("dijit.layout.LayoutContainer");
+    dojo.require("dijit.layout.ContentPane");
+    dojo.require("dijit.layout.TabContainer");
+    dojo.require("dijit.form.Button");
+    dojo.require("dojo.parser");
+    function button_action(device, action) {
+      dojo.xhrGet( {
+        url: "/ajax?args="+device+"&args="+action,
+        handleAs: "text",
+        timeout: 3000,
+        load: function(response, ioArgs) {
+          dojo.byId("status").innerHTML = response;
+          return response;
+        },
+        error: function(response, ioArgs) {
+          dojo.byId("status").innerHTML = "HTTP error: " + ioArgs.xhr.status;
+          return response;
+        },
+      });
+    }
+  </script>
+  <style type="text/css">
+    @import "http://ajax.googleapis.com/ajax/libs/dojo/1.1.1/dojo/resources/dojo.css";
+    @import "http://ajax.googleapis.com/ajax/libs/dojo/1.1.1/dijit/themes/tundra/tundra.css";
+    html, body {
+      width: 100%;	/* make the body expand to fill the visible window */
+      height: 100%;
+      padding: 0 0 0 0;
+      margin: 0 0 0 0;
+    }
+    #logo {
+    float: right;
+    }
+    h1.title {
+      padding: 0.1em;
+      margin: 0px;
+      font: Ariel;
+      font-weight: bold;
+      color: #12171c;
+    }
+  </style>
+ </head>
+ <body class="tundra">
+<div id="outer" dojotype="dijit.layout.LayoutContainer"
+     style="width: 100%; height: 100%;">
+  <div id="topBar" dojotype="dijit.layout.ContentPane"
+       layoutalign="top"
+       style="background-color: #efefef; border-bottom: 3px solid #12171c;">
+    <img id="logo" class="logo" height="40" width="40"
+         src="http://localhost/images/zenah-50.png" />
+    <h1 class="title">Zen Automated Home</h1>
+    <div id="status">&nbsp;</div>
+  </div>
+  <div id="bottomBar" dojotype="dijit.layout.ContentPane"
+       layoutalign="bottom"
+       style="background-color: #efefef; text-align: center;">
+    <div id="copyright">© 2006, 2008 Mark Hindess</div>
+  </div>
+    <div id="houseTabContainer" dojotype="dijit.layout.TabContainer"
+         layoutAlign="client">
+      <div id="upstairsTabContainer" dojotype="dijit.layout.TabContainer"
+           title="Upstairs">
+  <div id="bath_tab" dojoType="dijit.layout.ContentPane"
+     title="Bathroom">
+    <b>Light:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bath','x10/on');">
+    On
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bath','x10/off');">
+    Off
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bath','x10/bright');">
+    Bright
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bath','x10/dim');">
+    Dim
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bath','x10/full-fast');">
+    FullFast
+  </button>
+<br/>
+    <b>Blind:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('b_bath','blind/close');">
+    Close
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('b_bath','blind/open');">
+    Open
+  </button>
+<br/>
+</div>
+  <div id="bed_1_tab" dojoType="dijit.layout.ContentPane"
+     title="Bedroom 1">
+    <b>Light:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bed_1','x10/on');">
+    On
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bed_1','x10/off');">
+    Off
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bed_1','x10/bright');">
+    Bright
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bed_1','x10/dim');">
+    Dim
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bed_1','x10/full-fast');">
+    FullFast
+  </button>
+<br/>
+    <b>Reading Light:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bed_1_r','x10/on');">
+    On
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bed_1_r','x10/off');">
+    Off
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bed_1_r','x10/bright');">
+    Bright
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bed_1_r','x10/dim');">
+    Dim
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bed_1_r','x10/full-fast');">
+    FullFast
+  </button>
+<br/>
+    <b>Curtain:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('c_bed_1','curtain/open');">
+    Open
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('c_bed_1','curtain/close');">
+    Close
+  </button>
+<br/>
+    <b>Blind:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('b_bed_1','blind/close');">
+    Close
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('b_bed_1','blind/open');">
+    Open
+  </button>
+<br/>
+</div>
+      </div>
+      <div id="downstairsTabContainer" dojotype="dijit.layout.TabContainer"
+            title="Downstairs">
+  <div id="cloak_tab" dojoType="dijit.layout.ContentPane"
+     title="Cloak Room">
+    <b>Light:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_cloak','x10/on');">
+    On
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_cloak','x10/off');">
+    Off
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_cloak','x10/bright');">
+    Bright
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_cloak','x10/dim');">
+    Dim
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_cloak','x10/full-fast');">
+    FullFast
+  </button>
+<br/>
+</div>
+  <div id="kitchen_tab" dojoType="dijit.layout.ContentPane"
+     title="Kitchen">
+    <b>Spots:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_kitchen','x10/on');">
+    On
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_kitchen','x10/off');">
+    Off
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_kitchen','x10/bright');">
+    Bright
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_kitchen','x10/dim');">
+    Dim
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_kitchen','x10/full-fast');">
+    FullFast
+  </button>
+<br/>
+    <b>Under Lights:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_kitchen_under','x10/on');">
+    On
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_kitchen_under','x10/off');">
+    Off
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_kitchen_under','x10/bright');">
+    Bright
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_kitchen_under','x10/dim');">
+    Dim
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_kitchen_under','x10/full-fast');">
+    FullFast
+  </button>
+<br/>
+    <b>Curtain:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('c_kitchen','curtain/open');">
+    Open
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('c_kitchen','curtain/close');">
+    Close
+  </button>
+<br/>
+</div>
+  <div id="lounge_tab" dojoType="dijit.layout.ContentPane"
+     title="Lounge">
+    <b>Light:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_lounge','x10/on');">
+    On
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_lounge','x10/off');">
+    Off
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_lounge','x10/bright');">
+    Bright
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_lounge','x10/dim');">
+    Dim
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_lounge','x10/full-fast');">
+    FullFast
+  </button>
+<br/>
+    <b>Curtain:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('c_lounge','curtain/open');">
+    Open
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('c_lounge','curtain/close');">
+    Close
+  </button>
+<br/>
+    <b>Amplifier:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('a_amp','x10/on');">
+    On
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('a_amp','x10/off');">
+    Off
+  </button>
+<br/>
+    <b>Plasma:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('a_plasma','x10/on');">
+    On
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('a_plasma','x10/off');">
+    Off
+  </button>
+<br/>
+    <b>TV:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('a_tv','x10/on');">
+    On
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('a_tv','x10/off');">
+    Off
+  </button>
+<br/>
+</div>
+  <div id="garden_tab" dojoType="dijit.layout.ContentPane"
+     title="Garden">
+    <b>Light:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_garden','x10/on');">
+    On
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_garden','x10/off');">
+    Off
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_garden','x10/full-fast');">
+    FullFast
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_garden','x10/flash');">
+    Flash
+  </button>
+<br/>
+</div>
+      </div>
+    </div>
+    <div id="fill"></div>
+</div>
+ </body>
+</html>
