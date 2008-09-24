@@ -218,19 +218,19 @@ tr.list-row-1 {
 Filter:
     <span class="filterbutton-current">none</span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/state/.?filter=humidity"
+      href="http://localhost/admin/state?filter=humidity"
        >humidity</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/state/.?filter=light"
+      href="http://localhost/admin/state?filter=light"
        >light</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/state/.?filter=motion"
+      href="http://localhost/admin/state?filter=motion"
        >motion</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/state/.?filter=temp"
+      href="http://localhost/admin/state?filter=temp"
        >temp</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/state/.?filter=uv"
+      href="http://localhost/admin/state?filter=uv"
        >uv</a></span>
 </p>
 <p class="pagenav" id="pagenav">

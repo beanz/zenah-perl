@@ -218,16 +218,16 @@ tr.list-row-1 {
 Filter:
     <span class="filterbutton-current">none</span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/map/.?filter=motion_trigger"
+      href="http://localhost/admin/map?filter=motion_trigger"
        >motion_trigger</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/map/.?filter=phonebook"
+      href="http://localhost/admin/map?filter=phonebook"
        >phonebook</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/map/.?filter=scene_trigger"
+      href="http://localhost/admin/map?filter=scene_trigger"
        >scene_trigger</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/map/.?filter=x10lamp_trigger"
+      href="http://localhost/admin/map?filter=x10lamp_trigger"
        >x10lamp_trigger</a></span>
 </p>
 <p class="pagenav" id="pagenav">

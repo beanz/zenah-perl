@@ -217,14 +217,14 @@ tr.list-row-1 {
 <p class="filternav" id="filternav">
 Filter:
     <span class="filterbutton"><a
-      href="http://localhost/admin/map/.?filter=none"
+      href="http://localhost/admin/map?filter=none"
        >none</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/map/.?filter=motion_trigger"
+      href="http://localhost/admin/map?filter=motion_trigger"
        >motion_trigger</a></span>
     <span class="filterbutton-current">scene_trigger</span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/map/.?filter=x10lamp_trigger"
+      href="http://localhost/admin/map?filter=x10lamp_trigger"
        >x10lamp_trigger</a></span>
 </p>
 <table class="list-table">

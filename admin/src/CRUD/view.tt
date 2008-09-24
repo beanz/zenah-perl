@@ -1,0 +1,77 @@
+<table class="view-table">
+[% FOR column = column_order %]
+  <tr>
+    <th class="view-table">[% column %]</th>
+    <td class="view-table" colspan="2">[% item.to_view(column) %]</td>
+  </tr>
+[% END %]
+[% IF has_attributes %]
+  <tr>
+    <th class="view-table" colspan="3"">Attributes</th>
+  </tr>
+  [% FOR attr = item.attributes %]
+    <tr>
+      <th class="view-table">[% attr.name %]</th>
+      <td class="view-table">
+        [% attr.value %]
+      </td>
+      <td class="view-table">
+        [% crudbutton(type _ "attribute", "view", attr.id) %]
+      </td>
+    </tr>
+  [% END %]
+[% END %]
+[% IF has_controls %]
+  <tr>
+    <th class="view-table" colspan="3"">Controls</th>
+  </tr>
+  [% FOR control = item.device_controls %]
+  <tr>
+    <th class="view-table" colspan="2">[% control.name %]</th>
+    <td>
+      [% crudbutton("devicecontrol", "view", control.id) %]
+    </td>
+  </tr>
+  [% END %]
+[% END %]
+[% IF has_rooms %]
+  <tr>
+    <th class="view-table" colspan="3"">Room</th>
+  </tr>
+  [% FOR room = item.rooms %]
+  <tr>
+    <td class="view-table" colspan="2">
+      [% room.name %]
+    </td>
+    <td class="view-table">
+      [% crudbutton("room", "view", room.id) %]
+    </td>
+  </tr>
+  [% END %]
+[% END %]
+[% IF has_devices %]
+  <tr>
+    <th class="view-table" colspan="3">Devices</th>
+  </tr>
+  [% FOR device = item.devices %]
+  <tr>
+    <td class="view-table" colspan="2">
+      [% device.name %]
+    </td>
+    <td class="view-table">
+      [% crudbutton("device", "view", device.id) %]
+    </td>
+  </tr>
+  [% END %]
+[% END %]
+</table>
+[% crudbutton(type, "edit", item.id) %]
+[% crudbutton(type, "destroy", item.id) %]
+<hr/>
+[% crudbutton(type, "list", "") %]
+
+[% IF has_attributes %]
+&nbsp;
+[% crudbutton(type _ "attribute", "list", "", "List Attributes") %]
+[% crudbutton(type _ "attribute", "add", "", "Add Attribute") %]
+[% END %]

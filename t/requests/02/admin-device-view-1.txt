@@ -239,7 +239,7 @@ tr.list-row-1 {
     <td class="view-table">
       l1
     </td>
-    <td>
+    <td class="view-table">
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/view/1"
     >View</a></span>
@@ -312,6 +312,7 @@ tr.list-row-1 {
   <span class="crudbutton"><a
     href="http://localhost//admin/device/list/"
     >List</a></span>
+&nbsp;
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/list/"
     >List Attributes</a></span>

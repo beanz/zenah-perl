@@ -20,7 +20,7 @@
 Page:
   [% IF pp %]
     <span class="pagebutton"><a
-      href="[% Catalyst.uri_for(".", { page => pp, filter => f }) %]"
+      href="[% Catalyst.uri_for(type, { page => pp, filter => f }) %]"
         >&lt;&lt;</a></span>
   [% ELSE %]
     <span class="pagebutton">&lt;&lt;</span>
@@ -33,7 +33,7 @@ Page:
       <span class="pagebutton-current">[% p %]</span>
     [% ELSE %]
     <span class="pagebutton"><a
-      href="[% Catalyst.uri_for(".", { page => p, filter => f }) %]"
+      href="[% Catalyst.uri_for(type, { page => p, filter => f }) %]"
         >[% p %]</a></span>
     [% END %]
     &nbsp;
@@ -42,7 +42,7 @@ Page:
 
   [% IF np %]
     <span class="pagebutton"><a
-      href="[% Catalyst.uri_for(".", { page => np, filter => f }) %]"
+      href="[% Catalyst.uri_for(type, { page => np, filter => f }) %]"
         >&gt;&gt;</a></span>
   [% ELSE %]
     <span class="pagebutton">&gt;&gt;</span>
@@ -60,7 +60,7 @@ Filter:
     <span class="filterbutton-current">[% filter %]</span>
   [% ELSE %]
     <span class="filterbutton"><a
-      href="[% Catalyst.uri_for(".", { 'filter' => filter }) %]"
+      href="[% Catalyst.uri_for(type, { 'filter' => filter }) %]"
        >[% filter %]</a></span>
   [% END %]
 [% END %]
@@ -74,7 +74,6 @@ Filter:
 <p>[%message%]</p>
 <form action="[% base _ '/admin/' _ tlc _ '/do_add' %]" method="post">
   [% FOR column = column_order %]
-    [% SET t_c = table _ '.' _ column %]
     [% column %]<br/>
     [% table_class.to_field(column).as_XML %]<br/>
   [% END %]

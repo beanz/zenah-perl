@@ -217,70 +217,70 @@ tr.list-row-1 {
 <p class="filternav" id="filternav">
 Filter:
     <span class="filterbutton"><a
-      href="http://localhost/admin/deviceattribute/.?filter=none"
+      href="http://localhost/admin/deviceattribute?filter=none"
        >none</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/deviceattribute/.?filter=close_relay"
+      href="http://localhost/admin/deviceattribute?filter=close_relay"
        >close_relay</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/deviceattribute/.?filter=open_relay"
+      href="http://localhost/admin/deviceattribute?filter=open_relay"
        >open_relay</a></span>
     <span class="filterbutton-current">unit</span>
 </p>
 <p class="pagenav" id="pagenav">
 Page:
     <span class="pagebutton"><a
-      href="http://localhost/admin/deviceattribute/.?page=1&filter=unit"
+      href="http://localhost/admin/deviceattribute?page=1&filter=unit"
         >&lt;&lt;</a></span>
 &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/deviceattribute/.?page=1&filter=unit"
+      href="http://localhost/admin/deviceattribute?page=1&filter=unit"
         >1</a></span>
     &nbsp;
       <span class="pagebutton-current">2</span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/deviceattribute/.?page=3&filter=unit"
+      href="http://localhost/admin/deviceattribute?page=3&filter=unit"
         >3</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/deviceattribute/.?page=4&filter=unit"
+      href="http://localhost/admin/deviceattribute?page=4&filter=unit"
         >4</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/deviceattribute/.?page=5&filter=unit"
+      href="http://localhost/admin/deviceattribute?page=5&filter=unit"
         >5</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/deviceattribute/.?page=6&filter=unit"
+      href="http://localhost/admin/deviceattribute?page=6&filter=unit"
         >6</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/deviceattribute/.?page=7&filter=unit"
+      href="http://localhost/admin/deviceattribute?page=7&filter=unit"
         >7</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/deviceattribute/.?page=8&filter=unit"
+      href="http://localhost/admin/deviceattribute?page=8&filter=unit"
         >8</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/deviceattribute/.?page=9&filter=unit"
+      href="http://localhost/admin/deviceattribute?page=9&filter=unit"
         >9</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/deviceattribute/.?page=10&filter=unit"
+      href="http://localhost/admin/deviceattribute?page=10&filter=unit"
         >10</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/deviceattribute/.?page=11&filter=unit"
+      href="http://localhost/admin/deviceattribute?page=11&filter=unit"
         >11</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/deviceattribute/.?page=12&filter=unit"
+      href="http://localhost/admin/deviceattribute?page=12&filter=unit"
         >12</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/deviceattribute/.?page=3&filter=unit"
+      href="http://localhost/admin/deviceattribute?page=3&filter=unit"
         >&gt;&gt;</a></span>
 </p>
 <table class="list-table">

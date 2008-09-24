@@ -1,16 +1,26 @@
-[% WRAPPER crud_edit
-   table = 'Device' %]
-[% USE room_table = Class('ZenAH::Model::CDBI::Room') %]
-[% USE attr_table = Class('ZenAH::Model::CDBI::DeviceAttribute') %]
-[% USE control_table = Class('ZenAH::Model::CDBI::DeviceControl') %]
-<br/>
+<p>[%message%]</p>
+<form action="[% base _ '/admin/' _ type _ '/do_edit/' _ item.id %]"
+    method="post">
+  [% FOR column = column_order %]
+    [% column %]<br/>
+    [% item.to_field(column).as_XML %]<br/>
+  [% END %]
+[% IF has_rooms OR has_controls OR has_attributes %]
 <table border="0" width="100%">
 <tr>
-  <th align="left">Rooms</th>
-  <th align="left">Controls</th>
-  <th align="left">Attributes</th>
+  [% IF has_rooms %]
+    <th align="left">Rooms</th>
+  [% END %]
+  [% IF has_controls %]
+    <th align="left">Controls</th>
+  [% END %]
+  [% IF has_attributes %]
+    <th align="left">Attributes</th>
+  [% END %]
 </tr>
 <tr>
+  [% IF has_rooms %]
+  [% USE room_table = Class('ZenAH::Model::CDBI::Room') %]
   <td valign="top" align="left">
     <select name="rooms" multiple="multiple">
     [% FOR room = room_table.retrieve_all(order_by => "name") %]
@@ -23,6 +33,9 @@
     [% END %]
     </select>
   </td>
+  [% END %]
+  [% IF has_controls %]
+  [% USE control_table = Class(fulltable _ 'Control') %]
   <td valign="top" align="left">
     <select name="controls" multiple="multiple">
     [% FOR control = control_table.retrieve_all(order_by => "name") %]
@@ -37,6 +50,9 @@
     [% END %]
     </select>
   </td>
+  [% END %]
+  [% IF has_attributes %]
+  [% USE attr_table = Class(fulltable _ 'Attribute') %]
   <td valign="top" align="left">
     <select name="attrs" multiple="multiple">
     [% FOR attr = attr_table.retrieve_all(order_by => "name,value") %]
@@ -51,6 +67,11 @@
     [% END %]
     </select>
   </td>
+  [% END %]
 </tr>
 </table>
 [% END %]
+  <input type="submit" value="Edit"/>
+</form>
+<hr/>
+[% crudbutton(type, "list", "") %]

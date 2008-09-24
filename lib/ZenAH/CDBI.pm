@@ -171,6 +171,12 @@ ZenAH::CDBI::Device->set_sql(type_and_attr => q{
         device_attribute.value = ?
 });
 
+sub ZenAH::CDBI::Device::controls {
+  ZenAH::CDBI::Device::device_controls(@_);
+}
+sub ZenAH::CDBI::Device::attributes {
+  ZenAH::CDBI::Device::device_attributes(@_);
+}
 sub ZenAH::CDBI::Device::attribute {
   my $self = shift;
   my $name = shift;
@@ -326,6 +332,9 @@ sub ZenAH::CDBI::DeviceControl::to_field {
   }
 }
 
+sub ZenAH::CDBI::Room::attributes {
+  ZenAH::CDBI::Room::room_attributes(@_);
+}
 sub ZenAH::CDBI::Room::attribute {
   my $self = shift;
   my $name = shift;

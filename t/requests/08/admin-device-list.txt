@@ -217,47 +217,47 @@ tr.list-row-1 {
 <p class="filternav" id="filternav">
 Filter:
     <span class="filterbutton"><a
-      href="http://localhost/admin/device/.?filter=none"
+      href="http://localhost/admin/device?filter=none"
        >none</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/device/.?filter=Blind"
+      href="http://localhost/admin/device?filter=Blind"
        >Blind</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/device/.?filter=Curtain"
+      href="http://localhost/admin/device?filter=Curtain"
        >Curtain</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/device/.?filter=X10App"
+      href="http://localhost/admin/device?filter=X10App"
        >X10App</a></span>
     <span class="filterbutton-current">X10Lamp</span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/device/.?filter=X10Light"
+      href="http://localhost/admin/device?filter=X10Light"
        >X10Light</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/device/.?filter=X10Motion"
+      href="http://localhost/admin/device?filter=X10Motion"
        >X10Motion</a></span>
 </p>
 <p class="pagenav" id="pagenav">
 Page:
     <span class="pagebutton"><a
-      href="http://localhost/admin/device/.?page=1&filter=X10Lamp"
+      href="http://localhost/admin/device?page=1&filter=X10Lamp"
         >&lt;&lt;</a></span>
 &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/device/.?page=1&filter=X10Lamp"
+      href="http://localhost/admin/device?page=1&filter=X10Lamp"
         >1</a></span>
     &nbsp;
       <span class="pagebutton-current">2</span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/device/.?page=3&filter=X10Lamp"
+      href="http://localhost/admin/device?page=3&filter=X10Lamp"
         >3</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/device/.?page=4&filter=X10Lamp"
+      href="http://localhost/admin/device?page=4&filter=X10Lamp"
         >4</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/device/.?page=3&filter=X10Lamp"
+      href="http://localhost/admin/device?page=3&filter=X10Lamp"
         >&gt;&gt;</a></span>
 </p>
 <table class="list-table">

@@ -217,34 +217,34 @@ tr.list-row-1 {
 <p class="filternav" id="filternav">
 Filter:
     <span class="filterbutton"><a
-      href="http://localhost/admin/rule/.?filter=none"
+      href="http://localhost/admin/rule?filter=none"
        >none</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/rule/.?filter=at"
+      href="http://localhost/admin/rule?filter=at"
        >at</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/rule/.?filter=scene"
+      href="http://localhost/admin/rule?filter=scene"
        >scene</a></span>
     <span class="filterbutton-current">xpl</span>
 </p>
 <p class="pagenav" id="pagenav">
 Page:
     <span class="pagebutton"><a
-      href="http://localhost/admin/rule/.?page=1&filter=xpl"
+      href="http://localhost/admin/rule?page=1&filter=xpl"
         >&lt;&lt;</a></span>
 &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/rule/.?page=1&filter=xpl"
+      href="http://localhost/admin/rule?page=1&filter=xpl"
         >1</a></span>
     &nbsp;
       <span class="pagebutton-current">2</span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/rule/.?page=3&filter=xpl"
+      href="http://localhost/admin/rule?page=3&filter=xpl"
         >3</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/rule/.?page=3&filter=xpl"
+      href="http://localhost/admin/rule?page=3&filter=xpl"
         >&gt;&gt;</a></span>
 </p>
 <table class="list-table">

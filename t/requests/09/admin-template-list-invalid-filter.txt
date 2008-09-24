@@ -217,108 +217,108 @@ tr.list-row-1 {
 <p class="filternav" id="filternav">
 Filter:
     <span class="filterbutton"><a
-      href="http://localhost/admin/template/.?filter=none"
+      href="http://localhost/admin/template?filter=none"
        >none</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/template/.?filter=config"
+      href="http://localhost/admin/template?filter=config"
        >config</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/template/.?filter=content"
+      href="http://localhost/admin/template?filter=content"
        >content</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/template/.?filter=dojo"
+      href="http://localhost/admin/template?filter=dojo"
        >dojo</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/template/.?filter=html"
+      href="http://localhost/admin/template?filter=html"
        >html</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/template/.?filter=room"
+      href="http://localhost/admin/template?filter=room"
        >room</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/template/.?filter=site"
+      href="http://localhost/admin/template?filter=site"
        >site</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/template/.?filter=xul"
+      href="http://localhost/admin/template?filter=xul"
        >xul</a></span>
 </p>
 <p class="pagenav" id="pagenav">
 Page:
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=1&filter=invalid"
+      href="http://localhost/admin/template?page=1&filter=invalid"
         >&lt;&lt;</a></span>
 &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=1&filter=invalid"
+      href="http://localhost/admin/template?page=1&filter=invalid"
         >1</a></span>
     &nbsp;
       <span class="pagebutton-current">2</span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=3&filter=invalid"
+      href="http://localhost/admin/template?page=3&filter=invalid"
         >3</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=4&filter=invalid"
+      href="http://localhost/admin/template?page=4&filter=invalid"
         >4</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=5&filter=invalid"
+      href="http://localhost/admin/template?page=5&filter=invalid"
         >5</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=6&filter=invalid"
+      href="http://localhost/admin/template?page=6&filter=invalid"
         >6</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=7&filter=invalid"
+      href="http://localhost/admin/template?page=7&filter=invalid"
         >7</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=8&filter=invalid"
+      href="http://localhost/admin/template?page=8&filter=invalid"
         >8</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=9&filter=invalid"
+      href="http://localhost/admin/template?page=9&filter=invalid"
         >9</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=10&filter=invalid"
+      href="http://localhost/admin/template?page=10&filter=invalid"
         >10</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=11&filter=invalid"
+      href="http://localhost/admin/template?page=11&filter=invalid"
         >11</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=12&filter=invalid"
+      href="http://localhost/admin/template?page=12&filter=invalid"
         >12</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=13&filter=invalid"
+      href="http://localhost/admin/template?page=13&filter=invalid"
         >13</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=14&filter=invalid"
+      href="http://localhost/admin/template?page=14&filter=invalid"
         >14</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=15&filter=invalid"
+      href="http://localhost/admin/template?page=15&filter=invalid"
         >15</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=16&filter=invalid"
+      href="http://localhost/admin/template?page=16&filter=invalid"
         >16</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=17&filter=invalid"
+      href="http://localhost/admin/template?page=17&filter=invalid"
         >17</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=18&filter=invalid"
+      href="http://localhost/admin/template?page=18&filter=invalid"
         >18</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template/.?page=3&filter=invalid"
+      href="http://localhost/admin/template?page=3&filter=invalid"
         >&gt;&gt;</a></span>
 </p>
 <table class="list-table">

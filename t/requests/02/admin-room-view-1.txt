@@ -228,6 +228,9 @@ tr.list-row-1 {
     <td class="view-table" colspan="2">Main living area</td>
   </tr>
   <tr>
+    <th class="view-table" colspan="3"">Attributes</th>
+  </tr>
+  <tr>
     <th class="view-table">zone</th>
     <td class="view-table">
       downstairs
@@ -239,8 +242,10 @@ tr.list-row-1 {
     </td>
   </tr>
   <tr>
-    <th class="view-table" rowspan="7">Device</th>
-    <td class="view-table">
+    <th class="view-table" colspan="3">Devices</th>
+  </tr>
+  <tr>
+    <td class="view-table" colspan="2">
       l_lounge
     </td>
     <td class="view-table">
@@ -250,7 +255,7 @@ tr.list-row-1 {
     </td>
     </tr>
     <tr>
-    <td class="view-table">
+    <td class="view-table" colspan="2">
       c_lounge
     </td>
     <td class="view-table">
@@ -260,7 +265,7 @@ tr.list-row-1 {
     </td>
     </tr>
     <tr>
-    <td class="view-table">
+    <td class="view-table" colspan="2">
       m_lounge
     </td>
     <td class="view-table">
@@ -270,7 +275,7 @@ tr.list-row-1 {
     </td>
     </tr>
     <tr>
-    <td class="view-table">
+    <td class="view-table" colspan="2">
       m_lounge_l
     </td>
     <td class="view-table">
@@ -280,7 +285,7 @@ tr.list-row-1 {
     </td>
     </tr>
     <tr>
-    <td class="view-table">
+    <td class="view-table" colspan="2">
       a_amp
     </td>
     <td class="view-table">
@@ -290,7 +295,7 @@ tr.list-row-1 {
     </td>
     </tr>
     <tr>
-    <td class="view-table">
+    <td class="view-table" colspan="2">
       a_plasma
     </td>
     <td class="view-table">
@@ -300,7 +305,7 @@ tr.list-row-1 {
     </td>
     </tr>
     <tr>
-    <td class="view-table">
+    <td class="view-table" colspan="2">
       a_tv
     </td>
     <td class="view-table">
@@ -309,8 +314,6 @@ tr.list-row-1 {
     >View</a></span>
     </td>
     </tr>
-    <tr>
-  </tr>
 </table>
   <span class="crudbutton"><a
     href="http://localhost//admin/room/edit/1"
@@ -322,6 +325,7 @@ tr.list-row-1 {
   <span class="crudbutton"><a
     href="http://localhost//admin/room/list/"
     >List</a></span>
+  &nbsp;
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/list/"
     >List Attributes</a></span>

@@ -218,10 +218,10 @@ tr.list-row-1 {
 Filter:
     <span class="filterbutton-current">none</span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/roomattribute/.?filter=motion_timeout"
+      href="http://localhost/admin/roomattribute?filter=motion_timeout"
        >motion_timeout</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/roomattribute/.?filter=zone"
+      href="http://localhost/admin/roomattribute?filter=zone"
        >zone</a></span>
 </p>
 <p class="pagenav" id="pagenav">

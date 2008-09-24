@@ -218,7 +218,7 @@ tr.list-row-1 {
 Filter:
     <span class="filterbutton-current">none</span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/roomattribute/.?filter=zone"
+      href="http://localhost/admin/roomattribute?filter=zone"
        >zone</a></span>
 </p>
 <p class="pagenav" id="pagenav">

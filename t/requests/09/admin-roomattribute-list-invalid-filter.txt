@@ -217,20 +217,20 @@ tr.list-row-1 {
 <p class="filternav" id="filternav">
 Filter:
     <span class="filterbutton"><a
-      href="http://localhost/admin/roomattribute/.?filter=none"
+      href="http://localhost/admin/roomattribute?filter=none"
        >none</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/roomattribute/.?filter=zone"
+      href="http://localhost/admin/roomattribute?filter=zone"
        >zone</a></span>
 </p>
 <p class="pagenav" id="pagenav">
 Page:
     <span class="pagebutton"><a
-      href="http://localhost/admin/roomattribute/.?page=1&filter=invalid"
+      href="http://localhost/admin/roomattribute?page=1&filter=invalid"
         >&lt;&lt;</a></span>
 &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/roomattribute/.?page=1&filter=invalid"
+      href="http://localhost/admin/roomattribute?page=1&filter=invalid"
         >1</a></span>
     &nbsp;
       <span class="pagebutton-current">2</span>

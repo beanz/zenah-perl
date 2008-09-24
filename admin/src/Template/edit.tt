@@ -1,3 +1,0 @@
-[% WRAPPER crud_edit
-   table = 'Template' %]
-[% END %]

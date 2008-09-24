@@ -1,9 +1,0 @@
-[% WRAPPER crud_list
-   table = 'Room'
-   has_attributes = 1 %]
-[% END %]
-
-&nbsp;
-
-[% crudbutton("roomattribute", "list", "", "List Attributes") %]
-[% crudbutton("roomattribute", "add", "", "Add Attribute") %]

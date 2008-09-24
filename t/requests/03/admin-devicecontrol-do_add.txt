@@ -218,16 +218,16 @@ tr.list-row-1 {
 Filter:
     <span class="filterbutton-current">none</span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/devicecontrol/.?filter=blind"
+      href="http://localhost/admin/devicecontrol?filter=blind"
        >blind</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/devicecontrol/.?filter=curtain"
+      href="http://localhost/admin/devicecontrol?filter=curtain"
        >curtain</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/devicecontrol/.?filter=door"
+      href="http://localhost/admin/devicecontrol?filter=door"
        >door</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/devicecontrol/.?filter=x10"
+      href="http://localhost/admin/devicecontrol?filter=x10"
        >x10</a></span>
 </p>
 <p class="pagenav" id="pagenav">
@@ -237,11 +237,11 @@ Page:
       <span class="pagebutton-current">1</span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/devicecontrol/.?page=2&filter="
+      href="http://localhost/admin/devicecontrol?page=2&filter="
         >2</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/devicecontrol/.?page=2&filter="
+      href="http://localhost/admin/devicecontrol?page=2&filter="
         >&gt;&gt;</a></span>
 </p>
 <table class="list-table">

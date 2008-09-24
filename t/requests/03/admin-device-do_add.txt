@@ -218,25 +218,25 @@ tr.list-row-1 {
 Filter:
     <span class="filterbutton-current">none</span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/device/.?filter=Blind"
+      href="http://localhost/admin/device?filter=Blind"
        >Blind</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/device/.?filter=Curtain"
+      href="http://localhost/admin/device?filter=Curtain"
        >Curtain</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/device/.?filter=Door"
+      href="http://localhost/admin/device?filter=Door"
        >Door</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/device/.?filter=X10App"
+      href="http://localhost/admin/device?filter=X10App"
        >X10App</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/device/.?filter=X10Lamp"
+      href="http://localhost/admin/device?filter=X10Lamp"
        >X10Lamp</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/device/.?filter=X10Light"
+      href="http://localhost/admin/device?filter=X10Light"
        >X10Light</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/device/.?filter=X10Motion"
+      href="http://localhost/admin/device?filter=X10Motion"
        >X10Motion</a></span>
 </p>
 <p class="pagenav" id="pagenav">
@@ -246,11 +246,11 @@ Page:
       <span class="pagebutton-current">1</span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/device/.?page=2&filter="
+      href="http://localhost/admin/device?page=2&filter="
         >2</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/device/.?page=2&filter="
+      href="http://localhost/admin/device?page=2&filter="
         >&gt;&gt;</a></span>
 </p>
 <table class="list-table">

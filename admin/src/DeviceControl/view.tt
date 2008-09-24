@@ -1,3 +1,0 @@
-[% WRAPPER crud_view
-   table = 'DeviceControl' %]
-[% END %]

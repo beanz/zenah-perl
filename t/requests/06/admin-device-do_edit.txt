@@ -229,7 +229,6 @@ tr.list-row-1 {
     type<br/>
     <input name="type" type="text" value="Door" />
 <br/>
-<br/>
 <table border="0" width="100%">
 <tr>
   <th align="left">Rooms</th>

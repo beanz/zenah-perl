@@ -1,0 +1,48 @@
+[% filternav(filters) IF filters %]
+[% pagenav(page) %]
+<table class="list-table">
+  <tr class="list-header">
+  [% FOR column = column_order %]
+    <th>[% column %]</th>
+  [% END %]
+    [% IF has_attributes %]
+      <th>Attributes</th>
+    [% END %]
+    <th/>
+  </tr>
+  [% SET count = 0 %]
+  [% WHILE (item = items.next) %]
+    <tr class="list-row-[% count % 2 %]">
+    [% FOR column = column_order %]
+      <td>[% item.to_view(column) %]</td>
+    [% END %]
+    [% IF has_attributes %]
+      <td>
+      [% FOR attr = item.attributes %]
+        [% attr.name %]=[% attr.value %],&nbsp;
+      [% END %]
+      </td>
+    [% END %]
+      <td>
+        [% crudbutton(type, "view", item.id) %]
+        [% crudbutton(type, "edit", item.id) %]
+        <!-- [% crudbutton(type, "destroy", item.id) %] -->
+      </td>
+    </tr>
+    [% count = count + 1 %]
+  [% END %]
+</table>
+<hr/>
+[% crudbutton(type, "add", "") %]
+
+[% IF has_controls %]
+  &nbsp;
+  [% crudbutton(type _ "control", "list", "", "List Controls") %]
+  [% crudbutton(type _ "control", "add", "", "Add Control") %]
+[% END %]
+
+[% IF has_attributes %]
+  &nbsp;
+  [% crudbutton(type _ "attribute", "list", "", "List Attributes") %]
+  [% crudbutton(type _ "attribute", "add", "", "Add Attribute") %]
+[% END %]

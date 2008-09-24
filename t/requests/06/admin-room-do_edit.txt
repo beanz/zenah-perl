@@ -226,8 +226,13 @@ tr.list-row-1 {
     description<br/>
     <textarea cols="22" name="description" rows="3">Node Zero</textarea>
 <br/>
-Attributes<br/>
-<select name="attrs" multiple="multiple">
+<table border="0" width="100%">
+<tr>
+  <th align="left">Attributes</th>
+</tr>
+<tr>
+  <td valign="top" align="left">
+    <select name="attrs" multiple="multiple">
       <option selected="selected"
               value="4"
         >motion_timeout&nbsp;= &nbsp;600</option>
@@ -237,8 +242,10 @@ Attributes<br/>
         >zone&nbsp;= &nbsp;outside</option>
       <option value="1"
         >zone&nbsp;= &nbsp;upstairs</option>
-</select>
-<br/>
+    </select>
+  </td>
+</tr>
+</table>
   <input type="submit" value="Edit"/>
 </form>
 <hr/>

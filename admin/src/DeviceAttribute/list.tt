@@ -1,3 +1,0 @@
-[% WRAPPER crud_list
-   table = 'DeviceAttribute' %]
-[% END %]

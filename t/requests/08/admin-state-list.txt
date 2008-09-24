@@ -217,20 +217,20 @@ tr.list-row-1 {
 <p class="filternav" id="filternav">
 Filter:
     <span class="filterbutton"><a
-      href="http://localhost/admin/state/.?filter=none"
+      href="http://localhost/admin/state?filter=none"
        >none</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/state/.?filter=humidity"
+      href="http://localhost/admin/state?filter=humidity"
        >humidity</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/state/.?filter=light"
+      href="http://localhost/admin/state?filter=light"
        >light</a></span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/state/.?filter=motion"
+      href="http://localhost/admin/state?filter=motion"
        >motion</a></span>
     <span class="filterbutton-current">temp</span>
     <span class="filterbutton"><a
-      href="http://localhost/admin/state/.?filter=uv"
+      href="http://localhost/admin/state?filter=uv"
        >uv</a></span>
 </p>
 <table class="list-table">

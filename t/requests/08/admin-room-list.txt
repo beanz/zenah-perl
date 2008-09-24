@@ -217,21 +217,21 @@ tr.list-row-1 {
 <p class="pagenav" id="pagenav">
 Page:
     <span class="pagebutton"><a
-      href="http://localhost/admin/room/.?page=1&filter="
+      href="http://localhost/admin/room?page=1&filter="
         >&lt;&lt;</a></span>
 &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/room/.?page=1&filter="
+      href="http://localhost/admin/room?page=1&filter="
         >1</a></span>
     &nbsp;
       <span class="pagebutton-current">2</span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/room/.?page=3&filter="
+      href="http://localhost/admin/room?page=3&filter="
         >3</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/room/.?page=3&filter="
+      href="http://localhost/admin/room?page=3&filter="
         >&gt;&gt;</a></span>
 </p>
 <table class="list-table">

@@ -24,14 +24,128 @@ Admin Controller for this Catalyst based application.
 
 =cut
 
+my %crud =
+  (
+   'device' => {
+     table => 'Device',
+     column_order => [qw/name string description type/],
+     sort_order => 'name',
+     form_validation => {
+       required => [ qw/name string type/ ],
+       optional => [ qw/description/ ],
+     },
+     has_attributes => 1,
+     has_controls => 1,
+     has_rooms => 1,
+     list_rows => 15,
+   },
+   'deviceattribute' => {
+     table => 'DeviceAttribute',
+     column_order => [qw/name value/],
+     sort_order => 'name, value',
+     form_validation => {
+       required => [ qw/name value/ ],
+     },
+     filter_format => '%s%%',
+     filter_field => 'name',
+   },
+   'devicecontrol' => {
+     table => 'DeviceControl',
+     column_order => [qw/name string description definition/],
+     sort_order => 'name',
+     form_validation => {
+       required => [ qw/name string definition/ ],
+       optional => [ qw/description/ ],
+     },
+     filter_format => '%s%%',
+     filter_field => 'name',
+     filter_types_method => 'prefixes',
+     list_rows => 10,
+   },
+   'map' => {
+     table => 'Map',
+     column_order => [qw/type name value/],
+     sort_order => 'type, name',
+     form_validation => {
+       required => [ qw/type name value/ ],
+     },
+   },
+   'room' => {
+     table => 'Room',
+     column_order => [qw/name string description/],
+     sort_order => 'name',
+     form_validation => {
+       required => [ qw/name string/ ],
+       optional => [ qw/description/ ],
+     },
+     filter_types_method => 'none',
+     has_attributes => 1,
+     has_devices => 1,
+   },
+   'roomattribute' => {
+     table => 'RoomAttribute',
+     column_order => [qw/name value/],
+     sort_order => 'name, value',
+     form_validation => {
+       required => [ qw/name value/ ],
+     },
+     filter_format => '%s%%',
+     filter_field => 'name',
+   },
+   'rule' => {
+     table => 'Rule',
+     column_order => [qw/name active trig_type trig action ftime mtime/],
+     sort_order => 'name',
+     form_validation => {
+       required => [ qw/name trig_type active/ ],
+       optional => [ qw/trig action mtime/ ],
+       constraint_methods => {
+         trig_type => qr/^(?:xpl|scene|at)$/,
+         active => qr/^[01]$/,
+       },
+     },
+     filter_field => 'trig_type',
+     filter_types_method => 'triggers',
+     list_rows => 10,
+   },
+   'state' => {
+     table => 'State',
+     column_order => [qw/type name value ctime mtime/],
+     sort_order => 'name',
+     form_validation => {
+       required => [ qw/type name value ctime mtime/ ]
+     },
+   },
+   'template' => {
+     table => 'Template',
+     column_order => [qw/name text/],
+     sort_order => 'name',
+     form_validation => {
+       required => [ qw/name text/ ]
+     },
+     filter_format => '%s%%',
+     filter_field => 'name',
+     filter_types_method => 'prefixes',
+     list_rows => 5,
+   },
+  );
+
 #
 # Output a friendly welcome message
 #
 sub default : Private {
   my ( $self, $c ) = @_;
 
-#  $c->response->body( $c->welcome_message );
-  $c->forward('ZenAH::Controller::Admin::Device', 'default');
+  my ($root, $type, $view, @args) = @{$c->request->arguments};
+
+  if (exists $crud{$type}) {
+    $c->stash(type => $type);
+    $c->stash($_ => $crud{$type}->{$_}) foreach (keys %{$crud{$type}});
+    $c->stash('fulltable' => 'ZenAH::Model::CDBI::'.$crud{$type}->{table});
+    $c->forward('ZenAH::Controller::Admin::CRUD', $view||'default', @args)
+  } else {
+    $c->forward('ZenAH::Controller::Admin::Device', 'default');
+  }
 }
 
 =head1 SEE ALSO
