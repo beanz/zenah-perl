@@ -138,14 +138,16 @@ sub default : Private {
 
   my ($root, $type, $view, @args) = @{$c->request->arguments};
 
-  if (exists $crud{$type}) {
-    $c->stash(type => $type);
-    $c->stash($_ => $crud{$type}->{$_}) foreach (keys %{$crud{$type}});
-    $c->stash('fulltable' => 'ZenAH::Model::CDBI::'.$crud{$type}->{table});
-    $c->forward('ZenAH::Controller::Admin::CRUD', $view||'default', @args)
-  } else {
-    $c->forward('ZenAH::Controller::Admin::Device', 'default');
+  unless (exists $crud{$type}) {
+    $type = 'device';
+    $view = 'default';
+    @args = ();
   }
+
+  $c->stash(type => $type);
+  $c->stash($_ => $crud{$type}->{$_}) foreach (keys %{$crud{$type}});
+  $c->stash('fulltable' => 'ZenAH::Model::CDBI::'.$crud{$type}->{table});
+  $c->forward('ZenAH::Controller::Admin::CRUD', $view||'default', @args)
 }
 
 =head1 SEE ALSO
