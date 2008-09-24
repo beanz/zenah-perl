@@ -64,7 +64,11 @@ Adds a new row to the table and forwards to list.
 sub do_add : Local {
     my ( $self, $c ) = @_;
     $c->form( required => [ qw/name trig_type active/ ],
-              optional => [ qw/trig action mtime/ ]);
+              optional => [ qw/trig action mtime/ ],
+              constraint_methods => {
+                trig_type => qr/^(?:xpl|scene|at)$/,
+                active => qr/^[01]$/,
+              });
     if ($c->form->has_missing) {
         $c->stash->{message}='You have to fill in all fields. '.
         'The following are missing: <b>'.
@@ -89,7 +93,11 @@ Edits a row and forwards to edit.
 sub do_edit : Local {
     my ( $self, $c, $id ) = @_;
     $c->form( required => [ qw/name trig_type active/ ],
-              optional => [ qw/trig action mtime/ ]);
+              optional => [ qw/trig action mtime/ ],
+              constraint_methods => {
+                trig_type => qr/^(?:xpl|scene|at)$/,
+                active => qr/^[01]$/,
+              });
     if ($c->form->has_missing) {
         $c->stash->{message}='You have to fill in all fields.'.
         'the following are missing: <b>'.
