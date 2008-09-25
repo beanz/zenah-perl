@@ -21,41 +21,13 @@ BEGIN {
   import Test::More tests => scalar @modules;
 }
 
-my %has;
-eval { require DateTime::Event::Cron; };
-$has{Cron}++ unless ($@);
-eval { require Date::Parse; };
-$has{Parse}++ unless ($@);
-eval { require DateTime::Event::Sunrise; };
-$has{Sunrise}++ unless ($@);
-eval { require DateTime::Event::Recurrence; };
-$has{Recurrence}++ unless ($@);
-eval { require Gtk2; };
-$has{Gtk2}++ unless ($@);
-eval { require SMS::Send; };
-$has{SMS}++ unless ($@);
-
-
 foreach my $m (@modules) {
  SKIP: {
-    skip 'no database defined, see xPL::SQL', 1
-      if ($m eq 'xPL::SQL' && !exists $ENV{'XPL_DB_CONFIG'});
-    skip 'Date::Parse not available', 1
-      if ($m eq 'xPL::RF::Oregon' && !$has{Parse});
-    skip 'DateTime::Event::Cron not available', 1
-      if ($m eq 'xPL::Timer::cron' && !$has{Cron});
-    skip 'DateTime::Event::Sunrise not available', 1
-      if ($m eq 'xPL::Timer::sunrise' && !$has{Sunrise});
-    skip 'DateTime::Event::Sunrise not available', 1
-      if ($m eq 'xPL::Client::DawnDusk' && !$has{Sunrise});
-    skip 'DateTime::Event::Sunrise not available', 1
-      if ($m eq 'xPL::Timer::sunset' && !$has{Sunrise});
-    skip 'DateTime::Event::Recurrence not available', 1
-      if ($m eq 'xPL::Timer::recurrence' && !$has{Recurrence});
-    skip 'Gtk2 not available', 1 if ($m eq 'xPL::Gtk2Client' && !$has{Gtk2});
-    skip 'SMS::Send not available', 1
-      if ($m =~ /^SMS::Send::/ && !$has{SMS});
-
-    require_ok($m);
+    if ($m eq 'ZenAH' or $m eq 'ZenAH::View::Site') {
+      require_ok('Catalyst');
+      import Catalyst $m;
+    } else {
+      require_ok($m);
+    }
   }
 }
