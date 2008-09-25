@@ -352,13 +352,13 @@ sub set_mtime {
 
 sub set_mtime_sometimes {
   my @changed = $_[0]->is_changed();
-  my $ftime = scalar @changed ==1 && $changed[0] eq "ftime";
-  if (@changed && !$ftime) {
+  if (@changed && $changed[0] ne 'ftime') {
     $_[0]->_attribute_set(which_mtime() => time);
   }
 }
 sub set_time {
-  $_[0]->_attribute_set(which_mtime() => time) unless ($_[0]->mtime);
+  $_[0]->_attribute_set(which_mtime() => time)
+    unless ($_[0]->_attrs('mtime'));
 }
 ZenAH::CDBI::Rule->add_trigger(before_create => \&set_time);
 ZenAH::CDBI::Rule->add_trigger(before_update => \&set_mtime_sometimes);
