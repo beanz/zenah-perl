@@ -76,15 +76,8 @@ sub new {
            } ZenAH::CDBI::Map->search(type => $_[0]);
      },
     );
-  $self->{_map} = \%m;
-  $engine->add_stash(variable => "map",
-                     callback => sub { $self->stash(@_); });
+  $engine->add_stash(variable => "map", callback => sub { \%m });
   return $self;
-}
-
-sub stash {
-  my $self = shift;
-  return $self->{_map};
 }
 
 # Autoload methods go after =cut, and are processed by the autosplit program.
