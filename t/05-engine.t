@@ -122,6 +122,8 @@ debug
 error
 scene
 xpl
+device
+device invalid
 sleep 1
 });
 $cuckoo->update();
@@ -146,6 +148,8 @@ ZenAH::Engine->action_debug: requires 'spec' parameter.
 ZenAH::Engine->action_error: requires 'spec' parameter.
 ZenAH::Engine->set: requires 'spec' parameter.
 ZenAH::Engine->xpl_send: requires 'spec' parameter.
+ZenAH::Engine->action_device: requires 'spec' parameter.
+ZenAH::Engine->action_device: device, invalid, not found.
 ZenAH::Engine->action_sleep: sleep for nothing?},
    'ran modified rule');
 

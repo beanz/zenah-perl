@@ -98,7 +98,7 @@ sub new {
 sub action_device {
   my $self = shift;
   my %p = @_;
-  exists $p{spec} or return $self->{_engine}->ouch("requires 'spec' parameter");
+  $p{spec} or return $self->{_engine}->ouch("requires 'spec' parameter");
   my ($device_name, @args) = split /\s+/, $p{spec};
   my $device = ZenAH::CDBI::Device->search(name => $device_name)->first or
     return $self->{_engine}->ouch("device, $device_name, not found");
