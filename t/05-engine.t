@@ -7,7 +7,7 @@ use DirHandle;
 use English qw/-no_match_vars/;
 use FileHandle;
 use POSIX qw/strftime/;
-use Test::More tests => 68;
+use Test::More tests => 69;
 use t::Helpers qw/test_error test_warn/;
 
 END {
@@ -616,6 +616,24 @@ my $new_mtime = $state->mtime;
 ok($new_mtime > $mtime, 'state.set stash - mtime changed');
 my $new_ctime = $state->ctime;
 is($new_ctime, $ctime, 'state.set stash - ctime unchanged');
+
+# test rrds
+ZenAH::CDBI::Map->create({
+                          type => 'engine_config',
+                          name => 'rrd_dir',
+                          value => 't/rrd',
+                         });
+ZenAH::CDBI::Map->create({
+                          type => 'rrd_type',
+                          name => 'uv',
+                          value => 'uv,1,GAUGE,0,40',
+                         });
+$engine->reset_timer(update_rrd_files => time - 300);
+$engine->main_loop(1);
+ok(-f 't/rrd/uv138.55/uv.rrd', 'uv.rrd created');
+unlink 't/rrd/uv138.55/uv.rrd';
+rmdir 't/rrd/uv138.55';
+rmdir 't/rrd';
 
 # Some error/warning cases not already covered
 
