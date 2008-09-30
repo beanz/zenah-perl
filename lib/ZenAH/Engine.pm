@@ -150,7 +150,7 @@ sub read_rule {
   }
 
   unless ($self->exists_trigger($type)) {
-    warn "unknown trigger type: $type ",$rule->name, " ",$rule->trig,"\n";
+    warn "unknown trigger type: $type ",$rule->name, "\n";
     return;
   }
   my $trig = $rule->trig;
@@ -234,7 +234,6 @@ sub trigger_rule {
   my $action = $rule->action;
   $rule->ftime(time);
   $rule->update();
-  print STDERR "Triggering ", $rule->name, "\n";
   return $self->evaluate_action($action, @_);
 }
 
@@ -315,7 +314,7 @@ sub action_error {
   my $self = shift;
   my %p = @_;
   exists $p{spec} or return $self->ouch("requires 'spec' parameter");
-  print STDERR 'Error: ',$p{spec}, "\n";
+  warn 'Error: ',$p{spec}, "\n";
   return 1;
 }
 
@@ -325,12 +324,12 @@ sub action_debug {
   exists $p{spec} or return $self->ouch("requires 'spec' parameter");
   my $line = ('-'x78)."\n";
   if ($p{spec} eq '...') {
-    print STDERR $line, $p{remaining},"\n", $line;
+    warn $line, $p{remaining},"\n", $line;
     return -1; # skip remaining actions
   } elsif ($p{spec} eq "stash") {
-    print STDERR $line, Data::Dumper->Dump([$p{stash}],[qw/stash/]),"\n", $line;
+    warn $line, Data::Dumper->Dump([$p{stash}],[qw/stash/]),"\n", $line;
   } else {
-    print STDERR $p{spec}, "\n";
+    warn $p{spec}, "\n";
   }
   return 1;
 }
