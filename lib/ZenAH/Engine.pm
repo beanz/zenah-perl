@@ -125,9 +125,9 @@ sub read_rule {
   unless ($rule->active) {
     if ($self->exists_rule($rule)) {
       my $old_type = $self->rule_type($rule);
-      $self->trigger_remove_callback($old_type)->(rule => $rule);
+      $self->trigger_remove_callback($old_type)->($rule);
       $self->remove_rule($rule);
-      print STDERR 'Removed rule: ', $rule->name, "\n";
+      print STDERR 'Removed disabled rule: ', $rule->name, "\n";
     }
     return;
   }
@@ -135,12 +135,11 @@ sub read_rule {
   my $mtime = $rule->mtime;
   if ($self->exists_rule($rule)) {
     my $old_mtime = $self->rule_mtime($rule);
-    return unless (defined $mtime &&
-                   (!defined $old_mtime || $mtime->epoch > $old_mtime->epoch));
+    return unless ($mtime > $old_mtime);
     my $old_type = $self->rule_type($rule);
-    $self->trigger_remove_callback($old_type)->(rule => $rule);
+    $self->trigger_remove_callback($old_type)->($rule);
     $self->remove_rule($rule);
-    print STDERR 'Removed rule: ', $rule->name, "\n";
+    print STDERR 'Removed changed rule: ', $rule->name, "\n";
   }
 
   my $type = $rule->trig_type;
@@ -159,7 +158,7 @@ sub read_rule {
 
   $self->add_rule($rule, { mtime => $rule->mtime(), type => $type });
 
-  $self->trigger_add_callback($type)->(rule => $rule, trigger => $trig);
+  $self->trigger_add_callback($type)->($rule);
 
   return 1;
 }
@@ -205,10 +204,10 @@ sub run_action {
   my $self = shift;
   my $action = shift;
   my $stash = shift || {};
-  my $command;
   my $remaining = $action;
-  while ($remaining &&
-         (($command, $remaining) = split(/\r?\n+/, $remaining, 2))) {
+  while ($remaining) {
+    my $command;
+    ($command, $remaining) = split(/\r?\n+/, $remaining, 2);
     next if ($command =~ /^\s*$/ or $command =~ /^\s*#/);
     $command =~ s/^\s+//;
     my ($type, $spec) = split(/\s+/, $command, 2);
@@ -216,7 +215,8 @@ sub run_action {
       warn "no action defined for '$type'";
       next;
     }
-    print STDERR "Action: ", $type, " ", $spec, "\n";
+    print STDERR "Action: ", $type, " ", (defined $spec ? $spec : 'undef'),
+      "\n";
     my $res = $self->action_callback($type)->(spec => $spec,
                                               remaining => $remaining,
                                               stash => $stash);
@@ -235,16 +235,6 @@ sub trigger_rule {
   $rule->ftime(time);
   $rule->update();
   return $self->evaluate_action($action, @_);
-}
-
-sub trigger_rule_by_id {
-  my $self = shift;
-  my $id = shift;
-  my $rule = ZenAH::CDBI::Rule->retrieve($id);
-  unless ($rule) {
-    return $self->ouch('no rule with id: '.$id);
-  }
-  return $self->trigger_rule($rule, @_);
 }
 
 sub trigger_rule_by_name {
@@ -273,7 +263,7 @@ sub process_template {
 sub action_enable_rule {
   my $self = shift;
   my %p = @_;
-  exists $p{spec} or return $self->ouch("requires 'spec' parameter");
+  $p{spec} or return $self->ouch("requires 'spec' parameter");
   my $name = $p{spec};
   my $rule = ZenAH::CDBI::Rule->search(name => $name)->first;
   unless ($rule) {
@@ -293,7 +283,7 @@ sub enable_rule {
 sub action_disable_rule {
   my $self = shift;
   my %p = @_;
-  exists $p{spec} or return $self->ouch("requires 'spec' parameter");
+  $p{spec} or return $self->ouch("requires 'spec' parameter");
   my $name = $p{spec};
   my $rule = ZenAH::CDBI::Rule->search(name => $name)->first;
   unless ($rule) {
@@ -313,7 +303,7 @@ sub disable_rule {
 sub action_error {
   my $self = shift;
   my %p = @_;
-  exists $p{spec} or return $self->ouch("requires 'spec' parameter");
+  $p{spec} or return $self->ouch("requires 'spec' parameter");
   warn 'Error: ',$p{spec}, "\n";
   return 1;
 }
@@ -321,7 +311,7 @@ sub action_error {
 sub action_debug {
   my $self = shift;
   my %p = @_;
-  exists $p{spec} or return $self->ouch("requires 'spec' parameter");
+  defined $p{spec} or return $self->ouch("requires 'spec' parameter");
   my $line = ('-'x78)."\n";
   if ($p{spec} eq '...') {
     warn $line, $p{remaining},"\n", $line;

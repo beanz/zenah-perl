@@ -44,7 +44,6 @@ our $VERSION = qw/$Revision$/[1];
 
 sub new {
   my $pkg = shift;
-  $pkg = ref($pkg) if (ref($pkg));
   my $self = {};
   bless $self, $pkg;
 

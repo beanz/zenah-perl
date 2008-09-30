@@ -45,7 +45,6 @@ our $VERSION = qw/$Revision$/[1];
 
 sub new {
   my $pkg = shift;
-  $pkg = ref($pkg) if (ref($pkg));
   my $self = {};
   bless $self, $pkg;
 
@@ -74,41 +73,28 @@ sub new {
 }
 
 sub add {
-  my $self = shift;
-  my %p = @_;
-  exists $p{rule} or $self->argh("requires 'rule' parameter");
-  exists $p{trigger} or $self->argh("requires 'trigger' parameter");
-  my $rule = $p{rule}->id;
-  my $trigger = $p{trigger};
-
-  $self->{_engine}->add_timer(id => 'trigger-for-rule-'.$rule,
-                              timeout => $trigger,
-                              callback => sub { return $self->fire($rule, @_) },
+  my ($self, $rule) = @_;
+  return $self->{_engine}->add_timer(id => 'trigger-for-rule-'.$rule,
+                                     timeout => $rule->trig,
+                                     callback => sub {
+                                       return
+                                         $self->{_engine}->trigger_rule($rule);
+                                     },
                               );
-  return 1;
 }
 
 sub remove {
-  my $self = shift;
-  my %p = @_;
-  exists $p{rule} or $self->argh("requires 'rule' parameter");
-  $self->{_engine}->remove_timer('trigger-for-rule-'.$p{rule});
-  return 1;
-}
-
-sub fire {
-  my $self = shift;
-  my $rule = shift;
-  $self->{_engine}->trigger_rule_by_id($rule);
-  return 1;
+  my ($self, $rule) = @_;
+  return $self->{_engine}->remove_timer('trigger-for-rule-'.$rule);
 }
 
 sub action_sleep {
   my $self = shift;
   my %p = @_;
-  exists $p{spec} or return $self->ouch("requires 'spec' parameter");
-  my $timeout = $p{spec};
-  my $remaining = $p{remaining};
+  my $timeout =
+    $p{spec} or return $self->{_engine}->ouch("requires 'spec' parameter");
+  my $remaining =
+    $p{remaining} or return $self->{_engine}->ouch("sleep for nothing?");
   $self->{_engine}->add_timer(id => '~tmp~sleep~'.Time::HiRes::time.'~'.rand,
                               timeout => $timeout,
                               callback => sub {

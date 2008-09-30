@@ -44,7 +44,6 @@ our $VERSION = qw/$Revision$/[1];
 
 sub new {
   my $pkg = shift;
-  $pkg = ref($pkg) if (ref($pkg));
   my $self = {};
   bless $self, $pkg;
 
@@ -99,10 +98,10 @@ sub new {
 sub action_device {
   my $self = shift;
   my %p = @_;
-  exists $p{spec} or return $self->ouch("requires 'spec' parameter");
+  exists $p{spec} or return $self->{_engine}->ouch("requires 'spec' parameter");
   my ($device_name, @args) = split /\s+/, $p{spec};
   my $device = ZenAH::CDBI::Device->search(name => $device_name)->first or
-    return $self->ouch("device, $device_name, not found");
+    return $self->{_engine}->ouch("device, $device_name, not found");
   return $self->{_engine}->run_action($device->action(@args));
 }
 

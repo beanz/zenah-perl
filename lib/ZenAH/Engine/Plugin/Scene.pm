@@ -44,7 +44,6 @@ our $VERSION = qw/$Revision$/[1];
 
 sub new {
   my $pkg = shift;
-  $pkg = ref($pkg) if (ref($pkg));
   my $self = {};
   bless $self, $pkg;
 
@@ -58,8 +57,7 @@ sub new {
 sub set {
   my $self = shift;
   my %p = @_;
-  exists $p{spec} or return $self->ouch("requires 'spec' parameter");
-  my $spec = $p{spec};
+  my $spec = $p{spec} or return $self->{_engine}->ouch("requires 'spec' parameter");
   my @args = simple_tokenizer($spec);
   my %stash;
   my $name;

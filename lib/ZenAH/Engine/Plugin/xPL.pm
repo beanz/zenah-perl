@@ -45,7 +45,6 @@ our $VERSION = qw/$Revision$/[1];
 
 sub new {
   my $pkg = shift;
-  $pkg = ref($pkg) if (ref($pkg));
   my $self = {};
   bless $self, $pkg;
 
@@ -62,14 +61,8 @@ sub new {
 }
 
 sub add {
-  my $self = shift;
-  my %p = @_;
-  exists $p{rule} or $self->argh("requires 'rule' parameter");
-  exists $p{trigger} or $self->argh("requires 'trigger' parameter");
-  my $rule = $p{rule}->id;
-  my $trigger = $p{trigger};
-
-  my %filter = simple_tokenizer($trigger);
+  my ($self, $rule) = @_;
+  my %filter = simple_tokenizer($rule->trig);
   if (exists $filter{class} && $filter{class} =~ /^(\w+)\.(\w+)$/) {
     $filter{class} = $1;
     $filter{class_type} = $2;
@@ -86,7 +79,7 @@ sub add {
         sub {
           my $res;
           eval { $res = ZenAH::CDBI::Device->$lookup(@arg, $_[0]) };
-          warn $p{rule}." lookup error: $@\n" if ($@);
+          warn $rule->name." lookup error: $@\n" if ($@);
           return $res;
         };
     }
@@ -103,10 +96,8 @@ sub add {
 }
 
 sub remove {
-  my $self = shift;
-  my %p = @_;
-  exists $p{rule} or $self->argh("requires 'rule' parameter");
-  $self->{_engine}->remove_xpl_callback('trigger-for-rule-'.$p{rule});
+  my ($self, $rule) = @_;
+  $self->{_engine}->remove_xpl_callback('trigger-for-rule-'.$rule);
   return 1;
 }
 
@@ -114,19 +105,18 @@ sub fire {
   my $self = shift;
   my $rule = shift;
   my %p = @_;
-  $self->{_engine}->trigger_rule_by_id($rule, { xpl => $p{message} });
+  $self->{_engine}->trigger_rule($rule, { xpl => $p{message} });
   return 1;
 }
 
 sub xpl_send {
   my $self = shift;
   my %p = @_;
-  exists $p{spec} or return $self->ouch("requires 'spec' parameter");
-  my $spec = $p{spec};
+  my $spec = $p{spec} or return $self->{_engine}->ouch("requires 'spec' parameter");
   eval {
     $self->{_engine}->send_from_string($spec);
   };
-  $self->ouch($@) if ($@);
+  $self->{_engine}->ouch($@) if ($@);
   return 1;
 }
 
