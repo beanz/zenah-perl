@@ -71,13 +71,21 @@ $Template::Stash::SCALAR_OPS->{int} = sub { int $_[0] };
 
 # Preloaded methods go here.
 
+=head2 C<new(%params)>
+
+The constructor creates a new L<ZenAH::Engine> object.  The
+constructor takes a parameter hash as arguments.  Valid parameters in
+the hash are inherited directly from the L<xPL::Client> constructor.
+
+It returns a blessed reference when successful or undef otherwise.
+
+=cut
+
 sub new {
   my $pkg = shift;
   $pkg = ref($pkg) if (ref($pkg));
 
   my $self = $pkg->SUPER::new(vendor_id => 'bnz', device_id => 'zenah', @_);
-  my %p = @_;
-  $self->{_verbose} = $p{verbose};
 
   $self->init_triggers();
   $self->init_actions();
@@ -107,10 +115,23 @@ sub new {
   return $self;
 }
 
+=head2 C<info(@message)>
+
+Helper method to output informational messages if verbose mode is enabled.
+
+=cut
+
 sub info {
   my $self = shift;
-  print @_ if ($self->{_verbose});
+  print @_ if ($self->verbose);
 }
+
+=head2 C<read_rules()>
+
+Method to (re)read the rule from the database.  It is called
+automatically on startup and again every 120 seconds.
+
+=cut
 
 sub read_rules {
   my $self = shift;
@@ -125,6 +146,12 @@ sub read_rules {
 
   return 1;
 }
+
+=head2 C<read_rule($rule)>
+
+Method to (re)read a rule from the database.
+
+=cut
 
 sub read_rule {
   my $self = shift;
@@ -171,6 +198,33 @@ sub read_rule {
   return 1;
 }
 
+=head2 C<add_trigger(%params)>
+
+This method is used by plugins to register a new type of trigger.
+Valid parameters in the hash are:
+
+=over
+
+=item type
+
+The name of the trigger type.
+
+=item add_callback
+
+The code reference to call when a new rule with this trigger type is
+added to the database.  This is optional the default is an empty
+sub.
+
+=item remove_callback
+
+The code reference to call when an old rule with this trigger type is
+removed from the database.  This is optional the default is an empty
+sub.
+
+=back
+
+=cut
+
 sub add_trigger {
   my $self = shift;
   my %p = @_;
@@ -183,6 +237,25 @@ sub add_trigger {
   return $self->add_item('trigger', $p{type}, \%p);
 }
 
+=head2 C<add_action(%params)>
+
+This method is used by plugins to register a new type of action.
+Valid parameters in the hash are those used by :
+
+=over
+
+=item type
+
+The name of the action type.
+
+=item callback
+
+The code reference to call when this action is invoked.
+
+=back
+
+=cut
+
 sub add_action {
   my $self = shift;
   my %p = @_;
@@ -190,6 +263,26 @@ sub add_action {
   $self->info("Adding action type: ", $p{type}, "\n");
   return $self->add_callback_item('action', $p{type}, \%p);
 }
+
+=head2 C<add_stash(%params)>
+
+This method is used by plugins to register a new type of stash to be
+added to the template processing.  Valid parameters in the hash are
+those used by :
+
+=over
+
+=item type
+
+The name of the stash type.
+
+=item callback
+
+The code reference to call when this stash element is accessed.
+
+=back
+
+=cut
 
 sub add_stash {
   my $self = shift;
@@ -199,6 +292,13 @@ sub add_stash {
   return $self->add_callback_item('stash', $p{variable}, \%p);
 }
 
+=head2 C<evaluate_action($template_string, $template_stash)>
+
+This method is used to proces a template (with the given stash)
+and run the resulting actions.
+
+=cut
+
 sub evaluate_action {
   my $self = shift;
   my $action = shift;
@@ -207,6 +307,13 @@ sub evaluate_action {
   $processed =~ s/^\s*$//mg;
   return $self->run_action($processed, $stash);
 }
+
+=head2 C<run_action($action_string, $template_stash)>
+
+This method is executes a list of actions after it has been prcessed as
+a template.
+
+=cut
 
 sub run_action {
   my $self = shift;
@@ -235,6 +342,13 @@ sub run_action {
   return 1;
 }
 
+=head2 C<trigger_rule($rule)>
+
+This method is executes the actions of a given rule.  It also updates
+the "last fired" time, C<ftime>, field in the database.
+
+=cut
+
 sub trigger_rule {
   my $self = shift;
   my $rule = shift;
@@ -243,6 +357,13 @@ sub trigger_rule {
   $rule->update();
   return $self->evaluate_action($action, @_);
 }
+
+=head2 C<trigger_rule_by_name($rule)>
+
+This method is executes the actions of a named rule.  It also updates
+the "last fired" time, C<ftime>, field in the database.
+
+=cut
 
 sub trigger_rule_by_name {
   my $self = shift;
@@ -253,6 +374,14 @@ sub trigger_rule_by_name {
   }
   return $self->trigger_rule($rule, @_);
 }
+
+=head2 C<process_template($template_string, $template_stash)>
+
+This method is applied the L<Template::Toolkit> to the given string
+with the combination of the supplied stash and the "system" stash
+that is polulated by the callbacks registered by the plugins.
+
+=cut
 
 sub process_template {
   my $self = shift;
@@ -267,6 +396,14 @@ sub process_template {
   return $output;
 }
 
+=head2 C<action_enable_rule(%params)>
+
+This method is registered as a callback for the 'enable' action.  It
+takes the name of a rule as the argument to the action and marks this
+rule as enabled in the database.
+
+=cut
+
 sub action_enable_rule {
   my $self = shift;
   my %p = @_;
@@ -279,6 +416,12 @@ sub action_enable_rule {
   return $self->enable_rule($rule);
 }
 
+=head2 C<enable_rule($rule)>
+
+This method marks the given rule as enabled in the database.
+
+=cut
+
 sub enable_rule {
   my $self = shift;
   my $rule = shift;
@@ -286,6 +429,14 @@ sub enable_rule {
   $rule->update();
   return $self->read_rule($rule);
 }
+
+=head2 C<action_disable_rule(%params)>
+
+This method is registered as a callback for the 'disable' action.  It
+takes the name of a rule as the argument to the action and marks this
+rule as disabled in the database.
+
+=cut
 
 sub action_disable_rule {
   my $self = shift;
@@ -299,6 +450,12 @@ sub action_disable_rule {
   return $self->disable_rule($rule);
 }
 
+=head2 C<disable_rule($rule)>
+
+This method marks the given rule as disabled in the database.
+
+=cut
+
 sub disable_rule {
   my $self = shift;
   my $rule = shift;
@@ -307,6 +464,13 @@ sub disable_rule {
   return $self->read_rule($rule);
 }
 
+=head2 C<action_error(%params)>
+
+This method is registered as a callback for the 'error' action.  It
+takes an error string as arguments.
+
+=cut
+
 sub action_error {
   my $self = shift;
   my %p = @_;
@@ -314,6 +478,30 @@ sub action_error {
   warn 'Error: ',$p{spec}, "\n";
   return 1;
 }
+
+=head2 C<action_debug(%params)>
+
+This method is registered as a callback for the 'debug' action.  It
+takes either:
+
+=over
+
+=item the word 'stash'
+
+In which case the contents of the stash is dumped to C<STDERR>.
+
+=item the string '...'
+
+In which case the remaining unprocessed rules are printed to C<STDERR>
+and E<not> executed.
+
+=item any string
+
+In which case the string is printed on C<STDERR>.
+
+=back
+
+=cut
 
 sub action_debug {
   my $self = shift;
@@ -330,6 +518,15 @@ sub action_debug {
   }
   return 1;
 }
+
+=head2 C<zenah_config($key)>
+
+This method is used to lookup configuration items for the
+L<ZenAH::Engine> from the database.  These configuration items are
+stored in the L<ZenAH::CDBI::Map> table with a 'class' value of
+'engine_config'.
+
+=cut
 
 sub zenah_config {
   my $self = shift;
