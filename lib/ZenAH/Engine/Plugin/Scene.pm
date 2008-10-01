@@ -42,6 +42,27 @@ our $VERSION = qw/$Revision$/[1];
 
 # Preloaded methods go here.
 
+=head2 C<new(%params)>
+
+The constructor creates a new plugin object.  The constructor takes a
+parameter hash as arguments.  Valid parameters in the hash are:
+
+=over
+
+=item engine
+
+This is a reference to the engine that is instantiating the plugin.
+
+=back
+
+It returns a blessed reference when successful or undef otherwise.
+
+This plugin registers a 'scene' trigger - that does nothing since
+scenes are always triggered by running the 'scene' action - and a
+'scene' action, see L<action_scene()> below.
+
+=cut
+
 sub new {
   my $pkg = shift;
   my $self = {};
@@ -50,14 +71,28 @@ sub new {
   my %p = @_;
   my $engine = $self->{_engine} = $p{engine};
   $engine->add_trigger(type => "scene"); # no-op
-  $engine->add_action(type => "scene", callback => sub { $self->set(@_) });
+  $engine->add_action(type => "scene",
+                      callback => sub { $self->action_scene(@_) });
   return $self;
 }
 
-sub set {
+=head2 C<action_scene(%params)>
+
+This method is registered as a callback for the 'scene' action.  If it
+is passed an odd number of arguments then the first is assumed to be
+the name of the 'scene' rule to execute and any remaining arguments
+are assumed to be a hash of parameters to pass to the action template
+for the rule, otherwise the arguments are assumed to be a hash of
+parameters to pass to the action template with 'name' key/value with
+the name of the rule to execute.
+
+=cut
+
+sub action_scene {
   my $self = shift;
   my %p = @_;
-  my $spec = $p{spec} or return $self->{_engine}->ouch("requires 'spec' parameter");
+  my $spec = $p{spec} or
+    return $self->{_engine}->ouch("requires 'spec' parameter");
   my @args = simple_tokenizer($spec);
   my %stash;
   my $name;

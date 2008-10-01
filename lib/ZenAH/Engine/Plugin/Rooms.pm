@@ -42,6 +42,43 @@ our $VERSION = qw/$Revision$/[1];
 
 # Preloaded methods go here.
 
+=head2 C<new(%params)>
+
+The constructor creates a new plugin object.  The constructor takes a
+parameter hash as arguments.  Valid parameters in the hash are:
+
+=over
+
+=item engine
+
+This is a reference to the engine that is instantiating the plugin.
+
+=back
+
+It returns a blessed reference when successful or undef otherwise.
+
+This plugin registers a 'room' stash with the following operations:
+
+=over
+
+=item C<all()>
+
+Returns a list of all room objects.
+
+=item C<by_attr(name, value)>
+
+Returns the room object (first if there are more than one) which
+has the given attribute name and value.
+
+=item C<by_attr_list(name, value>
+
+Returns a list of room objects which have the given attribute name and
+value.
+
+=back
+
+=cut
+
 sub new {
   my $pkg = shift;
   my $self = {};

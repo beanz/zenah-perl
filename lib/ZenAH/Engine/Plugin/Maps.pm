@@ -42,6 +42,47 @@ our $VERSION = qw/$Revision$/[1];
 
 # Preloaded methods go here.
 
+=head2 C<new(%params)>
+
+The constructor creates a new plugin object.  The constructor takes a
+parameter hash as arguments.  Valid parameters in the hash are:
+
+=over
+
+=item engine
+
+This is a reference to the engine that is instantiating the plugin.
+
+=back
+
+It returns a blessed reference when successful or undef otherwise.
+
+This plugin registers a 'map' stash with the following operations:
+
+=over
+
+=item C<lookup(type, name>
+
+Returns the value of the specified map entry or undef if no such entry
+exists.
+
+=item C<reverse(type, value)>
+
+Returns the name of the specified map entry or undef if no such entry
+exists.
+
+=item C<lookup(type, name>
+
+Returns a list of values of any matching map entries.
+
+=item C<reverse(type, value)>
+
+Returns a list of names of any matching map entries.
+
+=back
+
+=cut
+
 sub new {
   my $pkg = shift;
   my $self = {};

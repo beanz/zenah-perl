@@ -42,6 +42,62 @@ our $VERSION = qw/$Revision$/[1];
 
 # Preloaded methods go here.
 
+=head2 C<new(%params)>
+
+The constructor creates a new plugin object.  The constructor takes a
+parameter hash as arguments.  Valid parameters in the hash are:
+
+=over
+
+=item engine
+
+This is a reference to the engine that is instantiating the plugin.
+
+=back
+
+It returns a blessed reference when successful or undef otherwise.
+
+This plugin registers a 'device' action, see L<action_device()> below,
+and a 'device' stash with the following operations:
+
+=over
+
+=item C<all>
+
+Returns a list of all device objects.
+
+=item C<by_name(device_name)>
+
+Returns the device object for the named device.
+
+=item C<by_type_list(type)>
+
+Returns a list of device objects of the given type.
+
+=item C<by_attr(attribute_name, attribute_value)>
+
+Returns the device object (first if there are more than one) which
+has the given attribute name and value.
+
+=item C<by_type_and_attr(type, attribute_name, attribute_value)>
+
+Returns the device object (first if there are more than one) of the
+given type which has the given attribute name and value.
+
+=item C<by_attr_list(attribute_name, attribute_value)>
+
+Returns a list of device objects which have the given attribute name
+and value.
+
+=item C<by_attr_name_list(attribute_name)>
+
+Returns a list of device objects which have an atrribute of the
+specified name.
+
+=back
+
+=cut
+
 sub new {
   my $pkg = shift;
   my $self = {};
@@ -94,6 +150,14 @@ sub new {
                       callback => sub { $self->action_device(@_); });
   return $self;
 }
+
+=head2 C<action_device(%params)>
+
+This method is registered as a callback for the 'device' action.  It
+takes the name of a device and the name of a control to apply to the
+device as arguments.
+
+=cut
 
 sub action_device {
   my $self = shift;
