@@ -1,4 +1,4 @@
-/ajax?fname=device_func&args=l_bath&args=x10/on
+/ajax?fname=device_func&args=l_bath&args=x10%2Fon
 text/html
 200 OK
 

@@ -76,6 +76,9 @@ sub new {
   $pkg = ref($pkg) if (ref($pkg));
 
   my $self = $pkg->SUPER::new(vendor_id => 'bnz', device_id => 'zenah', @_);
+  my %p = @_;
+  $self->{_verbose} = $p{verbose};
+
   $self->init_triggers();
   $self->init_actions();
   $self->init_stashs();
@@ -100,8 +103,13 @@ sub new {
 
   $self->{_template} = Template->new({});
 
-  print STDERR "Done.\n\n";
+  $self->info("Done.\n\n");
   return $self;
+}
+
+sub info {
+  my $self = shift;
+  print @_ if ($self->{_verbose});
 }
 
 sub read_rules {
@@ -127,7 +135,7 @@ sub read_rule {
       my $old_type = $self->rule_type($rule);
       $self->trigger_remove_callback($old_type)->($rule);
       $self->remove_rule($rule);
-      print STDERR 'Removed disabled rule: ', $rule->name, "\n";
+      $self->info('Removed disabled rule: ', $rule->name, "\n");
     }
     return;
   }
@@ -139,7 +147,7 @@ sub read_rule {
     my $old_type = $self->rule_type($rule);
     $self->trigger_remove_callback($old_type)->($rule);
     $self->remove_rule($rule);
-    print STDERR 'Removed changed rule: ', $rule->name, "\n";
+    $self->info('Removed changed rule: ', $rule->name, "\n");
   }
 
   my $type = $rule->trig_type;
@@ -154,7 +162,7 @@ sub read_rule {
   }
   my $trig = $rule->trig;
 
-  print STDERR 'Adding rule: ', $rule->name, "\n";
+  $self->info('Adding rule: ', $rule->name, "\n");
 
   $self->add_rule($rule, { mtime => $rule->mtime(), type => $type });
 
@@ -171,7 +179,7 @@ sub add_trigger {
   exists $p{remove_callback} or $p{remove_callback} = sub { 1 };
   $p{add_callback_count} = 0;
   $p{remove_callback_count} = 0;
-  print STDERR "Adding trigger type: ", $p{type}, "\n";
+  $self->info("Adding trigger type: ", $p{type}, "\n");
   return $self->add_item('trigger', $p{type}, \%p);
 }
 
@@ -179,7 +187,7 @@ sub add_action {
   my $self = shift;
   my %p = @_;
   exists $p{type} or $self->argh("requires 'type' argument");
-  print STDERR "Adding action type: ", $p{type}, "\n";
+  $self->info("Adding action type: ", $p{type}, "\n");
   return $self->add_callback_item('action', $p{type}, \%p);
 }
 
@@ -187,7 +195,7 @@ sub add_stash {
   my $self = shift;
   my %p = @_;
   exists $p{variable} or $self->argh("requires 'variable' argument");
-  print STDERR "Adding stash variable: ", $p{variable}, "\n";
+  $self->info("Adding stash variable: ", $p{variable}, "\n");
   return $self->add_callback_item('stash', $p{variable}, \%p);
 }
 
@@ -215,8 +223,7 @@ sub run_action {
       warn "no action defined for '$type'";
       next;
     }
-    print STDERR "Action: ", $type, " ", (defined $spec ? $spec : 'undef'),
-      "\n";
+    $self->info('Action: ', $type, ' ', (defined $spec ? $spec : 'undef'),"\n");
     my $res = $self->action_callback($type)->(spec => $spec,
                                               remaining => $remaining,
                                               stash => $stash);

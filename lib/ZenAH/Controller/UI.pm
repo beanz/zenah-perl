@@ -104,9 +104,14 @@ Shows a UI page
 =cut
 
 sub ajax : Local {
-    my ( $self, $c, $device_name, $action ) = @_;
+    my ( $self, $c, $device_name, @action ) = @_;
 
-    ($device_name, $action) = $c->request->param('args') unless ($device_name);
+    my $action;
+    if ($device_name) {
+      $action = join('/', @action);
+    } else {
+      ($device_name, $action) = $c->request->param('args');
+    }
 
     my $device =
       ZenAH::Model::CDBI::Device->search(name => $device_name)->first;
@@ -139,7 +144,8 @@ Shows a UI page
 =cut
 
 sub action : Local {
-    my ( $self, $c, $device_name, $action ) = @_;
+    my ( $self, $c, $device_name, @action ) = @_;
+    my $action = join('/', @action);
     my $status = $c->subreq('/ajax/'.$device_name.'/'.$action);
     my $uri = URI->new($c->request->referer());
     $uri->query_param(status => $status);

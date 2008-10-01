@@ -138,7 +138,7 @@ sub default : Private {
 
   my ($root, $type, $view, @args) = @{$c->request->arguments};
 
-  unless (exists $crud{$type}) {
+  unless ($type && exists $crud{$type}) {
     $type = 'device';
     $view = 'default';
     @args = ();

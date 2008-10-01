@@ -16,6 +16,13 @@ use DateTime::Format::Strptime;
 
 {
   package ZenAH::CDBI::Base;
+
+=head2 C<ZenAH::CDBI::Base::to_view()>
+
+Trivial wrapper to define how fields should be rendered in HTML.
+
+=cut
+
   sub to_view {
     my ($self, $field) = @_;
     $self->$field();
@@ -111,6 +118,13 @@ ZenAH::CDBI::Rule->has_a(
     deflate => 'epoch'
 );
 
+=head2 C<ZenAH::CDBI::Rule::to_view()>
+
+Override the L<ZenAH::CDBI::Base::to_view> method to force the use
+of more appropriate elements for rendering as HTML.
+
+=cut
+
 sub ZenAH::CDBI::Rule::to_view {
   my ($self, $field) = @_;
   return '' unless (defined $self->$field);
@@ -138,6 +152,13 @@ ZenAH::CDBI::Template->has_a(
     deflate => 'epoch'
 );
 
+=head2 C<ZenAH::CDBI::Template::to_view()>
+
+Override the L<ZenAH::CDBI::Base::to_view> method to force the use
+of more appropriate elements for rendering as HTML.
+
+=cut
+
 sub ZenAH::CDBI::Template::to_view {
   my ($self, $field) = @_;
   return '' unless (defined $self->$field);
@@ -153,8 +174,15 @@ sub ZenAH::CDBI::Template::to_view {
 }
 
 ZenAH::CDBI::Device->set_sql(types => q{
-  SELECT distinct type FROM __TABLE__
+  SELECT DISTINCT type FROM __TABLE__
 });
+
+=head2 C<ZenAH::CDBI::Device::types>
+
+Method to return list of distinct C<type> fields of devices.
+
+=cut
+
 sub ZenAH::CDBI::Device::types {
   map { $_->type } $_[0]->search_types();
 }
@@ -169,12 +197,34 @@ ZenAH::CDBI::Device->set_sql(type_and_attr => q{
         device_attribute.value = ?
 });
 
+=head2 C<ZenAH::CDBI::Device::controls()>
+
+Wrapper for L<ZenAH::CDBI::Device::device_controls> to provide a more
+readable name.
+
+=cut
+
 sub ZenAH::CDBI::Device::controls {
   ZenAH::CDBI::Device::device_controls(@_);
 }
+
+=head2 C<ZenAH::CDBI::Device::attributes()>
+
+Wrapper for L<ZenAH::CDBI::Device::device_attributes> to provide a consistent
+interface for attributes on Rooms and Devices.
+
+=cut
+
 sub ZenAH::CDBI::Device::attributes {
   ZenAH::CDBI::Device::device_attributes(@_);
 }
+
+=head2 C<ZenAH::CDBI::Device::attribute($name)>
+
+Return the value of the named attribute for a device.
+
+=cut
+
 sub ZenAH::CDBI::Device::attribute {
   my $self = shift;
   my $name = shift;
@@ -215,18 +265,39 @@ sub ZenAH::CDBI::Device::action {
 ZenAH::CDBI::Map->set_sql(types => q{
   SELECT distinct type FROM __TABLE__
 });
+
+=head2 C<ZenAH::CDBI::Map::types>
+
+Method to return list of distinct C<type> fields of map entries.
+
+=cut
+
 sub ZenAH::CDBI::Map::types {
-  my $class = shift;
-  return map { $_->type } $class->search_types();
+  my $self = shift;
+  return map { $_->type } $self->search_types();
 }
 
 ZenAH::CDBI::Rule->set_sql(triggers => q{
   SELECT distinct trig_type FROM __TABLE__
 });
+
+=head2 C<ZenAH::CDBI::Rule::triggers>
+
+Method to return list of distinct C<trig_type> fields of rules.
+
+=cut
+
 sub ZenAH::CDBI::Rule::triggers {
-  my $class = shift;
-  return map { $_->trig_type } $class->search_triggers();
+  my $self = shift;
+  return map { $_->trig_type } $self->search_triggers();
 }
+
+=head2 C<ZenAH::CDBI::Rule::to_field()>
+
+Override the L<Class::DBI::AsForm::to_field> method to force the use
+of more appropriate inputs in web forms.
+
+=cut
 
 sub ZenAH::CDBI::Rule::to_field {
   my ($self, $field, $how) = @_;
@@ -255,6 +326,13 @@ sub ZenAH::CDBI::Rule::to_field {
 ZenAH::CDBI::State->set_sql(types => q{
   SELECT distinct type FROM __TABLE__
 });
+
+=head2 C<ZenAH::CDBI::State::types>
+
+Method to return list of distinct C<type> fields of state entries.
+
+=cut
+
 sub ZenAH::CDBI::State::types {
   my $class = shift;
   return map { $_->type } $class->search_types();
@@ -263,6 +341,14 @@ sub ZenAH::CDBI::State::types {
 ZenAH::CDBI::Template->set_sql(prefixes => q{
   SELECT distinct name FROM __TABLE__ where name like '%%/%%'
 });
+
+=head2 C<ZenAH::CDBI::Template::prefixes>
+
+Method to return list of the common prefixes of the names of
+templates.
+
+=cut
+
 sub ZenAH::CDBI::Template::prefixes {
   my $self = shift;
   my $sth = $self->sql_prefixes();
@@ -270,6 +356,13 @@ sub ZenAH::CDBI::Template::prefixes {
   my %p = map { $_=$_->[0]; s/\/.*//; $_ => 1 } @{$sth->fetchall_arrayref};
   return keys %p;
 }
+
+=head2 C<ZenAH::CDBI::Template::to_field()>
+
+Override the L<Class::DBI::AsForm::to_field> method to force the use
+of more appropriate inputs in web forms.
+
+=cut
 
 sub ZenAH::CDBI::Template::to_field {
   my ($self, $field, $how) = @_;
@@ -287,6 +380,13 @@ sub ZenAH::CDBI::Template::to_field {
 ZenAH::CDBI::DeviceAttribute->set_sql(types => q{
   SELECT distinct name FROM __TABLE__
 });
+
+=head2 C<ZenAH::CDBI::DeviceAttribute::types>
+
+Method to return list of distinct C<type> fields of device attributes.
+
+=cut
+
 sub ZenAH::CDBI::DeviceAttribute::types {
   my $self = shift;
   my $sth = $self->sql_types();
@@ -298,6 +398,13 @@ sub ZenAH::CDBI::DeviceAttribute::types {
 ZenAH::CDBI::RoomAttribute->set_sql(types => q{
   SELECT distinct name FROM __TABLE__
 });
+
+=head2 C<ZenAH::CDBI::RoomAttribute::types>
+
+Method to return list of distinct C<type> fields of room attributes.
+
+=cut
+
 sub ZenAH::CDBI::RoomAttribute::types {
   my $self = shift;
   my $sth = $self->sql_types();
@@ -309,6 +416,14 @@ sub ZenAH::CDBI::RoomAttribute::types {
 ZenAH::CDBI::DeviceControl->set_sql(prefixes => q{
   SELECT distinct name FROM __TABLE__ where name like '%%/%%'
 });
+
+=head2 C<ZenAH::CDBI::DeviceControl::prefixes>
+
+Method to return list of the common prefixes of the names of
+device controls.
+
+=cut
+
 sub ZenAH::CDBI::DeviceControl::prefixes {
   my $self = shift;
   my $sth = $self->sql_prefixes();
@@ -316,6 +431,13 @@ sub ZenAH::CDBI::DeviceControl::prefixes {
   my %p = map { $_=$_->[0]; s/\/.*//; $_ => 1 } @{$sth->fetchall_arrayref};
   return keys %p;
 }
+
+=head2 C<ZenAH::CDBI::DeviceControls::to_field()>
+
+Override the L<Class::DBI::AsForm::to_field> method to force the use
+of more appropriate inputs in web forms.
+
+=cut
 
 sub ZenAH::CDBI::DeviceControl::to_field {
   my ($self, $field, $how) = @_;
@@ -330,9 +452,23 @@ sub ZenAH::CDBI::DeviceControl::to_field {
   }
 }
 
+=head2 C<ZenAH::CDBI::Room::attributes()>
+
+Wrapper for L<ZenAH::CDBI::Room::room_attributes> to provide a consistent
+interface for attributes on rooms and devices.
+
+=cut
+
 sub ZenAH::CDBI::Room::attributes {
   ZenAH::CDBI::Room::room_attributes(@_);
 }
+
+=head2 C<ZenAH::CDBI::Room::attribute($name)>
+
+Return the value of the named attribute for a room.
+
+=cut
+
 sub ZenAH::CDBI::Room::attribute {
   my $self = shift;
   my $name = shift;
@@ -340,9 +476,22 @@ sub ZenAH::CDBI::Room::attribute {
   return $attr && $attr->value;
 }
 
+=head2 C<which_mtime()>
+
+Function to determine whether the real mtime field should be used -
+depending on whether the L<Test::Harness> is active.
+
+=cut
+
 sub which_mtime {
   exists $ENV{HARNESS_ACTIVE} ? 'fakemtime' : 'mtime';
 }
+
+=head2 C<set_mtime()>
+
+Set the modification time, C<mtime>, if the object has changed.
+
+=cut
 
 sub set_mtime {
   if ($_[0]->is_changed()) {
@@ -350,16 +499,32 @@ sub set_mtime {
   }
 }
 
+=head2 C<set_mtime_sometimes()>
+
+Set the modification time, C<mtime>, if the object has changed as
+long as the change isn't to the fired time, C<ftime>.
+
+=cut
+
 sub set_mtime_sometimes {
   my @changed = $_[0]->is_changed();
   if (@changed && $changed[0] ne 'ftime') {
     $_[0]->_attribute_set(which_mtime() => time);
   }
 }
+
+=head2 C<set_time()>
+
+Set the modification time, C<mtime>, on new objects unless it is
+already being set by the caller.
+
+=cut
+
 sub set_time {
   $_[0]->_attribute_set(which_mtime() => time)
     unless ($_[0]->_attrs('mtime'));
 }
+
 ZenAH::CDBI::Rule->add_trigger(before_create => \&set_time);
 ZenAH::CDBI::Rule->add_trigger(before_update => \&set_mtime_sometimes);
 
