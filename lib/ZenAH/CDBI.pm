@@ -173,24 +173,24 @@ sub ZenAH::CDBI::Template::to_view {
   }
 }
 
-ZenAH::CDBI::Device->set_sql(types => q{
-  SELECT DISTINCT type FROM __TABLE__
+ZenAH::CDBI::Device->set_sql(classes => q{
+  SELECT DISTINCT class FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::Device::types>
+=head2 C<ZenAH::CDBI::Device::classes>
 
-Method to return list of distinct C<type> fields of devices.
+Method to return list of distinct C<class> fields of devices.
 
 =cut
 
-sub ZenAH::CDBI::Device::types {
-  map { $_->type } $_[0]->search_types();
+sub ZenAH::CDBI::Device::classes {
+  map { $_->class } $_[0]->search_classes();
 }
 
-ZenAH::CDBI::Device->set_sql(type_and_attr => q{
+ZenAH::CDBI::Device->set_sql(class_and_attr => q{
   SELECT device.*
   FROM device, device_attribute_link, device_attribute
-  WHERE device.type = ? AND
+  WHERE device.class = ? AND
         device_attribute_link.device = device.id AND
         device_attribute_link.device_attribute = device_attribute.id AND
         device_attribute.name = ? AND
@@ -236,7 +236,7 @@ sub ZenAH::CDBI::Device::action {
   my $self = shift;
   my $action_name = shift;
   my $device_name = $self->name;
-  my $type_name = $self->type;
+  my $class_name = $self->class;
   $action_name =~ s/[^-a-z0-9_\/\.]/_/ig;
   my $control =
     $self->device_controls("device_control.name" => $action_name)->first;
@@ -248,13 +248,13 @@ sub ZenAH::CDBI::Device::action {
     $t->process(\$input, { device => $self }, \$output) or
       return "error bad template, $action_name, on device, $device_name\n";
     $definition = $output;
-  } elsif ($type_name eq "Button") {
+  } elsif ($class_name eq "Button") {
     $definition =
       sprintf('xpl -m xpl-trig -c remote.basic device=%s keys=%s',
               $device_name, $action_name);
-  } elsif ($type_name eq "DMX") {
+  } elsif ($class_name eq "DMX") {
     $definition =
-      sprintf('xpl -m xpl-cmnd -c dmx.basic base=%s type=set value=%s',
+      sprintf('xpl -m xpl-cmnd -c dmx.basic base=%s class=set value=%s',
               $self.attribute('base'), $action_name);
   } else {
     return "error invalid action, $action_name, on device, $device_name\n";
@@ -262,34 +262,34 @@ sub ZenAH::CDBI::Device::action {
   return $definition;
 }
 
-ZenAH::CDBI::Map->set_sql(types => q{
-  SELECT distinct type FROM __TABLE__
+ZenAH::CDBI::Map->set_sql(classes => q{
+  SELECT DISTINCT class FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::Map::types>
+=head2 C<ZenAH::CDBI::Map::classes>
 
-Method to return list of distinct C<type> fields of map entries.
+Method to return list of distinct C<class> fields of map entries.
 
 =cut
 
-sub ZenAH::CDBI::Map::types {
+sub ZenAH::CDBI::Map::classes {
   my $self = shift;
-  return map { $_->type } $self->search_types();
+  return map { $_->class } $self->search_classes();
 }
 
-ZenAH::CDBI::Rule->set_sql(triggers => q{
-  SELECT distinct trig_type FROM __TABLE__
+ZenAH::CDBI::Rule->set_sql(classes => q{
+  SELECT DISTINCT class FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::Rule::triggers>
+=head2 C<ZenAH::CDBI::Rule::classes>
 
-Method to return list of distinct C<trig_type> fields of rules.
+Method to return list of distinct C<class> fields of rules.
 
 =cut
 
-sub ZenAH::CDBI::Rule::triggers {
+sub ZenAH::CDBI::Rule::classes {
   my $self = shift;
-  return map { $_->trig_type } $self->search_triggers();
+  return map { $_->class } $self->search_classes();
 }
 
 =head2 C<ZenAH::CDBI::Rule::to_field()>
@@ -323,23 +323,23 @@ sub ZenAH::CDBI::Rule::to_field {
   }
 }
 
-ZenAH::CDBI::State->set_sql(types => q{
-  SELECT distinct type FROM __TABLE__
+ZenAH::CDBI::State->set_sql(classes => q{
+  SELECT DISTINCT class FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::State::types>
+=head2 C<ZenAH::CDBI::State::classes>
 
-Method to return list of distinct C<type> fields of state entries.
+Method to return list of distinct C<class> fields of state entries.
 
 =cut
 
-sub ZenAH::CDBI::State::types {
+sub ZenAH::CDBI::State::classes {
   my $self = shift;
-  return map { $_->type } $self->search_types();
+  return map { $_->class } $self->search_classes();
 }
 
 ZenAH::CDBI::Template->set_sql(classes => q{
-  SELECT distinct class FROM __TABLE__
+  SELECT DISTINCT class FROM __TABLE__
 });
 
 =head2 C<ZenAH::CDBI::Template::classes>
@@ -373,41 +373,41 @@ sub ZenAH::CDBI::Template::to_field {
   }
 }
 
-ZenAH::CDBI::DeviceAttribute->set_sql(types => q{
-  SELECT distinct name FROM __TABLE__
+ZenAH::CDBI::DeviceAttribute->set_sql(classes => q{
+  SELECT DISTINCT name FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::DeviceAttribute::types>
+=head2 C<ZenAH::CDBI::DeviceAttribute::classes>
 
-Method to return list of distinct C<type> fields of device attributes.
+Method to return list of distinct C<class> fields of device attributes.
 
 =cut
 
-sub ZenAH::CDBI::DeviceAttribute::types {
+sub ZenAH::CDBI::DeviceAttribute::classes {
   my $self = shift;
-  my $sth = $self->sql_types();
+  my $sth = $self->sql_classes();
   $sth->execute();
   my %p = map { $_->[0] => 1 } @{$sth->fetchall_arrayref};
   return keys %p;
 }
 
-ZenAH::CDBI::RoomAttribute->set_sql(types => q{
-  SELECT distinct name FROM __TABLE__
+ZenAH::CDBI::RoomAttribute->set_sql(classes => q{
+  SELECT DISTINCT name FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::RoomAttribute::types>
+=head2 C<ZenAH::CDBI::RoomAttribute::classes>
 
-Method to return list of distinct C<type> fields of room attributes.
+Method to return list of distinct C<class> fields of room attributes.
 
 =cut
 
-sub ZenAH::CDBI::RoomAttribute::types {
+sub ZenAH::CDBI::RoomAttribute::classes {
   my $self = shift;
-  return map { $_->name } $self->search_types();
+  return map { $_->name } $self->search_classes();
 }
 
 ZenAH::CDBI::DeviceControl->set_sql(classes => q{
-  SELECT distinct class FROM __TABLE__
+  SELECT DISTINCT class FROM __TABLE__
 });
 
 =head2 C<ZenAH::CDBI::DeviceControl::classes>

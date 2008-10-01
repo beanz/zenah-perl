@@ -225,8 +225,8 @@ tr.list-row-1 {
     active<br/>
     <select name="active"><option selected="selected" value="1">Enabled</option><option value="0">Disbled</option></select>
 <br/>
-    trig_type<br/>
-    <input name="trig_type" type="text" value="at" />
+    class<br/>
+    <input name="class" type="text" value="at" />
 <br/>
     trig<br/>
     <textarea cols="80" name="trig" rows="2">recurrence freq=hourly minutes=&quot;[0,15,30,45]&quot;</textarea>

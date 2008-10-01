@@ -53,10 +53,10 @@ sub new {
   exists $p{tz} or $p{tz} = $ENV{TZ} || 'Europe/London';
   my $tz = $self->{_tz} = $p{tz};
 
-  $engine->add_action(type => 'sleep',
+  $engine->add_action(class => 'sleep',
                       callback => sub { $self->action_sleep(@_); });
 
-  $engine->add_trigger(type => "at",
+  $engine->add_trigger(class => "at",
                        add_callback => sub { $self->add(@_) },
                        remove_callback => sub { $self->remove(@_) },
                       );

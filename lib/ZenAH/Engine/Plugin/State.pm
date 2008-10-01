@@ -52,71 +52,71 @@ sub new {
   my %d =
     (
      get => sub {
-       return ZenAH::CDBI::State->search(type => $_[0],
+       return ZenAH::CDBI::State->search(class => $_[0],
                                          name => $_[1])->first;
      },
      get_value => sub {
-       my $state = ZenAH::CDBI::State->search(type => $_[0],
+       my $state = ZenAH::CDBI::State->search(class => $_[0],
                                               name => $_[1])->first;
        return $state && $state->value;
      },
-     get_by_type => sub {
-       my @states = ZenAH::CDBI::State->search(type => $_[0]);
+     get_by_class => sub {
+       my @states = ZenAH::CDBI::State->search(class => $_[0]);
        return \@states;
      },
-     get_by_type_matching => sub {
+     get_by_class_matching => sub {
        my @states =
          grep
            { $_->name =~ /$_[1]/
-           } ZenAH::CDBI::State->search(type => $_[0]);
+           } ZenAH::CDBI::State->search(class => $_[0]);
        return \@states;
      },
-     get_by_type_since => sub {
+     get_by_class_since => sub {
        my @states =
-         ZenAH::CDBI::State->search(type => $_[0],
+         ZenAH::CDBI::State->search(class => $_[0],
                                     mtime => { '>' => $_[1] });
        return \@states;
      },
-     get_by_type_since_matching => sub {
+     get_by_class_since_matching => sub {
        my @states =
          grep
            { $_->name =~ /$_[2]/
-           } ZenAH::CDBI::State->search(type => $_[0],
+           } ZenAH::CDBI::State->search(class => $_[0],
                                         mtime => { '>' => $_[1] });
        return \@states;
      },
-     get_values_by_type => sub {
+     get_values_by_class => sub {
        my @values =
          map { $_->value
-             } ZenAH::CDBI::State->search(type => $_[0]);
+             } ZenAH::CDBI::State->search(class => $_[0]);
        return \@values;
      },
-     get_values_by_type_matching => sub {
+     get_values_by_class_matching => sub {
        my @values =
          map { $_->value
              } grep
                { $_->name =~ /$_[1]/
-               } ZenAH::CDBI::State->search(type => $_[0]);
+               } ZenAH::CDBI::State->search(class => $_[0]);
        return \@values;
      },
-     get_values_by_type_since => sub {
+     get_values_by_class_since => sub {
        my @values =
          map { $_->value
-             } ZenAH::CDBI::State->search(type => $_[0],
+             } ZenAH::CDBI::State->search(class => $_[0],
                                           mtime => { '>' => $_[1] });
        return \@values;
      },
-     get_values_by_type_since_matching => sub {
+     get_values_by_class_since_matching => sub {
        my @values =
          map { $_->value
              } grep
                { $_->name =~ /$_[2]/
-               } ZenAH::CDBI::State->search(type => $_[0],
+               } ZenAH::CDBI::State->search(class => $_[0],
                                             mtime => { '>' => $_[1] });
        return \@values;
      },
      set => sub {
-       my $state = ZenAH::CDBI::State->find_or_create(type => $_[0],
+       my $state = ZenAH::CDBI::State->find_or_create(class => $_[0],
                                                       name => $_[1]);
        my $old = $state->value();
        $state->value($_[2]);

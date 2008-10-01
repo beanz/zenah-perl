@@ -51,11 +51,11 @@ sub new {
   my %p = @_;
   my $engine = $self->{_engine} = $p{engine};
 
-  $engine->add_trigger(type => "xpl",
+  $engine->add_trigger(class => "xpl",
                        add_callback => sub { $self->add(@_) },
                        remove_callback => sub { $self->remove(@_) });
 
-  $engine->add_action(type => "xpl",
+  $engine->add_action(class => "xpl",
                       callback => sub { $self->xpl_send(@_) });
   return $self;
 }
@@ -71,7 +71,7 @@ sub add {
     if ($1 eq 'map') {
       my $arg = $2;
       $filter{'device'} =
-        sub { ZenAH::CDBI::Map->search(type => $arg, name => $_[0])->first };
+        sub { ZenAH::CDBI::Map->search(class => $arg, name => $_[0])->first };
     } else {
       my $lookup = 'search_'.$1;
       my @arg = split /,/, $2;

@@ -70,8 +70,8 @@ sub new {
 
   my %p = @_;
   my $engine = $self->{_engine} = $p{engine};
-  $engine->add_trigger(type => "scene"); # no-op
-  $engine->add_action(type => "scene",
+  $engine->add_trigger(class => "scene"); # no-op
+  $engine->add_action(class => "scene",
                       callback => sub { $self->action_scene(@_) });
   return $self;
 }

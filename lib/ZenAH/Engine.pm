@@ -58,7 +58,7 @@ __PACKAGE__->make_collection(trigger =>
                                  /],
                              action => [qw/callback callback_count/],
                              stash => [qw/callback callback_count/],
-                             rule => [qw/mtime type/],
+                             rule => [qw/mtime class/],
                             );
 
 # VMethods
@@ -95,14 +95,14 @@ sub new {
     push @{$self->{_plugins}}, $plugin;
   }
 
-  $self->add_action(type => 'enable',
+  $self->add_action(class => 'enable',
                     callback => sub { $self->action_enable_rule(@_) });
-  $self->add_action(type => 'disable',
+  $self->add_action(class => 'disable',
                     callback => sub { $self->action_disable_rule(@_) });
-  $self->add_action(type => 'debug',
+  $self->add_action(class => 'debug',
                     callback => sub { return $self->action_debug(@_) });
 
-  $self->add_action(type => 'error',
+  $self->add_action(class => 'error',
                     callback => sub { return $self->action_error(@_) });
 
   $self->add_timer(id => 'rules_timer',
@@ -159,8 +159,8 @@ sub read_rule {
 
   unless ($rule->active) {
     if ($self->exists_rule($rule)) {
-      my $old_type = $self->rule_type($rule);
-      $self->trigger_remove_callback($old_type)->($rule);
+      my $old_class = $self->rule_class($rule);
+      $self->trigger_remove_callback($old_class)->($rule);
       $self->remove_rule($rule);
       $self->info('Removed disabled rule: ', $rule->name, "\n");
     }
@@ -171,53 +171,53 @@ sub read_rule {
   if ($self->exists_rule($rule)) {
     my $old_mtime = $self->rule_mtime($rule);
     return unless ($mtime > $old_mtime);
-    my $old_type = $self->rule_type($rule);
-    $self->trigger_remove_callback($old_type)->($rule);
+    my $old_class = $self->rule_class($rule);
+    $self->trigger_remove_callback($old_class)->($rule);
     $self->remove_rule($rule);
     $self->info('Removed changed rule: ', $rule->name, "\n");
   }
 
-  my $type = $rule->trig_type;
-  unless ($type) {
-    warn "empty trigger type: ",$rule->name, "\n";
+  my $class = $rule->class;
+  unless ($class) {
+    warn "empty trigger class: ",$rule->name, "\n";
     return;
   }
 
-  unless ($self->exists_trigger($type)) {
-    warn "unknown trigger type: $type ",$rule->name, "\n";
+  unless ($self->exists_trigger($class)) {
+    warn "unknown trigger class: $class ",$rule->name, "\n";
     return;
   }
   my $trig = $rule->trig;
 
   $self->info('Adding rule: ', $rule->name, "\n");
 
-  $self->add_rule($rule, { mtime => $rule->mtime(), type => $type });
+  $self->add_rule($rule, { mtime => $rule->mtime(), class => $class });
 
-  $self->trigger_add_callback($type)->($rule);
+  $self->trigger_add_callback($class)->($rule);
 
   return 1;
 }
 
 =head2 C<add_trigger(%params)>
 
-This method is used by plugins to register a new type of trigger.
+This method is used by plugins to register a new class of trigger.
 Valid parameters in the hash are:
 
 =over
 
-=item type
+=item class
 
-The name of the trigger type.
+The name of the trigger class.
 
 =item add_callback
 
-The code reference to call when a new rule with this trigger type is
+The code reference to call when a new rule with this trigger class is
 added to the database.  This is optional the default is an empty
 sub.
 
 =item remove_callback
 
-The code reference to call when an old rule with this trigger type is
+The code reference to call when an old rule with this trigger class is
 removed from the database.  This is optional the default is an empty
 sub.
 
@@ -228,25 +228,25 @@ sub.
 sub add_trigger {
   my $self = shift;
   my %p = @_;
-  exists $p{type} or $self->argh("requires 'type' argument");
+  exists $p{class} or $self->argh("requires 'class' argument");
   exists $p{add_callback} or $p{add_callback} = sub { 1 };
   exists $p{remove_callback} or $p{remove_callback} = sub { 1 };
   $p{add_callback_count} = 0;
   $p{remove_callback_count} = 0;
-  $self->info("Adding trigger type: ", $p{type}, "\n");
-  return $self->add_item('trigger', $p{type}, \%p);
+  $self->info("Adding trigger class: ", $p{class}, "\n");
+  return $self->add_item('trigger', $p{class}, \%p);
 }
 
 =head2 C<add_action(%params)>
 
-This method is used by plugins to register a new type of action.
+This method is used by plugins to register a new class of action.
 Valid parameters in the hash are those used by :
 
 =over
 
-=item type
+=item class
 
-The name of the action type.
+The name of the action class.
 
 =item callback
 
@@ -259,22 +259,22 @@ The code reference to call when this action is invoked.
 sub add_action {
   my $self = shift;
   my %p = @_;
-  exists $p{type} or $self->argh("requires 'type' argument");
-  $self->info("Adding action type: ", $p{type}, "\n");
-  return $self->add_callback_item('action', $p{type}, \%p);
+  exists $p{class} or $self->argh("requires 'class' argument");
+  $self->info("Adding action class: ", $p{class}, "\n");
+  return $self->add_callback_item('action', $p{class}, \%p);
 }
 
 =head2 C<add_stash(%params)>
 
-This method is used by plugins to register a new type of stash to be
+This method is used by plugins to register a new class of stash to be
 added to the template processing.  Valid parameters in the hash are
 those used by :
 
 =over
 
-=item type
+=item class
 
-The name of the stash type.
+The name of the stash class.
 
 =item callback
 
@@ -325,13 +325,13 @@ sub run_action {
     ($command, $remaining) = split(/\r?\n+/, $remaining, 2);
     next if ($command =~ /^\s*$/ or $command =~ /^\s*#/);
     $command =~ s/^\s+//;
-    my ($type, $spec) = split(/\s+/, $command, 2);
-    unless ($self->exists_action($type)) {
-      warn "no action defined for '$type'";
+    my ($class, $spec) = split(/\s+/, $command, 2);
+    unless ($self->exists_action($class)) {
+      warn "no action defined for '$class'";
       next;
     }
-    $self->info('Action: ', $type, ' ', (defined $spec ? $spec : 'undef'),"\n");
-    my $res = $self->action_callback($type)->(spec => $spec,
+    $self->info('Action: ', $class, ' ', (defined $spec ? $spec : 'undef'),"\n");
+    my $res = $self->action_callback($class)->(spec => $spec,
                                               remaining => $remaining,
                                               stash => $stash);
     if (defined $res && $res == -1) {
@@ -531,7 +531,7 @@ stored in the L<ZenAH::CDBI::Map> table with a 'class' value of
 sub zenah_config {
   my $self = shift;
   my $key = shift;
-  my $conf = ZenAH::CDBI::Map->search(type => 'engine_config',
+  my $conf = ZenAH::CDBI::Map->search(class => 'engine_config',
                                       name => $key)->first or return;
   return $conf->value;
 }

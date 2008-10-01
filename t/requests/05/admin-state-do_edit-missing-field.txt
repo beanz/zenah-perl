@@ -1,4 +1,4 @@
-/admin/state/do_edit/14?type=motion&value=empty&mtime=1222123916&ctime=1222123816
+/admin/state/do_edit/14?class=motion&value=empty&mtime=1222123916&ctime=1222123816
 text/html
 200 OK
 
@@ -219,8 +219,8 @@ tr.list-row-1 {
 <p>You have to fill in all fields.the following are missing: <b>name</b></p>
 <form action="http://localhost//admin/state/do_edit/14"
     method="post">
-    type<br/>
-    <input name="type" type="text" value="motion" />
+    class<br/>
+    <input name="class" type="text" value="motion" />
 <br/>
     name<br/>
     <input name="name" type="text" value="node_0" />

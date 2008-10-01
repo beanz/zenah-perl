@@ -376,18 +376,18 @@ Page:
       <td>config</td>
       <td>macro</td>
       <td><small><pre>[% USE String %]
-[% MACRO variant_button(type, name, variant) BLOCK %]
+[% MACRO variant_button(class, name, variant) BLOCK %]
   [% SET var = Catalyst.request.param(variant.keys.0) %]
   [% SET cc = variant.values.0 == var ? &#34;-current&#34; : &#34;&#34; %]
- &#60;span class=&#34;[% type %][% cc %]&#34;&#62;[% variant_url(Catalyst, name, variant) %]&#60;/span&#62;
+ &#60;span class=&#34;[% class %][% cc %]&#34;&#62;[% variant_url(Catalyst, name, variant) %]&#60;/span&#62;
 [% END %]
-[% MACRO navbutton(type, name) BLOCK %]
+[% MACRO navbutton(class, name) BLOCK %]
   [% SET room = Catalyst.request.param(&#39;room&#39;) %]
-  [% SET cc = type == room or ( room == &#34;&#34; and type == &#34;home&#34; ) ?
+  [% SET cc = class == room or ( room == &#34;&#34; and class == &#34;home&#34; ) ?
          &#34;-current&#34; : &#34;&#34; %]
   &#60;span class=&#34;navbutton[% cc %]&#34;&#62;&#60;a
-    href=&#34;[% Catalyst.uri_for(&#34;/&#34;, type) %]&#34;
-    &#62;[% IF name %][% name %][% ELSE %][% type FILTER ucfirst %][% END %]&#60;/a&#62;&#60;/span&#62;
+    href=&#34;[% Catalyst.uri_for(&#34;/&#34;, class) %]&#34;
+    &#62;[% IF name %][% name %][% ELSE %][% class FILTER ucfirst %][% END %]&#60;/a&#62;&#60;/span&#62;
 [% END %]
 [% MACRO filternav(filters,current) BLOCK %]
 &#60;p class=&#34;filternav&#34; id=&#34;filternav&#34;&#62;

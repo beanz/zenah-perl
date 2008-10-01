@@ -1,4 +1,4 @@
-/admin/map/do_add?type=phonebook&value=999
+/admin/map/do_add?class=phonebook&value=999
 text/html
 200 OK
 
@@ -218,8 +218,8 @@ tr.list-row-1 {
 <div id="content">
 <p>You have to fill in all fields. The following are missing: <b>name</b></p>
 <form action="http://localhost//admin/map/do_add" method="post">
-    type<br/>
-    <input name="type" type="text" />
+    class<br/>
+    <input name="class" type="text" />
 <br/>
     name<br/>
     <input name="name" type="text" />

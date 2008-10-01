@@ -1,4 +1,4 @@
-/admin/device/do_add?name=front_door&description=Front%20Door&type=Door
+/admin/device/do_add?name=front_door&description=Front%20Door&class=Door
 text/html
 200 OK
 
@@ -227,8 +227,8 @@ tr.list-row-1 {
     description<br/>
     <textarea cols="22" name="description" rows="3"></textarea>
 <br/>
-    type<br/>
-    <input name="type" type="text" />
+    class<br/>
+    <input name="class" type="text" />
 <br/>
   <br/>
   <input type="submit" value="Add"/>

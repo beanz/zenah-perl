@@ -219,8 +219,8 @@ tr.list-row-1 {
 <p></p>
 <form action="http://localhost//admin/state/do_edit/1"
     method="post">
-    type<br/>
-    <input name="type" type="text" value="light" />
+    class<br/>
+    <input name="class" type="text" value="light" />
 <br/>
     name<br/>
     <input name="name" type="text" value="bath" />

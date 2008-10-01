@@ -70,19 +70,19 @@ Returns a list of all device objects.
 
 Returns the device object for the named device.
 
-=item C<by_type_list(type)>
+=item C<by_class_list(class)>
 
-Returns a list of device objects of the given type.
+Returns a list of device objects of the given class.
 
 =item C<by_attr(attribute_name, attribute_value)>
 
 Returns the device object (first if there are more than one) which
 has the given attribute name and value.
 
-=item C<by_type_and_attr(type, attribute_name, attribute_value)>
+=item C<by_class_and_attr(class, attribute_name, attribute_value)>
 
 Returns the device object (first if there are more than one) of the
-given type which has the given attribute name and value.
+given class which has the given attribute name and value.
 
 =item C<by_attr_list(attribute_name, attribute_value)>
 
@@ -115,8 +115,8 @@ sub new {
      by_name => sub {
        return ZenAH::CDBI::Device->search(name => $_[0])->first;
      },
-     by_type_list => sub {
-       return map { $_ } ZenAH::CDBI::Device->search(type => $_[0]);
+     by_class_list => sub {
+       return map { $_ } ZenAH::CDBI::Device->search(class => $_[0]);
      },
      by_attr => sub {
        my $attr =
@@ -125,8 +125,8 @@ sub new {
                                                 return;
        return $attr->devices->first;
      },
-     by_type_and_attr => sub {
-       return ZenAH::CDBI::Device->search_type_and_attr(@_)->first;
+     by_class_and_attr => sub {
+       return ZenAH::CDBI::Device->search_class_and_attr(@_)->first;
      },
      by_attr_list => sub {
        my $attr =
@@ -146,7 +146,7 @@ sub new {
 
   $engine->add_stash(variable => "device",
                      callback => sub { return \%d });
-  $engine->add_action(type => "device",
+  $engine->add_action(class => "device",
                       callback => sub { $self->action_device(@_); });
   return $self;
 }

@@ -73,10 +73,10 @@ sub update_rrd_files {
     print STDERR "zenah_config[rrd_dir] is not defined\n";
     return;
   };
-  my %types = map { $_->name => [split /\s*,\s*/, $_->value]
-                  } ZenAH::CDBI::Map->search(type => 'rrd_type');
+  my %classes = map { $_->name => [split /\s*,\s*/, $_->value]
+                  } ZenAH::CDBI::Map->search(class => 'rrd_type');
   foreach my $state (ZenAH::CDBI::State->retrieve_all()) {
-    my $definition = $types{$state->type};
+    my $definition = $classes{$state->class};
     next unless (defined $definition);
     $self->update_rrd($rrd_dir,
                $time, $state->name, $state->mtime->epoch, $state->value,

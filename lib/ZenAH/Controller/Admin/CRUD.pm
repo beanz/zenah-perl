@@ -196,17 +196,17 @@ sub list : Private {
     my $page = $c->req->param('page') || 1;
     my $rows = $c->req->param('rows') || $c->stash->{list_rows} || 20;
     my %search = ();
-    my $types_method = $c->stash->{filter_types_method} || 'types';
-    if ($types_method ne 'none') {
-      my %types = map { $_ => 1 } $c->stash->{fulltable}->$types_method();
+    my $filter_method = $c->stash->{filter_method} || 'classes';
+    if ($filter_method ne 'none') {
+      my %classes = map { $_ => 1 } $c->stash->{fulltable}->$filter_method();
       my $filter = $c->req->param('filter');
-      if ($filter && exists $types{$filter}) {
-        $search{$c->stash->{filter_field} || 'type'} =
+      if ($filter && exists $classes{$filter}) {
+        $search{$c->stash->{filter_field} || 'class'} =
           { -like => (sprintf $c->stash->{filter_format} || '%s', $filter) };
       } else {
         $filter = 'none';
       }
-      $c->stash->{filters} = ['none', sort keys %types];
+      $c->stash->{filters} = ['none', sort keys %classes];
       $c->stash->{filter} = $filter;
     }
     ($c->stash->{page},

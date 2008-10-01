@@ -219,8 +219,8 @@ tr.list-row-1 {
 <p></p>
 <form action="http://localhost//admin/map/do_edit/1"
     method="post">
-    type<br/>
-    <input name="type" type="text" value="x10lamp_trigger" />
+    class<br/>
+    <input name="class" type="text" value="x10lamp_trigger" />
 <br/>
     name<br/>
     <input name="name" type="text" value="b1" />

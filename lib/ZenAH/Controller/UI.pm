@@ -116,17 +116,17 @@ sub ajax : Local {
     my $device =
       ZenAH::Model::CDBI::Device->search(name => $device_name)->first;
     die 'No such device, ', $device_name, "\n" unless ($device);
-    my $type_name = $device->type;
+    my $class_name = $device->class;
     my $control =
       $device->device_controls("device_control.name" => $action)->first;
     $action =~ s/[^-a-z0-9_\.]/_/ig;
     my $definition;
     if ($control) {
       $definition = $control->definition;
-    } elsif ($type_name eq "Button") {
+    } elsif ($class_name eq "Button") {
       $definition =
         "xpl -m xpl-trig -c remote.basic device=[% device.name %] keys=$action";
-    } elsif ($type_name eq "DMX") {
+    } elsif ($class_name eq "DMX") {
       $definition =
         "xpl -m xpl-cmnd -c dmx.basic base=[% device.attribute('base') %] ".
           "type=set value=$action";
@@ -182,15 +182,15 @@ sub run_action : Private {
          (($command, $remaining) = split(/\r?\n+/, $remaining, 2))) {
     next if ($command =~ /^\s*$/);
     $command =~ s/^\s+//;
-    my ($type, $spec) = split(/\s+/, $command, 2);
-    unless ($type =~ /^(xpl|error)$/) {
-      die "no action defined for '$type'";
+    my ($class, $spec) = split(/\s+/, $command, 2);
+    unless ($class =~ /^(xpl|error)$/) {
+      die "no action defined for '$class'";
       next;
     }
-    if ($type eq "error") {
+    if ($class eq "error") {
       die $spec."\n";
     }
-    print STDERR "Action: ", $type, " ", $spec, "\n";
+    print STDERR "Action: ", $class, " ", $spec, "\n";
     my %args =
       (
        vendor_id => "bnz",

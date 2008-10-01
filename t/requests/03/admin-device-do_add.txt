@@ -1,4 +1,4 @@
-/admin/device/do_add?name=front_door&string=Front%20Door&description=Front%20Door&type=Door
+/admin/device/do_add?name=front_door&string=Front%20Door&description=Front%20Door&class=Door
 text/html
 200 OK
 
@@ -260,7 +260,7 @@ Page:
     <th>name</th>
     <th>string</th>
     <th>description</th>
-    <th>type</th>
+    <th>class</th>
       <th>Attributes</th>
     <th/>
   </tr>

@@ -216,7 +216,7 @@ tr.list-row-1 {
 <!-- END site/nav -->
 </div>
 <div id="content">
-<p>You have to fill in all fields.the following are missing: <b>name, trig_type</b></p>
+<p>You have to fill in all fields.the following are missing: <b>name, class</b></p>
 <form action="http://localhost//admin/rule/do_edit/15"
     method="post">
     name<br/>
@@ -225,8 +225,8 @@ tr.list-row-1 {
     active<br/>
     <select name="active"><option selected="selected" value="1">Enabled</option><option value="0">Disbled</option></select>
 <br/>
-    trig_type<br/>
-    <input name="trig_type" type="text" value="xpl" />
+    class<br/>
+    <input name="class" type="text" value="xpl" />
 <br/>
     trig<br/>
     <textarea cols="80" name="trig" rows="2">message_type=&quot;xpl-trig&quot; class=&quot;cid.basic&quot; calltype=inbound</textarea>

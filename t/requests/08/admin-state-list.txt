@@ -237,7 +237,7 @@ Filter:
 </p>
 <table class="list-table">
   <tr class="list-header">
-    <th>type</th>
+    <th>class</th>
     <th>name</th>
     <th>value</th>
     <th>ctime</th>

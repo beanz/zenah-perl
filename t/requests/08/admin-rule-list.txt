@@ -253,7 +253,7 @@ Page:
   <tr class="list-header">
     <th>name</th>
     <th>active</th>
-    <th>trig_type</th>
+    <th>class</th>
     <th>trig</th>
     <th>action</th>
     <th>ftime</th>

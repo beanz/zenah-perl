@@ -1,4 +1,4 @@
-/admin/map/do_edit/6?type=phonebook&name=emergency&value=112
+/admin/map/do_edit/6?class=phonebook&name=emergency&value=112
 text/html
 200 OK
 
@@ -219,8 +219,8 @@ tr.list-row-1 {
 <p>Updated OK</p>
 <form action="http://localhost//admin/map/do_edit/6"
     method="post">
-    type<br/>
-    <input name="type" type="text" value="phonebook" />
+    class<br/>
+    <input name="class" type="text" value="phonebook" />
 <br/>
     name<br/>
     <input name="name" type="text" value="emergency" />
