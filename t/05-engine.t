@@ -147,7 +147,7 @@ ZenAH::Engine->action_sleep: requires 'spec' parameter.
 ZenAH::Engine->action_debug: requires 'spec' parameter.
 ZenAH::Engine->action_error: requires 'spec' parameter.
 ZenAH::Engine->action_scene: requires 'spec' parameter.
-ZenAH::Engine->xpl_send: requires 'spec' parameter.
+ZenAH::Engine->action_xpl: requires 'spec' parameter.
 ZenAH::Engine->action_device: requires 'spec' parameter.
 ZenAH::Engine->action_device: device, invalid, not found.
 ZenAH::Engine->action_sleep: sleep for nothing?},
@@ -179,43 +179,43 @@ $warn =~ s/\s+at .*?\s+line\s+\d+//msg;
 is($warn, q!------------------------------------------------------------------------------
 $stash = {
            'zenah' => {
+                        'datetime' => sub { "DUMMY" },
+                        'device' => {
+                                      'all' => sub { "DUMMY" },
+                                      'by_attr' => sub { "DUMMY" },
+                                      'by_attr_list' => sub { "DUMMY" },
+                                      'by_attr_name_list' => sub { "DUMMY" },
+                                      'by_class_and_attr' => sub { "DUMMY" },
+                                      'by_class_list' => sub { "DUMMY" },
+                                      'by_name' => sub { "DUMMY" }
+                                    },
                         'map' => {
-                                   'lookup' => sub { "DUMMY" },
-                                   'reverse_list' => sub { "DUMMY" },
                                    'all' => sub { "DUMMY" },
+                                   'lookup' => sub { "DUMMY" },
                                    'lookup_list' => sub { "DUMMY" },
-                                   'reverse' => sub { "DUMMY" }
+                                   'reverse' => sub { "DUMMY" },
+                                   'reverse_list' => sub { "DUMMY" }
                                  },
+                        'room' => {
+                                    'all' => sub { "DUMMY" },
+                                    'by_attr' => sub { "DUMMY" },
+                                    'by_attr_list' => sub { "DUMMY" }
+                                  },
                         'rrd' => {
                                    'get' => sub { "DUMMY" }
                                  },
-                        'device' => {
-                                      'by_attr' => sub { "DUMMY" },
-                                      'by_attr_name_list' => sub { "DUMMY" },
-                                      'by_name' => sub { "DUMMY" },
-                                      'by_attr_list' => sub { "DUMMY" },
-                                      'by_class_list' => sub { "DUMMY" },
-                                      'by_class_and_attr' => sub { "DUMMY" },
-                                      'all' => sub { "DUMMY" }
-                                    },
-                        'room' => {
-                                    'by_attr' => sub { "DUMMY" },
-                                    'by_attr_list' => sub { "DUMMY" },
-                                    'all' => sub { "DUMMY" }
-                                  },
-                        'datetime' => sub { "DUMMY" },
                         'state' => {
-                                     'get_values_by_class' => sub { "DUMMY" },
-                                     'get_values_by_class_since_matching' => sub { "DUMMY" },
-                                     'get_by_class_since' => sub { "DUMMY" },
-                                     'get_values_by_class_matching' => sub { "DUMMY" },
-                                     'get_value' => sub { "DUMMY" },
-                                     'get_by_class_since_matching' => sub { "DUMMY" },
-                                     'get_by_class' => sub { "DUMMY" },
                                      'get' => sub { "DUMMY" },
+                                     'get_by_class' => sub { "DUMMY" },
                                      'get_by_class_matching' => sub { "DUMMY" },
-                                     'set' => sub { "DUMMY" },
-                                     'get_values_by_class_since' => sub { "DUMMY" }
+                                     'get_by_class_since' => sub { "DUMMY" },
+                                     'get_by_class_since_matching' => sub { "DUMMY" },
+                                     'get_value' => sub { "DUMMY" },
+                                     'get_values_by_class' => sub { "DUMMY" },
+                                     'get_values_by_class_matching' => sub { "DUMMY" },
+                                     'get_values_by_class_since' => sub { "DUMMY" },
+                                     'get_values_by_class_since_matching' => sub { "DUMMY" },
+                                     'set' => sub { "DUMMY" }
                                    }
                       }
          };

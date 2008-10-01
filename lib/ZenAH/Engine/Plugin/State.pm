@@ -42,6 +42,84 @@ our $VERSION = qw/$Revision$/[1];
 
 # Preloaded methods go here.
 
+=head2 C<new(%params)>
+
+The constructor creates a new plugin object.  The constructor takes a
+parameter hash as arguments.  Valid parameters in the hash are:
+
+=over
+
+=item engine
+
+This is a reference to the engine that is instantiating the plugin.
+
+=back
+
+It returns a blessed reference when successful or undef otherwise.
+
+This plugin registers a 'state' stash with the following operations:
+
+=over
+
+=item C<get(class, name)>
+
+Returns the state object (or first if there is more than one) with
+the given class and name.
+
+=item C<get_value(class, name)>
+
+Returns the value from the state object (or first if there is more
+than one) with the given class and name.
+
+=item C<get_by_class(class)>
+
+Returns a list of state objects with the given class.
+
+=item C<get_by_class_matching(class, name_pattern)>
+
+Returns a list of state objects with the given class with names that
+match the given pattern.
+
+=item C<get_by_class_since(class, modification_time)>
+
+Returns a list of state objects with the given class and with
+modification times equal or more recent than the given time.
+
+=item C<get_by_class_since_matching(class, modification_time, name_pattern)>
+
+Returns a list of state objects with the given class, with
+modification times equal or more recent than the given time, and
+with names that match the given pattern.
+
+=item C<get_values_by_class(class)>
+
+Returns the list of values from the objects that would be returned by
+the C<get_by_class> call.
+
+=item C<get_values_by_class_matching(class, name_pattern)>
+
+Returns the list of values from the objects that would be returned by
+the C<get_by_class_matching> call.
+
+=item C<get_values_by_class_since(class, modification_time)>
+
+Returns the list of values from the objects that would be returned by
+the C<get_by_class_since> call.
+
+=item C<get_values_by_class_since_matching(class, modification_time, pattern)>
+
+Returns the list of values from the objects that would be returned by
+the C<get_by_class_since_matching> call.
+
+=item C<set(class, name, value)>
+
+Updates the database with the new value or creates a new entry in the state
+table.
+
+=back
+
+=cut
+
 sub new {
   my $pkg = shift;
   my $self = {};

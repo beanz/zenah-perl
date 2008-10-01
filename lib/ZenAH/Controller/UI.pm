@@ -163,6 +163,13 @@ sub variant_url {
   return '<a href="'.$uri.'">'.$name.'</a>';
 }
 
+=head2 C<evaluate_action($template_string, $template_stash)>
+
+This method is used to process a template (with the given stash)
+and run the resulting actions.
+
+=cut
+
 sub evaluate_action : Private {
   my $self = shift;
   my $action = shift;
@@ -172,14 +179,21 @@ sub evaluate_action : Private {
   return $self->run_action($processed, $stash);
 }
 
+=head2 C<run_action($action_string, $template_stash)>
+
+This method executes a list of actions after it has been processed as
+a template.
+
+=cut
+
 sub run_action : Private {
   my $self = shift;
   my $action = shift;
   my $stash = shift || {};
-  my $command;
   my $remaining = $action;
-  while ($remaining &&
-         (($command, $remaining) = split(/\r?\n+/, $remaining, 2))) {
+  while ($remaining) {
+    my $command;
+    ($command, $remaining) = split(/\r?\n+/, $remaining, 2);
     next if ($command =~ /^\s*$/);
     $command =~ s/^\s+//;
     my ($class, $spec) = split(/\s+/, $command, 2);
@@ -202,6 +216,13 @@ sub run_action : Private {
   }
   return 1;
 }
+
+=head2 C<process_template($template_string, $template_stash)>
+
+This method is applies the L<Template::Toolkit> to the given string
+with the supplied stash.
+
+=cut
 
 sub process_template : Private {
   my $self = shift;

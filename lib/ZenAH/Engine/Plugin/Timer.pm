@@ -43,6 +43,29 @@ our $VERSION = qw/$Revision$/[1];
 
 # Preloaded methods go here.
 
+=head2 C<new(%params)>
+
+The constructor creates a new plugin object.  The constructor takes a
+parameter hash as arguments.  Valid parameters in the hash are:
+
+=over
+
+=item engine
+
+This is a reference to the engine that is instantiating the plugin.
+
+=back
+
+It returns a blessed reference when successful or undef otherwise.
+
+This plugin registers a 'sleep' action, which causes the remaining
+actions to be delayed.  It registers an 'at' trigger for rules that
+are triggered based on L<xPL::Timer> events.  It registers a
+'datetime' stash which returns a L<DateTime> object of the current
+time.
+
+=cut
+
 sub new {
   my $pkg = shift;
   my $self = {};
@@ -72,6 +95,15 @@ sub new {
   return $self;
 }
 
+=head2 C<add($rule)>
+
+This method is the callback that sets up the timers for rules which
+have the class 'at'.  The trigger, C<trig>, value is passed directly
+to the L<xPL::Listener::add_timer()> method.  Supported values for the
+trigger are describe in the documentation for that method.
+
+=cut
+
 sub add {
   my ($self, $rule) = @_;
   return $self->{_engine}->add_timer(id => 'trigger-for-rule-'.$rule,
@@ -83,10 +115,26 @@ sub add {
                               );
 }
 
+=head2 C<remove($rule)>
+
+This method is the callback that removes the timers for rules which
+have the class 'at'.
+
+=cut
+
 sub remove {
   my ($self, $rule) = @_;
   return $self->{_engine}->remove_timer('trigger-for-rule-'.$rule);
 }
+
+=head2 C<action_sleep(%params)>
+
+This method is registered as a callback for the 'sleep' action.  It
+takes a timeout as arguments.  The timeout value is passed directly to
+the L<xPL::Listener::add_timer()> method.  Supported values for the
+timeout are describe in the documentation for that method.
+
+=cut
 
 sub action_sleep {
   my $self = shift;

@@ -294,7 +294,7 @@ sub add_stash {
 
 =head2 C<evaluate_action($template_string, $template_stash)>
 
-This method is used to proces a template (with the given stash)
+This method is used to process a template (with the given stash)
 and run the resulting actions.
 
 =cut
@@ -310,7 +310,7 @@ sub evaluate_action {
 
 =head2 C<run_action($action_string, $template_stash)>
 
-This method is executes a list of actions after it has been prcessed as
+This method executes a list of actions after it has been processed as
 a template.
 
 =cut
@@ -377,7 +377,7 @@ sub trigger_rule_by_name {
 
 =head2 C<process_template($template_string, $template_stash)>
 
-This method is applied the L<Template::Toolkit> to the given string
+This method is applies the L<Template::Toolkit> to the given string
 with the combination of the supplied stash and the "system" stash
 that is polulated by the callbacks registered by the plugins.
 
@@ -493,7 +493,7 @@ In which case the contents of the stash is dumped to C<STDERR>.
 =item the string '...'
 
 In which case the remaining unprocessed rules are printed to C<STDERR>
-and E<not> executed.
+and B<not> executed.
 
 =item any string
 
@@ -512,6 +512,7 @@ sub action_debug {
     warn $line, $p{remaining},"\n", $line;
     return -1; # skip remaining actions
   } elsif ($p{spec} eq "stash") {
+    local $Data::Dumper::Sortkeys = 1;
     warn $line, Data::Dumper->Dump([$p{stash}],[qw/stash/]),"\n", $line;
   } else {
     warn $p{spec}, "\n";

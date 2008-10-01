@@ -43,6 +43,27 @@ our $VERSION = qw/$Revision$/[1];
 
 # Preloaded methods go here.
 
+=head2 C<new(%params)>
+
+The constructor creates a new plugin object.  The constructor takes a
+parameter hash as arguments.  Valid parameters in the hash are:
+
+=over
+
+=item engine
+
+This is a reference to the engine that is instantiating the plugin.
+
+=back
+
+It returns a blessed reference when successful or undef otherwise.
+
+This plugin registers an 'xpl' action, see L<action_xpl()> below,
+and an 'xpl' trigger for rules that are triggered based on incoming
+xPL messages, see L<add()> below.
+
+=cut
+
 sub new {
   my $pkg = shift;
   my $self = {};
@@ -56,17 +77,41 @@ sub new {
                        remove_callback => sub { $self->remove(@_) });
 
   $engine->add_action(class => "xpl",
-                      callback => sub { $self->xpl_send(@_) });
+                      callback => sub { $self->action_xpl(@_) });
   return $self;
 }
+
+=head2 C<add($rule)>
+
+This method is the callback that sets up the listeners for rules which
+have the class 'xpl'.  The trigger, C<trig>, value is passed directly
+to the L<xPL::Listener::add_xpl_callback()> method.  Supported values
+for the trigger are describe in the documentation for that method.
+Additionally, for filtering on 'device' fields only, as fast lookup
+is supported with the following syntax:
+
+=over
+
+=item C<lookup_map(class)>
+
+Filters xPL messages depending on whether the value of the device field
+appears as a 'name' in the Map table with the given class.  This is used
+to avoid firing rules that will do lookups using the 'map' stash in the
+template but fail becuase no entry is found.
+
+=item C<lookup_blah(arg1,arg2,...)>
+
+Filters xPL messages depending on whether the
+L<ZenAH::CDBI::Device::search_blah(arg1, arg2, ..., device)> returns
+true for the given device.
+
+=back
+
+=cut
 
 sub add {
   my ($self, $rule) = @_;
   my %filter = simple_tokenizer($rule->trig);
-  if (exists $filter{class} && $filter{class} =~ /^(\w+)\.(\w+)$/) {
-    $filter{class} = $1;
-    $filter{class_type} = $2;
-  }
   if ($filter{'device'} && $filter{'device'} =~ /^lookup_(\w+)\[([^]]+)\]$/) {
     if ($1 eq 'map') {
       my $arg = $2;
@@ -95,11 +140,26 @@ sub add {
   return 1;
 }
 
+=head2 C<remove($rule)>
+
+This method is the callback that removes the xPL callbacks for rules
+which have the class 'xpl'.
+
+=cut
+
 sub remove {
   my ($self, $rule) = @_;
   $self->{_engine}->remove_xpl_callback('trigger-for-rule-'.$rule);
   return 1;
 }
+
+=head2 C<fire($rule, %params)>
+
+This method is the callback that triggers rules when an xPL message is
+matched.  It passes the xpl message object to the action template as
+the 'xpl' entry in the stash.
+
+=cut
 
 sub fire {
   my $self = shift;
@@ -109,10 +169,21 @@ sub fire {
   return 1;
 }
 
-sub xpl_send {
+=head2 C<action_xpl(%params)>
+
+This method is registered as a callback for the 'xpl' action.  It
+takes an xPL message string as arguments.  The message string value is
+passed directly to the L<xPL::Listener::send_from_string()> method.
+Supported values for the message string are describe in the
+documentation for that method.
+
+=cut
+
+sub action_xpl {
   my $self = shift;
   my %p = @_;
-  my $spec = $p{spec} or return $self->{_engine}->ouch("requires 'spec' parameter");
+  my $spec = $p{spec}
+    or return $self->{_engine}->ouch("requires 'spec' parameter");
   eval {
     $self->{_engine}->send_from_string($spec);
   };

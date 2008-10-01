@@ -71,11 +71,11 @@ exists.
 Returns the name of the specified map entry or undef if no such entry
 exists.
 
-=item C<lookup(class, name>
+=item C<lookup_list(class, name>
 
 Returns a list of values of any matching map entries.
 
-=item C<reverse(class, value)>
+=item C<reverse_list(class, value)>
 
 Returns a list of names of any matching map entries.
 
