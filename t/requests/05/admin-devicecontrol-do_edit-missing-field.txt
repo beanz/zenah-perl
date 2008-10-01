@@ -1,4 +1,4 @@
-/admin/devicecontrol/do_edit/20?name=door%2Fopen&description=Open
+/admin/devicecontrol/do_edit/20?class=door&name=open&description=Open
 text/html
 200 OK
 
@@ -219,8 +219,11 @@ tr.list-row-1 {
 <p>You have to fill in all fields.the following are missing: <b>string, definition</b></p>
 <form action="http://localhost//admin/devicecontrol/do_edit/20"
     method="post">
+    class<br/>
+    <input name="class" type="text" value="door" />
+<br/>
     name<br/>
-    <input name="name" type="text" value="door/open" />
+    <input name="name" type="text" value="open" />
 <br/>
     string<br/>
     <input name="string" type="text" value="Open" />

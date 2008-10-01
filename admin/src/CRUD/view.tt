@@ -27,7 +27,7 @@
   </tr>
   [% FOR control = item.device_controls %]
   <tr>
-    <th class="view-table" colspan="2">[% control.name %]</th>
+    <th class="view-table" colspan="2">[% control.class _ "/" _ control.name %]</th>
     <td>
       [% crudbutton("devicecontrol", "view", control.id) %]
     </td>

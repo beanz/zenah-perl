@@ -76,33 +76,33 @@ text/html
      title="Bathroom">
     <b>Light:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bath','x10/on');">
+    onclick="button_action('l_bath','on');">
     On
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bath','x10/off');">
+    onclick="button_action('l_bath','off');">
     Off
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bath','x10/bright');">
+    onclick="button_action('l_bath','bright');">
     Bright
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bath','x10/dim');">
+    onclick="button_action('l_bath','dim');">
     Dim
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bath','x10/full-fast');">
+    onclick="button_action('l_bath','full-fast');">
     FullFast
   </button>
 <br/>
     <b>Blind:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('b_bath','blind/close');">
+    onclick="button_action('b_bath','close');">
     Close
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('b_bath','blind/open');">
+    onclick="button_action('b_bath','open');">
     Open
   </button>
 <br/>
@@ -111,65 +111,65 @@ text/html
      title="Bedroom 1">
     <b>Light:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bed_1','x10/on');">
+    onclick="button_action('l_bed_1','on');">
     On
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bed_1','x10/off');">
+    onclick="button_action('l_bed_1','off');">
     Off
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bed_1','x10/bright');">
+    onclick="button_action('l_bed_1','bright');">
     Bright
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bed_1','x10/dim');">
+    onclick="button_action('l_bed_1','dim');">
     Dim
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bed_1','x10/full-fast');">
+    onclick="button_action('l_bed_1','full-fast');">
     FullFast
   </button>
 <br/>
     <b>Reading Light:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bed_1_r','x10/on');">
+    onclick="button_action('l_bed_1_r','on');">
     On
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bed_1_r','x10/off');">
+    onclick="button_action('l_bed_1_r','off');">
     Off
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bed_1_r','x10/bright');">
+    onclick="button_action('l_bed_1_r','bright');">
     Bright
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bed_1_r','x10/dim');">
+    onclick="button_action('l_bed_1_r','dim');">
     Dim
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_bed_1_r','x10/full-fast');">
+    onclick="button_action('l_bed_1_r','full-fast');">
     FullFast
   </button>
 <br/>
     <b>Curtain:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('c_bed_1','curtain/open');">
+    onclick="button_action('c_bed_1','open');">
     Open
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('c_bed_1','curtain/close');">
+    onclick="button_action('c_bed_1','close');">
     Close
   </button>
 <br/>
     <b>Blind:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('b_bed_1','blind/close');">
+    onclick="button_action('b_bed_1','close');">
     Close
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('b_bed_1','blind/open');">
+    onclick="button_action('b_bed_1','open');">
     Open
   </button>
 <br/>
@@ -181,23 +181,23 @@ text/html
      title="Cloak Room">
     <b>Light:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_cloak','x10/on');">
+    onclick="button_action('l_cloak','on');">
     On
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_cloak','x10/off');">
+    onclick="button_action('l_cloak','off');">
     Off
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_cloak','x10/bright');">
+    onclick="button_action('l_cloak','bright');">
     Bright
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_cloak','x10/dim');">
+    onclick="button_action('l_cloak','dim');">
     Dim
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_cloak','x10/full-fast');">
+    onclick="button_action('l_cloak','full-fast');">
     FullFast
   </button>
 <br/>
@@ -206,55 +206,55 @@ text/html
      title="Kitchen">
     <b>Spots:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_kitchen','x10/on');">
+    onclick="button_action('l_kitchen','on');">
     On
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_kitchen','x10/off');">
+    onclick="button_action('l_kitchen','off');">
     Off
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_kitchen','x10/bright');">
+    onclick="button_action('l_kitchen','bright');">
     Bright
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_kitchen','x10/dim');">
+    onclick="button_action('l_kitchen','dim');">
     Dim
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_kitchen','x10/full-fast');">
+    onclick="button_action('l_kitchen','full-fast');">
     FullFast
   </button>
 <br/>
     <b>Under Lights:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_kitchen_under','x10/on');">
+    onclick="button_action('l_kitchen_under','on');">
     On
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_kitchen_under','x10/off');">
+    onclick="button_action('l_kitchen_under','off');">
     Off
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_kitchen_under','x10/bright');">
+    onclick="button_action('l_kitchen_under','bright');">
     Bright
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_kitchen_under','x10/dim');">
+    onclick="button_action('l_kitchen_under','dim');">
     Dim
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_kitchen_under','x10/full-fast');">
+    onclick="button_action('l_kitchen_under','full-fast');">
     FullFast
   </button>
 <br/>
     <b>Curtain:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('c_kitchen','curtain/open');">
+    onclick="button_action('c_kitchen','open');">
     Open
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('c_kitchen','curtain/close');">
+    onclick="button_action('c_kitchen','close');">
     Close
   </button>
 <br/>
@@ -263,63 +263,63 @@ text/html
      title="Lounge">
     <b>Light:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_lounge','x10/on');">
+    onclick="button_action('l_lounge','on');">
     On
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_lounge','x10/off');">
+    onclick="button_action('l_lounge','off');">
     Off
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_lounge','x10/bright');">
+    onclick="button_action('l_lounge','bright');">
     Bright
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_lounge','x10/dim');">
+    onclick="button_action('l_lounge','dim');">
     Dim
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_lounge','x10/full-fast');">
+    onclick="button_action('l_lounge','full-fast');">
     FullFast
   </button>
 <br/>
     <b>Curtain:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('c_lounge','curtain/open');">
+    onclick="button_action('c_lounge','open');">
     Open
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('c_lounge','curtain/close');">
+    onclick="button_action('c_lounge','close');">
     Close
   </button>
 <br/>
     <b>Amplifier:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('a_amp','x10/on');">
+    onclick="button_action('a_amp','on');">
     On
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('a_amp','x10/off');">
+    onclick="button_action('a_amp','off');">
     Off
   </button>
 <br/>
     <b>Plasma:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('a_plasma','x10/on');">
+    onclick="button_action('a_plasma','on');">
     On
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('a_plasma','x10/off');">
+    onclick="button_action('a_plasma','off');">
     Off
   </button>
 <br/>
     <b>TV:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('a_tv','x10/on');">
+    onclick="button_action('a_tv','on');">
     On
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('a_tv','x10/off');">
+    onclick="button_action('a_tv','off');">
     Off
   </button>
 <br/>
@@ -328,19 +328,19 @@ text/html
      title="Garden">
     <b>Light:</b>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_garden','x10/on');">
+    onclick="button_action('l_garden','on');">
     On
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_garden','x10/off');">
+    onclick="button_action('l_garden','off');">
     Off
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_garden','x10/full-fast');">
+    onclick="button_action('l_garden','full-fast');">
     FullFast
   </button>
   <button dojoType="dijit.form.Button"
-    onclick="button_action('l_garden','x10/flash');">
+    onclick="button_action('l_garden','flash');">
     Flash
   </button>
 <br/>

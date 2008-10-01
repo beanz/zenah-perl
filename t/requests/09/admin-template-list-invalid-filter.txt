@@ -234,6 +234,9 @@ Filter:
       href="http://localhost/admin/template?filter=html"
        >html</a></span>
     <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=message"
+       >message</a></span>
+    <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=room"
        >room</a></span>
     <span class="filterbutton"><a
@@ -325,12 +328,14 @@ Page:
 </p>
 <table class="list-table">
   <tr class="list-header">
+    <th>class</th>
     <th>name</th>
     <th>text</th>
     <th/>
   </tr>
     <tr class="list-row-0">
-      <td>config/main</td>
+      <td>config</td>
+      <td>main</td>
       <td><small><pre>[% # config/main
    #
    # This is the main configuration template which is processed before
@@ -372,7 +377,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-1">
-      <td>config/url</td>
+      <td>config</td>
+      <td>url</td>
       <td><small><pre>[% base = Catalyst.req.base;
    site.url = {
      base    = base

@@ -1,4 +1,4 @@
-/admin/template/do_edit/41?name=content/basement
+/admin/template/do_edit/41?class=content&name=basement
 text/html
 200 OK
 
@@ -219,8 +219,11 @@ tr.list-row-1 {
 <p>You have to fill in all fields.the following are missing: <b>text</b></p>
 <form action="http://localhost//admin/template/do_edit/41"
     method="post">
+    class<br/>
+    <input name="class" type="text" value="content" />
+<br/>
     name<br/>
-    <input name="name" type="text" value="content/basement" />
+    <input name="name" type="text" value="basement" />
 <br/>
     text<br/>
     <textarea cols="80" name="text" rows="10">&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;90%&quot; border=&quot;1&quot;&gt;

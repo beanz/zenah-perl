@@ -1,4 +1,4 @@
-/admin/devicecontrol/do_add?name=door%2Fopen&definition=%5b%25%20SET%20relay%20%3d%20device.attribute(%27open_relay%27)%20%25%5d%0a%5b%25%20IF%20relay%20%25%5d%0a%20%20xpl%20-c%20control.basic%20device%3d%5b%25%20relay%20%25%5d%20type%3doutput%20current%3dpulse%0a%5b%25%20ELSE%20%25%5d%0a%20%20error%20%27invalid%20device%27%0a%5b%25%20END%20%25%5d%0a
+/admin/devicecontrol/do_add?class=door&name=open&definition=%5b%25%20SET%20relay%20%3d%20device.attribute(%27open_relay%27)%20%25%5d%0a%5b%25%20IF%20relay%20%25%5d%0a%20%20xpl%20-c%20control.basic%20device%3d%5b%25%20relay%20%25%5d%20type%3doutput%20current%3dpulse%0a%5b%25%20ELSE%20%25%5d%0a%20%20error%20%27invalid%20device%27%0a%5b%25%20END%20%25%5d%0a
 text/html
 200 OK
 
@@ -218,6 +218,9 @@ tr.list-row-1 {
 <div id="content">
 <p>You have to fill in all fields. The following are missing: <b>string</b></p>
 <form action="http://localhost//admin/devicecontrol/do_add" method="post">
+    class<br/>
+    <input name="class" type="text" />
+<br/>
     name<br/>
     <input name="name" type="text" />
 <br/>

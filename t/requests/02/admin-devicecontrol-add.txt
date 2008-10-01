@@ -218,6 +218,9 @@ tr.list-row-1 {
 <div id="content">
 <p></p>
 <form action="http://localhost//admin/devicecontrol/do_add" method="post">
+    class<br/>
+    <input name="class" type="text" />
+<br/>
     name<br/>
     <input name="name" type="text" />
 <br/>

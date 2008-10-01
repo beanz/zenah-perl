@@ -51,15 +51,14 @@ my %crud =
    },
    'devicecontrol' => {
      table => 'DeviceControl',
-     column_order => [qw/name string description definition/],
-     sort_order => 'name',
+     column_order => [qw/class name string description definition/],
+     sort_order => 'class, name',
      form_validation => {
-       required => [ qw/name string definition/ ],
+       required => [ qw/class name string definition/ ],
        optional => [ qw/description/ ],
      },
-     filter_format => '%s%%',
-     filter_field => 'name',
-     filter_types_method => 'prefixes',
+     filter_field => 'class',
+     filter_types_method => 'classes',
      list_rows => 10,
    },
    'map' => {
@@ -118,14 +117,13 @@ my %crud =
    },
    'template' => {
      table => 'Template',
-     column_order => [qw/name text/],
-     sort_order => 'name',
+     column_order => [qw/class name text/],
+     sort_order => 'class,name',
      form_validation => {
-       required => [ qw/name text/ ]
+       required => [ qw/class name text/ ]
      },
-     filter_format => '%s%%',
-     filter_field => 'name',
-     filter_types_method => 'prefixes',
+     filter_field => 'class',
+     filter_types_method => 'classes',
      list_rows => 5,
    },
   );

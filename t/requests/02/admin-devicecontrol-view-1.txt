@@ -218,8 +218,12 @@ tr.list-row-1 {
 <div id="content">
 <table class="view-table">
   <tr>
+    <th class="view-table">class</th>
+    <td class="view-table" colspan="2">x10</td>
+  </tr>
+  <tr>
     <th class="view-table">name</th>
-    <td class="view-table" colspan="2">x10/on</td>
+    <td class="view-table" colspan="2">on</td>
   </tr>
   <tr>
     <th class="view-table">string</th>

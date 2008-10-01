@@ -255,6 +255,7 @@ Page:
 </p>
 <table class="list-table">
   <tr class="list-header">
+    <th>class</th>
     <th>name</th>
     <th>string</th>
     <th>description</th>
@@ -262,7 +263,8 @@ Page:
     <th/>
   </tr>
     <tr class="list-row-0">
-      <td>x10/flash</td>
+      <td>x10</td>
+      <td>flash</td>
       <td>Flash</td>
       <td>Flash light (and all others on same housecode)
 </td>
@@ -292,7 +294,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-1">
-      <td>x10/full-fast</td>
+      <td>x10</td>
+      <td>full-fast</td>
       <td>FullFast</td>
       <td></td>
       <td>[% SET unit = device.attribute('unit') %]

@@ -1,4 +1,4 @@
-/admin/template/do_add?name=content/basement
+/admin/template/do_add?class=content&name=basement
 text/html
 200 OK
 
@@ -218,6 +218,9 @@ tr.list-row-1 {
 <div id="content">
 <p>You have to fill in all fields. The following are missing: <b>text</b></p>
 <form action="http://localhost//admin/template/do_add" method="post">
+    class<br/>
+    <input name="class" type="text" />
+<br/>
     name<br/>
     <input name="name" type="text" />
 <br/>

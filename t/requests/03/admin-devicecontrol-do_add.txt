@@ -1,4 +1,4 @@
-/admin/devicecontrol/do_add?name=door%2Fopen&string=Open&definition=%5b%25%20SET%20relay%20%3d%20device.attribute(%27open_relay%27)%20%25%5d%0a%5b%25%20IF%20relay%20%25%5d%0a%20%20xpl%20-c%20control.basic%20device%3d%5b%25%20relay%20%25%5d%20type%3doutput%20current%3dpulse%0a%5b%25%20ELSE%20%25%5d%0a%20%20error%20%27invalid%20device%27%0a%5b%25%20END%20%25%5d%0a
+/admin/devicecontrol/do_add?class=door&name=open&string=Open&definition=%5b%25%20SET%20relay%20%3d%20device.attribute(%27open_relay%27)%20%25%5d%0a%5b%25%20IF%20relay%20%25%5d%0a%20%20xpl%20-c%20control.basic%20device%3d%5b%25%20relay%20%25%5d%20type%3doutput%20current%3dpulse%0a%5b%25%20ELSE%20%25%5d%0a%20%20error%20%27invalid%20device%27%0a%5b%25%20END%20%25%5d%0a
 text/html
 200 OK
 
@@ -248,6 +248,7 @@ Page:
 </p>
 <table class="list-table">
   <tr class="list-header">
+    <th>class</th>
     <th>name</th>
     <th>string</th>
     <th>description</th>
@@ -255,7 +256,8 @@ Page:
     <th/>
   </tr>
     <tr class="list-row-0">
-      <td>blind/close</td>
+      <td>blind</td>
+      <td>close</td>
       <td>Close</td>
       <td></td>
       <td>[% SET relay = device.attribute('close_relay') %]
@@ -280,7 +282,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-1">
-      <td>blind/open</td>
+      <td>blind</td>
+      <td>open</td>
       <td>Open</td>
       <td></td>
       <td>[% SET relay = device.attribute('open_relay') %]
@@ -305,7 +308,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-0">
-      <td>curtain/close</td>
+      <td>curtain</td>
+      <td>close</td>
       <td>Close</td>
       <td></td>
       <td>[% SET relay = device.attribute('close_relay') %]
@@ -330,7 +334,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-1">
-      <td>curtain/open</td>
+      <td>curtain</td>
+      <td>open</td>
       <td>Open</td>
       <td></td>
       <td>[% SET relay = device.attribute('open_relay') %]
@@ -355,7 +360,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-0">
-      <td>door/open</td>
+      <td>door</td>
+      <td>open</td>
       <td>Open</td>
       <td></td>
       <td>[% SET relay = device.attribute('open_relay') %]
@@ -380,7 +386,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-1">
-      <td>x10/bright</td>
+      <td>x10</td>
+      <td>bright</td>
       <td>Bright</td>
       <td></td>
       <td>[% SET unit = device.attribute('unit') %]
@@ -405,7 +412,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-0">
-      <td>x10/dim</td>
+      <td>x10</td>
+      <td>dim</td>
       <td>Dim</td>
       <td></td>
       <td>[% SET unit = device.attribute('unit') %]
@@ -430,7 +438,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-1">
-      <td>x10/flash</td>
+      <td>x10</td>
+      <td>flash</td>
       <td>Flash</td>
       <td>Flash light (and all others on same housecode)
 </td>
@@ -460,7 +469,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-0">
-      <td>x10/full-fast</td>
+      <td>x10</td>
+      <td>full-fast</td>
       <td>FullFast</td>
       <td></td>
       <td>[% SET unit = device.attribute('unit') %]
@@ -484,7 +494,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-1">
-      <td>x10/off</td>
+      <td>x10</td>
+      <td>off</td>
       <td>Off</td>
       <td></td>
       <td>[% SET unit = device.attribute('unit') %]

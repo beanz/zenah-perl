@@ -265,6 +265,7 @@ Page:
 </p>
 <table class="list-table">
   <tr class="list-header">
+    <th>class</th>
     <th>name</th>
     <th>string</th>
     <th>description</th>
@@ -272,7 +273,8 @@ Page:
     <th/>
   </tr>
     <tr class="list-row-0">
-      <td>curtain/close</td>
+      <td>curtain</td>
+      <td>close</td>
       <td>Close</td>
       <td></td>
       <td>[% SET relay = device.attribute('close_relay') %]
@@ -297,7 +299,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-1">
-      <td>curtain/open</td>
+      <td>curtain</td>
+      <td>open</td>
       <td>Open</td>
       <td></td>
       <td>[% SET relay = device.attribute('open_relay') %]

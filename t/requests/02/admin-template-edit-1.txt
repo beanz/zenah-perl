@@ -219,8 +219,11 @@ tr.list-row-1 {
 <p></p>
 <form action="http://localhost//admin/template/do_edit/1"
     method="post">
+    class<br/>
+    <input name="class" type="text" value="content" />
+<br/>
     name<br/>
-    <input name="name" type="text" value="content/downstairs" />
+    <input name="name" type="text" value="downstairs" />
 <br/>
     text<br/>
     <textarea cols="80" name="text" rows="10">&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;80%&quot; border=&quot;1&quot;&gt;

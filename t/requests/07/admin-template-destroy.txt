@@ -232,6 +232,9 @@ Filter:
       href="http://localhost/admin/template?filter=html"
        >html</a></span>
     <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=message"
+       >message</a></span>
+    <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=room"
        >room</a></span>
     <span class="filterbutton"><a
@@ -281,12 +284,14 @@ Page:
 </p>
 <table class="list-table">
   <tr class="list-header">
+    <th>class</th>
     <th>name</th>
     <th>text</th>
     <th/>
   </tr>
     <tr class="list-row-0">
-      <td>config/col</td>
+      <td>config</td>
+      <td>col</td>
       <td><small><pre>[% site.rgb = {
      black   = &#39;#000000&#39;
      white   = &#39;#ffffff&#39;
@@ -368,7 +373,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-1">
-      <td>config/macro</td>
+      <td>config</td>
+      <td>macro</td>
       <td><small><pre>[% USE String %]
 [% MACRO variant_button(type, name, variant) BLOCK %]
   [% SET var = Catalyst.request.param(variant.keys.0) %]
@@ -414,7 +420,8 @@ Filter:
       </td>
     </tr>
     <tr class="list-row-0">
-      <td>config/main</td>
+      <td>config</td>
+      <td>main</td>
       <td><small><pre>[% # config/main
    #
    # This is the main configuration template which is processed before
@@ -456,7 +463,8 @@ Filter:
       </td>
     </tr>
     <tr class="list-row-1">
-      <td>config/url</td>
+      <td>config</td>
+      <td>url</td>
       <td><small><pre>[% base = Catalyst.req.base;
    site.url = {
      base    = base
@@ -481,7 +489,8 @@ Filter:
       </td>
     </tr>
     <tr class="list-row-0">
-      <td>content/default</td>
+      <td>content</td>
+      <td>default</td>
       <td><small><pre>[% SET t_content = &#39;content/&#39; _ (Catalyst.request.param(&#39;content&#39;) || &#39;house&#39;) %]
 [% PROCESS $t_content %]</pre></small>
 </td>

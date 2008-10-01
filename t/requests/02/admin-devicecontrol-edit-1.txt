@@ -219,8 +219,11 @@ tr.list-row-1 {
 <p></p>
 <form action="http://localhost//admin/devicecontrol/do_edit/1"
     method="post">
+    class<br/>
+    <input name="class" type="text" value="x10" />
+<br/>
     name<br/>
-    <input name="name" type="text" value="x10/on" />
+    <input name="name" type="text" value="on" />
 <br/>
     string<br/>
     <input name="string" type="text" value="On" />

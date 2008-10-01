@@ -294,19 +294,19 @@ INSERT INTO "rule" VALUES(4,'dusk','sunset minutes="-20"','at','scene all_window
 INSERT INTO "rule" VALUES(5,'all_windows',NULL,'scene','# map ''on'' => ''open'' and ''off'' to ''close''
 [% SET action = state == ''on'' ? ''open'' : (state == ''off'' ? ''close'' : state) %]
 [% FOREACH dev = zenah.device.by_type_list("Curtain") %]
-  [% dev.action("curtain/$action") %]
+  [% dev.action("$action") %]
 [% END %]
 [% FOREACH dev = zenah.device.by_type_list("Blind") %]
   # Power supply can only serve 3 blinds at once so we pause a little
   [% IF loop.count AND ( loop.count % 3 ) == 0 %]
     sleep 30
   [% END %]
-  [% dev.action("blind/$action") %]
+  [% dev.action("$action") %]
   # could be written:
-  # device [% dev.name %] blind/[% action %]
+  # device [% dev.name %] [% action %]
 [% END %]
 ',1,1186342242,1186773465);
-INSERT INTO "rule" VALUES(6,'kettle',NULL,'scene','[% zenah.device.by_name(''kettle'').action("x10/$state") %]
+INSERT INTO "rule" VALUES(6,'kettle',NULL,'scene','[% zenah.device.by_name(''kettle'').action("$state") %]
 [% IF state == ''on'' %]
 enable kettle_warn
 [% ELSE %]
@@ -344,7 +344,7 @@ INSERT INTO "rule" VALUES(12,'motion_trigger',NULL,'scene','[%# trigger regardle
 [% SET lamp_name = zenah.map.lookup(''motion_trigger'',room) %]
 debug [% lamp_name %] in [% room %]
 [% IF lamp_name %]
-  [% zenah.device.by_name(lamp_name).action("x10/$state") %]
+  [% zenah.device.by_name(lamp_name).action("$state") %]
 [% END %]
 
 [%# trigger only if the room is dark %]
@@ -352,7 +352,7 @@ debug [% lamp_name %] in [% room %]
 [% IF light.value == ''dark'' OR state == ''off'' %]
   [% SET lamp_name = zenah.map.lookup(''motion_dark_trigger'',room) %]
   [% IF lamp_name %]
-    [% zenah.device.by_name(lamp_name).action("x10/$state") %]
+    [% zenah.device.by_name(lamp_name).action("$state") %]
   [% END %]
 [% END %]
 ',1,1186334273,2007);
@@ -399,11 +399,12 @@ INSERT INTO "state" VALUES(12,'26.6DA373000000','temp','26.7',1186340387,1186340
 INSERT INTO "state" VALUES(13,'26.6DA373000000','humidity','55.0025',1186340414,1186340414);
 CREATE TABLE "template" (
   "id" integer PRIMARY KEY,
+  "class" varchar(20) default NULL,
   "name" varchar(80) default NULL,
   "text" text,
   "mtime" int(11) default NULL
 );
-INSERT INTO "template" VALUES(1,'content/downstairs','<table cellpadding="0" cellspacing="0" width="80%" border="1">
+INSERT INTO "template" VALUES(1,'content','downstairs','<table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
   [% PROCESS room/default room = "kitchen" %]
   [% PROCESS room/default room = "lounge" rowspan="2" %]
@@ -413,14 +414,14 @@ INSERT INTO "template" VALUES(1,'content/downstairs','<table cellpadding="0" cel
 </tr>
 </table>
 ',1185695960);
-INSERT INTO "template" VALUES(3,'content/upstairs','<table cellpadding="0" cellspacing="0" width="80%" border="1">
+INSERT INTO "template" VALUES(3,'content','upstairs','<table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
   [% PROCESS room/default room = "bath" %]
   [% PROCESS room/default room = "bed_1" %]
 </tr>
 </table>
 ',1185696146);
-INSERT INTO "template" VALUES(4,'room/name','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
+INSERT INTO "template" VALUES(4,'room','name','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
 [% SET r = table_class.search({ name => room }) %]
 [% IF r %]
   <td valign="top" rowspan="[% rowspan || 1 %]" colspan="[% colspan || 1 %]">
@@ -432,7 +433,7 @@ INSERT INTO "template" VALUES(4,'room/name','[% USE table_class = Class(''ZenAH:
   Invalid room ''[% room %]''
 [% END %]
 ',1188675351);
-INSERT INTO "template" VALUES(5,'room/motion','[% USE room_table = Class(''ZenAH::Model::CDBI::Room'') %]
+INSERT INTO "template" VALUES(5,'room','motion','[% USE room_table = Class(''ZenAH::Model::CDBI::Room'') %]
 [% USE state_table = Class(''ZenAH::Model::CDBI::State'') %]
 [% SET r = room_table.search({ name => room }) %]
 [% IF r %]
@@ -450,7 +451,7 @@ INSERT INTO "template" VALUES(5,'room/motion','[% USE room_table = Class(''ZenAH
   Invalid room
 [% END %]
 ',1186318470);
-INSERT INTO "template" VALUES(6,'room/light','[% USE room_table = Class(''ZenAH::Model::CDBI::Room'') %]
+INSERT INTO "template" VALUES(6,'room','light','[% USE room_table = Class(''ZenAH::Model::CDBI::Room'') %]
 [% USE state_table = Class(''ZenAH::Model::CDBI::State'') %]
 [% SET r = room_table.search({ name => room }) %]
 [% IF r %]
@@ -469,13 +470,13 @@ INSERT INTO "template" VALUES(6,'room/light','[% USE room_table = Class(''ZenAH:
   Invalid room
 [% END %]
 ',1186318448);
-INSERT INTO "template" VALUES(7,'content/room','<table cellpadding="0" cellspacing="0" width="80%" border="1">
+INSERT INTO "template" VALUES(7,'content','room','<table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
   [% PROCESS room/default room = Catalyst.request.param(''room_name'') %]
 </tr>
 </table>
 ',1185696038);
-INSERT INTO "template" VALUES(8,'room/devices','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
+INSERT INTO "template" VALUES(8,'room','devices','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
 [% SET r = table_class.search({ name => room }) %]
 [% IF r %]
   <td valign="top" rowspan="[% rowspan || 1 %]" colspan="[% colspan || 1 %]">
@@ -498,7 +499,7 @@ INSERT INTO "template" VALUES(8,'room/devices','[% USE table_class = Class(''Zen
   Invalid room ''[% room %]''
 [% END %]
 ',1186318420);
-INSERT INTO "template" VALUES(9,'html/device','<div class="device">
+INSERT INTO "template" VALUES(9,'html','device','<div class="device">
   <table valign="top" border="0">
   <tr>
     <th halign="right">
@@ -519,7 +520,7 @@ INSERT INTO "template" VALUES(9,'html/device','<div class="device">
   </table>
 </div>
 ',1188675344);
-INSERT INTO "template" VALUES(10,'room/lights','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
+INSERT INTO "template" VALUES(10,'room','lights','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
 [% SET r = table_class.search({ name => room }) %]
 [% IF r %]
   <td valign="top" rowspan="[% rowspan || 1 %]" colspan="[% colspan || 1 %]">
@@ -542,7 +543,7 @@ INSERT INTO "template" VALUES(10,'room/lights','[% USE table_class = Class(''Zen
 [% ELSE %]
   Invalid room ''[% room %]''
 [% END %]',1186318464);
-INSERT INTO "template" VALUES(11,'room/windows','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
+INSERT INTO "template" VALUES(11,'room','windows','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
 [% SET r = table_class.search({ name => room }) %]
 [% IF r %]
   <td valign="top" rowspan="[% rowspan || 1 %]" colspan="[% colspan || 1 %]">
@@ -564,13 +565,13 @@ INSERT INTO "template" VALUES(11,'room/windows','[% USE table_class = Class(''Ze
 [% ELSE %]
   Invalid room ''[% room %]''
 [% END %]',1186318544);
-INSERT INTO "template" VALUES(13,'html/header','<!-- BEGIN header -->
+INSERT INTO "template" VALUES(13,'html','header','<!-- BEGIN header -->
 <img id="logo" class="logo" height="50" width="50"
      src="[% Catalyst.uri_for("/images") %]/zenah-50.png" />
 <h1 class="title">[% template.title or site.title %]</h1>
 <!-- END header -->
 ',1185030456);
-INSERT INTO "template" VALUES(14,'html/nav','<!-- BEGIN nav -->
+INSERT INTO "template" VALUES(14,'html','nav','<!-- BEGIN nav -->
 <div id="topnav">
 [% navbutton("","Home") %]
 [% variant_button("navbutton", "Lights", { "room" => "lights" }) %]
@@ -587,11 +588,11 @@ INSERT INTO "template" VALUES(14,'html/nav','<!-- BEGIN nav -->
 </div>
 <!-- END nav -->
 ',1188675537);
-INSERT INTO "template" VALUES(16,'html/footer','<!-- BEGIN footer -->
+INSERT INTO "template" VALUES(16,'html','footer','<!-- BEGIN footer -->
 <div id="copyright">© [% site.copyright %]</div>
 <!-- END footer -->
 ',1185030464);
-INSERT INTO "template" VALUES(17,'html/buttonset','[% FOR attribute = device.device_attributes %]
+INSERT INTO "template" VALUES(17,'html','buttonset','[% FOR attribute = device.device_attributes %]
   [% NEXT UNLESS attribute.name == "button" %]
   [% SET v = attribute.value.split(":") %]
   [% SET name = v.0 %]
@@ -603,7 +604,7 @@ INSERT INTO "template" VALUES(17,'html/buttonset','[% FOR attribute = device.dev
   </td>
 [% END %]
 ',1188675335);
-INSERT INTO "template" VALUES(18,'xul/layout','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
+INSERT INTO "template" VALUES(18,'xul','layout','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
 <description><html:h1>ZenAH</html:h1></description>
 <box>
     <html:div id="zenah_status">No Value</html:div>
@@ -657,7 +658,7 @@ INSERT INTO "template" VALUES(18,'xul/layout','[% USE table_class = Class(''ZenA
   <statusbarpanel label="Status" flex="1" />
 </statusbar>
 ',1186344362);
-INSERT INTO "template" VALUES(19,'xul/room','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
+INSERT INTO "template" VALUES(19,'xul','room','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
 [% SET r = table_class.search({ name => room }) %]
 [% IF r %]
   <grid flex="1">
@@ -677,7 +678,7 @@ INSERT INTO "template" VALUES(19,'xul/room','[% USE table_class = Class(''ZenAH:
   Invalid room ''[% room %]''
 [% END %]
 ',1185028972);
-INSERT INTO "template" VALUES(20,'xul/device','<row>
+INSERT INTO "template" VALUES(20,'xul','device','<row>
   <label value="[% device.string %]"/>
   <hbox flex="1" >
     [% IF device.type == "Button" %]
@@ -692,7 +693,7 @@ INSERT INTO "template" VALUES(20,'xul/device','<row>
   </hbox>
 </row>
 ',1185029088);
-INSERT INTO "template" VALUES(21,'xul/buttonset','[% FOR attribute = device.device_attributes %]
+INSERT INTO "template" VALUES(21,'xul','buttonset','[% FOR attribute = device.device_attributes %]
   [% NEXT UNLESS attribute.name == "button" %]
   [% SET v = attribute.value.split(":") %]
   [% SET name = v.0 %]
@@ -701,7 +702,7 @@ INSERT INTO "template" VALUES(21,'xul/buttonset','[% FOR attribute = device.devi
     oncommand="device_func([''args__[% device.name %]'',''args__[% name %]''],[''zenah_status'']);return false;" />
 [% END %]
 ',1185029058);
-INSERT INTO "template" VALUES(22,'config/main','[% # config/main
+INSERT INTO "template" VALUES(22,'config','main','[% # config/main
    #
    # This is the main configuration template which is processed before
    # any other page, by virtue of it being defined as a PRE_PROCESS 
@@ -731,7 +732,7 @@ INSERT INTO "template" VALUES(22,'config/main','[% # config/main
 
 -%]
 ',1185028812);
-INSERT INTO "template" VALUES(23,'site/wrapper','[% IF template.name.match(''.(css|js|txt)'');
+INSERT INTO "template" VALUES(23,'site','wrapper','[% IF template.name.match(''.(css|js|txt)'');
      debug("Passing page through as text: $template.name");
      content;
    ELSE;
@@ -753,7 +754,7 @@ INSERT INTO "template" VALUES(23,'site/wrapper','[% IF template.name.match(''.(c
    END;
 -%]
 ',1188649289);
-INSERT INTO "template" VALUES(24,'config/col','[% site.rgb = {
+INSERT INTO "template" VALUES(24,'config','col','[% site.rgb = {
      black   = ''#000000''
      white   = ''#ffffff''
      grey1   = ''#484848''
@@ -819,7 +820,7 @@ INSERT INTO "template" VALUES(24,'config/col','[% site.rgb = {
    };
 %]
 ',1185008838);
-INSERT INTO "template" VALUES(25,'config/macro','[% USE String %]
+INSERT INTO "template" VALUES(25,'config','macro','[% USE String %]
 [% MACRO variant_button(type, name, variant) BLOCK %]
   [% SET var = Catalyst.request.param(variant.keys.0) %]
   [% SET cc = variant.values.0 == var ? "-current" : "" %]
@@ -850,7 +851,7 @@ Filter:
 </p>
 [% END %]
 ',1188675330);
-INSERT INTO "template" VALUES(26,'config/url','[% base = Catalyst.req.base;
+INSERT INTO "template" VALUES(26,'config','url','[% base = Catalyst.req.base;
 
    site.url = {
      base    = base
@@ -859,7 +860,7 @@ INSERT INTO "template" VALUES(26,'config/url','[% base = Catalyst.req.base;
    }
 -%]
 ',1185008875);
-INSERT INTO "template" VALUES(27,'site/html','<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+INSERT INTO "template" VALUES(27,'site','html','<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
   <title>[% template.title or site.title %]</title>
@@ -885,7 +886,7 @@ INSERT INTO "template" VALUES(27,'site/html','<!DOCTYPE HTML PUBLIC "-//W3C//DTD
  </body>
 </html>
 ',1186318302);
-INSERT INTO "template" VALUES(28,'site/style.css','html {
+INSERT INTO "template" VALUES(28,'site','style.css','html {
     height: 100%;
 }
 
@@ -1037,7 +1038,7 @@ content {
   margin-top: 15px;
 }
 ',1185045421);
-INSERT INTO "template" VALUES(29,'site/xul','<?xml version="1.0"?>
+INSERT INTO "template" VALUES(29,'site','xul','<?xml version="1.0"?>
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
@@ -1048,7 +1049,7 @@ INSERT INTO "template" VALUES(29,'site/xul','<?xml version="1.0"?>
 [% content %]
 </window>
 ',1185008913);
-INSERT INTO "template" VALUES(30,'html/layout','<div id="header">[% PROCESS html/header %]</div>
+INSERT INTO "template" VALUES(30,'html','layout','<div id="header">[% PROCESS html/header %]</div>
 
 <div id="nav">[% PROCESS html/nav %]</div>
 
@@ -1063,24 +1064,24 @@ INSERT INTO "template" VALUES(30,'html/layout','<div id="header">[% PROCESS html
 
 <div id="footer">[% PROCESS html/footer %]</div>
 ',1185370939);
-INSERT INTO "template" VALUES(32,'content/house','[% PROCESS content/upstairs %]
+INSERT INTO "template" VALUES(32,'content','house','[% PROCESS content/upstairs %]
 <br />
 [% PROCESS content/downstairs %]
 <br />
 [% PROCESS content/garden %]
 
 ',1185623448);
-INSERT INTO "template" VALUES(33,'content/default','[% SET t_content = ''content/'' _ (Catalyst.request.param(''content'') || ''house'') %]
+INSERT INTO "template" VALUES(33,'content','default','[% SET t_content = ''content/'' _ (Catalyst.request.param(''content'') || ''house'') %]
 [% PROCESS $t_content %]',1185032774);
-INSERT INTO "template" VALUES(34,'room/default','[% SET t_room = ''room/'' _ (Catalyst.request.param(''room'') || ''name'') %]
+INSERT INTO "template" VALUES(34,'room','default','[% SET t_room = ''room/'' _ (Catalyst.request.param(''room'') || ''name'') %]
 [% PROCESS $t_room %]',1185032816);
-INSERT INTO "template" VALUES(35,'content/garden','<table cellpadding="0" cellspacing="0" width="80%" border="1">
+INSERT INTO "template" VALUES(35,'content','garden','<table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
   [% PROCESS room/default room = "garden" %]
 </tr>
 </table>
 ',1185696008);
-INSERT INTO "template" VALUES(36,'error.tt2','[% META title = ''Catalyst/TT Error'' %]
+INSERT INTO "template" VALUES(36,'message','error','[% META title = ''Catalyst/TT Error'' %]
 <p>
   An error has occurred.  We''re terribly sorry about that, but it''s 
   one of those things that happens from time to time.  Let''s just 
@@ -1091,7 +1092,7 @@ INSERT INTO "template" VALUES(36,'error.tt2','[% META title = ''Catalyst/TT Erro
   to you: <span class="error">[% error %]</span>
 </p>
 ',1185630505);
-INSERT INTO "template" VALUES(37,'site/dojo','<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+INSERT INTO "template" VALUES(37,'site','dojo','<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
   <title>[% template.title or site.title %]</title>
@@ -1153,7 +1154,7 @@ INSERT INTO "template" VALUES(37,'site/dojo','<!DOCTYPE HTML PUBLIC "-//W3C//DTD
 [% content %]
  </body>
 </html>',1188675362);
-INSERT INTO "template" VALUES(38,'dojo/device','<b>[% device.string %]:</b>
+INSERT INTO "template" VALUES(38,'dojo','device','<b>[% device.string %]:</b>
 [% FOR control = device.device_controls %]
   <button dojoType="dijit.form.Button"
     onclick="button_action(''[% device.name %]'',''[% control.name %]'');">
@@ -1161,7 +1162,7 @@ INSERT INTO "template" VALUES(38,'dojo/device','<b>[% device.string %]:</b>
   </button>
 [% END %]
 <br/>',1188649372);
-INSERT INTO "template" VALUES(39,'dojo/layout','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
+INSERT INTO "template" VALUES(39,'dojo','layout','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
 <div id="outer" dojotype="dijit.layout.LayoutContainer"
      style="width: 100%; height: 100%;">
   <div id="topBar" dojotype="dijit.layout.ContentPane"
@@ -1199,7 +1200,7 @@ INSERT INTO "template" VALUES(39,'dojo/layout','[% USE table_class = Class(''Zen
     <div id="fill"></div>
 </div>
 ',1188659709);
-INSERT INTO "template" VALUES(40,'dojo/room','<div id="[% room.name %]_tab" dojoType="dijit.layout.ContentPane"
+INSERT INTO "template" VALUES(40,'dojo','room','<div id="[% room.name %]_tab" dojoType="dijit.layout.ContentPane"
      title="[% room.string %]">
   [% FOR d = room.devices %]
     [% NEXT UNLESS d.device_controls %]
@@ -1213,67 +1214,68 @@ CREATE TABLE "timestamp" (
 );
 CREATE TABLE "device_control" (
   "id" integer PRIMARY KEY,
+  "class" varchar(20) default NULL,
   "name" varchar(50) default NULL,
   "definition" text,
   "string" varchar(80) default NULL,
   "description" text
 );
-INSERT INTO "device_control" VALUES(1,'x10/on','[% SET unit = device.attribute(''unit'') %]
+INSERT INTO "device_control" VALUES(1,'x10','on','[% SET unit = device.attribute(''unit'') %]
 [% IF unit %]
   xpl -m xpl-cmnd -c x10.basic device=[% unit %] command=on
 [% ELSE %]
   error ''invalid device''
 [% END %]
 ','On',NULL);
-INSERT INTO "device_control" VALUES(2,'x10/off','[% SET unit = device.attribute(''unit'') %]
+INSERT INTO "device_control" VALUES(2,'x10','off','[% SET unit = device.attribute(''unit'') %]
 [% IF unit %]
   xpl -m xpl-cmnd -c x10.basic device=[% unit %] command=off
 [% ELSE %]
   error ''invalid device''
 [% END %]
 ','Off',NULL);
-INSERT INTO "device_control" VALUES(3,'x10/bright','[% SET unit = device.attribute(''unit'') %]
+INSERT INTO "device_control" VALUES(3,'x10','bright','[% SET unit = device.attribute(''unit'') %]
 [% IF unit %]
   xpl -m xpl-cmnd -c x10.basic device=[% unit %] command=bright level=5
 [% ELSE %]
   error ''invalid device''
 [% END %]
 ','Bright',NULL);
-INSERT INTO "device_control" VALUES(4,'x10/dim','[% SET unit = device.attribute(''unit'') %]
+INSERT INTO "device_control" VALUES(4,'x10','dim','[% SET unit = device.attribute(''unit'') %]
 [% IF unit %]
   xpl -m xpl-cmnd -c x10.basic device=[% unit %] command=dim level=5
 [% ELSE %]
   error ''invalid device''
 [% END %]
 ','Dim',NULL);
-INSERT INTO "device_control" VALUES(5,'curtain/open','[% SET relay = device.attribute(''open_relay'') %]
+INSERT INTO "device_control" VALUES(5,'curtain','open','[% SET relay = device.attribute(''open_relay'') %]
 [% IF relay %]
   xpl -c control.basic device=[% relay %] type=output current=pulse
 [% ELSE %]
   error ''invalid device''
 [% END %]
 ','Open',NULL);
-INSERT INTO "device_control" VALUES(6,'curtain/close','[% SET relay = device.attribute(''close_relay'') %]
+INSERT INTO "device_control" VALUES(6,'curtain','close','[% SET relay = device.attribute(''close_relay'') %]
 [% IF relay %]
   xpl -c control.basic device=[% relay %] type=output current=pulse
 [% ELSE %]
   error ''invalid device''
 [% END %]
 ','Close',NULL);
-INSERT INTO "device_control" VALUES(14,'x10/on-override','[% SET unit = device.attribute(''unit'') %]
+INSERT INTO "device_control" VALUES(14,'x10','on-override','[% SET unit = device.attribute(''unit'') %]
 [% IF unit %]
   xpl -m xpl-cmnd -c x10.basic device=[% unit %] command=on
 [% ELSE %]
   error ''invalid device''
 [% END %]
 ','Force On',NULL);
-INSERT INTO "device_control" VALUES(16,'x10/full-fast','[% SET unit = device.attribute(''unit'') %]
+INSERT INTO "device_control" VALUES(16,'x10','full-fast','[% SET unit = device.attribute(''unit'') %]
 [% IF unit %]
   xpl -m xpl-cmnd -c x10.basic device=[% unit %] command=extended data1=49 data2=63
 [% ELSE %]
   error ''invalid device''
 [% END %]','FullFast',NULL);
-INSERT INTO "device_control" VALUES(17,'x10/flash','[% USE String %]
+INSERT INTO "device_control" VALUES(17,'x10','flash','[% USE String %]
 [% SET unit = device.attribute(''unit'') %]
 [% IF unit %]
   [% FOREACH count = [ 1, 2, 3, 4, 5 ] %]
@@ -1285,18 +1287,18 @@ INSERT INTO "device_control" VALUES(17,'x10/flash','[% USE String %]
   error ''invalid device''
 [% END %]','Flash','Flash light (and all others on same housecode)
 ');
-INSERT INTO "device_control" VALUES(18,'blind/close','[% SET relay = device.attribute(''close_relay'') %]
+INSERT INTO "device_control" VALUES(18,'blind','close','[% SET relay = device.attribute(''close_relay'') %]
 [% IF relay %]
   xpl -c control.basic device=[% relay %] type=output current=pulse
 [% ELSE %]
   error ''invalid device''
 [% END %]
 ','Close',NULL);
-INSERT INTO "device_control" VALUES(19,'blind/open','[% SET relay = device.attribute(''open_relay'') %]
+INSERT INTO "device_control" VALUES(19,'blind','open','[% SET relay = device.attribute(''open_relay'') %]
 [% IF relay %]
   xpl -c control.basic device=[% relay %] type=output current=pulse
 [% ELSE %]
   error ''invalid device''
 [% END %]
 ','Open',NULL);
-cOMMIT;
+COMMIT;

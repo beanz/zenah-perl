@@ -334,27 +334,23 @@ Method to return list of distinct C<type> fields of state entries.
 =cut
 
 sub ZenAH::CDBI::State::types {
-  my $class = shift;
-  return map { $_->type } $class->search_types();
+  my $self = shift;
+  return map { $_->type } $self->search_types();
 }
 
-ZenAH::CDBI::Template->set_sql(prefixes => q{
-  SELECT distinct name FROM __TABLE__ where name like '%%/%%'
+ZenAH::CDBI::Template->set_sql(classes => q{
+  SELECT distinct class FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::Template::prefixes>
+=head2 C<ZenAH::CDBI::Template::classes>
 
-Method to return list of the common prefixes of the names of
-templates.
+Method to return list of the distinct class fileds templates.
 
 =cut
 
-sub ZenAH::CDBI::Template::prefixes {
+sub ZenAH::CDBI::Template::classes {
   my $self = shift;
-  my $sth = $self->sql_prefixes();
-  $sth->execute();
-  my %p = map { $_=$_->[0]; s/\/.*//; $_ => 1 } @{$sth->fetchall_arrayref};
-  return keys %p;
+  return map { $_->class } $self->search_classes();
 }
 
 =head2 C<ZenAH::CDBI::Template::to_field()>
@@ -407,29 +403,22 @@ Method to return list of distinct C<type> fields of room attributes.
 
 sub ZenAH::CDBI::RoomAttribute::types {
   my $self = shift;
-  my $sth = $self->sql_types();
-  $sth->execute();
-  my %p = map { $_->[0] => 1 } @{$sth->fetchall_arrayref};
-  return keys %p;
+  return map { $_->name } $self->search_types();
 }
 
-ZenAH::CDBI::DeviceControl->set_sql(prefixes => q{
-  SELECT distinct name FROM __TABLE__ where name like '%%/%%'
+ZenAH::CDBI::DeviceControl->set_sql(classes => q{
+  SELECT distinct class FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::DeviceControl::prefixes>
+=head2 C<ZenAH::CDBI::DeviceControl::classes>
 
-Method to return list of the common prefixes of the names of
-device controls.
+Method to return list of the distinct C<class> fieilds of device controls.
 
 =cut
 
-sub ZenAH::CDBI::DeviceControl::prefixes {
+sub ZenAH::CDBI::DeviceControl::classes {
   my $self = shift;
-  my $sth = $self->sql_prefixes();
-  $sth->execute();
-  my %p = map { $_=$_->[0]; s/\/.*//; $_ => 1 } @{$sth->fetchall_arrayref};
-  return keys %p;
+  return map { $_->class } $self->search_classes();
 }
 
 =head2 C<ZenAH::CDBI::DeviceControls::to_field()>

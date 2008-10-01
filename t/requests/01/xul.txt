@@ -36,15 +36,15 @@ application/vnd.mozilla.xul+xml
   <label value="Light"/>
   <hbox flex="1" >
         <button label="On"
-           oncommand="device_func(['args__l_bath','args__x10/on'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bath','args__on'],['zenah_status']);return false;" />
         <button label="Off"
-           oncommand="device_func(['args__l_bath','args__x10/off'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bath','args__off'],['zenah_status']);return false;" />
         <button label="Bright"
-           oncommand="device_func(['args__l_bath','args__x10/bright'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bath','args__bright'],['zenah_status']);return false;" />
         <button label="Dim"
-           oncommand="device_func(['args__l_bath','args__x10/dim'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bath','args__dim'],['zenah_status']);return false;" />
         <button label="FullFast"
-           oncommand="device_func(['args__l_bath','args__x10/full-fast'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bath','args__full-fast'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -52,9 +52,9 @@ application/vnd.mozilla.xul+xml
   <label value="Blind"/>
   <hbox flex="1" >
         <button label="Close"
-           oncommand="device_func(['args__b_bath','args__blind/close'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__b_bath','args__close'],['zenah_status']);return false;" />
         <button label="Open"
-           oncommand="device_func(['args__b_bath','args__blind/open'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__b_bath','args__open'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -72,15 +72,15 @@ application/vnd.mozilla.xul+xml
   <label value="Light"/>
   <hbox flex="1" >
         <button label="On"
-           oncommand="device_func(['args__l_bed_1','args__x10/on'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bed_1','args__on'],['zenah_status']);return false;" />
         <button label="Off"
-           oncommand="device_func(['args__l_bed_1','args__x10/off'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bed_1','args__off'],['zenah_status']);return false;" />
         <button label="Bright"
-           oncommand="device_func(['args__l_bed_1','args__x10/bright'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bed_1','args__bright'],['zenah_status']);return false;" />
         <button label="Dim"
-           oncommand="device_func(['args__l_bed_1','args__x10/dim'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bed_1','args__dim'],['zenah_status']);return false;" />
         <button label="FullFast"
-           oncommand="device_func(['args__l_bed_1','args__x10/full-fast'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bed_1','args__full-fast'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -88,15 +88,15 @@ application/vnd.mozilla.xul+xml
   <label value="Reading Light"/>
   <hbox flex="1" >
         <button label="On"
-           oncommand="device_func(['args__l_bed_1_r','args__x10/on'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bed_1_r','args__on'],['zenah_status']);return false;" />
         <button label="Off"
-           oncommand="device_func(['args__l_bed_1_r','args__x10/off'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bed_1_r','args__off'],['zenah_status']);return false;" />
         <button label="Bright"
-           oncommand="device_func(['args__l_bed_1_r','args__x10/bright'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bed_1_r','args__bright'],['zenah_status']);return false;" />
         <button label="Dim"
-           oncommand="device_func(['args__l_bed_1_r','args__x10/dim'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bed_1_r','args__dim'],['zenah_status']);return false;" />
         <button label="FullFast"
-           oncommand="device_func(['args__l_bed_1_r','args__x10/full-fast'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_bed_1_r','args__full-fast'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -104,9 +104,9 @@ application/vnd.mozilla.xul+xml
   <label value="Curtain"/>
   <hbox flex="1" >
         <button label="Open"
-           oncommand="device_func(['args__c_bed_1','args__curtain/open'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__c_bed_1','args__open'],['zenah_status']);return false;" />
         <button label="Close"
-           oncommand="device_func(['args__c_bed_1','args__curtain/close'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__c_bed_1','args__close'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -114,9 +114,9 @@ application/vnd.mozilla.xul+xml
   <label value="Blind"/>
   <hbox flex="1" >
         <button label="Close"
-           oncommand="device_func(['args__b_bed_1','args__blind/close'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__b_bed_1','args__close'],['zenah_status']);return false;" />
         <button label="Open"
-           oncommand="device_func(['args__b_bed_1','args__blind/open'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__b_bed_1','args__open'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -146,15 +146,15 @@ application/vnd.mozilla.xul+xml
   <label value="Light"/>
   <hbox flex="1" >
         <button label="On"
-           oncommand="device_func(['args__l_cloak','args__x10/on'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_cloak','args__on'],['zenah_status']);return false;" />
         <button label="Off"
-           oncommand="device_func(['args__l_cloak','args__x10/off'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_cloak','args__off'],['zenah_status']);return false;" />
         <button label="Bright"
-           oncommand="device_func(['args__l_cloak','args__x10/bright'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_cloak','args__bright'],['zenah_status']);return false;" />
         <button label="Dim"
-           oncommand="device_func(['args__l_cloak','args__x10/dim'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_cloak','args__dim'],['zenah_status']);return false;" />
         <button label="FullFast"
-           oncommand="device_func(['args__l_cloak','args__x10/full-fast'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_cloak','args__full-fast'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -172,15 +172,15 @@ application/vnd.mozilla.xul+xml
   <label value="Spots"/>
   <hbox flex="1" >
         <button label="On"
-           oncommand="device_func(['args__l_kitchen','args__x10/on'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_kitchen','args__on'],['zenah_status']);return false;" />
         <button label="Off"
-           oncommand="device_func(['args__l_kitchen','args__x10/off'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_kitchen','args__off'],['zenah_status']);return false;" />
         <button label="Bright"
-           oncommand="device_func(['args__l_kitchen','args__x10/bright'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_kitchen','args__bright'],['zenah_status']);return false;" />
         <button label="Dim"
-           oncommand="device_func(['args__l_kitchen','args__x10/dim'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_kitchen','args__dim'],['zenah_status']);return false;" />
         <button label="FullFast"
-           oncommand="device_func(['args__l_kitchen','args__x10/full-fast'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_kitchen','args__full-fast'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -188,15 +188,15 @@ application/vnd.mozilla.xul+xml
   <label value="Under Lights"/>
   <hbox flex="1" >
         <button label="On"
-           oncommand="device_func(['args__l_kitchen_under','args__x10/on'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_kitchen_under','args__on'],['zenah_status']);return false;" />
         <button label="Off"
-           oncommand="device_func(['args__l_kitchen_under','args__x10/off'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_kitchen_under','args__off'],['zenah_status']);return false;" />
         <button label="Bright"
-           oncommand="device_func(['args__l_kitchen_under','args__x10/bright'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_kitchen_under','args__bright'],['zenah_status']);return false;" />
         <button label="Dim"
-           oncommand="device_func(['args__l_kitchen_under','args__x10/dim'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_kitchen_under','args__dim'],['zenah_status']);return false;" />
         <button label="FullFast"
-           oncommand="device_func(['args__l_kitchen_under','args__x10/full-fast'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_kitchen_under','args__full-fast'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -204,9 +204,9 @@ application/vnd.mozilla.xul+xml
   <label value="Curtain"/>
   <hbox flex="1" >
         <button label="Open"
-           oncommand="device_func(['args__c_kitchen','args__curtain/open'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__c_kitchen','args__open'],['zenah_status']);return false;" />
         <button label="Close"
-           oncommand="device_func(['args__c_kitchen','args__curtain/close'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__c_kitchen','args__close'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -224,15 +224,15 @@ application/vnd.mozilla.xul+xml
   <label value="Light"/>
   <hbox flex="1" >
         <button label="On"
-           oncommand="device_func(['args__l_lounge','args__x10/on'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_lounge','args__on'],['zenah_status']);return false;" />
         <button label="Off"
-           oncommand="device_func(['args__l_lounge','args__x10/off'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_lounge','args__off'],['zenah_status']);return false;" />
         <button label="Bright"
-           oncommand="device_func(['args__l_lounge','args__x10/bright'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_lounge','args__bright'],['zenah_status']);return false;" />
         <button label="Dim"
-           oncommand="device_func(['args__l_lounge','args__x10/dim'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_lounge','args__dim'],['zenah_status']);return false;" />
         <button label="FullFast"
-           oncommand="device_func(['args__l_lounge','args__x10/full-fast'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_lounge','args__full-fast'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -240,9 +240,9 @@ application/vnd.mozilla.xul+xml
   <label value="Curtain"/>
   <hbox flex="1" >
         <button label="Open"
-           oncommand="device_func(['args__c_lounge','args__curtain/open'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__c_lounge','args__open'],['zenah_status']);return false;" />
         <button label="Close"
-           oncommand="device_func(['args__c_lounge','args__curtain/close'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__c_lounge','args__close'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -250,9 +250,9 @@ application/vnd.mozilla.xul+xml
   <label value="Amplifier"/>
   <hbox flex="1" >
         <button label="On"
-           oncommand="device_func(['args__a_amp','args__x10/on'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__a_amp','args__on'],['zenah_status']);return false;" />
         <button label="Off"
-           oncommand="device_func(['args__a_amp','args__x10/off'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__a_amp','args__off'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -260,9 +260,9 @@ application/vnd.mozilla.xul+xml
   <label value="Plasma"/>
   <hbox flex="1" >
         <button label="On"
-           oncommand="device_func(['args__a_plasma','args__x10/on'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__a_plasma','args__on'],['zenah_status']);return false;" />
         <button label="Off"
-           oncommand="device_func(['args__a_plasma','args__x10/off'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__a_plasma','args__off'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -270,9 +270,9 @@ application/vnd.mozilla.xul+xml
   <label value="TV"/>
   <hbox flex="1" >
         <button label="On"
-           oncommand="device_func(['args__a_tv','args__x10/on'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__a_tv','args__on'],['zenah_status']);return false;" />
         <button label="Off"
-           oncommand="device_func(['args__a_tv','args__x10/off'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__a_tv','args__off'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>
@@ -290,13 +290,13 @@ application/vnd.mozilla.xul+xml
   <label value="Light"/>
   <hbox flex="1" >
         <button label="On"
-           oncommand="device_func(['args__l_garden','args__x10/on'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_garden','args__on'],['zenah_status']);return false;" />
         <button label="Off"
-           oncommand="device_func(['args__l_garden','args__x10/off'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_garden','args__off'],['zenah_status']);return false;" />
         <button label="FullFast"
-           oncommand="device_func(['args__l_garden','args__x10/full-fast'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_garden','args__full-fast'],['zenah_status']);return false;" />
         <button label="Flash"
-           oncommand="device_func(['args__l_garden','args__x10/flash'],['zenah_status']);return false;" />
+           oncommand="device_func(['args__l_garden','args__flash'],['zenah_status']);return false;" />
     <spacer flex="1"/>
   </hbox>
 </row>

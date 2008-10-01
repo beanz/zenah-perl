@@ -38,14 +38,14 @@
   [% USE control_table = Class(fulltable _ 'Control') %]
   <td valign="top" align="left">
     <select name="controls" multiple="multiple">
-    [% FOR control = control_table.retrieve_all(order_by => "name") %]
+    [% FOR control = control_table.retrieve_all(order_by => "class,name") %]
       [% IF controls.$control %]
         <option selected="selected"
                 value="[% control %]"
-          >[% control.name %]</option>
+          >[% control.class _ "/" _ control.name %]</option>
       [% ELSE %]
         <option value="[% control %]"
-          >[% control.name %]</option>
+          >[% control.class _ "/" _ control.name %]</option>
       [% END %]
     [% END %]
     </select>

@@ -233,6 +233,9 @@ Filter:
     <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=html"
        >html</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=message"
+       >message</a></span>
     <span class="filterbutton-current">room</span>
     <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=site"
@@ -267,12 +270,14 @@ Page:
 </p>
 <table class="list-table">
   <tr class="list-header">
+    <th>class</th>
     <th>name</th>
     <th>text</th>
     <th/>
   </tr>
     <tr class="list-row-0">
-      <td>room/light</td>
+      <td>room</td>
+      <td>light</td>
       <td><small><pre>[% USE room_table = Class(&#39;ZenAH::Model::CDBI::Room&#39;) %]
 [% USE state_table = Class(&#39;ZenAH::Model::CDBI::State&#39;) %]
 [% SET r = room_table.search({ name =&#62; room }) %]
@@ -308,7 +313,8 @@ Page:
       </td>
     </tr>
     <tr class="list-row-1">
-      <td>room/lights</td>
+      <td>room</td>
+      <td>lights</td>
       <td><small><pre>[% USE table_class = Class(&#39;ZenAH::Model::CDBI::Room&#39;) %]
 [% SET r = table_class.search({ name =&#62; room }) %]
 [% IF r %]
