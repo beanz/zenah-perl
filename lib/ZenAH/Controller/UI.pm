@@ -28,9 +28,7 @@ UI Component.
 
 =head1 METHODS
 
-=over 4
-
-=item default
+=head2 C<default>
 
 Forwards to list.
 
@@ -41,7 +39,7 @@ sub default : Private {
     $c->forward('show');
 }
 
-=item show
+=head2 C<show>
 
 Shows a UI page
 
@@ -61,7 +59,7 @@ sub show : Local {
     $c->forward('ZenAH::View::UI');
 }
 
-=item text
+=head2 C<text>
 
 Shows a UI page
 
@@ -79,7 +77,7 @@ sub text : Local {
     $c->forward('ZenAH::View::UI');
 }
 
-=item json
+=head2 C<json>
 
 Shows a UI page
 
@@ -97,7 +95,7 @@ sub json : Local {
     $c->forward('ZenAH::View::UI');
 }
 
-=item ajax
+=head2 C<ajax>
 
 Shows a UI page
 
@@ -137,7 +135,7 @@ sub ajax : Local {
     $c->response->body("Invoked action, $action, on device, $device_name\n");
 }
 
-=item action
+=head2 C<action>
 
 Shows a UI page
 
@@ -151,6 +149,14 @@ sub action : Local {
     $uri->query_param(status => $status);
     $c->response->redirect($uri, 303);
 }
+
+=head2 C<variant_url($catalyst, $name, \%hash)>
+
+Returns a href with content, C<$name>, based on the current url but
+with C<QUERY_STRING> parameters added (or replaced) for each entry in
+the given hash.
+
+=cut
 
 sub variant_url {
   my $catalyst = shift;
@@ -234,8 +240,6 @@ sub process_template : Private {
     die 'Template error: '.$self->{_template}->error();
   return $output;
 }
-
-=back
 
 =head1 SEE ALSO
 
