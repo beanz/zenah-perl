@@ -255,7 +255,7 @@ sub ZenAH::CDBI::Device::action {
   } elsif ($class_name eq "DMX") {
     $definition =
       sprintf('xpl -m xpl-cmnd -c dmx.basic base=%s class=set value=%s',
-              $self.attribute('base'), $action_name);
+              $self->attribute('base'), $action_name);
   } else {
     return "error invalid action, $action_name, on device, $device_name\n";
   }
@@ -519,6 +519,12 @@ ZenAH::CDBI::Rule->add_trigger(before_update => \&set_mtime_sometimes);
 
 ZenAH::CDBI::Template->add_trigger(before_create => \&set_time);
 ZenAH::CDBI::Template->add_trigger(before_update => \&set_mtime);
+
+=head2 C<loader()>
+
+Return the L<Class::DBI::Loader> object for the ZenAH database.
+
+=cut
 
 sub loader {
   return $loader;
