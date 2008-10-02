@@ -44,6 +44,74 @@ our $VERSION = qw/$Revision: 2 $/[1];
 
 # Preloaded methods go here.
 
+=head2 C<new(%params)>
+
+The constructor creates a new plugin object.  The constructor takes a
+parameter hash as arguments.  Valid parameters in the hash are:
+
+=over
+
+=item engine
+
+This is a reference to the engine that is instantiating the plugin.
+
+=back
+
+It returns a blessed reference when successful or undef otherwise.
+
+This plugin registers an 'rrd' stash with the following operations:
+
+=over
+
+=item C<get()>
+
+Not implemented yet.
+
+=back
+
+It also sets up a timer to update any defined RRD databases every two
+minutes.  In order for RRD databases to be active a Map entry must
+exist in the database with class 'engine_config' and name 'rrd_dir'
+the value is used as the path for any created RRD databases.
+
+RRD databases may be defined by creating entries in the Map table
+with class 'rrd_def' with name matching the class of entries in
+the state table.  The values are a comma separated list with:
+
+=over
+
+=item the Data Source name
+
+See the L<rrdcreate(1)> man page.
+
+=item a fill flag
+
+0 or 1 value.  0 means that if a value hasn't been updated recently
+then the value should be treated as undefined and 1 means that current
+value will be used regardless when it was last updated.
+
+=item the Data Source Type (DST)
+
+See the L<rrdcreate(1)> man page.  Additionally, the DST can also be
+of the form 'MAP:DST:...' where MAP is just an identifier, DST is the
+real RRD DST and ... is 1 or more key value pair used to map values in
+the state table to values to enter in the RRD database.  If no
+matching key is found the RRD value will be 0.  For example,
+'MAP:GAUGE:on=1:off=0' could be used to Map on/off values in the state
+table to 0 and 1 to record in an RRD database.
+
+=item the min value
+
+See the L<rrdcreate(1)> man page.
+
+=item the max value
+
+See the L<rrdcreate(1)> man page.
+
+=back
+
+=cut
+
 sub new {
   my $pkg = shift;
   my $self = {};
@@ -66,6 +134,14 @@ sub new {
   return $self;
 }
 
+=head2 C<update_rrd_files()>
+
+This method is registered as a timer callback.  It is called every
+120 seconds to update any defined RRD databases based on the values
+in the state table.
+
+=cut
+
 sub update_rrd_files {
   my $self = shift;
   my $time = time;
@@ -74,7 +150,7 @@ sub update_rrd_files {
     return;
   };
   my %classes = map { $_->name => [split /\s*,\s*/, $_->value]
-                  } ZenAH::CDBI::Map->search(class => 'rrd_type');
+                  } ZenAH::CDBI::Map->search(class => 'rrd_def');
   foreach my $state (ZenAH::CDBI::State->retrieve_all()) {
     my $definition = $classes{$state->class};
     next unless (defined $definition);
@@ -84,6 +160,12 @@ sub update_rrd_files {
   }
   return 1;
 }
+
+=head2 C<update_rrd($rrd_dir, $time, $dev, $last, $val, $definition)>
+
+This method updates a single RRD database.
+
+=cut
 
 sub update_rrd {
   my ($self, $rrd_dir, $time, $dev, $last, $val, $definition) = @_;
@@ -109,6 +191,12 @@ sub update_rrd {
   }
   return 1;
 }
+
+=head2 C<make_rrd($rrd_file, $definition)>
+
+This method creates a new RRD database.
+
+=cut
 
 sub make_rrd {
   my ($self, $rrd, $definition) = @_;
