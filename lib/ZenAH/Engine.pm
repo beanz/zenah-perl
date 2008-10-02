@@ -91,8 +91,11 @@ sub new {
   $self->init_actions();
   $self->init_stashs();
   $self->init_rules();
-  foreach my $plugin ($self->plugins(engine => $self)) {
-    push @{$self->{_plugins}}, $plugin;
+
+  foreach my $plugin ($self->plugins(engine => $self, @_)) {
+    my $name = ref $plugin;
+    $name =~ s/.*:://;
+    $self->{_plugin}->{$name} = $plugin;
   }
 
   $self->add_action(class => 'enable',
