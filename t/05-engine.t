@@ -7,7 +7,7 @@ use DirHandle;
 use English qw/-no_match_vars/;
 use FileHandle;
 use POSIX qw/strftime/;
-use Test::More tests => 69;
+use Test::More tests => 75;
 use t::Helpers qw/test_error test_warn/;
 
 END {
@@ -624,7 +624,7 @@ ZenAH::CDBI::Map->create({
                           value => 't/rrd',
                          });
 ZenAH::CDBI::Map->create({
-                          class => 'rrd_type',
+                          class => 'rrd_def',
                           name => 'uv',
                           value => 'uv,1,GAUGE,0,40',
                          });
@@ -634,6 +634,18 @@ ok(-f 't/rrd/uv138.55/uv.rrd', 'uv.rrd created');
 unlink 't/rrd/uv138.55/uv.rrd';
 rmdir 't/rrd/uv138.55';
 rmdir 't/rrd';
+
+is($engine->info("output\n"), undef, 'engine->info not verbose');
+my $engine2 = $engine->new(verbose => 1, tz => 'Europe/Vienna');
+is($engine2->info("output\n"), 1, 'engine->info verbose');
+is($engine2->{_plugin}->{Timer}->{_tz}, 'Europe/Vienna',
+   'engine->new tz param');
+$ENV{TZ}='Europe/Moscow';
+$engine2 = $engine->new();
+is($engine->{_plugin}->{Timer}->{_tz}, 'Europe/London',
+   'engine->new tz default');
+is($engine2->{_plugin}->{Timer}->{_tz}, 'Europe/Moscow',
+   'engine->new tz environment var');
 
 # Some error/warning cases not already covered
 
@@ -661,3 +673,7 @@ is(test_warn(sub { $engine->process_template('[% IF false %]') }),
 is(test_warn(sub { $engine->trigger_rule_by_name('invalid') }),
    'ZenAH::Engine->trigger_rule_by_name: no rule with name: invalid',
    'triggering non-existent rule');
+
+is(test_warn(sub { $engine->run_action('device l_bed_1 change_bulb') }),
+   "Error: invalid action, change_bulb, on device, l_bed_1\n",
+   'device plugin run_action');
