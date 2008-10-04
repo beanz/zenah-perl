@@ -138,6 +138,8 @@ sub default : Private {
 
   $c->stash(type => $type);
   $c->stash($_ => $crud{$type}->{$_}) foreach (keys %{$crud{$type}});
+  $c->stash(sort_order => join(',',$c->request->param('sort_order'))) if
+    ($c->request->param('sort_order'));
   $c->stash('fulltable' => 'ZenAH::Model::CDBI::'.$crud{$type}->{table});
   $c->forward('ZenAH::Controller::Admin::CRUD', $view||'default', @args)
 }
