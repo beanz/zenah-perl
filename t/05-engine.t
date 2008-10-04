@@ -636,12 +636,15 @@ rmdir 't/rrd/uv138.55';
 rmdir 't/rrd';
 
 is($engine->info("output\n"), undef, 'engine->info not verbose');
-my $engine2 = $engine->new(verbose => 1, tz => 'Europe/Vienna');
+my $engine2 = $engine->new(ip => "127.0.0.1",
+                           broadcast => "127.0.0.1",
+                           verbose => 1, tz => 'Europe/Vienna');
 is($engine2->info("output\n"), 1, 'engine->info verbose');
 is($engine2->{_plugin}->{Timer}->{_tz}, 'Europe/Vienna',
    'engine->new tz param');
 $ENV{TZ}='Europe/Moscow';
-$engine2 = $engine->new();
+$engine2 = $engine->new(ip => "127.0.0.1",
+                        broadcast => "127.0.0.1");
 is($engine->{_plugin}->{Timer}->{_tz}, 'Europe/London',
    'engine->new tz default');
 is($engine2->{_plugin}->{Timer}->{_tz}, 'Europe/Moscow',
