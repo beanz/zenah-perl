@@ -6,7 +6,7 @@
     <th>[% column %]</th>
   [% END %]
     [% IF has_attributes %]
-      <th>Attributes</th>
+      <th>attributes</th>
     [% END %]
     <th/>
   </tr>

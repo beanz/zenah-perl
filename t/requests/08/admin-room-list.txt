@@ -241,7 +241,7 @@ Page:
     <th>name</th>
     <th>string</th>
     <th>description</th>
-      <th>Attributes</th>
+      <th>attributes</th>
     <th/>
   </tr>
     <tr class="list-row-0">
