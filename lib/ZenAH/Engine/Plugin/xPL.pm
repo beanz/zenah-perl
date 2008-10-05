@@ -112,6 +112,11 @@ true for the given device.
 sub add {
   my ($self, $rule) = @_;
   my %filter = simple_tokenizer($rule->trig);
+# TOFIX: shouldn't need this here?
+  if (exists $filter{class} && $filter{class} =~ /^(\w+)\.(\w+)$/) {
+    $filter{class} = $1;
+    $filter{class_type} = $2;
+  }
   if ($filter{'device'} && $filter{'device'} =~ /^lookup_(\w+)\[([^]]+)\]$/) {
     if ($1 eq 'map') {
       my $arg = $2;
