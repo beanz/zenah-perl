@@ -4,7 +4,7 @@ CREATE TABLE "device" (
   "name" varchar(80) default NULL,
   "string" varchar(80) default NULL,
   "description" text,
-  "class" varchar(80) default NULL
+  "type" varchar(80) default NULL
 );
 INSERT INTO "device" VALUES(1,'l_bed_1','Light','Main light','X10Lamp');
 INSERT INTO "device" VALUES(2,'l_bath','Light','Main Light','X10Lamp');
@@ -186,7 +186,7 @@ CREATE TABLE "liststate" (
 );
 CREATE TABLE "map" (
   "id" integer PRIMARY KEY,
-  "class" varchar(50) default NULL,
+  "type" varchar(50) default NULL,
   "name" varchar(80) default NULL,
   "value" varchar(255) default NULL
 );
@@ -266,7 +266,7 @@ CREATE TABLE "rule" (
   "id" integer PRIMARY KEY,
   "name" varchar(80) default NULL,
   "trig" text,
-  "class" varchar(30) default NULL,
+  "type" varchar(30) default NULL,
   "action" text,
   "active" tinyint(1) default NULL,
   "mtime" int(11) default NULL,
@@ -293,10 +293,10 @@ INSERT INTO "rule" VALUES(4,'dusk','sunset minutes="-20"','at','scene all_window
 ',1,1186145585,1186773464);
 INSERT INTO "rule" VALUES(5,'all_windows',NULL,'scene','# map ''on'' => ''open'' and ''off'' to ''close''
 [% SET action = state == ''on'' ? ''open'' : (state == ''off'' ? ''close'' : state) %]
-[% FOREACH dev = zenah.device.by_class_list("Curtain") %]
+[% FOREACH dev = zenah.device.by_type_list("Curtain") %]
   [% dev.action("$action") %]
 [% END %]
-[% FOREACH dev = zenah.device.by_class_list("Blind") %]
+[% FOREACH dev = zenah.device.by_type_list("Blind") %]
   # Power supply can only serve 3 blinds at once so we pause a little
   [% IF loop.count AND ( loop.count % 3 ) == 0 %]
     sleep 30
@@ -323,7 +323,7 @@ INSERT INTO "rule" VALUES(8,'kettle_warn','30','at','xpl -c osd.basic command=cl
 INSERT INTO "rule" VALUES(9,'cleaner_prep','recurrence freq=weekly hours=11 minutes=30 days=th','at','scene all_windows state=on
 # device washing_machine on',1,1186340154,NULL);
 INSERT INTO "rule" VALUES(10,'motion_state','message_type="xpl-trig" class="x10.basic" command=on','xpl','[% SET dev = zenah.device.by_attr(''unit'', xpl.device) %]
-[% IF dev and dev.class == ''X10Motion'' %]
+[% IF dev and dev.type == ''X10Motion'' %]
   [% SET t = zenah.datetime.epoch %]
   [% FOREACH room = dev.rooms %]
     [% CALL zenah.state.set(''motion'', room.name, ''occupied'') %]
@@ -332,7 +332,7 @@ INSERT INTO "rule" VALUES(10,'motion_state','message_type="xpl-trig" class="x10.
 [% END %]
 ',1,1186218390,1186322734);
 INSERT INTO "rule" VALUES(11,'light_state','message_type="xpl-trig" class="x10.basic" command=(on|off)','xpl','[% SET dev = zenah.device.by_attr(''unit'', xpl.device) %]
-[% IF dev and dev.class == ''X10Light'' %]
+[% IF dev and dev.type == ''X10Light'' %]
   [% SET t = zenah.datetime.epoch %]
   [% FOREACH room = dev.rooms %]
     [% SET var = room.name %]
@@ -379,7 +379,7 @@ INSERT INTO "rule" VALUES(14,'sensor_history','message_type="(xpl-trig|xpl-stat)
 CREATE TABLE "state" (
   "id" integer PRIMARY KEY,
   "name" varchar(80) default NULL,
-  "class" varchar(20) default NULL,
+  "type" varchar(20) default NULL,
   "value" varchar(200) default NULL,
   "mtime" int(11) default NULL,
   "ctime" int(11) default NULL
@@ -399,7 +399,7 @@ INSERT INTO "state" VALUES(12,'26.6DA373000000','temp','26.7',1186340387,1186340
 INSERT INTO "state" VALUES(13,'26.6DA373000000','humidity','55.0025',1186340414,1186340414);
 CREATE TABLE "template" (
   "id" integer PRIMARY KEY,
-  "class" varchar(20) default NULL,
+  "type" varchar(20) default NULL,
   "name" varchar(80) default NULL,
   "text" text,
   "mtime" int(11) default NULL
@@ -439,7 +439,7 @@ INSERT INTO "template" VALUES(5,'room','motion','[% USE room_table = Class(''Zen
 [% IF r %]
   <td valign="top" rowspan="[% rowspan || 1 %]" colspan="[% colspan || 1 %]">
   [% r.string %]<br/>
-  [% SET m = state_table.search({ class => ''motion'', name => r.name }) %]
+  [% SET m = state_table.search({ type => ''motion'', name => r.name }) %]
   [% IF m %]
     [% m.value %]<br/>
     [% m.mtime %]
@@ -457,7 +457,7 @@ INSERT INTO "template" VALUES(6,'room','light','[% USE room_table = Class(''ZenA
 [% IF r %]
   <td valign="top" rowspan="[% rowspan || 1 %]" colspan="[% colspan || 1 %]">
   [% r.string %]<br/>
-  [% SET l = state_table.search({ class => ''light'',
+  [% SET l = state_table.search({ type => ''light'',
                                   name => r.name }) %]
   [% IF l %]
     [% l.value %]<br/>
@@ -505,7 +505,7 @@ INSERT INTO "template" VALUES(9,'html','device','<div class="device">
     <th halign="right">
       <div class="devicename">[% device.string %]</div>
     </th>
-    [% IF device.class == "Button" %]
+    [% IF device.type == "Button" %]
       [% PROCESS html/buttonset button = device %]
     [% ELSE %]
       [% FOR control = device.device_controls %]
@@ -531,7 +531,7 @@ INSERT INTO "template" VALUES(10,'room','lights','[% USE table_class = Class(''Z
     <th valign="top">[% r.string %]</th>
   </tr>
   [% FOR d = r.devices %]
-    [% NEXT UNLESS d.class == ''X10Lamp'' %]
+    [% NEXT UNLESS d.type == ''X10Lamp'' %]
     <tr>
       <td>
         [% PROCESS html/device device = d %]
@@ -553,7 +553,7 @@ INSERT INTO "template" VALUES(11,'room','windows','[% USE table_class = Class(''
     <th valign="top">[% r.string %]</th>
   </tr>
   [% FOR d = r.devices %]
-    [% NEXT UNLESS d.class == ''Blind'' or d.class == ''Curtain'' %]
+    [% NEXT UNLESS d.type == ''Blind'' or d.type == ''Curtain'' %]
     <tr>
       <td>
         [% PROCESS html/device device = d %]
@@ -681,7 +681,7 @@ INSERT INTO "template" VALUES(19,'xul','room','[% USE table_class = Class(''ZenA
 INSERT INTO "template" VALUES(20,'xul','device','<row>
   <label value="[% device.string %]"/>
   <hbox flex="1" >
-    [% IF device.class == "Button" %]
+    [% IF device.type == "Button" %]
       [% PROCESS xul/buttonset button = device %]
     [% ELSE %]
       [% FOR control = device.device_controls %]
@@ -821,19 +821,19 @@ INSERT INTO "template" VALUES(24,'config','col','[% site.rgb = {
 %]
 ',1185008838);
 INSERT INTO "template" VALUES(25,'config','macro','[% USE String %]
-[% MACRO variant_button(class, name, variant) BLOCK %]
+[% MACRO variant_button(type, name, variant) BLOCK %]
   [% SET var = Catalyst.request.param(variant.keys.0) %]
   [% SET cc = variant.values.0 == var ? "-current" : "" %]
- <span class="[% class %][% cc %]">[% variant_url(Catalyst, name, variant) %]</span>
+ <span class="[% type %][% cc %]">[% variant_url(Catalyst, name, variant) %]</span>
 [% END %]
 
-[% MACRO navbutton(class, name) BLOCK %]
+[% MACRO navbutton(type, name) BLOCK %]
   [% SET room = Catalyst.request.param(''room'') %]
-  [% SET cc = class == room or ( room == "" and class == "home" ) ?
+  [% SET cc = type == room or ( room == "" and type == "home" ) ?
          "-current" : "" %]
   <span class="navbutton[% cc %]"><a
-    href="[% Catalyst.uri_for("/", class) %]"
-    >[% IF name %][% name %][% ELSE %][% class FILTER ucfirst %][% END %]</a></span>
+    href="[% Catalyst.uri_for("/", type) %]"
+    >[% IF name %][% name %][% ELSE %][% type FILTER ucfirst %][% END %]</a></span>
 [% END %]
 
 [% MACRO filternav(filters,current) BLOCK %]
@@ -1214,7 +1214,7 @@ CREATE TABLE "timestamp" (
 );
 CREATE TABLE "device_control" (
   "id" integer PRIMARY KEY,
-  "class" varchar(20) default NULL,
+  "type" varchar(20) default NULL,
   "name" varchar(50) default NULL,
   "definition" text,
   "string" varchar(80) default NULL,

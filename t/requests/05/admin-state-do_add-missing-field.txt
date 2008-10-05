@@ -1,4 +1,4 @@
-/admin/state/do_add?class=motion&value=empty&mtime=1222123816&ctime=1222123816
+/admin/state/do_add?type=motion&value=empty&mtime=1222123816&ctime=1222123816
 text/html
 200 OK
 
@@ -218,8 +218,8 @@ tr.list-row-1 {
 <div id="content">
 <p>You have to fill in all fields. The following are missing: <b>name</b></p>
 <form action="http://localhost//admin/state/do_add" method="post">
-    class<br/>
-    <input name="class" type="text" />
+    type<br/>
+    <input name="type" type="text" />
 <br/>
     name<br/>
     <input name="name" type="text" />

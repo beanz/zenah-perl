@@ -71,11 +71,11 @@ Not implemented yet.
 
 It also sets up a timer to update any defined RRD databases every two
 minutes.  In order for RRD databases to be active a Map entry must
-exist in the database with class 'engine_config' and name 'rrd_dir'
+exist in the database with type 'engine_config' and name 'rrd_dir'
 the value is used as the path for any created RRD databases.
 
 RRD databases may be defined by creating entries in the Map table
-with class 'rrd_def' with name matching the class of entries in
+with type 'rrd_def' with name matching the type of entries in
 the state table.  The values are a comma separated list with:
 
 =over
@@ -149,10 +149,10 @@ sub update_rrd_files {
     print STDERR "zenah_config[rrd_dir] is not defined\n";
     return;
   };
-  my %classes = map { $_->name => [split /\s*,\s*/, $_->value]
-                  } ZenAH::CDBI::Map->search(class => 'rrd_def');
+  my %types = map { $_->name => [split /\s*,\s*/, $_->value]
+                  } ZenAH::CDBI::Map->search(type => 'rrd_def');
   foreach my $state (ZenAH::CDBI::State->retrieve_all()) {
-    my $definition = $classes{$state->class};
+    my $definition = $types{$state->type};
     next unless (defined $definition);
     $self->update_rrd($rrd_dir,
                $time, $state->name, $state->mtime->epoch, $state->value,

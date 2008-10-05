@@ -61,21 +61,21 @@ This plugin registers a 'map' stash with the following operations:
 
 =over
 
-=item C<lookup(class, name>
+=item C<lookup(type, name>
 
 Returns the value of the specified map entry or undef if no such entry
 exists.
 
-=item C<reverse(class, value)>
+=item C<reverse(type, value)>
 
 Returns the name of the specified map entry or undef if no such entry
 exists.
 
-=item C<lookup_list(class, name>
+=item C<lookup_list(type, name>
 
 Returns a list of values of any matching map entries.
 
-=item C<reverse_list(class, value)>
+=item C<reverse_list(type, value)>
 
 Returns a list of names of any matching map entries.
 
@@ -94,27 +94,27 @@ sub new {
   my %m =
     (
      lookup => sub {
-       my $r = ZenAH::CDBI::Map->search(class => $_[0],
+       my $r = ZenAH::CDBI::Map->search(type => $_[0],
                                         name => $_[1])->first;
        return $r ? $r->value : undef;
      },
      reverse => sub {
-       my $r = ZenAH::CDBI::Map->search(class => $_[0],
+       my $r = ZenAH::CDBI::Map->search(type => $_[0],
                                         value => $_[1])->first;
        return $r ? $r->name : undef;
      },
      lookup_list => sub {
-       map { $_->value } ZenAH::CDBI::Map->search(class => $_[0],
+       map { $_->value } ZenAH::CDBI::Map->search(type => $_[0],
                                                   name => $_[1]);
      },
      reverse_list => sub {
-       map { $_->name } ZenAH::CDBI::Map->search(class => $_[0],
+       map { $_->name } ZenAH::CDBI::Map->search(type => $_[0],
                                                  value => $_[1]);
      },
      all => sub {
        map { { name => $_->name,
                  value => $_->value }
-           } ZenAH::CDBI::Map->search(class => $_[0]);
+           } ZenAH::CDBI::Map->search(type => $_[0]);
      },
     );
   $engine->add_stash(variable => "map", callback => sub { \%m });

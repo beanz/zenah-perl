@@ -257,7 +257,7 @@ Page:
     <th>name</th>
     <th>string</th>
     <th>description</th>
-    <th>class</th>
+    <th>type</th>
       <th>attributes</th>
     <th/>
   </tr>

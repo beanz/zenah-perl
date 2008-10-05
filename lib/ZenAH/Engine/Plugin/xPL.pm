@@ -72,11 +72,11 @@ sub new {
   my %p = @_;
   my $engine = $self->{_engine} = $p{engine};
 
-  $engine->add_trigger(class => "xpl",
+  $engine->add_trigger(type => "xpl",
                        add_callback => sub { $self->add(@_) },
                        remove_callback => sub { $self->remove(@_) });
 
-  $engine->add_action(class => "xpl",
+  $engine->add_action(type => "xpl",
                       callback => sub { $self->action_xpl(@_) });
   return $self;
 }
@@ -84,7 +84,7 @@ sub new {
 =head2 C<add($rule)>
 
 This method is the callback that sets up the listeners for rules which
-have the class 'xpl'.  The trigger, C<trig>, value is passed directly
+have the type 'xpl'.  The trigger, C<trig>, value is passed directly
 to the L<xPL::Listener::add_xpl_callback()> method.  Supported values
 for the trigger are describe in the documentation for that method.
 Additionally, for filtering on 'device' fields only, as fast lookup
@@ -92,10 +92,10 @@ is supported with the following syntax:
 
 =over
 
-=item C<lookup_map(class)>
+=item C<lookup_map(type)>
 
 Filters xPL messages depending on whether the value of the device field
-appears as a 'name' in the Map table with the given class.  This is used
+appears as a 'name' in the Map table with the given type.  This is used
 to avoid firing rules that will do lookups using the 'map' stash in the
 template but fail becuase no entry is found.
 
@@ -121,7 +121,7 @@ sub add {
     if ($1 eq 'map') {
       my $arg = $2;
       $filter{'device'} =
-        sub { ZenAH::CDBI::Map->search(class => $arg, name => $_[0])->first };
+        sub { ZenAH::CDBI::Map->search(type => $arg, name => $_[0])->first };
     } else {
       my $lookup = 'search_'.$1;
       my @arg = split /,/, $2;
@@ -148,7 +148,7 @@ sub add {
 =head2 C<remove($rule)>
 
 This method is the callback that removes the xPL callbacks for rules
-which have the class 'xpl'.
+which have the type 'xpl'.
 
 =cut
 

@@ -43,8 +43,8 @@ sub _template_modified {
   my $self = shift;
   my $path = shift;
   $path =~ s!^\.\/!!;
-  my ($class, $name) = split /\//, $path, 2;
-  my $t = ZenAH::CDBI::Template->search(class => $class, name => $name)->first;
+  my ($type, $name) = split /\//, $path, 2;
+  my $t = ZenAH::CDBI::Template->search(type => $type, name => $name)->first;
   unless ($t) {
     warn "ZenAH::Template: can't find: $path\n";
     return;
@@ -57,8 +57,8 @@ sub _template_content {
   my $self = shift;
   my $path = shift;
   $path =~ s!^\.\/!!;
-  my ($class, $name) = split /\//, $path, 2;
-  my $t = ZenAH::CDBI::Template->search(class => $class, name => $name)->first;
+  my ($type, $name) = split /\//, $path, 2;
+  my $t = ZenAH::CDBI::Template->search(type => $type, name => $name)->first;
   unless ($t) {
     warn "ZenAH::Template: can't find: $path\n";
     return wantarray ? (undef, $path.': not found', time) : undef;

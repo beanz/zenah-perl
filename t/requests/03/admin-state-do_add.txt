@@ -1,4 +1,4 @@
-/admin/state/do_add?class=motion&name=node_0&value=empty&mtime=1222123816&ctime=1222123816
+/admin/state/do_add?type=motion&name=node_0&value=empty&mtime=1222123816&ctime=1222123816
 text/html
 200 OK
 
@@ -245,7 +245,7 @@ Page:
 </p>
 <table class="list-table">
   <tr class="list-header">
-    <th>class</th>
+    <th>type</th>
     <th>name</th>
     <th>value</th>
     <th>ctime</th>

@@ -226,7 +226,7 @@ tr.list-row-1 {
     <td class="view-table" colspan="2">enabled</td>
   </tr>
   <tr>
-    <th class="view-table">class</th>
+    <th class="view-table">type</th>
     <td class="view-table" colspan="2">at</td>
   </tr>
   <tr>

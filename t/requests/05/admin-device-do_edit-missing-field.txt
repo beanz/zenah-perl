@@ -216,7 +216,7 @@ tr.list-row-1 {
 <!-- END site/nav -->
 </div>
 <div id="content">
-<p>You have to fill in all fields.the following are missing: <b>class</b></p>
+<p>You have to fill in all fields.the following are missing: <b>type</b></p>
 <form action="http://localhost//admin/device/do_edit/27"
     method="post">
     name<br/>
@@ -228,8 +228,8 @@ tr.list-row-1 {
     description<br/>
     <textarea cols="22" name="description" rows="3">Front Door</textarea>
 <br/>
-    class<br/>
-    <input name="class" type="text" value="Door" />
+    type<br/>
+    <input name="type" type="text" value="Door" />
 <br/>
 <table border="0" width="100%">
 <tr>

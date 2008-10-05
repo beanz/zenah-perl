@@ -1,4 +1,4 @@
-/admin/rule/do_add?name=callerid&active=1&class=xpl&trig=message_type%3d%22xpl-trig%22%20class%3d%22cid.basic%22%20calltype%3dinbound&action=%5b%25%20SET%20name%20%3d%20zenah.map.reverse(%27phonebook%27%2c%20xpl.phone)%20%25%5d%0axpl%20-c%20osd.basic%20command%3dclear%20text%3d%22%20Call%20%5b%25%20name%20%3f%20name%20%3a%20xpl.phone%20%25%5d%22%0a&ftime=&mtime=
+/admin/rule/do_add?name=callerid&active=1&type=xpl&trig=message_type%3d%22xpl-trig%22%20class%3d%22cid.basic%22%20calltype%3dinbound&action=%5b%25%20SET%20name%20%3d%20zenah.map.reverse(%27phonebook%27%2c%20xpl.phone)%20%25%5d%0axpl%20-c%20osd.basic%20command%3dclear%20text%3d%22%20Call%20%5b%25%20name%20%3f%20name%20%3a%20xpl.phone%20%25%5d%22%0a&ftime=&mtime=
 text/html
 200 OK
 
@@ -247,7 +247,7 @@ Page:
   <tr class="list-header">
     <th>name</th>
     <th>active</th>
-    <th>class</th>
+    <th>type</th>
     <th>trig</th>
     <th>action</th>
     <th>ftime</th>
@@ -261,10 +261,10 @@ Page:
       <td></td>
       <td><small><pre># map &#39;on&#39; =&#62; &#39;open&#39; and &#39;off&#39; to &#39;close&#39;
 [% SET action = state == &#39;on&#39; ? &#39;open&#39; : (state == &#39;off&#39; ? &#39;close&#39; : state) %]
-[% FOREACH dev = zenah.device.by_class_list(&#34;Curtain&#34;) %]
+[% FOREACH dev = zenah.device.by_type_list(&#34;Curtain&#34;) %]
   [% dev.action(&#34;$action&#34;) %]
 [% END %]
-[% FOREACH dev = zenah.device.by_class_list(&#34;Blind&#34;) %]
+[% FOREACH dev = zenah.device.by_type_list(&#34;Blind&#34;) %]
   # Power supply can only serve 3 blinds at once so we pause a little
   [% IF loop.count AND ( loop.count % 3 ) == 0 %]
     sleep 30
@@ -453,7 +453,7 @@ disable kettle_warn
       <td><small><pre>message_type=&#34;xpl-trig&#34; class=&#34;x10.basic&#34; command=(on|off)</pre></small>
 </td>
       <td><small><pre>[% SET dev = zenah.device.by_attr(&#39;unit&#39;, xpl.device) %]
-[% IF dev and dev.class == &#39;X10Light&#39; %]
+[% IF dev and dev.type == &#39;X10Light&#39; %]
   [% SET t = zenah.datetime.epoch %]
   [% FOREACH room = dev.rooms %]
     [% SET var = room.name %]
@@ -521,7 +521,7 @@ disable kettle_warn
       <td><small><pre>message_type=&#34;xpl-trig&#34; class=&#34;x10.basic&#34; command=on</pre></small>
 </td>
       <td><small><pre>[% SET dev = zenah.device.by_attr(&#39;unit&#39;, xpl.device) %]
-[% IF dev and dev.class == &#39;X10Motion&#39; %]
+[% IF dev and dev.type == &#39;X10Motion&#39; %]
   [% SET t = zenah.datetime.epoch %]
   [% FOREACH room = dev.rooms %]
     [% CALL zenah.state.set(&#39;motion&#39;, room.name, &#39;occupied&#39;) %]

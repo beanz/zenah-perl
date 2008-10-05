@@ -126,15 +126,19 @@ of more appropriate elements for rendering as HTML.
 =cut
 
 sub ZenAH::CDBI::Rule::to_view {
-  my ($self, $field) = @_;
+  my ($self, $field, $short) = @_;
   return '' unless (defined $self->$field);
   if ($field eq 'active') {
     $self->active ? 'enabled' : 'disabled'
   } elsif ($field eq 'action' or $field eq 'trig') {
     my $small = HTML::Element->new('small');
-    my $pre = HTML::Element->new('pre');
-    $pre->push_content($self->$field);
-    $small->push_content($pre);
+    if ($short) {
+      $small->push_content($self->$field);
+    } else {
+      my $pre = HTML::Element->new('pre');
+      $pre->push_content($self->$field);
+      $small->push_content($pre);
+    }
     $small->as_XML;
   } else {
     $self->$field();
@@ -160,37 +164,41 @@ of more appropriate elements for rendering as HTML.
 =cut
 
 sub ZenAH::CDBI::Template::to_view {
-  my ($self, $field) = @_;
+  my ($self, $field, $short) = @_;
   return '' unless (defined $self->$field);
   if ($field eq 'text') {
     my $small = HTML::Element->new('small');
-    my $pre = HTML::Element->new('pre');
-    $pre->push_content($self->$field);
-    $small->push_content($pre);
+    if ($short) {
+      $small->push_content($self->$field);
+    } else {
+      my $pre = HTML::Element->new('pre');
+      $pre->push_content($self->$field);
+      $small->push_content($pre);
+    }
     $small->as_XML;
   } else {
     $self->$field();
   }
 }
 
-ZenAH::CDBI::Device->set_sql(classes => q{
-  SELECT DISTINCT class FROM __TABLE__
+ZenAH::CDBI::Device->set_sql(types => q{
+  SELECT DISTINCT type FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::Device::classes>
+=head2 C<ZenAH::CDBI::Device::types>
 
-Method to return list of distinct C<class> fields of devices.
+Method to return list of distinct C<type> fields of devices.
 
 =cut
 
-sub ZenAH::CDBI::Device::classes {
-  map { $_->class } $_[0]->search_classes();
+sub ZenAH::CDBI::Device::types {
+  map { $_->type } $_[0]->search_types();
 }
 
-ZenAH::CDBI::Device->set_sql(class_and_attr => q{
+ZenAH::CDBI::Device->set_sql(type_and_attr => q{
   SELECT device.*
   FROM device, device_attribute_link, device_attribute
-  WHERE device.class = ? AND
+  WHERE device.type = ? AND
         device_attribute_link.device = device.id AND
         device_attribute_link.device_attribute = device_attribute.id AND
         device_attribute.name = ? AND
@@ -236,7 +244,7 @@ sub ZenAH::CDBI::Device::action {
   my $self = shift;
   my $action_name = shift;
   my $device_name = $self->name;
-  my $class_name = $self->class;
+  my $type_name = $self->type;
   $action_name =~ s/[^-a-z0-9_\/\.]/_/ig;
   my $control =
     $self->device_controls("device_control.name" => $action_name)->first;
@@ -248,13 +256,13 @@ sub ZenAH::CDBI::Device::action {
     $t->process(\$input, { device => $self }, \$output) or
       return "error bad template, $action_name, on device, $device_name\n";
     $definition = $output;
-  } elsif ($class_name eq "Button") {
+  } elsif ($type_name eq "Button") {
     $definition =
       sprintf('xpl -m xpl-trig -c remote.basic device=%s keys=%s',
               $device_name, $action_name);
-  } elsif ($class_name eq "DMX") {
+  } elsif ($type_name eq "DMX") {
     $definition =
-      sprintf('xpl -m xpl-cmnd -c dmx.basic base=%s class=set value=%s',
+      sprintf('xpl -m xpl-cmnd -c dmx.basic base=%s type=set value=%s',
               $self->attribute('base'), $action_name);
   } else {
     return "error invalid action, $action_name, on device, $device_name\n";
@@ -262,34 +270,34 @@ sub ZenAH::CDBI::Device::action {
   return $definition;
 }
 
-ZenAH::CDBI::Map->set_sql(classes => q{
-  SELECT DISTINCT class FROM __TABLE__
+ZenAH::CDBI::Map->set_sql(types => q{
+  SELECT DISTINCT type FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::Map::classes>
+=head2 C<ZenAH::CDBI::Map::types>
 
-Method to return list of distinct C<class> fields of map entries.
+Method to return list of distinct C<type> fields of map entries.
 
 =cut
 
-sub ZenAH::CDBI::Map::classes {
+sub ZenAH::CDBI::Map::types {
   my $self = shift;
-  return map { $_->class } $self->search_classes();
+  return map { $_->type } $self->search_types();
 }
 
-ZenAH::CDBI::Rule->set_sql(classes => q{
-  SELECT DISTINCT class FROM __TABLE__
+ZenAH::CDBI::Rule->set_sql(types => q{
+  SELECT DISTINCT type FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::Rule::classes>
+=head2 C<ZenAH::CDBI::Rule::types>
 
-Method to return list of distinct C<class> fields of rules.
+Method to return list of distinct C<type> fields of rules.
 
 =cut
 
-sub ZenAH::CDBI::Rule::classes {
+sub ZenAH::CDBI::Rule::types {
   my $self = shift;
-  return map { $_->class } $self->search_classes();
+  return map { $_->type } $self->search_types();
 }
 
 =head2 C<ZenAH::CDBI::Rule::to_field()>
@@ -323,34 +331,34 @@ sub ZenAH::CDBI::Rule::to_field {
   }
 }
 
-ZenAH::CDBI::State->set_sql(classes => q{
-  SELECT DISTINCT class FROM __TABLE__
+ZenAH::CDBI::State->set_sql(types => q{
+  SELECT DISTINCT type FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::State::classes>
+=head2 C<ZenAH::CDBI::State::types>
 
-Method to return list of distinct C<class> fields of state entries.
+Method to return list of distinct C<type> fields of state entries.
 
 =cut
 
-sub ZenAH::CDBI::State::classes {
+sub ZenAH::CDBI::State::types {
   my $self = shift;
-  return map { $_->class } $self->search_classes();
+  return map { $_->type } $self->search_types();
 }
 
-ZenAH::CDBI::Template->set_sql(classes => q{
-  SELECT DISTINCT class FROM __TABLE__
+ZenAH::CDBI::Template->set_sql(types => q{
+  SELECT DISTINCT type FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::Template::classes>
+=head2 C<ZenAH::CDBI::Template::types>
 
-Method to return list of the distinct class fileds templates.
+Method to return list of the distinct type fileds templates.
 
 =cut
 
-sub ZenAH::CDBI::Template::classes {
+sub ZenAH::CDBI::Template::types {
   my $self = shift;
-  return map { $_->class } $self->search_classes();
+  return map { $_->type } $self->search_types();
 }
 
 =head2 C<ZenAH::CDBI::Template::to_field()>
@@ -373,52 +381,52 @@ sub ZenAH::CDBI::Template::to_field {
   }
 }
 
-ZenAH::CDBI::DeviceAttribute->set_sql(classes => q{
+ZenAH::CDBI::DeviceAttribute->set_sql(types => q{
   SELECT DISTINCT name FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::DeviceAttribute::classes>
+=head2 C<ZenAH::CDBI::DeviceAttribute::types>
 
-Method to return list of distinct C<class> fields of device attributes.
+Method to return list of distinct C<type> fields of device attributes.
 
 =cut
 
-sub ZenAH::CDBI::DeviceAttribute::classes {
+sub ZenAH::CDBI::DeviceAttribute::types {
   my $self = shift;
-  my $sth = $self->sql_classes();
+  my $sth = $self->sql_types();
   $sth->execute();
   my %p = map { $_->[0] => 1 } @{$sth->fetchall_arrayref};
   return keys %p;
 }
 
-ZenAH::CDBI::RoomAttribute->set_sql(classes => q{
+ZenAH::CDBI::RoomAttribute->set_sql(types => q{
   SELECT DISTINCT name FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::RoomAttribute::classes>
+=head2 C<ZenAH::CDBI::RoomAttribute::types>
 
-Method to return list of distinct C<class> fields of room attributes.
+Method to return list of distinct C<type> fields of room attributes.
 
 =cut
 
-sub ZenAH::CDBI::RoomAttribute::classes {
+sub ZenAH::CDBI::RoomAttribute::types {
   my $self = shift;
-  return map { $_->name } $self->search_classes();
+  return map { $_->name } $self->search_types();
 }
 
-ZenAH::CDBI::DeviceControl->set_sql(classes => q{
-  SELECT DISTINCT class FROM __TABLE__
+ZenAH::CDBI::DeviceControl->set_sql(types => q{
+  SELECT DISTINCT type FROM __TABLE__
 });
 
-=head2 C<ZenAH::CDBI::DeviceControl::classes>
+=head2 C<ZenAH::CDBI::DeviceControl::types>
 
-Method to return list of the distinct C<class> fieilds of device controls.
+Method to return list of the distinct C<type> fieilds of device controls.
 
 =cut
 
-sub ZenAH::CDBI::DeviceControl::classes {
+sub ZenAH::CDBI::DeviceControl::types {
   my $self = shift;
-  return map { $_->class } $self->search_classes();
+  return map { $_->type } $self->search_types();
 }
 
 =head2 C<ZenAH::CDBI::DeviceControls::to_field()>

@@ -43,23 +43,23 @@ $engine->main_loop(1);
 is($engine->timer_callback_count('rules_timer'), ++$count, 'rules read(1)');
 ok(!$engine->exists_rule($cuckoo), 'rule "cuckoo" removed');
 
-# Check if rule is not added when the trigger class is invalid
-$cuckoo->class('invalid');
+# Check if rule is not added when the trigger type is invalid
+$cuckoo->type('invalid');
 $cuckoo->update();
 is(test_warn(sub { $engine->enable_rule($cuckoo) }),
-   "unknown trigger class: invalid cuckoo\n", 'invalid trigger class');
+   "unknown trigger type: invalid cuckoo\n", 'invalid trigger type');
 ok(!$engine->exists_rule($cuckoo), 'rule "cuckoo" not added (invalid)');
 
-# Check if rule is not added when the trigger class is null
-$cuckoo->class('');
+# Check if rule is not added when the trigger type is null
+$cuckoo->type('');
 $cuckoo->update();
 is(test_warn(sub { $engine->enable_rule($cuckoo) }),
-   "empty trigger class: cuckoo\n", 'null trigger class');
+   "empty trigger type: cuckoo\n", 'null trigger type');
 ok(!$engine->exists_rule($cuckoo), 'rule "cuckoo" not added (null)');
-# Check if rule is not added when the trigger class is null
+# Check if rule is not added when the trigger type is null
 
 # re-add rule with faster trigger time
-$cuckoo->class('at');
+$cuckoo->type('at');
 $cuckoo->trig('1');
 $cuckoo->update();
 $engine->enable_rule($cuckoo);
@@ -185,9 +185,9 @@ $stash = {
                                       'by_attr' => sub { "DUMMY" },
                                       'by_attr_list' => sub { "DUMMY" },
                                       'by_attr_name_list' => sub { "DUMMY" },
-                                      'by_class_and_attr' => sub { "DUMMY" },
-                                      'by_class_list' => sub { "DUMMY" },
-                                      'by_name' => sub { "DUMMY" }
+                                      'by_name' => sub { "DUMMY" },
+                                      'by_type_and_attr' => sub { "DUMMY" },
+                                      'by_type_list' => sub { "DUMMY" }
                                     },
                         'map' => {
                                    'all' => sub { "DUMMY" },
@@ -206,15 +206,15 @@ $stash = {
                                  },
                         'state' => {
                                      'get' => sub { "DUMMY" },
-                                     'get_by_class' => sub { "DUMMY" },
-                                     'get_by_class_matching' => sub { "DUMMY" },
-                                     'get_by_class_since' => sub { "DUMMY" },
-                                     'get_by_class_since_matching' => sub { "DUMMY" },
+                                     'get_by_type' => sub { "DUMMY" },
+                                     'get_by_type_matching' => sub { "DUMMY" },
+                                     'get_by_type_since' => sub { "DUMMY" },
+                                     'get_by_type_since_matching' => sub { "DUMMY" },
                                      'get_value' => sub { "DUMMY" },
-                                     'get_values_by_class' => sub { "DUMMY" },
-                                     'get_values_by_class_matching' => sub { "DUMMY" },
-                                     'get_values_by_class_since' => sub { "DUMMY" },
-                                     'get_values_by_class_since_matching' => sub { "DUMMY" },
+                                     'get_values_by_type' => sub { "DUMMY" },
+                                     'get_values_by_type_matching' => sub { "DUMMY" },
+                                     'get_values_by_type_since' => sub { "DUMMY" },
+                                     'get_values_by_type_since_matching' => sub { "DUMMY" },
                                      'set' => sub { "DUMMY" }
                                    }
                       }
@@ -313,7 +313,7 @@ m_lounge_l
    'device.all stash');
 
 is($engine->process_template(q{
-[% FOREACH dev = zenah.device.by_class_list("Curtain") -%]
+[% FOREACH dev = zenah.device.by_type_list("Curtain") -%]
 [% dev.name %]
 [% END -%]
 }),
@@ -322,7 +322,7 @@ c_bed_1
 c_kitchen
 c_lounge
 },
-   'device.by_class_list stash');
+   'device.by_type_list stash');
 
 is($engine->process_template('[% zenah.device.by_attr("unit", "a2").name -%]'),
    'a_amp', 'device.by_attr stash');
@@ -331,8 +331,8 @@ is($engine->process_template('[% zenah.device.by_attr("unit", "n0").name -%]'),
    '', 'device.by_attr stash - not found');
 
 is($engine->process_template(
-     '[% zenah.device.by_class_and_attr("X10App", "unit", "a2").name -%]'),
-   'a_amp', 'device.by_class_and_attr stash');
+     '[% zenah.device.by_type_and_attr("X10App", "unit", "a2").name -%]'),
+   'a_amp', 'device.by_type_and_attr stash');
 
 is($engine->process_template(q{
 [% FOREACH dev = zenah.device.by_attr_list("unit", "a2") -%]
@@ -495,7 +495,7 @@ is($engine->process_template(q{[% zenah.state.get_value("uv", "invalid") %]}),
    'state.get_value stash - invalid');
 
 is($engine->process_template(q{
-[% FOREACH state = zenah.state.get_by_class("light") -%]
+[% FOREACH state = zenah.state.get_by_type("light") -%]
 [% state.name %] = [% state.value %]
 [% END -%]
 }),
@@ -506,10 +506,10 @@ kitchen = light
 cloak = light
 lounge = light
 },
-   'state.get_by_class stash');
+   'state.get_by_type stash');
 
 is($engine->process_template(q{
-[% FOREACH state = zenah.state.get_by_class_matching("light", "^b") -%]
+[% FOREACH state = zenah.state.get_by_type_matching("light", "^b") -%]
 [% state.name %] = [% state.value %]
 [% END -%]
 }),
@@ -517,30 +517,30 @@ is($engine->process_template(q{
 bath = light
 bed_1 = light
 },
-   'state.get_by_class_matching stash');
+   'state.get_by_type_matching stash');
 
 is($engine->process_template(q{
-[% FOREACH state = zenah.state.get_by_class_since("light", 1186322165) -%]
+[% FOREACH state = zenah.state.get_by_type_since("light", 1186322165) -%]
 [% state.name %] = [% state.value %]
 [% END -%]
 }),
    q{
 lounge = light
 },
-   'state.get_by_class_since stash');
+   'state.get_by_type_since stash');
 
 is($engine->process_template(q{
-[% FOREACH state = zenah.state.get_by_class_since_matching("light", 1186322150, "^c") -%]
+[% FOREACH state = zenah.state.get_by_type_since_matching("light", 1186322150, "^c") -%]
 [% state.name %] = [% state.value %]
 [% END -%]
 }),
    q{
 cloak = light
 },
-   'state.get_by_class_since_matching stash');
+   'state.get_by_type_since_matching stash');
 
 is($engine->process_template(q{
-[% FOREACH value = zenah.state.get_values_by_class("light") -%]
+[% FOREACH value = zenah.state.get_values_by_type("light") -%]
 [% value %]
 [% END -%]
 }),
@@ -551,10 +551,10 @@ light
 light
 light
 },
-   'state.get_values_by_class stash');
+   'state.get_values_by_type stash');
 
 is($engine->process_template(q{
-[% FOREACH value = zenah.state.get_values_by_class_matching("light", "^b") -%]
+[% FOREACH value = zenah.state.get_values_by_type_matching("light", "^b") -%]
 [% value %]
 [% END -%]
 }),
@@ -562,27 +562,27 @@ is($engine->process_template(q{
 light
 light
 },
-   'state.get_values_by_class_matching stash');
+   'state.get_values_by_type_matching stash');
 
 is($engine->process_template(q{
-[% FOREACH value = zenah.state.get_values_by_class_since("light", 1186322165) -%]
+[% FOREACH value = zenah.state.get_values_by_type_since("light", 1186322165) -%]
 [% value %]
 [% END -%]
 }),
    q{
 light
 },
-   'state.get_values_by_class_since stash');
+   'state.get_values_by_type_since stash');
 
 is($engine->process_template(q{
-[% FOREACH value = zenah.state.get_values_by_class_since_matching("light", 1186322150, "^c") -%]
+[% FOREACH value = zenah.state.get_values_by_type_since_matching("light", 1186322150, "^c") -%]
 [% value %]
 [% END -%]
 }),
    q{
 light
 },
-   'state.get_values_by_class_since_matching stash');
+   'state.get_values_by_type_since_matching stash');
 
 is($engine->process_template(q{
 [% zenah.state.set("light", "garden", "light") %]
@@ -599,7 +599,7 @@ light
    'state.set stash');
 
 my $state =
-  ZenAH::CDBI::State->search(class => 'uv', name => 'uv138.55')->first;
+  ZenAH::CDBI::State->search(type => 'uv', name => 'uv138.55')->first;
 my $ctime = $state->ctime;
 my $mtime = $state->mtime;
 sleep 2;
@@ -619,12 +619,12 @@ is($new_ctime, $ctime, 'state.set stash - ctime unchanged');
 
 # test rrds
 ZenAH::CDBI::Map->create({
-                          class => 'engine_config',
+                          type => 'engine_config',
                           name => 'rrd_dir',
                           value => 't/rrd',
                          });
 ZenAH::CDBI::Map->create({
-                          class => 'rrd_def',
+                          type => 'rrd_def',
                           name => 'uv',
                           value => 'uv,1,GAUGE,0,40',
                          });
@@ -653,11 +653,11 @@ is($engine2->{_plugin}->{Timer}->{_tz}, 'Europe/Moscow',
 # Some error/warning cases not already covered
 
 is(test_error(sub { $engine->add_trigger() }),
-   'ZenAH::Engine->add_trigger: requires \'class\' argument',
+   'ZenAH::Engine->add_trigger: requires \'type\' argument',
    'add_trigger error');
 
 is(test_error(sub { $engine->add_action() }),
-   'ZenAH::Engine->add_action: requires \'class\' argument',
+   'ZenAH::Engine->add_action: requires \'type\' argument',
    'add_action error');
 
 is(test_error(sub { $engine->add_stash() }),

@@ -275,7 +275,7 @@ Page:
 </p>
 <table class="list-table">
   <tr class="list-header">
-    <th>class</th>
+    <th>type</th>
     <th>name</th>
     <th>value</th>
     <th>ctime</th>

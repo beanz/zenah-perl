@@ -1,4 +1,4 @@
-/admin/device/do_edit/27?name=front_door&string=Front%20Door&description=Front%20Door&class=Door&rooms=&controls=&attrs=
+/admin/device/do_edit/27?name=front_door&string=Front%20Door&description=Front%20Door&type=Door&rooms=&controls=&attrs=
 text/html
 200 OK
 
@@ -228,8 +228,8 @@ tr.list-row-1 {
     description<br/>
     <textarea cols="22" name="description" rows="3">Front Door</textarea>
 <br/>
-    class<br/>
-    <input name="class" type="text" value="Door" />
+    type<br/>
+    <input name="type" type="text" value="Door" />
 <br/>
 <table border="0" width="100%">
 <tr>

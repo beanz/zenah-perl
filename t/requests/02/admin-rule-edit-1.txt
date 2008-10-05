@@ -225,14 +225,14 @@ tr.list-row-1 {
     active<br/>
     <select name="active"><option selected="selected" value="1">Enabled</option><option value="0">Disbled</option></select>
 <br/>
-    class<br/>
-    <input name="class" type="text" value="at" />
+    type<br/>
+    <input name="type" type="text" value="at" />
 <br/>
     trig<br/>
-    <textarea cols="80" name="trig" rows="2">recurrence freq=hourly minutes=&quot;[0,15,30,45]&quot;</textarea>
+    <textarea cols="80" name="trig" rows="2">recurrence freq=hourly minutes=&#34;[0,15,30,45]&#34;</textarea>
 <br/>
     action<br/>
-    <textarea cols="80" name="action" rows="10">xpl -c osd.basic command=clear text=&quot;It is [% zenah.datetime.strftime(&quot;%H:%M&quot;) %]&quot; delay=10
+    <textarea cols="80" name="action" rows="10">xpl -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
 </textarea>
 <br/>
     ftime<br/>

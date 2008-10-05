@@ -228,8 +228,8 @@ tr.list-row-1 {
     description<br/>
     <textarea cols="22" name="description" rows="3">Main light</textarea>
 <br/>
-    class<br/>
-    <input name="class" type="text" value="X10Lamp" />
+    type<br/>
+    <input name="type" type="text" value="X10Lamp" />
 <br/>
 <table border="0" width="100%">
 <tr>

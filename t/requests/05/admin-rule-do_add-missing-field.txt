@@ -216,7 +216,7 @@ tr.list-row-1 {
 <!-- END site/nav -->
 </div>
 <div id="content">
-<p>You have to fill in all fields. The following are missing: <b>class</b></p>
+<p>You have to fill in all fields. The following are missing: <b>type</b></p>
 <form action="http://localhost//admin/rule/do_add" method="post">
     name<br/>
     <input name="name" type="text" />
@@ -224,8 +224,8 @@ tr.list-row-1 {
     active<br/>
     <select name="active"><option selected="selected" value="1">Enabled</option><option value="0">Disbled</option></select>
 <br/>
-    class<br/>
-    <input name="class" type="text" />
+    type<br/>
+    <input name="type" type="text" />
 <br/>
     trig<br/>
     <textarea cols="80" name="trig" rows="2"></textarea>

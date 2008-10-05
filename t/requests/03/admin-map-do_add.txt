@@ -1,4 +1,4 @@
-/admin/map/do_add?class=phonebook&name=emergency&value=999
+/admin/map/do_add?type=phonebook&name=emergency&value=999
 text/html
 200 OK
 
@@ -242,7 +242,7 @@ Page:
 </p>
 <table class="list-table">
   <tr class="list-header">
-    <th>class</th>
+    <th>type</th>
     <th>name</th>
     <th>value</th>
     <th/>

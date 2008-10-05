@@ -28,10 +28,10 @@ my %crud =
   (
    'device' => {
      table => 'Device',
-     column_order => [qw/name string description class/],
+     column_order => [qw/name string description type/],
      sort_order => 'name',
      form_validation => {
-       required => [ qw/name string class/ ],
+       required => [ qw/name string type/ ],
        optional => [ qw/description/ ],
      },
      has_attributes => 1,
@@ -51,20 +51,20 @@ my %crud =
    },
    'devicecontrol' => {
      table => 'DeviceControl',
-     column_order => [qw/class name string description definition/],
-     sort_order => 'class, name',
+     column_order => [qw/type name string description definition/],
+     sort_order => 'type, name',
      form_validation => {
-       required => [ qw/class name string definition/ ],
+       required => [ qw/type name string definition/ ],
        optional => [ qw/description/ ],
      },
      list_rows => 10,
    },
    'map' => {
      table => 'Map',
-     column_order => [qw/class name value/],
-     sort_order => 'class, name',
+     column_order => [qw/type name value/],
+     sort_order => 'type, name',
      form_validation => {
-       required => [ qw/class name value/ ],
+       required => [ qw/type name value/ ],
      },
    },
    'room' => {
@@ -91,13 +91,13 @@ my %crud =
    },
    'rule' => {
      table => 'Rule',
-     column_order => [qw/name active class trig action ftime mtime/],
+     column_order => [qw/name active type trig action ftime mtime/],
      sort_order => 'name',
      form_validation => {
-       required => [ qw/name class active/ ],
+       required => [ qw/name type active/ ],
        optional => [ qw/trig action mtime/ ],
        constraint_methods => {
-         class => qr/^(?:xpl|scene|at)$/,
+         type => qr/^(?:xpl|scene|at)$/,
          active => qr/^[01]$/,
        },
      },
@@ -105,18 +105,18 @@ my %crud =
    },
    'state' => {
      table => 'State',
-     column_order => [qw/class name value ctime mtime/],
+     column_order => [qw/type name value ctime mtime/],
      sort_order => 'name',
      form_validation => {
-       required => [ qw/class name value ctime mtime/ ]
+       required => [ qw/type name value ctime mtime/ ]
      },
    },
    'template' => {
      table => 'Template',
-     column_order => [qw/class name text/],
-     sort_order => 'class,name',
+     column_order => [qw/type name text/],
+     sort_order => 'type,name',
      form_validation => {
-       required => [ qw/class name text/ ]
+       required => [ qw/type name text/ ]
      },
      list_rows => 5,
    },

@@ -1,4 +1,4 @@
-/admin/rule/do_edit/15?name=callerid&active=1&class=cosine&trig=message_type%3d%22xpl-trig%22%20class%3d%22cid.basic%22%20calltype%3dinbound&action=%5b%25%20SET%20name%20%3d%20zenah.map.reverse(%27phonebook%27%2c%20xpl.phone)%20%25%5d%0axpl%20-c%20osd.basic%20command%3dwrite%20text%3d%22%20Call%20%5b%25%20name%20%3f%20name%20%3a%20xpl.phone%20%25%5d%22%0a&ftime=&mtime=1222123916
+/admin/rule/do_edit/15?name=callerid&active=1&type=cosine&trig=message_type%3d%22xpl-trig%22%20class%3d%22cid.basic%22%20calltype%3dinbound&action=%5b%25%20SET%20name%20%3d%20zenah.map.reverse(%27phonebook%27%2c%20xpl.phone)%20%25%5d%0axpl%20-c%20osd.basic%20command%3dwrite%20text%3d%22%20Call%20%5b%25%20name%20%3f%20name%20%3a%20xpl.phone%20%25%5d%22%0a&ftime=&mtime=1222123916
 text/html
 200 OK
 
@@ -216,7 +216,7 @@ tr.list-row-1 {
 <!-- END site/nav -->
 </div>
 <div id="content">
-<p>Some fields are not correctly filled in.the following are invalid: <b>class</b></p>
+<p>Some fields are not correctly filled in.the following are invalid: <b>type</b></p>
 <form action="http://localhost//admin/rule/do_edit/15"
     method="post">
     name<br/>
@@ -225,15 +225,15 @@ tr.list-row-1 {
     active<br/>
     <select name="active"><option selected="selected" value="1">Enabled</option><option value="0">Disbled</option></select>
 <br/>
-    class<br/>
-    <input name="class" type="text" value="xpl" />
+    type<br/>
+    <input name="type" type="text" value="xpl" />
 <br/>
     trig<br/>
-    <textarea cols="80" name="trig" rows="2">message_type=&quot;xpl-trig&quot; class=&quot;cid.basic&quot; calltype=inbound</textarea>
+    <textarea cols="80" name="trig" rows="2">message_type=&#34;xpl-trig&#34; class=&#34;cid.basic&#34; calltype=inbound</textarea>
 <br/>
     action<br/>
     <textarea cols="80" name="action" rows="10">[% SET name = zenah.map.reverse(&#39;phonebook&#39;, xpl.phone) %]
-xpl -c osd.basic command=write text=&quot; Call [% name ? name : xpl.phone %]&quot;
+xpl -c osd.basic command=write text=&#34; Call [% name ? name : xpl.phone %]&#34;
 </textarea>
 <br/>
     ftime<br/>

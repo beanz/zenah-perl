@@ -61,57 +61,57 @@ This plugin registers a 'state' stash with the following operations:
 
 =over
 
-=item C<get(class, name)>
+=item C<get(type, name)>
 
 Returns the state object (or first if there is more than one) with
-the given class and name.
+the given type and name.
 
-=item C<get_value(class, name)>
+=item C<get_value(type, name)>
 
 Returns the value from the state object (or first if there is more
-than one) with the given class and name.
+than one) with the given type and name.
 
-=item C<get_by_class(class)>
+=item C<get_by_type(type)>
 
-Returns a list of state objects with the given class.
+Returns a list of state objects with the given type.
 
-=item C<get_by_class_matching(class, name_pattern)>
+=item C<get_by_type_matching(type, name_pattern)>
 
-Returns a list of state objects with the given class with names that
+Returns a list of state objects with the given type with names that
 match the given pattern.
 
-=item C<get_by_class_since(class, modification_time)>
+=item C<get_by_type_since(type, modification_time)>
 
-Returns a list of state objects with the given class and with
+Returns a list of state objects with the given type and with
 modification times equal or more recent than the given time.
 
-=item C<get_by_class_since_matching(class, modification_time, name_pattern)>
+=item C<get_by_type_since_matching(type, modification_time, name_pattern)>
 
-Returns a list of state objects with the given class, with
+Returns a list of state objects with the given type, with
 modification times equal or more recent than the given time, and
 with names that match the given pattern.
 
-=item C<get_values_by_class(class)>
+=item C<get_values_by_type(type)>
 
 Returns the list of values from the objects that would be returned by
-the C<get_by_class> call.
+the C<get_by_type> call.
 
-=item C<get_values_by_class_matching(class, name_pattern)>
-
-Returns the list of values from the objects that would be returned by
-the C<get_by_class_matching> call.
-
-=item C<get_values_by_class_since(class, modification_time)>
+=item C<get_values_by_type_matching(type, name_pattern)>
 
 Returns the list of values from the objects that would be returned by
-the C<get_by_class_since> call.
+the C<get_by_type_matching> call.
 
-=item C<get_values_by_class_since_matching(class, modification_time, pattern)>
+=item C<get_values_by_type_since(type, modification_time)>
 
 Returns the list of values from the objects that would be returned by
-the C<get_by_class_since_matching> call.
+the C<get_by_type_since> call.
 
-=item C<set(class, name, value)>
+=item C<get_values_by_type_since_matching(type, modification_time, pattern)>
+
+Returns the list of values from the objects that would be returned by
+the C<get_by_type_since_matching> call.
+
+=item C<set(type, name, value)>
 
 Updates the database with the new value or creates a new entry in the state
 table.
@@ -130,71 +130,71 @@ sub new {
   my %d =
     (
      get => sub {
-       return ZenAH::CDBI::State->search(class => $_[0],
+       return ZenAH::CDBI::State->search(type => $_[0],
                                          name => $_[1])->first;
      },
      get_value => sub {
-       my $state = ZenAH::CDBI::State->search(class => $_[0],
+       my $state = ZenAH::CDBI::State->search(type => $_[0],
                                               name => $_[1])->first;
        return $state && $state->value;
      },
-     get_by_class => sub {
-       my @states = ZenAH::CDBI::State->search(class => $_[0]);
+     get_by_type => sub {
+       my @states = ZenAH::CDBI::State->search(type => $_[0]);
        return \@states;
      },
-     get_by_class_matching => sub {
+     get_by_type_matching => sub {
        my @states =
          grep
            { $_->name =~ /$_[1]/
-           } ZenAH::CDBI::State->search(class => $_[0]);
+           } ZenAH::CDBI::State->search(type => $_[0]);
        return \@states;
      },
-     get_by_class_since => sub {
+     get_by_type_since => sub {
        my @states =
-         ZenAH::CDBI::State->search(class => $_[0],
+         ZenAH::CDBI::State->search(type => $_[0],
                                     mtime => { '>' => $_[1] });
        return \@states;
      },
-     get_by_class_since_matching => sub {
+     get_by_type_since_matching => sub {
        my @states =
          grep
            { $_->name =~ /$_[2]/
-           } ZenAH::CDBI::State->search(class => $_[0],
+           } ZenAH::CDBI::State->search(type => $_[0],
                                         mtime => { '>' => $_[1] });
        return \@states;
      },
-     get_values_by_class => sub {
+     get_values_by_type => sub {
        my @values =
          map { $_->value
-             } ZenAH::CDBI::State->search(class => $_[0]);
+             } ZenAH::CDBI::State->search(type => $_[0]);
        return \@values;
      },
-     get_values_by_class_matching => sub {
+     get_values_by_type_matching => sub {
        my @values =
          map { $_->value
              } grep
                { $_->name =~ /$_[1]/
-               } ZenAH::CDBI::State->search(class => $_[0]);
+               } ZenAH::CDBI::State->search(type => $_[0]);
        return \@values;
      },
-     get_values_by_class_since => sub {
+     get_values_by_type_since => sub {
        my @values =
          map { $_->value
-             } ZenAH::CDBI::State->search(class => $_[0],
+             } ZenAH::CDBI::State->search(type => $_[0],
                                           mtime => { '>' => $_[1] });
        return \@values;
      },
-     get_values_by_class_since_matching => sub {
+     get_values_by_type_since_matching => sub {
        my @values =
          map { $_->value
              } grep
                { $_->name =~ /$_[2]/
-               } ZenAH::CDBI::State->search(class => $_[0],
+               } ZenAH::CDBI::State->search(type => $_[0],
                                             mtime => { '>' => $_[1] });
        return \@values;
      },
      set => sub {
-       my $state = ZenAH::CDBI::State->find_or_create(class => $_[0],
+       my $state = ZenAH::CDBI::State->find_or_create(type => $_[0],
                                                       name => $_[1]);
        my $old = $state->value();
        $state->value($_[2]);

@@ -37,7 +37,7 @@ $device_attr->update();
 is($device->action('on'),
    "  xpl -m xpl-cmnd -c x10.basic device=l1 command=on\n",
    'device->action("on")');
-my $device_ctrl = ZenAH::CDBI::DeviceControl->search(class => 'x10',
+my $device_ctrl = ZenAH::CDBI::DeviceControl->search(type => 'x10',
                                                      name => 'on')->first;
 $device_ctrl->definition('[% IF false %]');
 $device_ctrl->update();
@@ -49,7 +49,7 @@ is($device->action('invalid'),
    "error invalid action, invalid, on device, l_bed_1\n",
    'device->action("invalid")');
 
-$device->class('Button');
+$device->type('Button');
 $device->update();
 is($device->action('button'),
    'xpl -m xpl-trig -c remote.basic device=l_bed_1 keys=button',
@@ -61,10 +61,10 @@ ok($device_attr = ZenAH::CDBI::DeviceAttribute->create({name => 'base',
 ok(ZenAH::CDBI::DeviceAttributeLink->create({device => $device,
                                              device_attribute => $device_attr}),
    'device_attribute_link create');
-$device->class('DMX');
+$device->type('DMX');
 $device->update();
 is($device->action('red'),
-   'xpl -m xpl-cmnd -c dmx.basic base=13 class=set value=red',
+   'xpl -m xpl-cmnd -c dmx.basic base=13 type=set value=red',
    'device->action("red")');
 
 my $room = ZenAH::CDBI::Room->retrieve(1);

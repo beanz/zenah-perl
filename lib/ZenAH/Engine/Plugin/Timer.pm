@@ -76,10 +76,10 @@ sub new {
   exists $p{tz} or $p{tz} = $ENV{TZ} || 'Europe/London';
   my $tz = $self->{_tz} = $p{tz};
 
-  $engine->add_action(class => 'sleep',
+  $engine->add_action(type => 'sleep',
                       callback => sub { $self->action_sleep(@_); });
 
-  $engine->add_trigger(class => "at",
+  $engine->add_trigger(type => "at",
                        add_callback => sub { $self->add(@_) },
                        remove_callback => sub { $self->remove(@_) },
                       );
@@ -98,7 +98,7 @@ sub new {
 =head2 C<add($rule)>
 
 This method is the callback that sets up the timers for rules which
-have the class 'at'.  The trigger, C<trig>, value is passed directly
+have the type 'at'.  The trigger, C<trig>, value is passed directly
 to the L<xPL::Listener::add_timer()> method.  Supported values for the
 trigger are describe in the documentation for that method.
 
@@ -118,7 +118,7 @@ sub add {
 =head2 C<remove($rule)>
 
 This method is the callback that removes the timers for rules which
-have the class 'at'.
+have the type 'at'.
 
 =cut
 
