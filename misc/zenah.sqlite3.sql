@@ -3,7 +3,7 @@ CREATE TABLE device (
   name varchar(80),
   string varchar(80),
   description text,
-  type varchar(80)
+  class varchar(80)
 );
 CREATE TABLE device_attribute (
   id integer primary key,
@@ -18,6 +18,7 @@ CREATE TABLE device_attribute_link (
 CREATE TABLE device_control (
   id integer primary key,
   name varchar(50),
+  class varchar(20),
   description text,
   definition text,
   string varchar(80)
@@ -47,7 +48,7 @@ CREATE TABLE liststate (
 );
 CREATE TABLE map (
   id integer primary key,
-  type varchar(50),
+  class varchar(50),
   name varchar(80),
   value varchar(255)
 );
@@ -81,7 +82,7 @@ CREATE TABLE rule (
   id integer primary key,
   name varchar(80),
   trig text,
-  trig_type varchar(30),
+  class varchar(30),
   action text,
   active tinyint(1),
   mtime int(11),
@@ -90,7 +91,7 @@ CREATE TABLE rule (
 CREATE TABLE state (
   id integer primary key,
   name varchar(80),
-  type varchar(20),
+  class varchar(20),
   value varchar(200),
   mtime int(11),
   ctime int(11)
@@ -98,6 +99,7 @@ CREATE TABLE state (
 CREATE TABLE template (
   id integer primary key,
   name varchar(80),
+  class varchar(20),
   text text,
   mtime int(11));
 CREATE TABLE timestamp (

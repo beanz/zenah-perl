@@ -7,7 +7,7 @@ CREATE TABLE device (
   `name` varchar(80) default NULL,
   `string` varchar(80) default NULL,
   description text,
-  `type` varchar(80) default NULL,
+  `class` varchar(80) default NULL,
   PRIMARY KEY  (id)
 );
 
@@ -44,6 +44,7 @@ CREATE TABLE device_attribute_link (
 CREATE TABLE device_control (
   id int(11) NOT NULL auto_increment,
   `name` varchar(50) default NULL,
+  `class` varchar(20) default NULL,
   definition text,
   `string` varchar(80) default NULL,
   description text,
@@ -111,11 +112,11 @@ CREATE TABLE liststate (
 
 CREATE TABLE map (
   id int(11) NOT NULL auto_increment,
-  `type` varchar(50) default NULL,
+  `class` varchar(50) default NULL,
   `name` varchar(80) default NULL,
   `value` varchar(255) default NULL,
   PRIMARY KEY  (id),
-  KEY `type` (`type`,`name`)
+  KEY `class` (`class`,`name`)
 );
 
 --
@@ -185,7 +186,7 @@ CREATE TABLE rule (
   id int(11) NOT NULL auto_increment,
   `name` varchar(80) default NULL,
   trig text,
-  trig_type varchar(30) default NULL,
+  class varchar(30) default NULL,
   `action` text,
   active tinyint(1) default NULL,
   mtime int(11) default NULL,
@@ -201,13 +202,13 @@ CREATE TABLE rule (
 CREATE TABLE state (
   id int(11) NOT NULL auto_increment,
   `name` varchar(80) default NULL,
-  `type` varchar(20) default NULL,
+  `class` varchar(20) default NULL,
   `value` varchar(200) default NULL,
   mtime int(11) default NULL,
   ctime int(11) default NULL,
   PRIMARY KEY  (id),
   KEY `name` (`name`),
-  KEY `type` (`type`)
+  KEY `class` (`class`)
 );
 
 --
@@ -217,10 +218,12 @@ CREATE TABLE state (
 CREATE TABLE template (
   id int(11) NOT NULL auto_increment,
   `name` varchar(80) default NULL,
+  `class` varchar(20) default NULL,
   `text` text,
   mtime int(11) default NULL,
   PRIMARY KEY  (id),
-  KEY `name` (`name`)
+  KEY `name` (`name`),
+  KEY `class` (`class`)
 );
 
 --
