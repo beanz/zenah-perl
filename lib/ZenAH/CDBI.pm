@@ -305,7 +305,7 @@ sub ZenAH::CDBI::Rule::to_field {
     my $a = $self->Class::DBI::AsForm::to_field($field, 'textarea');
     $a->attr(cols => 80);
     $a->attr(rows => $field eq 'trig' ? 2 : 10);
-    if (ref $self) { $a->push_content(encode_entities($self->$field)) }
+    if (ref $self) { $a->push_content($self->$field) }
     $a;
   } elsif ($field eq 'active') {
     my $a = HTML::Element->new('select', name => $field);
@@ -366,7 +366,7 @@ sub ZenAH::CDBI::Template::to_field {
     my $a = $self->Class::DBI::AsForm::to_field($field, 'textarea');
     $a->attr(cols => 80);
     $a->attr(rows => 10);
-    if (ref $self) { $a->push_content(encode_entities($self->$field)) }
+    if (ref $self) { $a->push_content($self->$field) }
     $a;
   } else {
     $self->Class::DBI::AsForm::to_field($field);
