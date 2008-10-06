@@ -1,0 +1,295 @@
+/?content=room&room=devices&room_name=kitchen
+text/html
+200 OK
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+ <head>
+  <title>Zen Automated Home</title>
+  <style type="text/css">
+html {
+    height: 100%;
+}
+body { 
+    background-color: #ffffff;
+    color: #484848;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+#logo {
+    float: right;
+}
+#header {
+    background-color: #efefef;
+}
+#footer {
+    background-color: #efefef;
+    text-align: center;
+    border-top: 1px solid #aa1914;
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    width: 100%;
+    padding: 4px;
+}
+#content {
+    padding: 10px;
+}
+h1.title {
+    padding: 0.1em;
+    margin: 0px;
+    font: Ariel;
+    color: #12171c;
+}
+.message {
+    color: #66AA66;
+}
+.error {
+    color: #CC4444;
+}
+#nav {
+    padding: 2px 0px;
+    border-bottom: 5px solid #12171c;
+    background-color: #efefef;
+}
+.navbutton-current {
+    border-style: hidden;
+    padding: 3px 3px 2px 3px;
+    border-color: #12171c;
+    background: #12171c;
+}
+.navbutton {
+    border-bottom: 1px solid #efefef;
+    padding: 3px 3px 1px 3px;
+    background: #4ca7ab;
+}
+.navbutton-current A {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton-current A:hover {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton-current img {
+    border-style: hidden;
+}
+.navbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton A:hover {
+    background: #cceeee;
+} 
+.navbutton img {
+    border-style: hidden;
+}
+div.button {
+}
+div.button A {
+  color: #000000;
+  font-weight: bold;
+  text-decoration: none;
+} 
+div.roomname {
+  border-width: 2px 2px 2px 2px;
+  padding: 1px 1px 1px 1px;
+  border-style: outset outset outset outset;
+  border-color: teal;
+  background-color: #99aaaa;
+}
+div.devicename {
+  border-width: 2px 2px 2px 2px;
+  padding: 1px 1px 1px 1px;
+  border-style: outset outset outset outset;
+  border-color: teal;
+  background-color: #ccffff;
+}
+div.devicecontrol {
+  border-width: 2px 2px 2px 2px;
+  padding: 1px 1px 1px 1px;
+  border-style: outset outset outset outset;
+  border-color: teal;
+  background: #99cccc;
+}
+div.status {
+  colour: white;
+  padding: 2px 2px 2px 2px;
+  border-style: outset;
+  border-color: #cc0000;
+  background-color: #cc0000;
+  width: 450px;
+  float: top;
+  float: left;
+  font-weight: bold;
+}
+content {
+  width: 100%;
+  height: 380;
+  padding: 0px 0px 0px 0px;
+  background: white;
+  margin-top: 15px;
+}
+  </style>
+  <script src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load("prototype", "1.6");
+    google.load("scriptaculous", "1.8.1");
+  </script>
+  <script src="http://localhost/js/excanvas/excanvas.js"
+          type="text/javascript"></script>
+  <script src="http://localhost/js/plotr/plotr.js"
+          type="text/javascript"></script>
+  <script src="http://localhost/js/ajax.js"
+          type="text/javascript"></script>
+ </head>
+ <body>
+<div id="header"><!-- BEGIN header -->
+<img id="logo" class="logo" height="50" width="50"
+     src="http://localhost/images/zenah-50.png" />
+<h1 class="title">Zen Automated Home</h1>
+<!-- END header --></div>
+<div id="nav"><!-- BEGIN nav -->
+<div id="topnav">
+  <span class="navbutton"><a
+    href="http://localhost//"
+    >Home</a></span>
+ <span class="navbutton"><a href="http://localhost/?content=room&room=lights&room_name=kitchen">Lights</a></span>
+ <span class="navbutton-current"><a href="http://localhost/?content=room&room=devices&room_name=kitchen">Devices</a></span>
+ <span class="navbutton"><a href="http://localhost/?content=room&room=windows&room_name=kitchen">Windows</a></span>
+ <span class="navbutton"><a href="http://localhost/?content=room&room=motion&room_name=kitchen">Motion</a></span>
+ <span class="navbutton"><a href="http://localhost/?content=room&room=light&room_name=kitchen">Light</a></span>
+  <span class="navbutton"><a
+    href="http://localhost///admin"
+    >Admin</a></span>
+</div>
+<div id="leftnav">
+</div>
+<!-- END nav --></div>
+<div class="status" name="zenah_status" id="zenah_status"
+  >&nbsp;</div>
+<br/>
+<p></p>
+<br/>
+<div id="content">
+<table cellpadding="0" cellspacing="0" width="80%" border="1">
+<tr>
+  <td valign="top" rowspan="1" colspan="1">
+  <div class="device">
+  <table valign="top" border="0" width="100%">
+  <tr>
+    <th valign="top">Kitchen</th>
+  </tr>
+    <tr>
+      <td>
+        <div class="device">
+  <table valign="top" border="0">
+  <tr>
+    <th halign="right">
+      <div class="devicename">Spots</div>
+    </th>
+      <td onclick="device_func(['args__l_kitchen','args__on'],['zenah_status']);Effect.Pulsate(this);return false;">
+        <div class="button"><a
+          href="http://localhost/action/l_kitchen/on"
+          ><div class="devicecontrol">On</div></a></div>
+      </td>
+      <td onclick="device_func(['args__l_kitchen','args__off'],['zenah_status']);Effect.Pulsate(this);return false;">
+        <div class="button"><a
+          href="http://localhost/action/l_kitchen/off"
+          ><div class="devicecontrol">Off</div></a></div>
+      </td>
+      <td onclick="device_func(['args__l_kitchen','args__bright'],['zenah_status']);Effect.Pulsate(this);return false;">
+        <div class="button"><a
+          href="http://localhost/action/l_kitchen/bright"
+          ><div class="devicecontrol">Bright</div></a></div>
+      </td>
+      <td onclick="device_func(['args__l_kitchen','args__dim'],['zenah_status']);Effect.Pulsate(this);return false;">
+        <div class="button"><a
+          href="http://localhost/action/l_kitchen/dim"
+          ><div class="devicecontrol">Dim</div></a></div>
+      </td>
+      <td onclick="device_func(['args__l_kitchen','args__full-fast'],['zenah_status']);Effect.Pulsate(this);return false;">
+        <div class="button"><a
+          href="http://localhost/action/l_kitchen/full-fast"
+          ><div class="devicecontrol">FullFast</div></a></div>
+      </td>
+  </tr>
+  </table>
+</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="device">
+  <table valign="top" border="0">
+  <tr>
+    <th halign="right">
+      <div class="devicename">Under Lights</div>
+    </th>
+      <td onclick="device_func(['args__l_kitchen_under','args__on'],['zenah_status']);Effect.Pulsate(this);return false;">
+        <div class="button"><a
+          href="http://localhost/action/l_kitchen_under/on"
+          ><div class="devicecontrol">On</div></a></div>
+      </td>
+      <td onclick="device_func(['args__l_kitchen_under','args__off'],['zenah_status']);Effect.Pulsate(this);return false;">
+        <div class="button"><a
+          href="http://localhost/action/l_kitchen_under/off"
+          ><div class="devicecontrol">Off</div></a></div>
+      </td>
+      <td onclick="device_func(['args__l_kitchen_under','args__bright'],['zenah_status']);Effect.Pulsate(this);return false;">
+        <div class="button"><a
+          href="http://localhost/action/l_kitchen_under/bright"
+          ><div class="devicecontrol">Bright</div></a></div>
+      </td>
+      <td onclick="device_func(['args__l_kitchen_under','args__dim'],['zenah_status']);Effect.Pulsate(this);return false;">
+        <div class="button"><a
+          href="http://localhost/action/l_kitchen_under/dim"
+          ><div class="devicecontrol">Dim</div></a></div>
+      </td>
+      <td onclick="device_func(['args__l_kitchen_under','args__full-fast'],['zenah_status']);Effect.Pulsate(this);return false;">
+        <div class="button"><a
+          href="http://localhost/action/l_kitchen_under/full-fast"
+          ><div class="devicecontrol">FullFast</div></a></div>
+      </td>
+  </tr>
+  </table>
+</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="device">
+  <table valign="top" border="0">
+  <tr>
+    <th halign="right">
+      <div class="devicename">Curtain</div>
+    </th>
+      <td onclick="device_func(['args__c_kitchen','args__open'],['zenah_status']);Effect.Pulsate(this);return false;">
+        <div class="button"><a
+          href="http://localhost/action/c_kitchen/open"
+          ><div class="devicecontrol">Open</div></a></div>
+      </td>
+      <td onclick="device_func(['args__c_kitchen','args__close'],['zenah_status']);Effect.Pulsate(this);return false;">
+        <div class="button"><a
+          href="http://localhost/action/c_kitchen/close"
+          ><div class="devicecontrol">Close</div></a></div>
+      </td>
+  </tr>
+  </table>
+</div>
+      </td>
+    </tr>
+  </table>
+  </td>
+</tr>
+</table>
+</div>
+<div id="footer"><!-- BEGIN footer -->
+<div id="copyright">© 2006, 2008 Mark Hindess</div>
+<!-- END footer --></div>
+ </body>
+</html>
