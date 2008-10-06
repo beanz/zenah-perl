@@ -132,13 +132,9 @@ sub ZenAH::CDBI::Rule::to_view {
     $self->active ? 'enabled' : 'disabled'
   } elsif ($field eq 'action' or $field eq 'trig') {
     my $small = HTML::Element->new('small');
-    if ($short) {
-      $small->push_content($self->$field);
-    } else {
-      my $pre = HTML::Element->new('pre');
-      $pre->push_content($self->$field);
-      $small->push_content($pre);
-    }
+    my $inner = HTML::Element->new($short ? 'small' : 'pre');
+    $inner->push_content($self->$field);
+    $small->push_content($inner);
     $small->as_XML;
   } else {
     $self->$field();
@@ -168,13 +164,9 @@ sub ZenAH::CDBI::Template::to_view {
   return '' unless (defined $self->$field);
   if ($field eq 'text') {
     my $small = HTML::Element->new('small');
-    if ($short) {
-      $small->push_content($self->$field);
-    } else {
-      my $pre = HTML::Element->new('pre');
-      $pre->push_content($self->$field);
-      $small->push_content($pre);
-    }
+    my $inner = HTML::Element->new($short ? 'small' : 'pre');
+    $inner->push_content($self->$field);
+    $small->push_content($inner);
     $small->as_XML;
   } else {
     $self->$field();
