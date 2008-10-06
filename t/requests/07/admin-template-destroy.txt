@@ -292,7 +292,7 @@ Page:
     <tr class="list-row-0">
       <td>config</td>
       <td>col</td>
-      <td><small><pre>[% site.rgb = {
+      <td><small><small>[% site.rgb = {
      black   = &#39;#000000&#39;
      white   = &#39;#ffffff&#39;
      grey1   = &#39;#484848&#39;
@@ -356,7 +356,7 @@ Page:
       }
    };
 %]
-</pre></small>
+</small></small>
 </td>
       <td>
   <span class="crudbutton"><a
@@ -375,7 +375,7 @@ Page:
     <tr class="list-row-1">
       <td>config</td>
       <td>macro</td>
-      <td><small><pre>[% USE String %]
+      <td><small><small>[% USE String %]
 [% MACRO variant_button(type, name, variant) BLOCK %]
   [% SET var = Catalyst.request.param(variant.keys.0) %]
   [% SET cc = variant.values.0 == var ? &#34;-current&#34; : &#34;&#34; %]
@@ -403,7 +403,7 @@ Filter:
 [% END %]
 &#60;/p&#62;
 [% END %]
-</pre></small>
+</small></small>
 </td>
       <td>
   <span class="crudbutton"><a
@@ -422,7 +422,7 @@ Filter:
     <tr class="list-row-0">
       <td>config</td>
       <td>main</td>
-      <td><small><pre>[% # config/main
+      <td><small><small>[% # config/main
    #
    # This is the main configuration template which is processed before
    # any other page, by virtue of it being defined as a PRE_PROCESS 
@@ -446,7 +446,7 @@ Filter:
    DEFAULT 
      message = &#39;&#39;;
 -%]
-</pre></small>
+</small></small>
 </td>
       <td>
   <span class="crudbutton"><a
@@ -465,14 +465,14 @@ Filter:
     <tr class="list-row-1">
       <td>config</td>
       <td>url</td>
-      <td><small><pre>[% base = Catalyst.req.base;
+      <td><small><small>[% base = Catalyst.req.base;
    site.url = {
      base    = base
      home    = &#34;${base}welcome&#34;
      message = &#34;${base}message&#34;
    }
 -%]
-</pre></small>
+</small></small>
 </td>
       <td>
   <span class="crudbutton"><a
@@ -491,8 +491,8 @@ Filter:
     <tr class="list-row-0">
       <td>content</td>
       <td>default</td>
-      <td><small><pre>[% SET t_content = &#39;content/&#39; _ (Catalyst.request.param(&#39;content&#39;) || &#39;house&#39;) %]
-[% PROCESS $t_content %]</pre></small>
+      <td><small><small>[% SET t_content = &#39;content/&#39; _ (Catalyst.request.param(&#39;content&#39;) || &#39;house&#39;) %]
+[% PROCESS $t_content %]</small></small>
 </td>
       <td>
   <span class="crudbutton"><a

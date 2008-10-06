@@ -25,6 +25,14 @@ Trivial wrapper to define how fields should be rendered in HTML.
 
   sub to_view {
     my ($self, $field) = @_;
+    if ($field =~ /time$/) {
+      my $v = $self->$field;
+      if (ref $v && (ref $v) eq 'DateTime' && $v->epoch > (time - 86400)) {
+        return $v->hms;
+      } else {
+        return $v;
+      }
+    }
     $self->$field();
   }
 }

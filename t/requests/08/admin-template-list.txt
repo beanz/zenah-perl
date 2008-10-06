@@ -278,7 +278,7 @@ Page:
     <tr class="list-row-0">
       <td>room</td>
       <td>light</td>
-      <td><small><pre>[% USE room_table = Class(&#39;ZenAH::Model::CDBI::Room&#39;) %]
+      <td><small><small>[% USE room_table = Class(&#39;ZenAH::Model::CDBI::Room&#39;) %]
 [% USE state_table = Class(&#39;ZenAH::Model::CDBI::State&#39;) %]
 [% SET r = room_table.search({ name =&#62; room }) %]
 [% IF r %]
@@ -296,7 +296,7 @@ Page:
 [% ELSE %]
   Invalid room
 [% END %]
-</pre></small>
+</small></small>
 </td>
       <td>
   <span class="crudbutton"><a
@@ -315,7 +315,7 @@ Page:
     <tr class="list-row-1">
       <td>room</td>
       <td>lights</td>
-      <td><small><pre>[% USE table_class = Class(&#39;ZenAH::Model::CDBI::Room&#39;) %]
+      <td><small><small>[% USE table_class = Class(&#39;ZenAH::Model::CDBI::Room&#39;) %]
 [% SET r = table_class.search({ name =&#62; room }) %]
 [% IF r %]
   &#60;td valign=&#34;top&#34; rowspan=&#34;[% rowspan || 1 %]&#34; colspan=&#34;[% colspan || 1 %]&#34;&#62;
@@ -337,7 +337,7 @@ Page:
   &#60;/td&#62;
 [% ELSE %]
   Invalid room &#39;[% room %]&#39;
-[% END %]</pre></small>
+[% END %]</small></small>
 </td>
       <td>
   <span class="crudbutton"><a

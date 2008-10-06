@@ -264,13 +264,13 @@ Page:
       <td>scene_trigger</td>
       <td>enabled</td>
       <td>xpl</td>
-      <td><small><pre>message_type=&#34;xpl-trig&#34; class=&#34;x10.basic&#34; command=(on|off)</pre></small>
+      <td><small><small>message_type=&#34;xpl-trig&#34; class=&#34;x10.basic&#34; command=(on|off)</small></small>
 </td>
-      <td><small><pre>[% SET scene_name = zenah.map.lookup(&#39;scene_trigger&#39;,xpl.device) %]
+      <td><small><small>[% SET scene_name = zenah.map.lookup(&#39;scene_trigger&#39;,xpl.device) %]
 [% IF scene_name %]
 scene [% scene_name %] state=[% xpl.command %]
 [% END %]
-</pre></small>
+</small></small>
 </td>
       <td>1970-01-01 01:33:27</td>
       <td>2007-08-05 18:18:05</td>
@@ -292,12 +292,12 @@ scene [% scene_name %] state=[% xpl.command %]
       <td>sensor_history</td>
       <td>enabled</td>
       <td>xpl</td>
-      <td><small><pre>message_type=&#34;(xpl-trig|xpl-stat)&#34; class=&#34;sensor.basic&#34;</pre></small>
+      <td><small><small>message_type=&#34;(xpl-trig|xpl-stat)&#34; class=&#34;sensor.basic&#34;</small></small>
 </td>
-      <td><small><pre>[% SET t = zenah.datetime.epoch %]
+      <td><small><small>[% SET t = zenah.datetime.epoch %]
 [%# Add to state table for quick lookup of latest value %]
 [% CALL zenah.state.set(xpl.type, xpl.device, xpl.current) %]
-</pre></small>
+</small></small>
 </td>
       <td>2007-08-05 20:00:14</td>
       <td>2007-08-05 19:57:39</td>

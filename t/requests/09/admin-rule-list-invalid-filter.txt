@@ -282,10 +282,10 @@ Page:
       <td>cuckoo</td>
       <td>enabled</td>
       <td>at</td>
-      <td><small><pre>recurrence freq=hourly minutes=&#34;[0,15,30,45]&#34;</pre></small>
+      <td><small><small>recurrence freq=hourly minutes=&#34;[0,15,30,45]&#34;</small></small>
 </td>
-      <td><small><pre>xpl -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
-</pre></small>
+      <td><small><small>xpl -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
+</small></small>
 </td>
       <td>2007-08-10 21:45:02</td>
       <td>2007-08-05 14:52:24</td>
@@ -307,10 +307,10 @@ Page:
       <td>dusk</td>
       <td>enabled</td>
       <td>at</td>
-      <td><small><pre>sunset minutes=&#34;-20&#34;</pre></small>
+      <td><small><small>sunset minutes=&#34;-20&#34;</small></small>
 </td>
-      <td><small><pre>scene all_windows state=close
-</pre></small>
+      <td><small><small>scene all_windows state=close
+</small></small>
 </td>
       <td>2007-08-10 20:17:44</td>
       <td>2007-08-03 13:53:05</td>

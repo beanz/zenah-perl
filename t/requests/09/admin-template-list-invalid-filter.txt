@@ -336,7 +336,7 @@ Page:
     <tr class="list-row-0">
       <td>config</td>
       <td>main</td>
-      <td><small><pre>[% # config/main
+      <td><small><small>[% # config/main
    #
    # This is the main configuration template which is processed before
    # any other page, by virtue of it being defined as a PRE_PROCESS 
@@ -360,7 +360,7 @@ Page:
    DEFAULT 
      message = &#39;&#39;;
 -%]
-</pre></small>
+</small></small>
 </td>
       <td>
   <span class="crudbutton"><a
@@ -379,14 +379,14 @@ Page:
     <tr class="list-row-1">
       <td>config</td>
       <td>url</td>
-      <td><small><pre>[% base = Catalyst.req.base;
+      <td><small><small>[% base = Catalyst.req.base;
    site.url = {
      base    = base
      home    = &#34;${base}welcome&#34;
      message = &#34;${base}message&#34;
    }
 -%]
-</pre></small>
+</small></small>
 </td>
       <td>
   <span class="crudbutton"><a

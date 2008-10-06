@@ -14,7 +14,7 @@
   [% WHILE (item = items.next) %]
     <tr class="list-row-[% count % 2 %]">
     [% FOR column = column_order %]
-      <td>[% item.to_view(column) %]</td>
+      <td>[% item.to_view(column, 1) %]</td>
     [% END %]
     [% IF has_attributes %]
       <td>
