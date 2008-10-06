@@ -373,9 +373,11 @@ Page:
 &#60;html&#62;
  &#60;head&#62;
   &#60;title&#62;[% template.title or site.title %]&#60;/title&#62;
-  &#60;script type=&#34;text/javascript&#34;
-          src=&#34;http://ajax.googleapis.com/ajax/libs/dojo/1.1.1/dojo/dojo.xd.js&#34;
-          djConfig=&#34;parseOnLoad: true, isDebug: false&#34;&#62;&#60;/script&#62;
+  &#60;script src=&#34;http://www.google.com/jsapi&#34;&#62;&#60;/script&#62;
+  &#60;script type=&#34;text/javascript&#34;&#62;
+    var djConfig = { isDebug:true, parseOnLoad:true };
+    google.load(&#34;dojo&#34;, &#34;1.1.1&#34;);
+  &#60;/script&#62;
   &#60;script type=&#34;text/javascript&#34;&#62;
     dojo.require(&#34;dijit.layout.LayoutContainer&#34;);
     dojo.require(&#34;dijit.layout.ContentPane&#34;);

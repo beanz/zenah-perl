@@ -1,4 +1,4 @@
-/
+/?room=motion
 text/html
 200 OK
 
@@ -155,13 +155,13 @@ content {
 <!-- END header --></div>
 <div id="nav"><!-- BEGIN nav -->
 <div id="topnav">
-  <span class="navbutton-current"><a
+  <span class="navbutton"><a
     href="http://localhost//"
     >Home</a></span>
  <span class="navbutton"><a href="http://localhost/?room=lights">Lights</a></span>
  <span class="navbutton"><a href="http://localhost/?room=devices">Devices</a></span>
  <span class="navbutton"><a href="http://localhost/?room=windows">Windows</a></span>
- <span class="navbutton"><a href="http://localhost/?room=motion">Motion</a></span>
+ <span class="navbutton-current"><a href="http://localhost/?room=motion">Motion</a></span>
  <span class="navbutton"><a href="http://localhost/?room=light">Light</a></span>
   <span class="navbutton"><a
     href="http://localhost///admin"
@@ -179,14 +179,14 @@ content {
 <table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
   <td valign="top" rowspan="1" colspan="1">
-  <div class="button"
-    ><a href="http://localhost/?content=room&room=devices&room_name=bath"
-      ><div class="roomname">Bathroom</div></a></div>
+  Bathroom<br/>
+    occupied<br/>
+    2007-08-05 14:56:31
   </td>
   <td valign="top" rowspan="1" colspan="1">
-  <div class="button"
-    ><a href="http://localhost/?content=room&room=devices&room_name=bed_1"
-      ><div class="roomname">Bedroom 1</div></a></div>
+  Bedroom 1<br/>
+    occupied<br/>
+    2007-08-05 14:56:32
   </td>
 </tr>
 </table>
@@ -194,21 +194,21 @@ content {
 <table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
   <td valign="top" rowspan="1" colspan="1">
-  <div class="button"
-    ><a href="http://localhost/?content=room&room=devices&room_name=kitchen"
-      ><div class="roomname">Kitchen</div></a></div>
+  Kitchen<br/>
+    occupied<br/>
+    2007-08-05 14:56:34
   </td>
   <td valign="top" rowspan="2" colspan="1">
-  <div class="button"
-    ><a href="http://localhost/?content=room&room=devices&room_name=lounge"
-      ><div class="roomname">Lounge</div></a></div>
+  Lounge<br/>
+    occupied<br/>
+    2007-08-05 14:56:35
   </td>
 </tr>
 <tr>
   <td valign="top" rowspan="2" colspan="1">
-  <div class="button"
-    ><a href="http://localhost/?content=room&room=devices&room_name=cloak"
-      ><div class="roomname">Cloak Room</div></a></div>
+  Cloak Room<br/>
+    occupied<br/>
+    2007-08-05 15:05:34
   </td>
 </tr>
 </table>
@@ -216,9 +216,8 @@ content {
 <table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
   <td valign="top" rowspan="2" colspan="1">
-  <div class="button"
-    ><a href="http://localhost/?content=room&room=devices&room_name=garden"
-      ><div class="roomname">Garden</div></a></div>
+  Garden<br/>
+    unknown
   </td>
 </tr>
 </table>

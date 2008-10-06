@@ -442,7 +442,7 @@ INSERT INTO "template" VALUES(5,'room','motion','[% USE room_table = Class(''Zen
   [% SET m = state_table.search({ type => ''motion'', name => r.name }) %]
   [% IF m %]
     [% m.value %]<br/>
-    [% m.mtime %]
+    [% m.to_view("mtime") %]
   [% ELSE %]
     unknown
   [% END %]
@@ -461,7 +461,7 @@ INSERT INTO "template" VALUES(6,'room','light','[% USE room_table = Class(''ZenA
                                   name => r.name }) %]
   [% IF l %]
     [% l.value %]<br/>
-    [% l.ctime %]
+    [% l.to_view("ctime") %]
   [% ELSE %]
     unknown
   [% END %]
@@ -870,10 +870,11 @@ INSERT INTO "template" VALUES(27,'site','html','<!DOCTYPE HTML PUBLIC "-//W3C//D
 [% IF meta_refresh %]
   <meta http-equiv="refresh" content="[% meta_refresh %]">
 [% END %]
-  <script src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js"
-          type="text/javascript"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js"
-          type="text/javascript"></script>
+  <script src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load("prototype", "1.6");
+    google.load("scriptaculous", "1.8.1");
+  </script>
   <script src="[% Catalyst.uri_for("/js") %]/excanvas/excanvas.js"
           type="text/javascript"></script>
   <script src="[% Catalyst.uri_for("/js") %]/plotr/plotr.js"
@@ -1096,9 +1097,11 @@ INSERT INTO "template" VALUES(37,'site','dojo','<!DOCTYPE HTML PUBLIC "-//W3C//D
 <html>
  <head>
   <title>[% template.title or site.title %]</title>
-  <script type="text/javascript"
-          src="http://ajax.googleapis.com/ajax/libs/dojo/1.1.1/dojo/dojo.xd.js"
-          djConfig="parseOnLoad: true, isDebug: false"></script>
+  <script src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    var djConfig = { isDebug:true, parseOnLoad:true };
+    google.load("dojo", "1.1.1");
+  </script>
   <script type="text/javascript">
     dojo.require("dijit.layout.LayoutContainer");
     dojo.require("dijit.layout.ContentPane");

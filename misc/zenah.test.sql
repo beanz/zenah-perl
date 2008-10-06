@@ -442,7 +442,7 @@ INSERT INTO "template" VALUES(5,'room','motion','[% USE room_table = Class(''Zen
   [% SET m = state_table.search({ type => ''motion'', name => r.name }) %]
   [% IF m %]
     [% m.value %]<br/>
-    [% m.mtime %]
+    [% m.to_view("mtime") %]
   [% ELSE %]
     unknown
   [% END %]
@@ -461,7 +461,7 @@ INSERT INTO "template" VALUES(6,'room','light','[% USE room_table = Class(''ZenA
                                   name => r.name }) %]
   [% IF l %]
     [% l.value %]<br/>
-    [% l.ctime %]
+    [% l.to_view("ctime") %]
   [% ELSE %]
     unknown
   [% END %]

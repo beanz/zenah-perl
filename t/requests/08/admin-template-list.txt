@@ -288,7 +288,7 @@ Page:
                                   name =&#62; r.name }) %]
   [% IF l %]
     [% l.value %]&#60;br/&#62;
-    [% l.ctime %]
+    [% l.to_view(&#34;ctime&#34;) %]
   [% ELSE %]
     unknown
   [% END %]

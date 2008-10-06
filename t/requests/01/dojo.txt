@@ -6,9 +6,11 @@ text/html
 <html>
  <head>
   <title>Zen Automated Home</title>
-  <script type="text/javascript"
-          src="http://ajax.googleapis.com/ajax/libs/dojo/1.1.1/dojo/dojo.xd.js"
-          djConfig="parseOnLoad: true, isDebug: false"></script>
+  <script src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    var djConfig = { isDebug:true, parseOnLoad:true };
+    google.load("dojo", "1.1.1");
+  </script>
   <script type="text/javascript">
     dojo.require("dijit.layout.LayoutContainer");
     dojo.require("dijit.layout.ContentPane");
