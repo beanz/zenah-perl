@@ -6,7 +6,7 @@ use strict;
 use DirHandle;
 use English qw/-no_match_vars/;
 use FileHandle;
-use Test::More tests => 33;
+use Test::More tests => 34;
 use t::Helpers qw/test_warn test_error/;
 
 END {
@@ -87,6 +87,7 @@ is($rule->mtime, '2007-08-05 14:52:24', 'mtime after ftime change');
 $rule->name('chime');
 is($rule->update, 1, 'rule->update - change name');
 isnt($rule->mtime, '2007-08-05 14:52:24', 'mtime after name change');
+is(length($rule->to_view('mtime')), 8, 'mtime has no date');
 
 my $temp = ZenAH::CDBI::Template->create({name => 'time',
                                           mtime => 1199145600});

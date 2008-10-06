@@ -1,0 +1,455 @@
+/admin/template?rows=2&page=2&sort_order=text
+text/html
+200 OK
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+ <head>
+  <title>Zen Automated Home</title>
+  <style type="text/css">
+html {
+    height: 100%;
+}
+body { 
+    background-color: #ffffff;
+    color: #484848;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+#logo {
+    float: right;
+}
+#header {
+    background-color: #efefef;
+}
+#footer {
+    background-color: #efefef;
+    text-align: center;
+    border-top: 1px solid #aa1914;
+    bottom: 0;
+    left: 0px;
+    width: 100%;
+    padding: 4px;
+}
+#content {
+    padding: 10px;
+}
+h1.title {
+    padding: 0.1em;
+    margin: 0em;
+    font: Ariel;
+    color: #12171c;
+}
+.message {
+    color: #66AA66;
+}
+.error {
+    color: #CC4444;
+}
+table.view-table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+th.view-table {
+    border: 1px solid black;
+    text-align: left;
+}
+td.view-table {
+    border: 1px solid black;
+}
+table.list-table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+th.list-table {
+    border: 1px solid black;
+}
+td.list-table {
+    border: 1px solid black;
+}
+tr.list-row-0 {
+    background-color: #efefef;
+}
+tr.list-row-1 {
+    background-color: #ffffff;
+}
+#nav {
+    padding: 2px 0px;
+    border-bottom: 5px solid #12171c;
+    background-color: #efefef;
+}
+.navbutton-current {
+    border-style: hidden;
+    padding: 3px 3px 2px 3px;
+    border-color: #12171c;
+    background: #12171c;
+}
+.navbutton {
+    border-bottom: 1px solid #efefef;
+    padding: 3px 3px 1px 3px;
+    background: #4ca7ab;
+}
+.navbutton-current A {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton-current A:hover {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton-current img {
+    border-style: hidden;
+}
+.navbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.navbutton A:hover {
+    background: #cceeee;
+} 
+.navbutton img {
+    border-style: hidden;
+}
+.pagebutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.pagebutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cccccc;
+}
+.pagebutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.pagebutton A:hover {
+    background: #cceeee;
+} 
+.pagebutton img {
+    border-style: hidden;
+}
+.filterbutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.filterbutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #4ca7ab;
+}
+.filterbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.filterbutton A:hover {
+    background: #cceeee;
+} 
+.filterbutton img {
+    border-style: hidden;
+}
+.crudbutton-current {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #cceeee;
+}
+.crudbutton {
+    border-style: hidden;
+    padding: 2px 2px 2px 2px;
+    border-color: #484848;
+    background: #4ca7ab;
+}
+.crudbutton A {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+} 
+.crudbutton A:hover {
+    background: #cceeee;
+} 
+.crudbutton img {
+    border-style: hidden;
+}
+  </style>
+ </head>
+ <body>
+<div id="header"><!-- BEGIN site/header -->
+<img id="logo" class="logo" height="50" width="50" src="http://localhost/images/zenah-50.png" />
+<h1 class="title">Zen Automated Home</h1>
+<!-- END site/header -->
+</div>
+<div id="nav"><!-- BEGIN site/nav -->
+  <span class="navbutton"><a
+    href="http://localhost//admin/device"
+    >Device</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/map"
+    >Map</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/room"
+    >Room</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/rule"
+    >Rule</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/state"
+    >State</a></span>
+  <span class="navbutton"><a
+    href="http://localhost//admin/template"
+    >Template</a></span>
+  <span class="navbutton"><a href="http://localhost/"
+    >UI</a></span>
+<!-- END site/nav -->
+</div>
+<div id="content">
+<p class="filternav" id="filternav">
+Filter:
+    <span class="filterbutton-current">none</span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=config"
+       >config</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=content"
+       >content</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=dojo"
+       >dojo</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=html"
+       >html</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=message"
+       >message</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=room"
+       >room</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=site"
+       >site</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=xul"
+       >xul</a></span>
+</p>
+<p class="pagenav" id="pagenav">
+Page:
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=1&filter="
+        >&lt;&lt;</a></span>
+&nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=1&filter="
+        >1</a></span>
+    &nbsp;
+      <span class="pagebutton-current">2</span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=3&filter="
+        >3</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=4&filter="
+        >4</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=5&filter="
+        >5</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=6&filter="
+        >6</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=7&filter="
+        >7</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=8&filter="
+        >8</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=9&filter="
+        >9</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=10&filter="
+        >10</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=11&filter="
+        >11</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=12&filter="
+        >12</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=13&filter="
+        >13</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=14&filter="
+        >14</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=15&filter="
+        >15</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=16&filter="
+        >16</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=17&filter="
+        >17</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=18&filter="
+        >18</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=3&filter="
+        >&gt;&gt;</a></span>
+</p>
+<table class="list-table">
+  <tr class="list-header">
+    <th>type</th>
+    <th>name</th>
+    <th>text</th>
+    <th/>
+  </tr>
+    <tr class="list-row-0">
+      <td>html</td>
+      <td>nav</td>
+      <td><small><small>&#60;!-- BEGIN nav --&#62;
+&#60;div id=&#34;topnav&#34;&#62;
+[% navbutton(&#34;&#34;,&#34;Home&#34;) %]
+[% variant_button(&#34;navbutton&#34;, &#34;Lights&#34;, { &#34;room&#34; =&#62; &#34;lights&#34; }) %]
+[% variant_button(&#34;navbutton&#34;, &#34;Devices&#34;, { &#34;room&#34; =&#62; &#34;devices&#34; }) %]
+[% variant_button(&#34;navbutton&#34;, &#34;Windows&#34;, { &#34;room&#34; =&#62; &#34;windows&#34; }) %]
+[% variant_button(&#34;navbutton&#34;, &#34;Motion&#34;, { &#34;room&#34; =&#62; &#34;motion&#34; }) %]
+[% variant_button(&#34;navbutton&#34;, &#34;Light&#34;, { &#34;room&#34; =&#62; &#34;light&#34; }) %]
+[% navbutton(&#34;/admin&#34;, &#34;Admin&#34;) %]
+&#60;/div&#62;
+&#60;div id=&#34;leftnav&#34;&#62;
+[%# variant_button(&#34;navbutton&#34;, &#34;House&#34;, { &#34;content&#34; =&#62; &#34;house&#34; }) %]
+[%# variant_button(&#34;navbutton&#34;, &#34;Upstairs&#34;, { &#34;content&#34; =&#62; &#34;upstairs&#34; }) %]
+[%# variant_button(&#34;navbutton&#34;, &#34;Downstairs&#34;, { &#34;content&#34; =&#62; &#34;downstairs&#34; }) %]
+&#60;/div&#62;
+&#60;!-- END nav --&#62;
+</small></small>
+</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/view/14"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/edit/14"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/destroy/14"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>site</td>
+      <td>dojo</td>
+      <td><small><small>&#60;!DOCTYPE HTML PUBLIC &#34;-//W3C//DTD HTML 4.01 Transitional//EN&#34;&#62;
+&#60;html&#62;
+ &#60;head&#62;
+  &#60;title&#62;[% template.title or site.title %]&#60;/title&#62;
+  &#60;script type=&#34;text/javascript&#34;
+          src=&#34;http://ajax.googleapis.com/ajax/libs/dojo/1.1.1/dojo/dojo.xd.js&#34;
+          djConfig=&#34;parseOnLoad: true, isDebug: false&#34;&#62;&#60;/script&#62;
+  &#60;script type=&#34;text/javascript&#34;&#62;
+    dojo.require(&#34;dijit.layout.LayoutContainer&#34;);
+    dojo.require(&#34;dijit.layout.ContentPane&#34;);
+    dojo.require(&#34;dijit.layout.TabContainer&#34;);
+    dojo.require(&#34;dijit.form.Button&#34;);
+    dojo.require(&#34;dojo.parser&#34;);
+    function button_action(device, action) {
+      dojo.xhrGet( {
+        url: &#34;/ajax?args=&#34;+device+&#34;&#38;args=&#34;+action,
+        handleAs: &#34;text&#34;,
+        timeout: 3000,
+        load: function(response, ioArgs) {
+          dojo.byId(&#34;status&#34;).innerHTML = response;
+          return response;
+        },
+        error: function(response, ioArgs) {
+          dojo.byId(&#34;status&#34;).innerHTML = &#34;HTTP error: &#34; + ioArgs.xhr.status;
+          return response;
+        },
+      });
+    }
+  &#60;/script&#62;
+  &#60;style type=&#34;text/css&#34;&#62;
+    @import &#34;http://ajax.googleapis.com/ajax/libs/dojo/1.1.1/dojo/resources/dojo.css&#34;;
+    @import &#34;http://ajax.googleapis.com/ajax/libs/dojo/1.1.1/dijit/themes/tundra/tundra.css&#34;;
+    html, body {
+      width: 100%;	/* make the body expand to fill the visible window */
+      height: 100%;
+      padding: 0 0 0 0;
+      margin: 0 0 0 0;
+    }
+    #logo {
+    float: right;
+    }
+    h1.title {
+      padding: 0.1em;
+      margin: 0px;
+      font: Ariel;
+      font-weight: bold;
+      color: #12171c;
+    }
+  &#60;/style&#62;
+[% IF meta_refresh %]
+  &#60;meta http-equiv=&#34;refresh&#34; content=&#34;[% meta_refresh %]&#34;&#62;
+[% END %]
+ &#60;/head&#62;
+ &#60;body class=&#34;tundra&#34;&#62;
+[% content %]
+ &#60;/body&#62;
+&#60;/html&#62;</small></small>
+</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/view/37"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/edit/37"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/destroy/37"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+</table>
+<hr/>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/add/"
+    >Add</a></span>
+</div>
+<div id="footer"><!-- BEGIN site/footer -->
+<div id="copyright">&copy; 2006, 2008 Mark Hindess</div>
+<!-- END site/footer -->
+</div>
+ </body>
+</html>
