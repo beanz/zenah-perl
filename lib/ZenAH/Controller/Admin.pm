@@ -91,11 +91,12 @@ my %crud =
    },
    'rule' => {
      table => 'Rule',
-     column_order => [qw/name active type trig action ftime mtime/],
+     column_order => [qw/name active type trig action ftime/],
+     edit_columns => [qw/name active type trig action/],
      sort_order => 'name',
      form_validation => {
        required => [ qw/name type active/ ],
-       optional => [ qw/trig action mtime/ ],
+       optional => [ qw/trig action/ ],
        constraint_methods => {
          type => qr/^(?:xpl|scene|at)$/,
          active => qr/^[01]$/,
@@ -137,6 +138,8 @@ sub default : Private {
   }
 
   $c->stash(type => $type);
+  $crud{$type}->{edit_columns} = $crud{$type}->{column_order}
+    unless (exists $crud{$type}->{edit_columns});
   $c->stash($_ => $crud{$type}->{$_}) foreach (keys %{$crud{$type}});
   $c->stash(sort_order => join(',',$c->request->param('sort_order'))) if
     ($c->request->param('sort_order'));

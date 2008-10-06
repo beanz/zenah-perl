@@ -251,7 +251,6 @@ Page:
     <th>trig</th>
     <th>action</th>
     <th>ftime</th>
-    <th>mtime</th>
     <th/>
   </tr>
     <tr class="list-row-0">
@@ -276,7 +275,6 @@ Page:
 </small></small>
 </td>
       <td>2007-08-10 20:17:45</td>
-      <td>2007-08-05 20:30:42</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/view/5"
@@ -302,7 +300,6 @@ xpl -c osd.basic command=clear text=&#34; Call [% name ? name : xpl.phone %]&#34
 </small></small>
 </td>
       <td></td>
-      <td></td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/view/15"
@@ -327,7 +324,6 @@ xpl -c osd.basic command=clear text=&#34; Call [% name ? name : xpl.phone %]&#34
 # device washing_machine on</small></small>
 </td>
       <td></td>
-      <td>2007-08-05 19:55:54</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/view/9"
@@ -352,7 +348,6 @@ xpl -c osd.basic command=clear text=&#34; Call [% name ? name : xpl.phone %]&#34
 </small></small>
 </td>
       <td>2007-08-10 21:45:02</td>
-      <td>2007-08-05 14:52:24</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/view/1"
@@ -377,7 +372,6 @@ xpl -c osd.basic command=clear text=&#34; Call [% name ? name : xpl.phone %]&#34
 </small></small>
 </td>
       <td>2007-08-10 20:17:44</td>
-      <td>2007-08-03 13:53:05</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/view/4"
@@ -406,7 +400,6 @@ disable kettle_warn
 </small></small>
 </td>
       <td>2007-08-05 14:54:23</td>
-      <td>2007-08-03 15:10:21</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/view/6"
@@ -431,7 +424,6 @@ disable kettle_warn
 </small></small>
 </td>
       <td></td>
-      <td>2007-08-05 14:54:23</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/view/8"
@@ -463,7 +455,6 @@ disable kettle_warn
 [% END %]</small></small>
 </td>
       <td>2007-08-05 15:05:34</td>
-      <td>2007-08-04 10:14:30</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/view/11"
@@ -499,7 +490,6 @@ disable kettle_warn
 </small></small>
 </td>
       <td>2007-08-10 21:58:24</td>
-      <td>2007-08-04 10:11:00</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/view/13"
@@ -531,7 +521,6 @@ disable kettle_warn
 </small></small>
 </td>
       <td>2007-08-05 15:05:34</td>
-      <td>2007-08-04 10:06:30</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/view/10"

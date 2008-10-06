@@ -235,12 +235,6 @@ tr.list-row-1 {
     <textarea cols="80" name="action" rows="10">xpl -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
 </textarea>
 <br/>
-    ftime<br/>
-    <input name="ftime" type="text" value="2007-08-10 21:45:02" />
-<br/>
-    mtime<br/>
-    <input name="mtime" type="text" value="2007-08-05 14:52:24" />
-<br/>
   <input type="submit" value="Edit"/>
 </form>
 <hr/>

@@ -233,12 +233,6 @@ tr.list-row-1 {
     action<br/>
     <textarea cols="80" name="action" rows="10"></textarea>
 <br/>
-    ftime<br/>
-    <input name="ftime" type="text" />
-<br/>
-    mtime<br/>
-    <input name="mtime" type="text" />
-<br/>
   <br/>
   <input type="submit" value="Add"/>
 </form>

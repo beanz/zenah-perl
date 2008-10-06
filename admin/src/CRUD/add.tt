@@ -1,7 +1,7 @@
 [% USE table_class = Class(fulltable) %]
 <p>[%message%]</p>
 <form action="[% base _ '/admin/' _ type _ '/do_add' %]" method="post">
-  [% FOR column = column_order %]
+  [% FOR column = edit_columns %]
     [% column %]<br/>
     [% table_class.to_field(column).as_XML %]<br/>
   [% END %]

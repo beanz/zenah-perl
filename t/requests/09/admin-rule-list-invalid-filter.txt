@@ -275,7 +275,6 @@ Page:
     <th>trig</th>
     <th>action</th>
     <th>ftime</th>
-    <th>mtime</th>
     <th/>
   </tr>
     <tr class="list-row-0">
@@ -288,7 +287,6 @@ Page:
 </small></small>
 </td>
       <td>2007-08-10 21:45:02</td>
-      <td>2007-08-05 14:52:24</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/view/1"
@@ -313,7 +311,6 @@ Page:
 </small></small>
 </td>
       <td>2007-08-10 20:17:44</td>
-      <td>2007-08-03 13:53:05</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/view/4"

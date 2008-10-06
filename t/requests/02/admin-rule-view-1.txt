@@ -244,10 +244,6 @@ tr.list-row-1 {
     <th class="view-table">ftime</th>
     <td class="view-table" colspan="2">2007-08-10 21:45:02</td>
   </tr>
-  <tr>
-    <th class="view-table">mtime</th>
-    <td class="view-table" colspan="2">2007-08-05 14:52:24</td>
-  </tr>
 </table>
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/edit/1"
