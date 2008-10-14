@@ -1,5 +1,5 @@
-/action/l_bath/x10/dim
+/action/l_bath/dim
 
 303 See Other
 
-<html><body><p>This item has moved <a href="?status=Invoked+action%2C+x10_dim%2C+on+device%2C+l_bath%0A">here</a>.</p></body></html>
+<html><body><p>This item has moved <a href="?status=Invoked+action%2C+dim%2C+on+device%2C+l_bath%0A">here</a>.</p></body></html>

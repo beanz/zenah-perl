@@ -113,7 +113,10 @@ sub ajax : Local {
 
     my $device =
       ZenAH::Model::CDBI::Device->search(name => $device_name)->first;
-    die 'No such device, ', $device_name, "\n" unless ($device);
+    unless ($device) {
+      $c->response->body("No such device, $device_name\n");
+      return 1;
+    }
     my $type_name = $device->type;
     my $control =
       $device->device_controls("device_control.name" => $action)->first;
@@ -130,6 +133,7 @@ sub ajax : Local {
           "type=set value=$action";
     } else {
       $c->response->body("Invalid action, $action, on device, $device_name\n");
+      return 1;
     }
     $self->evaluate_action($definition, { device => $device });
     $c->response->body("Invoked action, $action, on device, $device_name\n");

@@ -1,5 +1,5 @@
-/ajax?fname=device_func&args=l_bath&args=x10%2Fon
+/ajax?fname=device_func&args=l_bath&args=on
 text/html
 200 OK
 
-Invoked action, x10_on, on device, l_bath
+Invoked action, on, on device, l_bath

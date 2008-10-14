@@ -241,6 +241,9 @@ Filter:
       href="http://localhost/admin/template?filter=site"
        >site</a></span>
     <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=text"
+       >text</a></span>
+    <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=xul"
        >xul</a></span>
 </p>

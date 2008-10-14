@@ -1,4 +1,4 @@
-/admin/template/do_edit/41?type=content&name=basement
+/admin/template/do_edit/42?type=content&name=basement
 text/html
 200 OK
 
@@ -217,7 +217,7 @@ tr.list-row-1 {
 </div>
 <div id="content">
 <p>You have to fill in all fields.the following are missing: <b>text</b></p>
-<form action="http://localhost//admin/template/do_edit/41"
+<form action="http://localhost//admin/template/do_edit/42"
     method="post">
     type<br/>
     <input name="type" type="text" value="content" />

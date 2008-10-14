@@ -241,6 +241,9 @@ Filter:
       href="http://localhost/admin/template?filter=site"
        >site</a></span>
     <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=text"
+       >text</a></span>
+    <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=xul"
        >xul</a></span>
 </p>
@@ -500,14 +503,14 @@ Filter:
 </td>
       <td>
   <span class="crudbutton"><a
-    href="http://localhost//admin/template/view/41"
+    href="http://localhost//admin/template/view/42"
     >View</a></span>
   <span class="crudbutton"><a
-    href="http://localhost//admin/template/edit/41"
+    href="http://localhost//admin/template/edit/42"
     >Edit</a></span>
         <!-- 
   <span class="crudbutton"><a
-    href="http://localhost//admin/template/destroy/41"
+    href="http://localhost//admin/template/destroy/42"
     >Destroy</a></span>
  -->
       </td>

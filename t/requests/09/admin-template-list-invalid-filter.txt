@@ -243,6 +243,9 @@ Filter:
       href="http://localhost/admin/template?filter=site"
        >site</a></span>
     <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=text"
+       >text</a></span>
+    <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=xul"
        >xul</a></span>
 </p>
@@ -321,6 +324,10 @@ Page:
     <span class="pagebutton"><a
       href="http://localhost/admin/template?page=18&filter=invalid"
         >18</a></span>
+    &nbsp;
+    <span class="pagebutton"><a
+      href="http://localhost/admin/template?page=19&filter=invalid"
+        >19</a></span>
     &nbsp;
     <span class="pagebutton"><a
       href="http://localhost/admin/template?page=3&filter=invalid"
