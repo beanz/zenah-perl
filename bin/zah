@@ -1,0 +1,121 @@
+#!/usr/bin/perl -w
+
+=head1 NAME
+
+zah - NAME
+
+xpl-rfxcom - Perl script for an xPL RFXCOM RF receiver application
+
+=head1 SYNOPSIS
+
+  zah [flags] [options] [device/action]
+  where valid flags are:
+    -h - show this help text
+    -m - show man page
+    -v - verbose mode
+    -b - output bash code for setting up command line completion
+    -c - find completions (used by the generated bash code to find
+         completions for a partial device/action string
+
+  ZENAH_URL must point to the location of the ZenAH server.  For
+  example:
+
+    ZENAH_URL=http://localhost:3000/ ; export ZENAH_URL
+
+  # write completion code to .bash_profile
+  zah -bash >>~/.bash_profile
+
+  # turn on kettle
+  zah kettle/on
+
+  # test completions (should return 'kettle/off\nkettle/on\n'
+  zah -complete ke
+
+=head1 DESCRIPTION
+
+This script is intended for command line control of the ZenAH system.
+
+=cut
+
+use strict;
+use Getopt::Long;
+use LWP::UserAgent;
+use Pod::Usage;
+
+my $verbose;
+my $complete;
+my $man;
+my $help;
+my $bash;
+GetOptions('verbose+' => \$verbose,
+           'help|?|h' => \$help,
+           'man' => \$man,
+           'complete' => \$complete,
+           'bash' => \$bash,
+          ) or pod2usage(2);
+pod2usage(1) if ($help);
+pod2usage(-exitstatus => 0, -verbose => 2) if ($man);
+
+my $url = $ENV{ZENAH_URL};
+my $ua = LWP::UserAgent->new;
+if ($complete) {
+  my $q = shift || '';
+  req('/text/completions?query='.$q);
+  exit;
+}
+if ($bash) {
+  print <<'EOF'
+# edit the URL below to point to your ZenAH server
+ZENAH_URL=http://localhost:3000/ ; export ZENAH_URL
+
+_zah()
+{
+  if [ $COMP_CWORD -eq 1 ]; then
+    COMPREPLY=( $(zah --complete ${COMP_WORDS[COMP_CWORD]}) )
+  else
+    COMPREPLY=()
+  fi
+  return 0
+}
+complete -F _zah zah
+
+EOF
+}
+
+my $a = shift or pod2usage(1);
+$a =~ s/\/$//;
+$a =~ s/\//&args=/g;
+req('/ajax?fname=device_func&args='.$a);
+exit;
+
+sub req {
+  my $req = shift;
+  my $url = $ENV{ZENAH_URL}.$req;
+  my $res = LWP::UserAgent->new->get($url);
+  if ($res->is_success) {
+    my $content = $res->content;
+    $content =~ s/\r?\n/\n/g;
+    print $content, "\n";
+  } else {
+    die $res->status_line, "\n", $verbose ? $res->content : '';
+  }
+  exit;
+}
+
+=head1 SEE ALSO
+
+Project website: http://www.zenah.org.uk/
+
+=head1 AUTHOR
+
+Mark Hindess, E<lt>soft-zenahl@temporalanomaly.comE<gt>
+
+=head1 COPYRIGHT
+
+Copyright (C) 2008 by Mark Hindess
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.8.7 or,
+at your option, any later version of Perl 5 you may have available.
+
+=cut

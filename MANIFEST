@@ -19,6 +19,7 @@ admin/src/ttsite.css
 admin/src/welcome.tt2
 bin/hr10-label
 bin/ss13e-label
+bin/zah
 bin/zenah
 Changes
 lib/ZenAH/CDBI.pm

@@ -732,7 +732,7 @@ INSERT INTO "template" VALUES(22,'config','main','[% # config/main
 
 -%]
 ',1185028812);
-INSERT INTO "template" VALUES(23,'site','wrapper','[% IF template.name.match(''.(css|js|txt)'');
+INSERT INTO "template" VALUES(23,'site','wrapper','[% IF template.name.match(''.(css|js|txt)'') OR template.name.match(''(png|json|text)'');
      debug("Passing page through as text: $template.name");
      content;
    ELSE;
@@ -1210,6 +1210,17 @@ INSERT INTO "template" VALUES(40,'dojo','room','<div id="[% room.name %]_tab" do
     [% PROCESS dojo/device device = d %]
   [% END %]
 </div>',1188650985);
+INSERT INTO "template" VALUES(41,'text','completions','[% USE table_class = Class(''ZenAH::Model::CDBI::Device'') -%]
+[% SET q = Catalyst.request.param(''query'') -%]
+[% FOREACH d = table_class.retrieve_all( order_by => ''name'' ) -%]
+[% FOREACH c = d.device_controls -%]
+[% SET s = d.name _ "/" _ c.name -%]
+[% IF s.substr(0, q.length) == q -%]
+[% s %]
+[% END -%]
+[% END -%]
+[% END -%] 
+',1223981035);
 CREATE TABLE "timestamp" (
   "id" integer PRIMARY KEY,
   "name" varchar(80) default NULL,
