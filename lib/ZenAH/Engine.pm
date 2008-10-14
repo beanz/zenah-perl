@@ -194,9 +194,12 @@ sub read_rule {
 
   $self->info('Adding rule: ', $rule->name, "\n");
 
-  $self->add_rule($rule, { mtime => $rule->mtime(), type => $type });
-
-  $self->trigger_add_callback($type)->($rule);
+  eval { $self->trigger_add_callback($type)->($rule); };
+  if ($@) {
+    warn "Failed to add rule ", $rule->name, ": ", $@, "\n";
+  } else {
+    $self->add_rule($rule, { mtime => $rule->mtime(), type => $type });
+  }
 
   return 1;
 }

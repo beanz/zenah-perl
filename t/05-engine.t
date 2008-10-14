@@ -7,7 +7,7 @@ use DirHandle;
 use English qw/-no_match_vars/;
 use FileHandle;
 use POSIX qw/strftime/;
-use Test::More tests => 75;
+use Test::More tests => 76;
 use t::Helpers qw/test_error test_warn/;
 
 END {
@@ -649,6 +649,14 @@ is($engine->{_plugin}->{Timer}->{_tz}, 'Europe/London',
    'engine->new tz default');
 is($engine2->{_plugin}->{Timer}->{_tz}, 'Europe/Moscow',
    'engine->new tz environment var');
+
+
+$cuckoo->trig('invalid');
+$cuckoo->update();
+is(test_warn(sub { $engine->enable_rule($cuckoo); }),
+   q{Failed to add rule cuckoo: xPL::Timer->new: Failed to load }.
+     q{xPL::Timer::invalid: Can't locate xPL/Timer/invalid.pm in @INC},
+   'failing to add rule without crashing');
 
 # Some error/warning cases not already covered
 
