@@ -64,7 +64,7 @@ if ($complete) {
   exit;
 }
 if ($bash) {
-  print <<'EOF'
+  print q!
 # edit the URL below to point to your ZenAH server
 ZENAH_URL=http://localhost:3000/ ; export ZENAH_URL
 
@@ -79,7 +79,8 @@ _zah()
 }
 complete -F _zah zah
 
-EOF
+!;
+  exit;
 }
 
 my $a = shift or pod2usage(1);
