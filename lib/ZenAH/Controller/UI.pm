@@ -135,8 +135,9 @@ sub ajax : Local {
       $c->response->body("Invalid action, $action, on device, $device_name\n");
       return 1;
     }
-    $self->evaluate_action($definition, { device => $device });
-    $c->response->body("Invoked action, $action, on device, $device_name\n");
+    $c->response->body($self->evaluate_action($definition,
+                                              { device => $device }) ||
+                       "Invoked action, $action, on device, $device_name\n");
 }
 
 =head2 C<action>
@@ -200,6 +201,7 @@ sub run_action : Private {
   my $self = shift;
   my $action = shift;
   my $stash = shift || {};
+  my $result = '';
   my $remaining = $action;
   while ($remaining) {
     my $command;
@@ -207,12 +209,16 @@ sub run_action : Private {
     next if ($command =~ /^\s*$/);
     $command =~ s/^\s+//;
     my ($type, $spec) = split(/\s+/, $command, 2);
-    unless ($type =~ /^(xpl|error)$/) {
+    unless ($type =~ /^(xpl|error|info)$/) {
       die "no action defined for '$type'";
       next;
     }
     if ($type eq "error") {
       die $spec."\n";
+    }
+    if ($type eq 'info') {
+      $result .= $spec."\n";
+      next;
     }
     print STDERR "Action: ", $type, " ", $spec, "\n";
     my %args =
@@ -224,7 +230,7 @@ sub run_action : Private {
     my $xpl = xPL::Client->new(%args) or die "Failed to create xPL::Client";
     $xpl->send_from_string($spec);
   }
-  return 1;
+  return $result;
 }
 
 =head2 C<process_template($template_string, $template_stash)>
@@ -241,7 +247,7 @@ sub process_template : Private {
   my $output = '';
   my $t = Template->new({ POST_CHOMP => 1, TRIM => 1, });
   $t->process(\$input, $stash, \$output) or
-    die 'Template error: '.$self->{_template}->error();
+    die 'Template error: '.$t->error();
   return $output;
 }
 
