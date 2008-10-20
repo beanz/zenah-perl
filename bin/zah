@@ -96,7 +96,7 @@ sub req {
     my $content = $res->content;
     $content =~ s/\r?\n/\n/g;
     print $content, "\n";
-  } else {
+  } elsif ($verbose || !$complete) {
     die $res->status_line, "\n", $verbose ? $res->content : '';
   }
   exit;
