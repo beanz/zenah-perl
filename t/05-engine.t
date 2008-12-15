@@ -640,14 +640,17 @@ my $engine2 = $engine->new(ip => "127.0.0.1",
                            broadcast => "127.0.0.1",
                            verbose => 1, tz => 'Europe/Vienna');
 is($engine2->info("output\n"), 1, 'engine->info verbose');
-is($engine2->{_plugin}->{Timer}->{_tz}, 'Europe/Vienna',
+is(ref $engine2->{_plugin}->{Timer}->{_tz},
+   'DateTime::TimeZone::Europe::Vienna',
    'engine->new tz param');
 $ENV{TZ}='Europe/Moscow';
 $engine2 = $engine->new(ip => "127.0.0.1",
                         broadcast => "127.0.0.1");
-is($engine->{_plugin}->{Timer}->{_tz}, 'Europe/London',
+is(ref $engine->{_plugin}->{Timer}->{_tz},
+   'DateTime::TimeZone::Europe::London',
    'engine->new tz default');
-is($engine2->{_plugin}->{Timer}->{_tz}, 'Europe/Moscow',
+is(ref $engine2->{_plugin}->{Timer}->{_tz},
+   'DateTime::TimeZone::Europe::Moscow',
    'engine->new tz environment var');
 
 

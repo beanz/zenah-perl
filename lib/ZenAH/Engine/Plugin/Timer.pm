@@ -30,6 +30,7 @@ use 5.006;
 use strict;
 use warnings;
 use DateTime;
+use DateTime::TimeZone;
 use Time::HiRes;
 
 require Exporter;
@@ -74,7 +75,7 @@ sub new {
   my %p = @_;
   my $engine = $self->{_engine} = $p{engine};
   exists $p{tz} or $p{tz} = $ENV{TZ} || 'Europe/London';
-  my $tz = $self->{_tz} = $p{tz};
+  my $tz = $self->{_tz} = DateTime::TimeZone->new(name => $p{tz});
 
   $engine->add_action(type => 'sleep',
                       callback => sub { $self->action_sleep(@_); });
