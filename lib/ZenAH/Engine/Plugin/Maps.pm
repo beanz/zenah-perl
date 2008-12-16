@@ -117,7 +117,7 @@ sub new {
            } ZenAH::CDBI::Map->search(type => $_[0]);
      },
     );
-  $engine->add_stash(variable => "map", callback => sub { \%m });
+  $engine->add_stash('map' => sub { \%m });
   return $self;
 }
 

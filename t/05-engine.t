@@ -7,7 +7,7 @@ use DirHandle;
 use English qw/-no_match_vars/;
 use FileHandle;
 use POSIX qw/strftime/;
-use Test::More tests => 76;
+use Test::More tests => 77;
 use t::Helpers qw/test_error test_warn/;
 
 END {
@@ -46,6 +46,7 @@ ok(!$engine->exists_rule($cuckoo), 'rule "cuckoo" removed');
 # Check if rule is not added when the trigger type is invalid
 $cuckoo->type('invalid');
 $cuckoo->update();
+$engine->disable_rule($cuckoo);
 is(test_warn(sub { $engine->enable_rule($cuckoo) }),
    "unknown trigger type: invalid cuckoo\n", 'invalid trigger type');
 ok(!$engine->exists_rule($cuckoo), 'rule "cuckoo" not added (invalid)');
@@ -53,6 +54,7 @@ ok(!$engine->exists_rule($cuckoo), 'rule "cuckoo" not added (invalid)');
 # Check if rule is not added when the trigger type is null
 $cuckoo->type('');
 $cuckoo->update();
+$engine->disable_rule($cuckoo);
 is(test_warn(sub { $engine->enable_rule($cuckoo) }),
    "empty trigger type: cuckoo\n", 'null trigger type');
 ok(!$engine->exists_rule($cuckoo), 'rule "cuckoo" not added (null)');
@@ -62,6 +64,7 @@ ok(!$engine->exists_rule($cuckoo), 'rule "cuckoo" not added (null)');
 $cuckoo->type('at');
 $cuckoo->trig('1');
 $cuckoo->update();
+$engine->disable_rule($cuckoo);
 $engine->enable_rule($cuckoo);
 ok($engine->exists_rule($cuckoo), 'rule "cuckoo" added');
 my $dusk = ZenAH::CDBI::Rule->search(name => 'dusk')->first;
@@ -70,6 +73,7 @@ ok(!$engine->exists_rule($dusk), 'rule "dusk" disabled');
 
 
 # test actions
+$engine->disable_rule($cuckoo);
 $cuckoo->action(qq{
 invalid action
 # comment
@@ -80,6 +84,7 @@ debug [% zenah.datetime.ymd %]
 error argh
 });
 $cuckoo->update();
+$engine->disable_rule($cuckoo);
 $engine->enable_rule($cuckoo);
 
 is(test_warn(sub {
@@ -87,14 +92,14 @@ is(test_warn(sub {
                  $engine->timer_callback_count('trigger-for-rule-'.$cuckoo);
                while ($engine->timer_callback_count('trigger-for-rule-'.
                                                     $cuckoo) == $count) {
-                 $engine->main_loop(1)
+                 $engine->main_loop(1);
                }
              }), 'no action defined for \'invalid\'', 'ran new rule');
 $engine->disable_rule($cuckoo);
 ok($engine->exists_rule($dusk), 'rule "dusk" enabled');
 my $cleaner_prep =
   ZenAH::CDBI::Rule->search(name => 'cleaner_prep')->first;
-ok(!$engine->exists_rule($cleaner_prep), 'rule "dusk" disabled');
+ok(!$engine->exists_rule($cleaner_prep), 'rule "cleaner_prep" disabled');
 
 my $sleeper;
 foreach ($engine->timers) {
@@ -127,6 +132,7 @@ device invalid
 sleep 1
 });
 $cuckoo->update();
+$engine->disable_rule($cuckoo);
 $engine->enable_rule($cuckoo);
 
 my $warn =
@@ -164,6 +170,7 @@ scene
 xpl
 });
 $cuckoo->update();
+$engine->disable_rule($cuckoo);
 $engine->enable_rule($cuckoo);
 
 $warn =
@@ -177,48 +184,7 @@ $warn =
             });
 $warn =~ s/\s+at .*?\s+line\s+\d+//msg;
 is($warn, q!------------------------------------------------------------------------------
-$stash = {
-           'zenah' => {
-                        'datetime' => sub { "DUMMY" },
-                        'device' => {
-                                      'all' => sub { "DUMMY" },
-                                      'by_attr' => sub { "DUMMY" },
-                                      'by_attr_list' => sub { "DUMMY" },
-                                      'by_attr_name_list' => sub { "DUMMY" },
-                                      'by_name' => sub { "DUMMY" },
-                                      'by_type_and_attr' => sub { "DUMMY" },
-                                      'by_type_list' => sub { "DUMMY" }
-                                    },
-                        'map' => {
-                                   'all' => sub { "DUMMY" },
-                                   'lookup' => sub { "DUMMY" },
-                                   'lookup_list' => sub { "DUMMY" },
-                                   'reverse' => sub { "DUMMY" },
-                                   'reverse_list' => sub { "DUMMY" }
-                                 },
-                        'room' => {
-                                    'all' => sub { "DUMMY" },
-                                    'by_attr' => sub { "DUMMY" },
-                                    'by_attr_list' => sub { "DUMMY" }
-                                  },
-                        'rrd' => {
-                                   'get' => sub { "DUMMY" }
-                                 },
-                        'state' => {
-                                     'get' => sub { "DUMMY" },
-                                     'get_by_type' => sub { "DUMMY" },
-                                     'get_by_type_matching' => sub { "DUMMY" },
-                                     'get_by_type_since' => sub { "DUMMY" },
-                                     'get_by_type_since_matching' => sub { "DUMMY" },
-                                     'get_value' => sub { "DUMMY" },
-                                     'get_values_by_type' => sub { "DUMMY" },
-                                     'get_values_by_type_matching' => sub { "DUMMY" },
-                                     'get_values_by_type_since' => sub { "DUMMY" },
-                                     'get_values_by_type_since_matching' => sub { "DUMMY" },
-                                     'set' => sub { "DUMMY" }
-                                   }
-                      }
-         };
+$stash = {};
 
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
@@ -237,6 +203,7 @@ ok(!$engine->exists_rule($kettle_warn), 'rule "kettle_warn" disabled');
 
 $cuckoo->action('scene kettle state=on');
 $cuckoo->update();
+$engine->disable_rule($cuckoo);
 $engine->enable_rule($cuckoo);
 
 $count =
@@ -251,6 +218,8 @@ ok($engine->exists_rule($kettle_warn), 'rule "kettle_warn" enabled');
 delete $ENV{HARNESS_ACTIVE};
 $cuckoo->action('scene name=kettle state=off');
 $cuckoo->update();
+$engine->disable_rule($cuckoo);
+$engine->enable_rule($cuckoo);
 $engine->reset_timer(rules_timer => time - 120);
 
 while ($engine->timer_callback_count('trigger-for-rule-'.
@@ -259,6 +228,8 @@ while ($engine->timer_callback_count('trigger-for-rule-'.
 }
 
 ok(!$engine->exists_rule($kettle_warn), 'rule "kettle_warn" enabled');
+
+$engine->disable_rule($cuckoo);
 
 # remove a scene rule
 my $kettle =
@@ -276,8 +247,31 @@ $engine->disable_rule($light_state);
 ok(!$engine->exists_xpl_callback('trigger-for-rule-'.$light_state),
    'rule "light_state" disabled');
 
+my $test_rule = ZenAH::CDBI::Rule->create({
+                                           name => 'test',
+                                           type => 'at',
+                                           trig => '100',
+                                           action => 'debug test',
+                                          }
+                                         );
+ok($test_rule, 'test_rule added to db');
+$engine->enable_rule($test_rule);
+
+sub process_test_rule {
+  my $action = shift;
+  my $stash = shift || {};
+  $test_rule->action($action ? "debug ...\n".$action : $action) or return;
+  $engine->disable_rule($test_rule);
+  $engine->enable_rule($test_rule) or return;
+  my $res =
+    $engine->process_template($engine->rule_template_document($test_rule),
+                              $stash);
+  $res =~ s/^debug \.\.\.\n//;
+  return $res;
+}
+
 # test device stash
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH dev = zenah.device.all -%]
 [% dev.name %]
 [% END -%]
@@ -312,7 +306,7 @@ m_lounge_l
 },
    'device.all stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH dev = zenah.device.by_type_list("Curtain") -%]
 [% dev.name %]
 [% END -%]
@@ -324,31 +318,31 @@ c_lounge
 },
    'device.by_type_list stash');
 
-is($engine->process_template('[% zenah.device.by_attr("unit", "a2").name -%]'),
+is(process_test_rule('[% zenah.device.by_attr("unit", "a2").name -%]'),
    'a_amp', 'device.by_attr stash');
 
-is($engine->process_template('[% zenah.device.by_attr("unit", "n0").name -%]'),
+is(process_test_rule('[% zenah.device.by_attr("unit", "n0").name -%]'),
    '', 'device.by_attr stash - not found');
 
-is($engine->process_template(
+is(process_test_rule(
      '[% zenah.device.by_type_and_attr("X10App", "unit", "a2").name -%]'),
    'a_amp', 'device.by_type_and_attr stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH dev = zenah.device.by_attr_list("unit", "a2") -%]
 [% dev.name %]
 [% END -%]
 }),
    "\na_amp\n", 'device.by_attr_list stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH dev = zenah.device.by_attr_list("unit", "n0") -%]
 [% dev.name %]
 [% END -%]
 }),
    "\n", 'device.by_attr_list stash - not found');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH dev = zenah.device.by_attr_name_list("open_relay") -%]
 [% dev.name %]
 [% END -%]
@@ -362,7 +356,7 @@ c_lounge
 },
  'device.by_attr_name_list stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% zenah.map.lookup("x10lamp_trigger", "b1") %]
 }),
    q{
@@ -370,14 +364,14 @@ l_bed_1
 },
  'map.lookup stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% zenah.map.lookup("x10lamp_trigger", "b4") -%]
 }),
    q{
 },
  'map.lookup stash - not found');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% zenah.map.reverse("x10lamp_trigger", "l_bed_1") %]
 }),
    q{
@@ -385,14 +379,14 @@ b1
 },
  'map.reverse stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% zenah.map.reverse("x10lamp_trigger", "l_garage") -%]
 }),
    q{
 },
  'map.reverse stash - not found');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH val = zenah.map.lookup_list("x10lamp_trigger", "b1") -%]
 [% val %]
 [% END -%]
@@ -402,7 +396,7 @@ l_bed_1
 },
  'map.lookup_list stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH val = zenah.map.reverse_list("x10lamp_trigger", "l_bed_1") -%]
 [% val %]
 [% END -%]
@@ -412,7 +406,7 @@ b1
 },
  'map.reverse_list stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH entry = zenah.map.all("x10lamp_trigger") -%]
 [% entry.name %] = [% entry.value %]
 [% END -%]
@@ -424,7 +418,7 @@ b3 = l_bath
 },
  'map.all stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% zenah.rrd.get() %]
 }),
    q{
@@ -432,7 +426,7 @@ not implemented
 },
  'rrd.get stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH room = zenah.room.all() -%]
 [% room.name %]
 [% END -%]
@@ -447,7 +441,7 @@ lounge
 },
  'room.all stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% zenah.room.by_attr("zone", "outside").name %]
 }),
    q{
@@ -455,14 +449,14 @@ garden
 },
  'room.by_attr stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% zenah.room.by_attr("zone", "invalid").name -%]
 }),
    q{
 },
  'room.by_attr stash - invalid');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH room = zenah.room.by_attr_list("zone", "upstairs") -%]
 [% room.name %]
 [% END -%]
@@ -473,7 +467,7 @@ bed_1
 },
  'room.by_attr_list stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH room = zenah.room.by_attr_list("zone", "invalid") -%]
 [% room.name %]
 [% END -%]
@@ -482,19 +476,19 @@ is($engine->process_template(q{
 },
  'room.by_attr_list stash - not found');
 
-is($engine->process_template(q{[% zenah.state.get("uv", "uv138.55").value %]}),
+is(process_test_rule(q{[% zenah.state.get("uv", "uv138.55").value %]}),
    q{2},
    'state.get stash');
 
-is($engine->process_template(q{[% zenah.state.get_value("uv", "uv138.55") %]}),
+is(process_test_rule(q{[% zenah.state.get_value("uv", "uv138.55") %]}),
    q{2},
    'state.get_value stash');
 
-is($engine->process_template(q{[% zenah.state.get_value("uv", "invalid") %]}),
+is(process_test_rule(q{[% zenah.state.get_value("uv", "invalid") %]}),
    q{},
    'state.get_value stash - invalid');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH state = zenah.state.get_by_type("light") -%]
 [% state.name %] = [% state.value %]
 [% END -%]
@@ -508,7 +502,7 @@ lounge = light
 },
    'state.get_by_type stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH state = zenah.state.get_by_type_matching("light", "^b") -%]
 [% state.name %] = [% state.value %]
 [% END -%]
@@ -519,7 +513,7 @@ bed_1 = light
 },
    'state.get_by_type_matching stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH state = zenah.state.get_by_type_since("light", 1186322165) -%]
 [% state.name %] = [% state.value %]
 [% END -%]
@@ -529,7 +523,7 @@ lounge = light
 },
    'state.get_by_type_since stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH state = zenah.state.get_by_type_since_matching("light", 1186322150, "^c") -%]
 [% state.name %] = [% state.value %]
 [% END -%]
@@ -539,7 +533,7 @@ cloak = light
 },
    'state.get_by_type_since_matching stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH value = zenah.state.get_values_by_type("light") -%]
 [% value %]
 [% END -%]
@@ -553,7 +547,7 @@ light
 },
    'state.get_values_by_type stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH value = zenah.state.get_values_by_type_matching("light", "^b") -%]
 [% value %]
 [% END -%]
@@ -564,7 +558,7 @@ light
 },
    'state.get_values_by_type_matching stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH value = zenah.state.get_values_by_type_since("light", 1186322165) -%]
 [% value %]
 [% END -%]
@@ -574,7 +568,7 @@ light
 },
    'state.get_values_by_type_since stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% FOREACH value = zenah.state.get_values_by_type_since_matching("light", 1186322150, "^c") -%]
 [% value %]
 [% END -%]
@@ -584,7 +578,7 @@ light
 },
    'state.get_values_by_type_since_matching stash');
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% zenah.state.set("light", "garden", "light") %]
 [% zenah.state.get_value("light","garden") %]
 [% zenah.state.set("uv", "uv138.55", 0) %]
@@ -604,7 +598,7 @@ my $ctime = $state->ctime;
 my $mtime = $state->mtime;
 sleep 2;
 
-is($engine->process_template(q{
+is(process_test_rule(q{
 [% zenah.state.set("uv", "uv138.55", 0) %]
 }),
    q{
@@ -653,9 +647,9 @@ is(ref $engine2->{_plugin}->{Timer}->{_tz},
    'DateTime::TimeZone::Europe::Moscow',
    'engine->new tz environment var');
 
-
 $cuckoo->trig('invalid');
 $cuckoo->update();
+$engine->disable_rule($cuckoo);
 is(test_warn(sub { $engine->enable_rule($cuckoo); }),
    q{Failed to add rule cuckoo: xPL::Timer->new: Failed to load }.
      q{xPL::Timer::invalid: Can't locate xPL/Timer/invalid.pm in @INC},
@@ -671,16 +665,17 @@ is(test_error(sub { $engine->add_action() }),
    'ZenAH::Engine->add_action: requires \'type\' argument',
    'add_action error');
 
-is(test_error(sub { $engine->add_stash() }),
-   'ZenAH::Engine->add_stash: requires \'variable\' argument',
+is(test_error(sub { $engine->add_stash('datetime' => 'test') }),
+   'ZenAH::Engine->add_stash: '.
+     'plugin bug: stash element \'datetime\' already exists',
    'add_stash error');
 
-is(test_warn(sub { $engine->process_template() }),
-   'ZenAH::Engine->process_template: empty template',
+is(test_warn(sub { process_test_rule() }),
+   'ZenAH::Engine->read_rule: Action template is empty',
    'empty template warning');
 
-is(test_warn(sub { $engine->process_template('[% IF false %]') }),
-   'Template error: file error - parse error - input text line 1: '.
+is(test_warn(sub { process_test_rule('[% IF false %]') }),
+   'ZenAH::Engine->read_rule: Action template parse error: line 2: '.
      'unexpected end of input',
    'template syntax error');
 

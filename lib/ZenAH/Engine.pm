@@ -36,7 +36,11 @@ use warnings;
 use Data::Dumper;
 use Getopt::Long;
 use Template;
+use Template::Context;
+use Template::Document;
+use Template::Parser;
 use Template::Stash;
+
 use List::Util;
 use Time::HiRes;
 use xPL::Client;
@@ -57,15 +61,13 @@ __PACKAGE__->make_collection(trigger =>
                                  remove_callback remove_callback_count
                                  /],
                              action => [qw/callback callback_count/],
-                             stash => [qw/callback callback_count/],
-                             rule => [qw/mtime type/],
+                             rule => [qw/mtime type template_document/],
                             );
 
 # VMethods
 $Template::Stash::LIST_OPS->{largest} = sub { List::Util::max(@{$_[0]}) };
 $Template::Stash::LIST_OPS->{smallest} = sub { List::Util::min(@{$_[0]}) };
 $Template::Stash::LIST_OPS->{sum} = sub { List::Util::sum(@{$_[0]}) };
-$Template::Stash::LIST_OPS->{mean} = sub { List::Util::sum(@{$_[0]})/@{$_[0]} };
 $Template::Stash::LIST_OPS->{mean} = sub { List::Util::sum(@{$_[0]})/@{$_[0]} };
 $Template::Stash::SCALAR_OPS->{int} = sub { int $_[0] };
 
@@ -89,8 +91,15 @@ sub new {
 
   $self->init_triggers();
   $self->init_actions();
-  $self->init_stashs();
   $self->init_rules();
+  $self->{_stash_zenah} = {};
+  my $stash = Template::Stash->new(zenah => $self->{_stash_zenah});
+  $self->{_template} =
+    {
+     context => Template::Context->new(STASH => $stash),
+     parser => Template::Parser->new(),
+     stash => $stash,
+    };
 
   foreach my $plugin ($self->plugins(engine => $self, @_)) {
     my $name = ref $plugin;
@@ -111,8 +120,6 @@ sub new {
   $self->add_timer(id => 'rules_timer',
                    timeout => -120,
                    callback => sub { $self->read_rules(); 1; });
-
-  $self->{_template} = Template->new({});
 
   $self->info("Done.\n\n");
   return $self;
@@ -192,14 +199,25 @@ sub read_rule {
   }
   my $trig = $rule->trig;
 
+  my $parser = $self->{_template}->{parser};
+  unless ($rule->action) {
+    return $self->ouch('Action template is empty')
+  }
+  my $template = $parser->parse($rule->action) or
+    return $self->ouch('Action template parse error: '.$parser->error);
+  my $doc = Template::Document->new($template) or
+    return $self->ouch('Action template doc error: '.
+                       $Template::Document::ERROR);
+
   $self->info('Adding rule: ', $rule->name, "\n");
 
   eval { $self->trigger_add_callback($type)->($rule); };
   if ($@) {
     warn "Failed to add rule ", $rule->name, ": ", $@, "\n";
-  } else {
-    $self->add_rule($rule, { mtime => $rule->mtime(), type => $type });
+    return;
   }
+  $self->add_rule($rule, { mtime => $rule->mtime(), type => $type,
+                           template_document => $doc });
 
   return 1;
 }
@@ -270,32 +288,25 @@ sub add_action {
   return $self->add_callback_item('action', $p{type}, \%p);
 }
 
-=head2 C<add_stash(%params)>
+=head2 C<add_stash($name, $value)>
 
 This method is used by plugins to register a new type of stash to be
-added to the template processing.  Valid parameters in the hash are
-those used by :
-
-=over
-
-=item type
-
-The name of the stash type.
-
-=item callback
-
-The code reference to call when this stash element is accessed.
-
-=back
+added to the template processing.  The value is typically a code
+reference that is called lazily when the stash element is accessed.
 
 =cut
 
 sub add_stash {
-  my $self = shift;
-  my %p = @_;
-  exists $p{variable} or $self->argh("requires 'variable' argument");
-  $self->info("Adding stash variable: ", $p{variable}, "\n");
-  return $self->add_callback_item('stash', $p{variable}, \%p);
+  my ($self, $name, $value) = @_;
+  exists $self->{_stash_zenah}->{$name} and
+    $self->argh("plugin bug: stash element '$name' already exists");
+  $self->info("Adding stash variable: ", $name, "\n");
+  $self->{_stash_zenah}->{$name} = $value;
+  return 1;
+}
+
+sub zenah_stash {
+  return $_[0]->{_stash_zenah};
 }
 
 =head2 C<evaluate_action($template_string, $template_stash)>
@@ -307,9 +318,9 @@ and run the resulting actions.
 
 sub evaluate_action {
   my $self = shift;
-  my $action = shift;
+  my $action_document = shift;
   my $stash = shift || {};
-  my $processed = $self->process_template($action, $stash);
+  my $processed = $self->process_template($action_document, $stash);
   $processed =~ s/^\s*$//mg;
   return $self->run_action($processed, $stash);
 }
@@ -358,7 +369,8 @@ the "last fired" time, C<ftime>, field in the database.
 sub trigger_rule {
   my $self = shift;
   my $rule = shift;
-  my $action = $rule->action;
+  print "Triggered rule: ", $rule->name, "\n";
+  my $action = $self->rule_template_document($rule);
   $rule->ftime(time);
   $rule->update();
   return $self->evaluate_action($action, @_);
@@ -381,7 +393,7 @@ sub trigger_rule_by_name {
   return $self->trigger_rule($rule, @_);
 }
 
-=head2 C<process_template($template_string, $template_stash)>
+=head2 C<process_template($template_document, $template_stash)>
 
 This method is applies the L<Template::Toolkit> to the given string
 with the combination of the supplied stash and the "system" stash
@@ -391,14 +403,16 @@ that is polulated by the callbacks registered by the plugins.
 
 sub process_template {
   my $self = shift;
-  my $input = shift or return $self->ouch("empty template");
+  my $template_document = shift;
   my $stash = shift || {};
-  foreach my $var ($self->stashs) {
-    $stash->{zenah}->{$var} = $self->stash_callback($var)->();
-  }
   my $output = '';
-  $self->{_template}->process(\$input, $stash, \$output) or
-    warn 'Template error: '.$self->{_template}->error();
+  eval {
+    $output = $self->{_template}->{context}->process($template_document,
+                                                     $stash);
+  };
+  if ($@) {
+    warn 'Template error: '.$@;
+  }
   return $output;
 }
 
@@ -494,7 +508,8 @@ takes either:
 
 =item the word 'stash'
 
-In which case the contents of the stash is dumped to C<STDERR>.
+In which case the contents of the stash (excluding 'zenah' items) is
+dumped to C<STDERR>.
 
 =item the string '...'
 

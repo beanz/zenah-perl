@@ -85,13 +85,10 @@ sub new {
                        remove_callback => sub { $self->remove(@_) },
                       );
 
-  $engine->add_stash(variable => "datetime",
-                     callback => sub {
-                       return sub {
-                         my $dt = DateTime->now;
-                         $dt->set_time_zone($tz);
-                         return $dt;
-                       };
+  $engine->add_stash(datetime => sub {
+                       my $dt = DateTime->now;
+                       $dt->set_time_zone($tz);
+                       return $dt;
                      });
   return $self;
 }

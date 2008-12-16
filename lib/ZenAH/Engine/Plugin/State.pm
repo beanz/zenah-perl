@@ -205,8 +205,7 @@ sub new {
      },
     );
 
-  $engine->add_stash(variable => "state",
-                     callback => sub { return \%d });
+  $engine->add_stash(state => sub { return \%d });
   return $self;
 }
 

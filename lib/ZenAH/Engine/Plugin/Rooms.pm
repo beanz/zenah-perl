@@ -109,7 +109,7 @@ sub new {
      },
     );
 
-  $engine->add_stash(variable => "room", callback => sub { return \%d });
+  $engine->add_stash(room => sub { return \%d });
   return $self;
 }
 

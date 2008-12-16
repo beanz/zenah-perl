@@ -124,8 +124,7 @@ sub new {
      get => sub { return "not implemented" },
     );
 
-  $engine->add_stash(variable => "rrd",
-                     callback => sub { return \%d });
+  $engine->add_stash(rrd => sub { return \%d });
 
   $engine->add_timer(id => 'update_rrd_files',
                      timeout => -120,

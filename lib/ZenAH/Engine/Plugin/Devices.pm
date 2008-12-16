@@ -144,8 +144,7 @@ sub new {
      },
     );
 
-  $engine->add_stash(variable => "device",
-                     callback => sub { return \%d });
+  $engine->add_stash(device => sub { return \%d });
   $engine->add_action(type => "device",
                       callback => sub { $self->action_device(@_); });
   return $self;
