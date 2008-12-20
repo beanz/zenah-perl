@@ -90,6 +90,7 @@ sub new {
                        $dt->set_time_zone($tz);
                        return $dt;
                      });
+  $engine->add_stash(time => sub { time });
   return $self;
 }
 

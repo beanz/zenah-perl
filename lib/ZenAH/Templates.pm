@@ -50,7 +50,7 @@ sub _template_modified {
     return;
   }
 #  print STDERR "ZenAH::Templates(mod): found $path\n";
-  return $t->mtime->epoch;
+  return $t->mtime;
 }
 
 sub _template_content {
@@ -64,7 +64,7 @@ sub _template_content {
     return wantarray ? (undef, $path.': not found', time) : undef;
   }
 #  print STDERR "ZenAH::Templates found $path\n";
-  return wantarray ? ($t->text, undef, $t->mtime->epoch) : $t->text;
+  return wantarray ? ($t->text, undef, $t->mtime) : $t->text;
 }
 
 # Autoload methods go after =cut, and are processed by the autosplit program.

@@ -80,21 +80,21 @@ is($room->attribute('zone'), '', 'room->attribute("valid") null');
 delete $ENV{HARNESS_ACTIVE}; # pretend we are not testing to exercise real code
 my $rule = ZenAH::CDBI::Rule->retrieve(1);
 is($rule->update, -1, 'rule->update - no change');
-is($rule->mtime, '2007-08-05 14:52:24', 'mtime before');
+is($rule->mtime, 1186321944, 'mtime before');
 $rule->ftime(time);
 is($rule->update, 1, 'rule->update - change ftime');
-is($rule->mtime, '2007-08-05 14:52:24', 'mtime after ftime change');
+is($rule->mtime, 1186321944, 'mtime after ftime change');
 $rule->name('chime');
 is($rule->update, 1, 'rule->update - change name');
-isnt($rule->mtime, '2007-08-05 14:52:24', 'mtime after name change');
+isnt($rule->mtime, 1186321944, 'mtime after name change');
 is(length($rule->to_view('mtime')), 8, 'mtime has no date');
 
 my $temp = ZenAH::CDBI::Template->create({name => 'time',
                                           mtime => 1199145600});
 ok($temp, 'template create - w/mtime');
-is($temp->mtime->epoch, 1199145600, 'template mtime');
+is($temp->mtime, 1199145600, 'template mtime');
 is($temp->update, -1, 'template->update - no change');
-is($temp->mtime->epoch, 1199145600, 'template mtime unchanged');
+is($temp->mtime, 1199145600, 'template mtime unchanged');
 is($temp->text(), undef, 'template->text undefined');
 is($temp->to_view('text'), '', 'template->to_view undefined');
 

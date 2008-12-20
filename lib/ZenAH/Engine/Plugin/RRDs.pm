@@ -154,7 +154,7 @@ sub update_rrd_files {
     my $definition = $types{$state->type};
     next unless (defined $definition);
     $self->update_rrd($rrd_dir,
-               $time, $state->name, $state->mtime->epoch, $state->value,
+               $time, $state->name, $state->mtime, $state->value,
                $definition);
   }
   return 1;

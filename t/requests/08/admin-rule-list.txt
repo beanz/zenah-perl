@@ -292,7 +292,7 @@ scene [% scene_name %] state=[% xpl.command %]
       <td>xpl</td>
       <td><small><small>message_type=&#34;(xpl-trig|xpl-stat)&#34; class=&#34;sensor.basic&#34;</small></small>
 </td>
-      <td><small><small>[% SET t = zenah.datetime.epoch %]
+      <td><small><small>[% SET t = zenah.time %]
 [%# Add to state table for quick lookup of latest value %]
 [% CALL zenah.state.set(xpl.type, xpl.device, xpl.current) %]
 </small></small>

@@ -324,7 +324,7 @@ INSERT INTO "rule" VALUES(9,'cleaner_prep','recurrence freq=weekly hours=11 minu
 # device washing_machine on',1,1186340154,NULL);
 INSERT INTO "rule" VALUES(10,'motion_state','message_type="xpl-trig" class="x10.basic" command=on','xpl','[% SET dev = zenah.device.by_attr(''unit'', xpl.device) %]
 [% IF dev and dev.type == ''X10Motion'' %]
-  [% SET t = zenah.datetime.epoch %]
+  [% SET t = zenah.time %]
   [% FOREACH room = dev.rooms %]
     [% CALL zenah.state.set(''motion'', room.name, ''occupied'') %]
     scene motion_trigger state=on room="[% room.name %]"
@@ -333,7 +333,7 @@ INSERT INTO "rule" VALUES(10,'motion_state','message_type="xpl-trig" class="x10.
 ',1,1186218390,1186322734);
 INSERT INTO "rule" VALUES(11,'light_state','message_type="xpl-trig" class="x10.basic" command=(on|off)','xpl','[% SET dev = zenah.device.by_attr(''unit'', xpl.device) %]
 [% IF dev and dev.type == ''X10Light'' %]
-  [% SET t = zenah.datetime.epoch %]
+  [% SET t = zenah.time %]
   [% FOREACH room = dev.rooms %]
     [% SET var = room.name %]
     [% SET value = xpl.command == ''on'' ? ''dark'' : ''light'' %]
@@ -356,7 +356,7 @@ debug [% lamp_name %] in [% room %]
   [% END %]
 [% END %]
 ',1,1186334273,2007);
-INSERT INTO "rule" VALUES(13,'motion_check','recurrence freq=minutely seconds=17','at','[% SET t = zenah.datetime.epoch %]
+INSERT INTO "rule" VALUES(13,'motion_check','recurrence freq=minutely seconds=17','at','[% SET t = zenah.time %]
 [% FOREACH room = zenah.room.all %]
   [% SET timeout = room.attribute(''motion_timeout'') %]
   [% NEXT UNLESS timeout %]
@@ -364,13 +364,13 @@ INSERT INTO "rule" VALUES(13,'motion_check','recurrence freq=minutely seconds=17
   [% SET motion = zenah.state.get(''motion'', room.name) %]
   [% NEXT UNLESS motion %]
   [% NEXT UNLESS motion.value == ''occupied'' %]
-  [% NEXT UNLESS motion.mtime.epoch < cutoff %]
+  [% NEXT UNLESS motion.mtime < cutoff %]
   scene motion_trigger state=off room="[% room.name %]"
   [% CALL zenah.state.set(''motion'', room.name, ''empty'') %]
 [% END %]
 
 ',1,1186218660,1186779504);
-INSERT INTO "rule" VALUES(14,'sensor_history','message_type="(xpl-trig|xpl-stat)" class="sensor.basic"','xpl','[% SET t = zenah.datetime.epoch %]
+INSERT INTO "rule" VALUES(14,'sensor_history','message_type="(xpl-trig|xpl-stat)" class="sensor.basic"','xpl','[% SET t = zenah.time %]
 
 [%# Add to state table for quick lookup of latest value %]
 [% CALL zenah.state.set(xpl.type, xpl.device, xpl.current) %]

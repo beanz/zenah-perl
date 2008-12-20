@@ -12,10 +12,9 @@ no warnings;
 sub Class::DBI::insert { Class::DBI::create(@_) }
 use warnings;
 
-use DateTime::Format::Strptime;
-
 {
   package ZenAH::CDBI::Base;
+  use POSIX qw/strftime/;
 
 =head2 C<ZenAH::CDBI::Base::to_view()>
 
@@ -27,18 +26,16 @@ Trivial wrapper to define how fields should be rendered in HTML.
     my ($self, $field) = @_;
     if ($field =~ /time$/) {
       my $v = $self->$field;
-      if ($v->epoch > (time - 86400)) {
-        return $v->hms;
+      if ($v > (time - 86400)) {
+        return strftime '%H:%M:%S', localtime($v);
       } else {
-        return $v;
+        return strftime '%Y-%m-%d %H:%M:%S', localtime($v);
       }
     }
     $self->$field();
   }
 }
 
-my $formatter = DateTime::Format::Strptime->new(pattern=>'%Y-%m-%d %H:%M:%S');
-my $time_zone = $ENV{TZ} || "Europe/London";
 my %args = ();
 
 my $config = exists $ENV{ZENAH_DBI_CONFIG} ? $ENV{ZENAH_DBI_CONFIG} :
@@ -76,56 +73,6 @@ $loader->relationship($_)
           );
 ZenAH::CDBI::List->has_a(liststate => 'ZenAH::CDBI::Liststate');
 
-ZenAH::CDBI::PhoneHist->has_a(
-    ctime => 'DateTime',
-    inflate => sub {
-      DateTime->from_epoch(epoch => shift,
-                           formatter => $formatter,
-                           time_zone => $time_zone);
-    },
-    deflate => 'epoch'
-);
-
-ZenAH::CDBI::State->has_a(
-    ctime => 'DateTime',
-    inflate => sub {
-      DateTime->from_epoch(epoch => shift,
-                           formatter => $formatter,
-                           time_zone => $time_zone);
-    },
-    deflate => 'epoch'
-);
-
-ZenAH::CDBI::State->has_a(
-    mtime => 'DateTime',
-    inflate => sub {
-      DateTime->from_epoch(epoch => shift,
-                           formatter => $formatter,
-                           time_zone => $time_zone);
-    },
-    deflate => 'epoch'
-);
-
-ZenAH::CDBI::Rule->has_a(
-    ftime => 'DateTime',
-    inflate => sub {
-      DateTime->from_epoch(epoch => shift,
-                           formatter => $formatter,
-                           time_zone => $time_zone);
-    },
-    deflate => 'epoch'
-);
-
-ZenAH::CDBI::Rule->has_a(
-    mtime => 'DateTime',
-    inflate => sub {
-      DateTime->from_epoch(epoch => shift,
-                           formatter => $formatter,
-                           time_zone => $time_zone);
-    },
-    deflate => 'epoch'
-);
-
 =head2 C<ZenAH::CDBI::Rule::to_view()>
 
 Override the L<ZenAH::CDBI::Base::to_view> method to force the use
@@ -148,17 +95,6 @@ sub ZenAH::CDBI::Rule::to_view {
     $self->ZenAH::CDBI::Base::to_view($field);
   }
 }
-
-
-ZenAH::CDBI::Template->has_a(
-    mtime => 'DateTime',
-    inflate => sub {
-      DateTime->from_epoch(epoch => shift,
-                           formatter => $formatter,
-                           time_zone => $time_zone);
-    },
-    deflate => 'epoch'
-);
 
 =head2 C<ZenAH::CDBI::Template::to_view()>
 

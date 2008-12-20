@@ -198,8 +198,8 @@ sub new {
                                                       name => $_[1]);
        my $old = $state->value();
        $state->value($_[2]);
-       $state->mtime(DateTime->now);
-       $state->ctime(DateTime->now) if (!defined $old || $old ne $_[2]);
+       $state->mtime(time);
+       $state->ctime(time) if (!defined $old || $old ne $_[2]);
        $state->update();
        return $state->value;
      },
