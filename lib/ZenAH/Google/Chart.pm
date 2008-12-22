@@ -140,6 +140,8 @@ sub x_labels {
   my $c = 0;
   my $cb = 0;
   my @fill = ();
+  my $curr_band_col = '';
+  my $curr_band_width = 0;
   foreach my $x (map { $_->[0] } @{$self->data}) {
     my $l = $fn->($fmt, $x);
     my $s = $l;
@@ -147,15 +149,25 @@ sub x_labels {
       ($l,$s) = split /~/, $l, 2;
     }
     if ($p ne $l && ($c%$skip) == 0 && ($l%$mod) == 0) {
-      push @l, $s;
+      push @l, $p eq '' ? '' : $s;
       $cb++;
     } else {
       push @l, '';
     }
-    push @fill, $bc[$cb % scalar @bc].','.(sprintf '%.6f',$bwidth);
+    my $new_band_col = $bc[$cb % scalar @bc];
+    if ($curr_band_col ne $new_band_col) {
+      push @fill, $curr_band_col.','.(sprintf '%.6f',$curr_band_width)
+        if ($curr_band_width);
+      $curr_band_width = 0;
+      $curr_band_col = $new_band_col;
+    }
+    $curr_band_width += $bwidth;
     $c++;
     $p = $l;
   }
+  push @fill, $curr_band_col.','.(sprintf '%.6f',$curr_band_width)
+    if ($curr_band_width);
+
   $self->fill('chf=c,ls,0,'.(join ',', @fill)) if ($fill);
   return \@l;
 }
