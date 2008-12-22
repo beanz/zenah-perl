@@ -2,59 +2,64 @@
 use strict;
 use Getopt::Long;
 use ZenAH::Google::Chart;
-use RRDs;
 
-# google-chart-from-rrd 'inside.rrd|Inside Temp' 'outside.rrd|Outside Temp'
+# google-chart-from-rrd 'inside.rrd|legend=Inside Temp' \
+#                       'outside.rrd|legend=Outside Temp'
 
 # graph of two variables:
 #
-# 'temp.rrd|Temp' 'humidity.rrd|Humidity!'
+# 'temp.rrd' 'humidity.rrd|side=right'
 #
 # graph for one day:
 #
-#  --fill -format2 '!%w~%a' --resolution=1800 'temp.rrd|Temp'
+#  --fill -format2 '!%w~%a' --resolution=1800 ...
 #
 # graph for one week:
 #
 #  --fill --span=604800 --resolution=14400 \
 #  --format='!%w~%a' --modulo=1 \
-#  --format2='!%U~%m-%d' --modulo2=1
+#  --format2='!%U~%m-%d' --modulo2=1 ...
 #
 # graph for one month
 #
 #  --fill --span=2678400 --resolution=43200 \
 #  --format='!%w~%a' --modulo=4 \
-#  --format2='!%U~%m-%d' --modulo2=1
+#  --format2='!%U~%m-%d' --modulo2=1 ...
 #
 # graph for 3 months
 #
 #  --span=8035200 --resolution=86400 \
 #  --format='!%U~%m-%d' --modulo=1 \
-#  --format2='!%m~%b' --modulo2=
+#  --format2='!%m~%b' --modulo2=1 ...
 #
 # graph for 6 months
 #
 #  --span=16070400 --resolution=86400 \
 #  --format='!%U~%m-%d' --modulo=1 \
-#  --format2='!%m~%b' --modulo2=
+#  --format2='!%m~%b' --modulo2=1 ...
 #
 # graph for 1 year
 #
 #  --span=31622400 --resolution=172800 \
-#  --format='!%m~%b' --modulo=1
+#  --format='!%m~%b' --modulo=1 ...
 #
 # graph for 2 years
 #
 #  --span=63244800 --resolution=604800 \
 #  --format='!%m~%b' --modulo=2 \
-#  --format2='!%Y' --modulo2=1
+#  --format2='!%Y' --modulo2=1 ...
 #
 # graph for 4 years
 #
 #  --span=126489600 --resolution=1209600 \
 #  --format='!%m~%b' --modulo=3 \
-#  --format2='!%Y' --modulo2=1
+#  --format2='!%Y' --modulo2=1 ...
 #
+
+
+#my $s = source(shift);
+#print $_, " => ", $s->{$_}, "\n" foreach (keys %{$s});
+#exit;
 
 my $verbose;
 my $span = 86400;
@@ -87,92 +92,26 @@ if (defined $start) {
 print STDERR "Time: $start - $end\n";
 print STDERR "Samples: ", $span/$rrdres, "\n";
 
-my %chart_data;
-my %legend;
-foreach my $file (@ARGV) {
-  my $side = 'left';
-  if ($file =~ s/!$//) {
-    $side = 'right';
-  }
-  my $legend;
-  if ($file =~ s/\|([^|]*)$//) {
-    $legend = $1;
-  } else {
-    $legend = $file;
-    $legend =~ s!/([^/]+)$! $1!;
-    $legend =~ s!^.*\/!!;
-    $legend =~ s!\.rrd$!!;
-  }
-  my $cf = 'AVERAGE';
-  if ($file =~ s/:([^\/:|]+)(?:\|[^|]*)?$//) {
-    $cf = $1;
-  }
-  print $file, ' ', $cf, ' ', $legend, "\n";
-  my ($start,$step,$names,$data) =
-    RRDs::fetch $file, $cf, '-r', $rrdres, '-e', $end, '-s', $start;
-
-  print STDERR "Res: ", $rrdres, " => ", $step, "\n";
-
-  if (scalar @$names) {
-    push @{$legend{$side}}, $_.($legend ? ' '.$legend : '') foreach (@$names);
-  } else {
-    push @{$legend{$side}}, $legend;
-  }
-  my $step_mod = $rrdres/$step;
-  print STDERR "step mod: ", $step_mod, "\n";
-  my $index = 0;
-  my $count = 0;
-  my @sum = ();
-  my @num = ();
-  foreach my $line (@$data) {
-    $count++;
-    my $num_values = scalar @$line - 1;
-
-    foreach my $i (0..$num_values) {
-      if (defined $line->[$i]) {
-	$sum[$i] += $line->[$i];
-	$num[$i]++;
-      }
-    }
-    my $sample = (($count%$step_mod) == 0);
-    if ($sample) {
-      unless (defined $chart_data{$side}->[$index]) {
-	push @{$chart_data{$side}->[$index]}, $start;
-      }
-      foreach my $i (0..$num_values) {
-	my $val = $num[$i] ? $sum[$i]/$num[$i] : undef;
-	push @{$chart_data{$side}->[$index]}, $val;
-      }
-      $start += $rrdres;
-      $index++;
-      @sum = ();
-      @num = ();
-    } else {
-    }
-  }
-}
-my @legend = ();
-push @legend, @{$legend{'left'}||[]};
-push @legend, @{$legend{'right'}||[]};
-
-print STDERR "Length: ", scalar @{$chart_data{'left'}}, "\n";
-
 #use Data::Dumper;
 #print Data::Dumper->Dump([\@chart_data], [qw/d/]);
 my $c = ZenAH::Google::Chart->new({width => 680, height => 300,
                                    type => 'lc',
 
-                                   data => $chart_data{'left'},
-#                                   min => 0,
-                                   legend => $legend{'left'},
+                                   start => $start,
+                                   end => $end,
+                                   rrdres => $rrdres,
 
-                                   right_data => $chart_data{'right'},
+#                                   min => 0,
                                    right_min => 0,
-                                   right_legend => $legend{'right'},
 
                                    xfmt => $xfmt, xmod => $xmod,
                                    x2fmt => $x2fmt, x2mod => $x2mod,
                                    colours => ['0000ff', 'ff0000', 'ffff00',
 					       '00ff00', '00ffff', 'ff00ff'],
                                    fill => $fill});
+
+foreach my $source (@ARGV) {
+  $c->add_from_source($source);
+}
+
 print $c->url,"\n";

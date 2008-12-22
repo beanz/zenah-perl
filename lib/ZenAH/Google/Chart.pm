@@ -3,11 +3,152 @@ use strict;
 use warnings;
 use base qw(Class::Accessor);
 use POSIX qw/log10 ceil floor strftime/;
+use RRDs;
+
 __PACKAGE__->mk_accessors(qw(width height
                              title type colours
                              data min max legend
+                             start end rrdres
                              right_data right_min right_max right_legend
                              xfmt xskip xmod fill x2fmt x2skip x2mod));
+
+
+sub add_from_source {
+  my ($self, $source) = @_;
+  $source = source_from_string($source) unless (ref $source);
+  return $self->fetch_from_source($source);
+}
+
+sub source_from_string {
+  my $string = shift;
+  my ($file, @rest);
+  ($file, @rest) = split /\|/, $string;
+  my %source =
+    (
+     file => $file,
+     side => 'l',
+     cf => 'AVERAGE',
+     offset_t => 0,
+     map { split /=/, $_, 2 } @rest
+    );
+  $source{'side'} = lc substr $source{'side'}, 0, 1;
+  unless (defined $source{'legend'}) {
+    $source{'legend'} = $source{'file'};
+    $source{'legend'} =~ s!/([^/]+)$! $1!;
+    $source{'legend'} =~ s!^.*\/!!;
+    $source{'legend'} =~ s!\.rrd$!!;
+  }
+  return \%source;
+}
+
+sub fetch_from_source {
+  my ($self, $source) = @_;
+  my ($start, $step, $names, $data) =
+    $self->my_rrd_fetch($source->{'file'}, $source->{'cf'},
+                        $self->rrdres,
+                        $self->start - $source->{'offset_t'},
+                        $self->end - $source->{'offset_t'});
+
+  my $rrdres = $self->rrdres;
+  my $step_mod = $rrdres/$step;
+  print STDERR "Adding data from ",$source->{'file'},
+    ' ', $source->{'offset_t'}, "\n";
+  print STDERR
+    "  rrdres=$rrdres, step=$step, step_mod=$step_mod, length=",
+      (scalar @$data), "\n";
+  my $side = $source->{'side'};
+  my $self_data;
+  my $self_legend;
+  if ($side eq 'l') {
+    $self_data = $self->data;
+    unless ($self_data) {
+      $self->data([]);
+      $self_data = $self->data;
+    }
+    $self_legend = $self->legend;
+    unless ($self_legend) {
+      $self->legend([]);
+      $self_legend = $self->legend;
+    }
+  } else {
+    $self_data = $self->right_data;
+    unless ($self_data) {
+      $self->right_data([]);
+      $self_data = $self->right_data;
+    }
+    $self_legend = $self->right_legend;
+    unless ($self_legend) {
+      $self->right_legend([]);
+      $self_legend = $self->right_legend;
+    }
+  }
+
+  my $legend = $source->{'legend'};
+  my %ds_index;
+  {
+    my $count = 0;
+    $ds_index{$_} = $count++ foreach (@$names);
+  }
+  my $ds = $source->{'ds'};
+  die "Invalid DS, $ds, from ",$source->{'file'},"\n"
+    if (defined $ds && !exists $ds_index{$ds});
+  my @ds;
+  if (defined $ds) {
+    @ds = ($ds);
+    print STDERR "  pushing '$legend' to legend\n";
+    push @{$self_legend}, $legend;
+  } else {
+    @ds = @$names;
+    foreach (@ds) {
+      my $l = $_.($legend ? ' '.$legend : '');
+      print STDERR "  pushing '$l' to legend\n";
+      push @{$self_legend}, $l;
+    }
+  }
+  my $index = 0;
+  my $count = 0;
+  my @sum = ();
+  my @num = ();
+  foreach my $line (@$data) {
+    $count++;
+    foreach my $i (map { $ds_index{$_} } @ds) {
+      if (defined $line->[$i]) {
+	$sum[$i] += $line->[$i];
+	$num[$i]++;
+      }
+    }
+    my $sample = (($count%$step_mod) == 0);
+    if ($sample) {
+      unless (defined $self_data->[$index]) {
+        print STDERR "Pushing start '$start' to data\n";
+	push @{$self_data->[$index]}, $start;
+      }
+      foreach my $i (map { $ds_index{$_} } @ds) {
+	my $val = $num[$i] ? $sum[$i]/$num[$i] : undef;
+        print STDERR "Pushing val '$val' to data\n";
+	push @{$self_data->[$index]}, $val;
+      }
+      $start += $rrdres;
+      $index++;
+      @sum = ();
+      @num = ();
+    } else {
+    }
+  }
+  return 1;
+}
+
+sub my_rrd_fetch {
+  my ($self, $file, $cf, $rrdres, $start, $end) = @_;
+  my $key = join '!', @_;
+  unless (exists $self->{_cache_rrd}->{$key}) {
+    print STDERR "rrdtool fetch $file $cf -r $rrdres, -s $start -e $end\n";
+    $self->{_cache_rrd}->{$key} =
+      [ RRDs::fetch $file, $cf, '-r', $rrdres, '-s', $start, '-e', $end ];
+  }
+  return
+    wantarray ? @{$self->{_cache_rrd}->{$key}} : $self->{_cache_rrd}->{$key};
+}
 
 sub url {
   my $self = shift;
