@@ -95,7 +95,7 @@ foreach my $file (@ARGV) {
     $side = 'right';
   }
   my $legend;
-  if ($file =~ s/\|([^|]+)$//) {
+  if ($file =~ s/\|([^|]*)$//) {
     $legend = $1;
   } else {
     $legend = $file;
@@ -103,7 +103,6 @@ foreach my $file (@ARGV) {
     $legend =~ s!^.*\/!!;
     $legend =~ s!\.rrd$!!;
   }
-  push @{$legend{$side}}, $legend;
   my $cf = 'AVERAGE';
   if ($file =~ s/:([^\/:|]+)(?:\|[^|]*)?$//) {
     $cf = $1;
@@ -113,6 +112,12 @@ foreach my $file (@ARGV) {
     RRDs::fetch $file, $cf, '-r', $rrdres, '-e', $end, '-s', $start;
 
   print STDERR "Res: ", $rrdres, " => ", $step, "\n";
+
+  if (scalar @$names) {
+    push @{$legend{$side}}, $_.($legend ? ' '.$legend : '') foreach (@$names);
+  } else {
+    push @{$legend{$side}}, $legend;
+  }
   my $step_mod = $rrdres/$step;
   print STDERR "step mod: ", $step_mod, "\n";
   my $index = 0;
