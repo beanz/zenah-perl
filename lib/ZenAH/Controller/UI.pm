@@ -51,7 +51,9 @@ sub show : Local {
     if ($template =~ /xul/) {
       $c->response->content_type('application/vnd.mozilla.xul+xml');
     }
-    $c->stash->{now} = time;
+    $c->stash->{now} = time; # TODO: deprecate
+    $c->stash->{'time'} = time;
+    $c->stash->{'rand'} = sub { rand $_[0] };
     $c->stash->{dt} = DateTime->now;
     $c->stash->{status} = $c->request->param('status') || '&nbsp;';
     $c->stash->{template} = $template;
