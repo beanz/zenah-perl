@@ -122,6 +122,8 @@ sub new {
                    timeout => -120,
                    callback => sub { $self->read_rules(); 1; });
 
+  $self->add_stash(rand => sub { rand $_[0] });
+
   $self->info("Done.\n\n");
   return $self;
 }
