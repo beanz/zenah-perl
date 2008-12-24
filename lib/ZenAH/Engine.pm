@@ -70,6 +70,7 @@ $Template::Stash::LIST_OPS->{smallest} = sub { List::Util::min(@{$_[0]}) };
 $Template::Stash::LIST_OPS->{sum} = sub { List::Util::sum(@{$_[0]}) };
 $Template::Stash::LIST_OPS->{mean} = sub { List::Util::sum(@{$_[0]})/@{$_[0]} };
 $Template::Stash::SCALAR_OPS->{int} = sub { int $_[0] };
+$Template::Stash::SCALAR_OPS->{rand} = sub { rand $_[0] };
 
 # Preloaded methods go here.
 
