@@ -308,8 +308,8 @@ sub ZenAH::CDBI::Template::to_field {
   my ($self, $field, $how) = @_;
   if ($field eq 'text') {
     my $a = $self->Class::DBI::AsForm::to_field($field, 'textarea');
-    $a->attr(cols => 80);
-    $a->attr(rows => 10);
+    $a->attr(cols => 120);
+    $a->attr(rows => 20);
     if (ref $self) { $a->push_content($self->$field) }
     $a;
   } else {
