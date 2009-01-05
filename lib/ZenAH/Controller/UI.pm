@@ -47,14 +47,18 @@ Shows a UI page
 
 sub show : Local {
     my ( $self, $c ) = @_;
-    my $template = ($c->request->path || 'html').'/layout';
+    my $template = $c->request->path;
+    $template = 'html'
+      if (!$template || $template eq 'zenah' || $template eq '/');
+    print STDERR "Template: !$template!\n";
+    $template .= '/layout' unless ($template =~ /\//);
     if ($template =~ /xul/) {
       $c->response->content_type('application/vnd.mozilla.xul+xml');
     }
     $c->stash->{now} = time; # TODO: deprecate
     $c->stash->{'time'} = time;
     $c->stash->{'rand'} = sub { rand $_[0] };
-    $c->stash->{dt} = DateTime->now;
+    $c->stash->{dt} = sub { DateTime->now; };
     $c->stash->{status} = $c->request->param('status') || '&nbsp;';
     $c->stash->{template} = $template;
     $c->stash->{variant_url} = \&variant_url;
