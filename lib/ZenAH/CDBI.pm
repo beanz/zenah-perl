@@ -409,6 +409,26 @@ sub ZenAH::CDBI::Room::attribute {
   return $attr && $attr->value;
 }
 
+ZenAH::CDBI::Room->set_sql(attr => q{
+  SELECT room.*
+  FROM room, room_attribute_link, room_attribute
+  WHERE room_attribute_link.room = room.id AND
+        room_attribute_link.room_attribute = room_attribute.id AND
+        room_attribute.name = ? AND
+        room_attribute.value = ? ORDER BY room.name
+});
+
+=head2 C<ZenAH::CDBI::Room::by_attribute($name, $value)>
+
+Return rooms with the named attribute set to the given value.
+
+=cut
+
+sub ZenAH::CDBI::Room::by_attribute {
+  my $self = shift;
+  return $self->search_attr(@_);
+}
+
 =head2 C<which_mtime()>
 
 Function to determine whether the real mtime field should be used -

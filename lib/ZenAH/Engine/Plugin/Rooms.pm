@@ -94,18 +94,10 @@ sub new {
        return @rooms;
      },
      by_attr => sub {
-       my $attr =
-         ZenAH::CDBI::RoomAttribute->search(name => $_[0],
-                                            value => $_[1])->first or
-                                              return;
-       return $attr->rooms->first;
+       return ZenAH::CDBI::Room->by_attribute($_[0], $_[1])->first;
      },
      by_attr_list => sub {
-       my $attr =
-         ZenAH::CDBI::RoomAttribute->search(name => $_[0],
-                                            value => $_[1])->first or
-                                              return;
-       return map { $_ } $attr->rooms;
+       return map { $_ } ZenAH::CDBI::Room->by_attribute($_[0], $_[1]);
      },
     );
 
