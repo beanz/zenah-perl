@@ -50,7 +50,6 @@ sub show : Local {
     my $template = $c->request->path;
     $template = 'html'
       if (!$template || $template eq 'zenah' || $template eq '/');
-    print STDERR "Template: !$template!\n";
     $template .= '/layout' unless ($template =~ /\//);
     if ($template =~ /xul/) {
       $c->response->content_type('application/vnd.mozilla.xul+xml');
