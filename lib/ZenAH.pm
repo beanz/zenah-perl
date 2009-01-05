@@ -22,7 +22,7 @@ __PACKAGE__->setup( qw/Static::Simple/ );
 __PACKAGE__->config->{static}->{dirs} =
   [
    'static',
-   qr!^(images|css|js|dojo)/!,
+   qr!^(images|css|js)/!,
   ];
 
 =head1 NAME
