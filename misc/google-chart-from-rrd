@@ -12,7 +12,7 @@ use ZenAH::Google::Chart;
 #
 # graph for one day:
 #
-#  --fill -format2 '!%w~%a' --resolution=1800 ...
+#  --fill -format2 '!%w~%a' ...
 #
 # graph for one week:
 #
@@ -56,14 +56,9 @@ use ZenAH::Google::Chart;
 #  --format2='!%Y' --modulo2=1 ...
 #
 
-
-#my $s = source(shift);
-#print $_, " => ", $s->{$_}, "\n" foreach (keys %{$s});
-#exit;
-
 my $verbose;
 my $span = 86400;
-my $rrdres = 3600;
+my $rrdres = 1800;
 my $end;
 my $start;
 my $fill = 0;
@@ -84,10 +79,11 @@ GetOptions('verbose+' => \$verbose,
           );
 
 if (defined $start) {
-} elsif (defined $end) {
+  $start = int($start/$rrdres)*$rrdres;
+  $end = $start+$rrdres*int(0.5+$span/$rrdres);
 } else {
-    $end = int(time/$rrdres)*$rrdres;
-    $start = $end-$rrdres*int(0.5+$span/$rrdres);
+  $end = int((defined $end ? $end : time)/$rrdres)*$rrdres;
+  $start = $end-$rrdres*int(0.5+$span/$rrdres);
 }
 print STDERR "Time: $start - $end\n";
 print STDERR "Samples: ", $span/$rrdres, "\n";
@@ -100,6 +96,7 @@ my $c = ZenAH::Google::Chart->new({width => 680, height => 300,
                                    start => $start,
                                    end => $end,
                                    rrdres => $rrdres,
+                                   span => $span,
 
 #                                   min => 0,
                                    right_min => 0,
