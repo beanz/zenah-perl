@@ -229,11 +229,11 @@ Filter:
       href="http://localhost/admin/template?filter=dojo"
        >dojo</a></span>
     <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=dojofragment"
+       >dojofragment</a></span>
+    <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=html"
        >html</a></span>
-    <span class="filterbutton"><a
-      href="http://localhost/admin/template?filter=message"
-       >message</a></span>
     <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=room"
        >room</a></span>
@@ -243,9 +243,6 @@ Filter:
     <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=text"
        >text</a></span>
-    <span class="filterbutton"><a
-      href="http://localhost/admin/template?filter=xul"
-       >xul</a></span>
 </p>
 <p class="pagenav" id="pagenav">
 Page:
@@ -493,20 +490,24 @@ Filter:
     </tr>
     <tr class="list-row-0">
       <td>content</td>
-      <td>default</td>
-      <td><small><small>[% SET t_content = &#39;content/&#39; _ (Catalyst.request.param(&#39;content&#39;) || &#39;house&#39;) %]
-[% PROCESS $t_content %]</small></small>
+      <td>basement</td>
+      <td><small><small>&#60;table cellpadding=&#34;0&#34; cellspacing=&#34;0&#34; width=&#34;90%&#34; border=&#34;1&#34;&#62;
+&#60;tr&#62;
+  [% PROCESS room/default room = &#34;node_0&#34; %]
+&#60;/tr&#62;
+&#60;/table&#62;
+</small></small>
 </td>
       <td>
   <span class="crudbutton"><a
-    href="http://localhost//admin/template/view/33"
+    href="http://localhost//admin/template/view/46"
     >View</a></span>
   <span class="crudbutton"><a
-    href="http://localhost//admin/template/edit/33"
+    href="http://localhost//admin/template/edit/46"
     >Edit</a></span>
         <!-- 
   <span class="crudbutton"><a
-    href="http://localhost//admin/template/destroy/33"
+    href="http://localhost//admin/template/destroy/46"
     >Destroy</a></span>
  -->
       </td>

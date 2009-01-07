@@ -223,7 +223,7 @@ tr.list-row-1 {
     <input name="name" type="text" value="zone" />
 <br/>
     value<br/>
-    <input name="value" type="text" value="upstairs" />
+    <input name="value" type="text" value="Upstairs" />
 <br/>
   <input type="submit" value="Edit"/>
 </form>

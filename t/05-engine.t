@@ -442,7 +442,7 @@ lounge
  'room.all stash');
 
 is(process_test_rule(q{
-[% zenah.room.by_attr("zone", "outside").name %]
+[% zenah.room.by_attr("zone", "Outside").name %]
 }),
    q{
 garden
@@ -457,7 +457,7 @@ is(process_test_rule(q{
  'room.by_attr stash - invalid');
 
 is(process_test_rule(q{
-[% FOREACH room = zenah.room.by_attr_list("zone", "upstairs") -%]
+[% FOREACH room = zenah.room.by_attr_list("zone", "Upstairs") -%]
 [% room.name %]
 [% END -%]
 }),

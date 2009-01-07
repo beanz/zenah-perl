@@ -226,13 +226,13 @@ tr.list-row-1 {
     <input name="name" type="text" value="downstairs" />
 <br/>
     text<br/>
-    <textarea cols="80" name="text" rows="10">&#60;table cellpadding=&#34;0&#34; cellspacing=&#34;0&#34; width=&#34;80%&#34; border=&#34;1&#34;&#62;
+    <textarea cols="120" name="text" rows="20">&#60;table cellpadding=&#34;0&#34; cellspacing=&#34;0&#34; width=&#34;80%&#34; border=&#34;1&#34;&#62;
 &#60;tr&#62;
-  [% PROCESS room/default room = &#34;kitchen&#34; %]
-  [% PROCESS room/default room = &#34;lounge&#34; rowspan=&#34;2&#34; %]
+  [% PROCESS room/wrapper room = &#34;kitchen&#34; %]
+  [% PROCESS room/wrapper room = &#34;lounge&#34; %]
 &#60;/tr&#62;
 &#60;tr&#62;
-  [% PROCESS room/default room = &#34;cloak&#34; %]
+  [% PROCESS room/wrapper room = &#34;cloak&#34; %]
 &#60;/tr&#62;
 &#60;/table&#62;
 </textarea>

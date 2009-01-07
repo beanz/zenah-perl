@@ -109,7 +109,7 @@ div.devicename {
   border-color: teal;
   background-color: #ccffff;
 }
-div.devicecontrol {
+a.devicecontrol {
   border-width: 2px 2px 2px 2px;
   padding: 1px 1px 1px 1px;
   border-style: outset outset outset outset;
@@ -149,7 +149,7 @@ content {
  </head>
  <body>
 <div id="header"><!-- BEGIN header -->
-<img id="logo" class="logo" height="50" width="50"
+<img id="logo" class="logo" height="50" width="50" alt="zenah logo"
      src="http://localhost/images/zenah-50.png" />
 <h1 class="title">Zen Automated Home</h1>
 <!-- END header --></div>
@@ -163,8 +163,9 @@ content {
  <span class="navbutton"><a href="http://localhost/?content=room&room=windows&room_name=kitchen">Windows</a></span>
  <span class="navbutton"><a href="http://localhost/?content=room&room=motion&room_name=kitchen">Motion</a></span>
  <span class="navbutton"><a href="http://localhost/?content=room&room=light&room_name=kitchen">Light</a></span>
+ <span class="navbutton"><a href="http://localhost/?content=room&room=sensors&room_name=kitchen">Sensors</a></span>
   <span class="navbutton"><a
-    href="http://localhost///admin"
+    href="http://localhost//admin"
     >Admin</a></span>
 </div>
 <div id="leftnav">
@@ -178,118 +179,113 @@ content {
 <div id="content">
 <table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
-  <td valign="top" rowspan="1" colspan="1">
-  <div class="device">
-  <table valign="top" border="0" width="100%">
+  <td valign="top"
+      rowspan="1"
+      colspan="1">
+    <table valign="top" border="0" width="100%">
+<tr>
+  <th valign="top">Kitchen</th>
+</tr>
   <tr>
-    <th valign="top">Kitchen</th>
+    <td>
+      <table valign="top" border="0">
+<tr>
+  <th halign="right">
+    <div class="devicename">Spots</div>
+  </th>
+    <td onclick="device_func(['args__l_kitchen','args__on'],['zenah_status']);Effect.Pulsate(this);return false;">
+      <div class="button"><a class="devicecontrol"
+        href="http://localhost/action/l_kitchen/on"
+        >On</a></div>
+    </td>
+    <td onclick="device_func(['args__l_kitchen','args__off'],['zenah_status']);Effect.Pulsate(this);return false;">
+      <div class="button"><a class="devicecontrol"
+        href="http://localhost/action/l_kitchen/off"
+        >Off</a></div>
+    </td>
+    <td onclick="device_func(['args__l_kitchen','args__bright'],['zenah_status']);Effect.Pulsate(this);return false;">
+      <div class="button"><a class="devicecontrol"
+        href="http://localhost/action/l_kitchen/bright"
+        >Bright</a></div>
+    </td>
+    <td onclick="device_func(['args__l_kitchen','args__dim'],['zenah_status']);Effect.Pulsate(this);return false;">
+      <div class="button"><a class="devicecontrol"
+        href="http://localhost/action/l_kitchen/dim"
+        >Dim</a></div>
+    </td>
+    <td onclick="device_func(['args__l_kitchen','args__full-fast'],['zenah_status']);Effect.Pulsate(this);return false;">
+      <div class="button"><a class="devicecontrol"
+        href="http://localhost/action/l_kitchen/full-fast"
+        >FullFast</a></div>
+    </td>
+</tr>
+</table>
+    </td>
   </tr>
-    <tr>
-      <td>
-        <div class="device">
-  <table valign="top" border="0">
   <tr>
-    <th halign="right">
-      <div class="devicename">Spots</div>
-    </th>
-      <td onclick="device_func(['args__l_kitchen','args__on'],['zenah_status']);Effect.Pulsate(this);return false;">
-        <div class="button"><a
-          href="http://localhost/action/l_kitchen/on"
-          ><div class="devicecontrol">On</div></a></div>
-      </td>
-      <td onclick="device_func(['args__l_kitchen','args__off'],['zenah_status']);Effect.Pulsate(this);return false;">
-        <div class="button"><a
-          href="http://localhost/action/l_kitchen/off"
-          ><div class="devicecontrol">Off</div></a></div>
-      </td>
-      <td onclick="device_func(['args__l_kitchen','args__bright'],['zenah_status']);Effect.Pulsate(this);return false;">
-        <div class="button"><a
-          href="http://localhost/action/l_kitchen/bright"
-          ><div class="devicecontrol">Bright</div></a></div>
-      </td>
-      <td onclick="device_func(['args__l_kitchen','args__dim'],['zenah_status']);Effect.Pulsate(this);return false;">
-        <div class="button"><a
-          href="http://localhost/action/l_kitchen/dim"
-          ><div class="devicecontrol">Dim</div></a></div>
-      </td>
-      <td onclick="device_func(['args__l_kitchen','args__full-fast'],['zenah_status']);Effect.Pulsate(this);return false;">
-        <div class="button"><a
-          href="http://localhost/action/l_kitchen/full-fast"
-          ><div class="devicecontrol">FullFast</div></a></div>
-      </td>
+    <td>
+      <table valign="top" border="0">
+<tr>
+  <th halign="right">
+    <div class="devicename">Under Lights</div>
+  </th>
+    <td onclick="device_func(['args__l_kitchen_under','args__on'],['zenah_status']);Effect.Pulsate(this);return false;">
+      <div class="button"><a class="devicecontrol"
+        href="http://localhost/action/l_kitchen_under/on"
+        >On</a></div>
+    </td>
+    <td onclick="device_func(['args__l_kitchen_under','args__off'],['zenah_status']);Effect.Pulsate(this);return false;">
+      <div class="button"><a class="devicecontrol"
+        href="http://localhost/action/l_kitchen_under/off"
+        >Off</a></div>
+    </td>
+    <td onclick="device_func(['args__l_kitchen_under','args__bright'],['zenah_status']);Effect.Pulsate(this);return false;">
+      <div class="button"><a class="devicecontrol"
+        href="http://localhost/action/l_kitchen_under/bright"
+        >Bright</a></div>
+    </td>
+    <td onclick="device_func(['args__l_kitchen_under','args__dim'],['zenah_status']);Effect.Pulsate(this);return false;">
+      <div class="button"><a class="devicecontrol"
+        href="http://localhost/action/l_kitchen_under/dim"
+        >Dim</a></div>
+    </td>
+    <td onclick="device_func(['args__l_kitchen_under','args__full-fast'],['zenah_status']);Effect.Pulsate(this);return false;">
+      <div class="button"><a class="devicecontrol"
+        href="http://localhost/action/l_kitchen_under/full-fast"
+        >FullFast</a></div>
+    </td>
+</tr>
+</table>
+    </td>
   </tr>
-  </table>
-</div>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <div class="device">
-  <table valign="top" border="0">
   <tr>
-    <th halign="right">
-      <div class="devicename">Under Lights</div>
-    </th>
-      <td onclick="device_func(['args__l_kitchen_under','args__on'],['zenah_status']);Effect.Pulsate(this);return false;">
-        <div class="button"><a
-          href="http://localhost/action/l_kitchen_under/on"
-          ><div class="devicecontrol">On</div></a></div>
-      </td>
-      <td onclick="device_func(['args__l_kitchen_under','args__off'],['zenah_status']);Effect.Pulsate(this);return false;">
-        <div class="button"><a
-          href="http://localhost/action/l_kitchen_under/off"
-          ><div class="devicecontrol">Off</div></a></div>
-      </td>
-      <td onclick="device_func(['args__l_kitchen_under','args__bright'],['zenah_status']);Effect.Pulsate(this);return false;">
-        <div class="button"><a
-          href="http://localhost/action/l_kitchen_under/bright"
-          ><div class="devicecontrol">Bright</div></a></div>
-      </td>
-      <td onclick="device_func(['args__l_kitchen_under','args__dim'],['zenah_status']);Effect.Pulsate(this);return false;">
-        <div class="button"><a
-          href="http://localhost/action/l_kitchen_under/dim"
-          ><div class="devicecontrol">Dim</div></a></div>
-      </td>
-      <td onclick="device_func(['args__l_kitchen_under','args__full-fast'],['zenah_status']);Effect.Pulsate(this);return false;">
-        <div class="button"><a
-          href="http://localhost/action/l_kitchen_under/full-fast"
-          ><div class="devicecontrol">FullFast</div></a></div>
-      </td>
+    <td>
+      <table valign="top" border="0">
+<tr>
+  <th halign="right">
+    <div class="devicename">Curtain</div>
+  </th>
+    <td onclick="device_func(['args__c_kitchen','args__open'],['zenah_status']);Effect.Pulsate(this);return false;">
+      <div class="button"><a class="devicecontrol"
+        href="http://localhost/action/c_kitchen/open"
+        >Open</a></div>
+    </td>
+    <td onclick="device_func(['args__c_kitchen','args__close'],['zenah_status']);Effect.Pulsate(this);return false;">
+      <div class="button"><a class="devicecontrol"
+        href="http://localhost/action/c_kitchen/close"
+        >Close</a></div>
+    </td>
+</tr>
+</table>
+    </td>
   </tr>
-  </table>
-</div>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <div class="device">
-  <table valign="top" border="0">
-  <tr>
-    <th halign="right">
-      <div class="devicename">Curtain</div>
-    </th>
-      <td onclick="device_func(['args__c_kitchen','args__open'],['zenah_status']);Effect.Pulsate(this);return false;">
-        <div class="button"><a
-          href="http://localhost/action/c_kitchen/open"
-          ><div class="devicecontrol">Open</div></a></div>
-      </td>
-      <td onclick="device_func(['args__c_kitchen','args__close'],['zenah_status']);Effect.Pulsate(this);return false;">
-        <div class="button"><a
-          href="http://localhost/action/c_kitchen/close"
-          ><div class="devicecontrol">Close</div></a></div>
-      </td>
-  </tr>
-  </table>
-</div>
-      </td>
-    </tr>
-  </table>
+</table>
   </td>
 </tr>
 </table>
 </div>
 <div id="footer"><!-- BEGIN footer -->
-<div id="copyright">© 2006, 2008 Mark Hindess</div>
+<div id="copyright">&copy; 2006, 2008 Mark Hindess</div>
 <!-- END footer --></div>
  </body>
 </html>

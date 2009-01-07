@@ -223,6 +223,9 @@ Filter:
       href="http://localhost/admin/roomattribute?filter=motion_timeout"
        >motion_timeout</a></span>
     <span class="filterbutton"><a
+      href="http://localhost/admin/roomattribute?filter=rowspan"
+       >rowspan</a></span>
+    <span class="filterbutton"><a
       href="http://localhost/admin/roomattribute?filter=zone"
        >zone</a></span>
 </p>
@@ -245,6 +248,23 @@ Page:
       <td>300</td>
       <td>
   <span class="crudbutton"><a
+    href="http://localhost//admin/roomattribute/view/5"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/roomattribute/edit/5"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/roomattribute/destroy/5"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>rowspan</td>
+      <td>2</td>
+      <td>
+  <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/view/4"
     >View</a></span>
   <span class="crudbutton"><a
@@ -257,9 +277,9 @@ Page:
  -->
       </td>
     </tr>
-    <tr class="list-row-1">
+    <tr class="list-row-0">
       <td>zone</td>
-      <td>downstairs</td>
+      <td>Downstairs</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/view/2"
@@ -274,9 +294,9 @@ Page:
  -->
       </td>
     </tr>
-    <tr class="list-row-0">
+    <tr class="list-row-1">
       <td>zone</td>
-      <td>outside</td>
+      <td>Outside</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/view/3"
@@ -291,9 +311,9 @@ Page:
  -->
       </td>
     </tr>
-    <tr class="list-row-1">
+    <tr class="list-row-0">
       <td>zone</td>
-      <td>upstairs</td>
+      <td>Upstairs</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/view/1"

@@ -109,7 +109,7 @@ div.devicename {
   border-color: teal;
   background-color: #ccffff;
 }
-div.devicecontrol {
+a.devicecontrol {
   border-width: 2px 2px 2px 2px;
   padding: 1px 1px 1px 1px;
   border-style: outset outset outset outset;
@@ -149,7 +149,7 @@ content {
  </head>
  <body>
 <div id="header"><!-- BEGIN header -->
-<img id="logo" class="logo" height="50" width="50"
+<img id="logo" class="logo" height="50" width="50" alt="zenah logo"
      src="http://localhost/images/zenah-50.png" />
 <h1 class="title">Zen Automated Home</h1>
 <!-- END header --></div>
@@ -163,8 +163,9 @@ content {
  <span class="navbutton"><a href="http://localhost/?room=windows">Windows</a></span>
  <span class="navbutton"><a href="http://localhost/?room=motion">Motion</a></span>
  <span class="navbutton"><a href="http://localhost/?room=light">Light</a></span>
+ <span class="navbutton"><a href="http://localhost/?room=sensors">Sensors</a></span>
   <span class="navbutton"><a
-    href="http://localhost///admin"
+    href="http://localhost//admin"
     >Admin</a></span>
 </div>
 <div id="leftnav">
@@ -178,53 +179,65 @@ content {
 <div id="content">
 <table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
-  <td valign="top" rowspan="1" colspan="1">
-  <div class="button"
-    ><a href="http://localhost/?content=room&room=devices&room_name=bath"
-      ><div class="roomname">Bathroom</div></a></div>
+  <td valign="top"
+      rowspan="1"
+      colspan="1">
+    <div class="button"
+  ><a href="http://localhost/?content=room&room=devices&room_name=bath"
+     ><div class="roomname">Bathroom</div></a></div>
   </td>
-  <td valign="top" rowspan="1" colspan="1">
-  <div class="button"
-    ><a href="http://localhost/?content=room&room=devices&room_name=bed_1"
-      ><div class="roomname">Bedroom 1</div></a></div>
-  </td>
-</tr>
-</table>
-<br />
-<table cellpadding="0" cellspacing="0" width="80%" border="1">
-<tr>
-  <td valign="top" rowspan="1" colspan="1">
-  <div class="button"
-    ><a href="http://localhost/?content=room&room=devices&room_name=kitchen"
-      ><div class="roomname">Kitchen</div></a></div>
-  </td>
-  <td valign="top" rowspan="2" colspan="1">
-  <div class="button"
-    ><a href="http://localhost/?content=room&room=devices&room_name=lounge"
-      ><div class="roomname">Lounge</div></a></div>
-  </td>
-</tr>
-<tr>
-  <td valign="top" rowspan="2" colspan="1">
-  <div class="button"
-    ><a href="http://localhost/?content=room&room=devices&room_name=cloak"
-      ><div class="roomname">Cloak Room</div></a></div>
+  <td valign="top"
+      rowspan="1"
+      colspan="1">
+    <div class="button"
+  ><a href="http://localhost/?content=room&room=devices&room_name=bed_1"
+     ><div class="roomname">Bedroom 1</div></a></div>
   </td>
 </tr>
 </table>
 <br />
 <table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
-  <td valign="top" rowspan="2" colspan="1">
-  <div class="button"
-    ><a href="http://localhost/?content=room&room=devices&room_name=garden"
-      ><div class="roomname">Garden</div></a></div>
+  <td valign="top"
+      rowspan="1"
+      colspan="1">
+    <div class="button"
+  ><a href="http://localhost/?content=room&room=devices&room_name=kitchen"
+     ><div class="roomname">Kitchen</div></a></div>
+  </td>
+  <td valign="top"
+      rowspan="2"
+      colspan="1">
+    <div class="button"
+  ><a href="http://localhost/?content=room&room=devices&room_name=lounge"
+     ><div class="roomname">Lounge</div></a></div>
+  </td>
+</tr>
+<tr>
+  <td valign="top"
+      rowspan="1"
+      colspan="1">
+    <div class="button"
+  ><a href="http://localhost/?content=room&room=devices&room_name=cloak"
+     ><div class="roomname">Cloak Room</div></a></div>
+  </td>
+</tr>
+</table>
+<br />
+<table cellpadding="0" cellspacing="0" width="80%" border="1">
+<tr>
+  <td valign="top"
+      rowspan="1"
+      colspan="1">
+    <div class="button"
+  ><a href="http://localhost/?content=room&room=devices&room_name=garden"
+     ><div class="roomname">Garden</div></a></div>
   </td>
 </tr>
 </table>
 </div>
 <div id="footer"><!-- BEGIN footer -->
-<div id="copyright">© 2006, 2008 Mark Hindess</div>
+<div id="copyright">&copy; 2006, 2008 Mark Hindess</div>
 <!-- END footer --></div>
  </body>
 </html>

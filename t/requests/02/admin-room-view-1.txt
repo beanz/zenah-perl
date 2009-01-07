@@ -235,11 +235,22 @@ tr.list-row-1 {
     <tr>
       <th class="view-table">zone</th>
       <td class="view-table">
-        downstairs
+        Downstairs
       </td>
       <td class="view-table">
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/view/2"
+    >View</a></span>
+      </td>
+    </tr>
+    <tr>
+      <th class="view-table">rowspan</th>
+      <td class="view-table">
+        2
+      </td>
+      <td class="view-table">
+  <span class="crudbutton"><a
+    href="http://localhost//admin/roomattribute/view/4"
     >View</a></span>
       </td>
     </tr>

@@ -229,11 +229,11 @@ Filter:
       href="http://localhost/admin/template?filter=dojo"
        >dojo</a></span>
     <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=dojofragment"
+       >dojofragment</a></span>
+    <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=html"
        >html</a></span>
-    <span class="filterbutton"><a
-      href="http://localhost/admin/template?filter=message"
-       >message</a></span>
     <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=room"
        >room</a></span>
@@ -243,9 +243,6 @@ Filter:
     <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=text"
        >text</a></span>
-    <span class="filterbutton"><a
-      href="http://localhost/admin/template?filter=xul"
-       >xul</a></span>
 </p>
 <p class="pagenav" id="pagenav">
 Page:
@@ -324,10 +321,6 @@ Page:
         >18</a></span>
     &nbsp;
     <span class="pagebutton"><a
-      href="http://localhost/admin/template?page=19&filter="
-        >19</a></span>
-    &nbsp;
-    <span class="pagebutton"><a
       href="http://localhost/admin/template?page=3&filter="
         >&gt;&gt;</a></span>
 </p>
@@ -349,7 +342,8 @@ Page:
 [% variant_button(&#34;navbutton&#34;, &#34;Windows&#34;, { &#34;room&#34; =&#62; &#34;windows&#34; }) %]
 [% variant_button(&#34;navbutton&#34;, &#34;Motion&#34;, { &#34;room&#34; =&#62; &#34;motion&#34; }) %]
 [% variant_button(&#34;navbutton&#34;, &#34;Light&#34;, { &#34;room&#34; =&#62; &#34;light&#34; }) %]
-[% navbutton(&#34;/admin&#34;, &#34;Admin&#34;) %]
+[% variant_button(&#34;navbutton&#34;, &#34;Sensors&#34;, { &#34;room&#34; =&#62; &#34;sensors&#34; }) %]
+[% navbutton(&#34;admin&#34;, &#34;Admin&#34;) %]
 &#60;/div&#62;
 &#60;div id=&#34;leftnav&#34;&#62;
 [%# variant_button(&#34;navbutton&#34;, &#34;House&#34;, { &#34;content&#34; =&#62; &#34;house&#34; }) %]
@@ -382,18 +376,20 @@ Page:
   &#60;title&#62;[% template.title or site.title %]&#60;/title&#62;
   &#60;script src=&#34;http://www.google.com/jsapi&#34;&#62;&#60;/script&#62;
   &#60;script type=&#34;text/javascript&#34;&#62;
-    var djConfig = { isDebug:true, parseOnLoad:true };
-    google.load(&#34;dojo&#34;, &#34;1.1.1&#34;);
+    var djConfig = {
+       isDebug:true, parseOnLoad:true
+    };
+    google.load(&#34;dojo&#34;, &#34;1.2.3&#34;);
   &#60;/script&#62;
   &#60;script type=&#34;text/javascript&#34;&#62;
-    dojo.require(&#34;dijit.layout.LayoutContainer&#34;);
+    dojo.require(&#34;dijit.layout.BorderContainer&#34;);
     dojo.require(&#34;dijit.layout.ContentPane&#34;);
     dojo.require(&#34;dijit.layout.TabContainer&#34;);
     dojo.require(&#34;dijit.form.Button&#34;);
     dojo.require(&#34;dojo.parser&#34;);
     function button_action(device, action) {
       dojo.xhrGet( {
-        url: &#34;/ajax?args=&#34;+device+&#34;&#38;args=&#34;+action,
+        url: &#34;[% Catalyst.uri_for(&#34;ajax&#34;) %]?args=&#34;+device+&#34;&#38;args=&#34;+action,
         handleAs: &#34;text&#34;,
         timeout: 3000,
         load: function(response, ioArgs) {
@@ -408,8 +404,8 @@ Page:
     }
   &#60;/script&#62;
   &#60;style type=&#34;text/css&#34;&#62;
-    @import &#34;http://ajax.googleapis.com/ajax/libs/dojo/1.1.1/dojo/resources/dojo.css&#34;;
-    @import &#34;http://ajax.googleapis.com/ajax/libs/dojo/1.1.1/dijit/themes/tundra/tundra.css&#34;;
+    @import &#34;http://ajax.googleapis.com/ajax/libs/dojo/1.2.3/dojo/resources/dojo.css&#34;;
+    @import &#34;http://ajax.googleapis.com/ajax/libs/dojo/1.2.3/dijit/themes/tundra/tundra.css&#34;;
     html, body {
       width: 100%;	/* make the body expand to fill the visible window */
       height: 100%;

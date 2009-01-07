@@ -1,4 +1,4 @@
-/admin/template/do_edit/42?type=content&name=basement&text=%3ctable%20cellpadding%3d%220%22%20cellspacing%3d%220%22%20width%3d%2290%25%22%20border%3d%221%22%3e%0a%3ctr%3e%0a%20%20%5b%25%20PROCESS%20room%2fdefault%20room%20%3d%20%22node_0%22%20%25%5d%0a%3c%2ftr%3e%0a%3c%2ftable%3e%0a
+/admin/template/do_edit/46?type=content&name=basement&text=%3ctable%20cellpadding%3d%220%22%20cellspacing%3d%220%22%20width%3d%2290%25%22%20border%3d%221%22%3e%0a%3ctr%3e%0a%20%20%5b%25%20PROCESS%20room%2fdefault%20room%20%3d%20%22node_0%22%20%25%5d%0a%3c%2ftr%3e%0a%3c%2ftable%3e%0a
 text/html
 200 OK
 
@@ -217,7 +217,7 @@ tr.list-row-1 {
 </div>
 <div id="content">
 <p>Updated OK</p>
-<form action="http://localhost//admin/template/do_edit/42"
+<form action="http://localhost//admin/template/do_edit/46"
     method="post">
     type<br/>
     <input name="type" type="text" value="content" />
@@ -226,7 +226,7 @@ tr.list-row-1 {
     <input name="name" type="text" value="basement" />
 <br/>
     text<br/>
-    <textarea cols="80" name="text" rows="10">&#60;table cellpadding=&#34;0&#34; cellspacing=&#34;0&#34; width=&#34;90%&#34; border=&#34;1&#34;&#62;
+    <textarea cols="120" name="text" rows="20">&#60;table cellpadding=&#34;0&#34; cellspacing=&#34;0&#34; width=&#34;90%&#34; border=&#34;1&#34;&#62;
 &#60;tr&#62;
   [% PROCESS room/default room = &#34;node_0&#34; %]
 &#60;/tr&#62;

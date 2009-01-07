@@ -217,9 +217,10 @@ CREATE TABLE "room_attribute" (
   "name" varchar(30) default NULL,
   "value" varchar(200) default NULL
 );
-INSERT INTO "room_attribute" VALUES(1,'zone','upstairs');
-INSERT INTO "room_attribute" VALUES(2,'zone','downstairs');
-INSERT INTO "room_attribute" VALUES(3,'zone','outside');
+INSERT INTO "room_attribute" VALUES(1,'zone','Upstairs');
+INSERT INTO "room_attribute" VALUES(2,'zone','Downstairs');
+INSERT INTO "room_attribute" VALUES(3,'zone','Outside');
+INSERT INTO "room_attribute" VALUES(4,'rowspan','2');
 CREATE TABLE "room_attribute_link" (
   "id" integer PRIMARY KEY,
   "room" int(11) default NULL,
@@ -231,6 +232,7 @@ INSERT INTO "room_attribute_link" VALUES(9,3,2);
 INSERT INTO "room_attribute_link" VALUES(10,6,3);
 INSERT INTO "room_attribute_link" VALUES(11,5,2);
 INSERT INTO "room_attribute_link" VALUES(12,1,2);
+INSERT INTO "room_attribute_link" VALUES(13,1,4);
 CREATE TABLE "room_device_link" (
   "id" integer PRIMARY KEY,
   "room" int(11) default NULL,
@@ -406,171 +408,138 @@ CREATE TABLE "template" (
 );
 INSERT INTO "template" VALUES(1,'content','downstairs','<table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
-  [% PROCESS room/default room = "kitchen" %]
-  [% PROCESS room/default room = "lounge" rowspan="2" %]
+  [% PROCESS room/wrapper room = "kitchen" %]
+  [% PROCESS room/wrapper room = "lounge" %]
 </tr>
 <tr>
-  [% PROCESS room/default room = "cloak" %]
+  [% PROCESS room/wrapper room = "cloak" %]
 </tr>
 </table>
-',1185695960);
+',1231334426);
 INSERT INTO "template" VALUES(3,'content','upstairs','<table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
-  [% PROCESS room/default room = "bath" %]
-  [% PROCESS room/default room = "bed_1" %]
+  [% PROCESS room/wrapper room = "bath" %]
+  [% PROCESS room/wrapper room = "bed_1" %]
 </tr>
 </table>
-',1185696146);
-INSERT INTO "template" VALUES(4,'room','name','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
-[% SET r = table_class.search({ name => room }) %]
-[% IF r %]
-  <td valign="top" rowspan="[% rowspan || 1 %]" colspan="[% colspan || 1 %]">
-  <div class="button"
-    ><a href="[% base _ "?content=room&room=devices&room_name=" _ r.name %]"
-      ><div class="roomname">[% r.string %]</div></a></div>
-  </td>
+',1231333634);
+INSERT INTO "template" VALUES(4,'room','name','<div class="button"
+  ><a href="[% base _ "?content=room&room=devices&room_name=" _ r.name %]"
+     ><div class="roomname">[% r.string %]</div></a></div>
+',1231333808);
+INSERT INTO "template" VALUES(5,'room','motion','[% USE state_table = Class(''ZenAH::Model::CDBI::State'') %]
+[% USE hexcol = format(''%02x%02x%02x'') %]
+[% r.string %]<br/>
+[% SET m = state_table.search({ type => ''motion'', name => r.name }) %]
+[% IF m %]
+  <table width="100%">
+    <tr><td>[% m.value %]</td></tr>
+    <tr><td>[% m.to_view("mtime") %]</td></tr>
+    [% SET cutoff = 7200 %]
+    [% SET age = now - m.mtime %]
+    [% SET col = age < cutoff ? 255 * ( age / cutoff ) : 255 %]
+    <tr><td bgcolor="#[% hexcol(255-col, 0, col) %]">&nbsp;</td></tr>
+  </table>
 [% ELSE %]
-  Invalid room ''[% room %]''
+  unknown
 [% END %]
-',1188675351);
-INSERT INTO "template" VALUES(5,'room','motion','[% USE room_table = Class(''ZenAH::Model::CDBI::Room'') %]
-[% USE state_table = Class(''ZenAH::Model::CDBI::State'') %]
-[% SET r = room_table.search({ name => room }) %]
-[% IF r %]
-  <td valign="top" rowspan="[% rowspan || 1 %]" colspan="[% colspan || 1 %]">
-  [% r.string %]<br/>
-  [% SET m = state_table.search({ type => ''motion'', name => r.name }) %]
-  [% IF m %]
-    [% m.value %]<br/>
-    [% m.to_view("mtime") %]
-  [% ELSE %]
-    unknown
-  [% END %]
-  </td>
+',1231335373);
+INSERT INTO "template" VALUES(6,'room','light','[% USE state_table = Class(''ZenAH::Model::CDBI::State'') %]
+[% USE hexcol = format(''%02x%02x%02x'') %]
+[% r.string %]<br/>
+[% SET l = state_table.search({ type => ''light'',
+                                name => r.name }) %]
+[% IF l %]
+  <table width="100%" height="100%">
+    <tr><td>[% l.value %]</td></tr>
+    <tr><td>[% l.to_view(''ctime'') %]</td></tr>
+    [% IF l.value == "light" %]
+      [% SET col = 255 %]
+    [% ELSE %]
+      [% SET cutoff = 7200 %]
+      [% SET age = now - l.ctime %]
+      [% SET col = 255 - ( age < cutoff ? 255 * ( age / cutoff ) : 255 ) %]
+    [% END %]
+    <tr><td bgcolor="#[% hexcol(col, col, col) %]" border="1">&nbsp;</td></tr>
+  </table>
 [% ELSE %]
-  Invalid room
+  unknown
 [% END %]
-',1186318470);
-INSERT INTO "template" VALUES(6,'room','light','[% USE room_table = Class(''ZenAH::Model::CDBI::Room'') %]
-[% USE state_table = Class(''ZenAH::Model::CDBI::State'') %]
-[% SET r = room_table.search({ name => room }) %]
-[% IF r %]
-  <td valign="top" rowspan="[% rowspan || 1 %]" colspan="[% colspan || 1 %]">
-  [% r.string %]<br/>
-  [% SET l = state_table.search({ type => ''light'',
-                                  name => r.name }) %]
-  [% IF l %]
-    [% l.value %]<br/>
-    [% l.to_view("ctime") %]
-  [% ELSE %]
-    unknown
-  [% END %]
-  </td>
-[% ELSE %]
-  Invalid room
-[% END %]
-',1186318448);
+',1231335526);
 INSERT INTO "template" VALUES(7,'content','room','<table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
-  [% PROCESS room/default room = Catalyst.request.param(''room_name'') %]
+  [% PROCESS room/wrapper room = Catalyst.request.param(''room_name'') %]
 </tr>
 </table>
-',1185696038);
-INSERT INTO "template" VALUES(8,'room','devices','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
-[% SET r = table_class.search({ name => room }) %]
-[% IF r %]
-  <td valign="top" rowspan="[% rowspan || 1 %]" colspan="[% colspan || 1 %]">
-  <div class="device">
-  <table valign="top" border="0" width="100%">
+',1231333624);
+INSERT INTO "template" VALUES(8,'room','devices','<table valign="top" border="0" width="100%">
+<tr>
+  <th valign="top">[% r.string %]</th>
+</tr>
+[% FOR d = r.devices %]
+  [% NEXT UNLESS d.device_controls %]
   <tr>
-    <th valign="top">[% r.string %]</th>
+    <td>
+      [% PROCESS html/device device = d %]
+    </td>
   </tr>
-  [% FOR d = r.devices %]
-    [% NEXT UNLESS d.device_controls %]
-    <tr>
-      <td>
-        [% PROCESS html/device device = d %]
-      </td>
-    </tr>
-  [% END %]
-  </table>
-  </td>
-[% ELSE %]
-  Invalid room ''[% room %]''
 [% END %]
-',1186318420);
-INSERT INTO "template" VALUES(9,'html','device','<div class="device">
-  <table valign="top" border="0">
-  <tr>
-    <th halign="right">
-      <div class="devicename">[% device.string %]</div>
-    </th>
-    [% IF device.type == "Button" %]
-      [% PROCESS html/buttonset button = device %]
-    [% ELSE %]
-      [% FOR control = device.device_controls %]
-      <td onclick="device_func([''args__[% device.name %]'',''args__[% control.name %]''],[''zenah_status'']);Effect.Pulsate(this);return false;">
-        <div class="button"><a
-          href="[% base _ "action/" _ device.name _ "/" _ control.name %]"
-          ><div class="devicecontrol">[% control.string %]</div></a></div>
-      </td>
-      [% END %]
+</table>
+',1231333834);
+INSERT INTO "template" VALUES(9,'html','device','<table valign="top" border="0">
+<tr>
+  <th halign="right">
+    <div class="devicename">[% device.string %]</div>
+  </th>
+  [% IF device.type == "Button" %]
+    [% PROCESS html/buttonset button = device %]
+  [% ELSE %]
+    [% FOR control = device.device_controls %]
+    <td onclick="device_func([''args__[% device.name %]'',''args__[% control.name %]''],[''zenah_status'']);Effect.Pulsate(this);return false;">
+      <div class="button"><a class="devicecontrol"
+        href="[% base _ "action/" _ device.name _ "/" _ control.name %]"
+        >[% control.string %]</a></div>
+    </td>
     [% END %]
-  </tr>
-  </table>
-</div>
-',1188675344);
-INSERT INTO "template" VALUES(10,'room','lights','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
-[% SET r = table_class.search({ name => room }) %]
-[% IF r %]
-  <td valign="top" rowspan="[% rowspan || 1 %]" colspan="[% colspan || 1 %]">
-  <div class="device">
-  <table border="0" width="100%" height="100%"
-         class="roomtable[% r.name %]">
-  <tr>
-    <th valign="top">[% r.string %]</th>
-  </tr>
-  [% FOR d = r.devices %]
-    [% NEXT UNLESS d.type == ''X10Lamp'' %]
-    <tr>
-      <td>
-        [% PROCESS html/device device = d %]
-      </td>
-    </tr>
   [% END %]
-  </table>
-  </td>
-[% ELSE %]
-  Invalid room ''[% room %]''
-[% END %]',1186318464);
-INSERT INTO "template" VALUES(11,'room','windows','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
-[% SET r = table_class.search({ name => room }) %]
-[% IF r %]
-  <td valign="top" rowspan="[% rowspan || 1 %]" colspan="[% colspan || 1 %]">
-  <div class="device">
-  <table valign="top" border="0">
+</tr>
+</table>
+',1231330928);
+INSERT INTO "template" VALUES(10,'room','lights','<table border="0" width="100%" height="100%"
+       class="roomtable[% r.name %]">
+<tr>
+  <th valign="top">[% r.string %]</th>
+</tr>
+[% FOR d = r.devices %]
+  [% NEXT UNLESS d.type == ''X10Lamp'' %]
   <tr>
-    <th valign="top">[% r.string %]</th>
+    <td>
+      [% PROCESS html/device device = d %]
+    </td>
   </tr>
-  [% FOR d = r.devices %]
-    [% NEXT UNLESS d.type == ''Blind'' or d.type == ''Curtain'' %]
-    <tr>
-      <td>
-        [% PROCESS html/device device = d %]
-      </td>
-    </tr>
-  [% END %]
-  </table>
-  </td>
-[% ELSE %]
-  Invalid room ''[% room %]''
-[% END %]',1186318544);
+[% END %]
+</table>
+',1231333919);
+INSERT INTO "template" VALUES(11,'room','windows','<table valign="top" border="0">
+<tr>
+  <th valign="top">[% r.string %]</th>
+</tr>
+[% FOR d = r.devices %]
+  [% NEXT UNLESS d.type == ''Blind'' or d.type == ''Curtain'' %]
+  <tr>
+    <td>
+      [% PROCESS html/device device = d %]
+    </td>
+  </tr>
+[% END %]
+</table>
+',1231333976);
 INSERT INTO "template" VALUES(13,'html','header','<!-- BEGIN header -->
-<img id="logo" class="logo" height="50" width="50"
+<img id="logo" class="logo" height="50" width="50" alt="zenah logo"
      src="[% Catalyst.uri_for("/images") %]/zenah-50.png" />
 <h1 class="title">[% template.title or site.title %]</h1>
 <!-- END header -->
-',1185030456);
+',1231328302);
 INSERT INTO "template" VALUES(14,'html','nav','<!-- BEGIN nav -->
 <div id="topnav">
 [% navbutton("","Home") %]
@@ -579,7 +548,8 @@ INSERT INTO "template" VALUES(14,'html','nav','<!-- BEGIN nav -->
 [% variant_button("navbutton", "Windows", { "room" => "windows" }) %]
 [% variant_button("navbutton", "Motion", { "room" => "motion" }) %]
 [% variant_button("navbutton", "Light", { "room" => "light" }) %]
-[% navbutton("/admin", "Admin") %]
+[% variant_button("navbutton", "Sensors", { "room" => "sensors" }) %]
+[% navbutton("admin", "Admin") %]
 </div>
 <div id="leftnav">
 [%# variant_button("navbutton", "House", { "content" => "house" }) %]
@@ -587,11 +557,11 @@ INSERT INTO "template" VALUES(14,'html','nav','<!-- BEGIN nav -->
 [%# variant_button("navbutton", "Downstairs", { "content" => "downstairs" }) %]
 </div>
 <!-- END nav -->
-',1188675537);
+',1231324346);
 INSERT INTO "template" VALUES(16,'html','footer','<!-- BEGIN footer -->
-<div id="copyright">© [% site.copyright %]</div>
+<div id="copyright">&copy; [% site.copyright %]</div>
 <!-- END footer -->
-',1185030464);
+',1231337560);
 INSERT INTO "template" VALUES(17,'html','buttonset','[% FOR attribute = device.device_attributes %]
   [% NEXT UNLESS attribute.name == "button" %]
   [% SET v = attribute.value.split(":") %]
@@ -604,104 +574,6 @@ INSERT INTO "template" VALUES(17,'html','buttonset','[% FOR attribute = device.d
   </td>
 [% END %]
 ',1188675335);
-INSERT INTO "template" VALUES(18,'xul','layout','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
-<description><html:h1>ZenAH</html:h1></description>
-<box>
-    <html:div id="zenah_status">No Value</html:div>
-</box>
-<tabbox id="houseTabList" >
- <tabs>
-   <tab height="30" label="Upstairs" />
-   <tab label="Downstairs" />
- </tabs>
- <tabpanels>
-   <tabpanel id="upstairs">
-     <tabbox id="upstairsTabList">
-       <tabs>
-[% FOR room = ["bath" "bed_1"] %]
-  [% SET r = table_class.search({ name => room }) %]
-         <tab label="[% r.string %]" />
-[% END %]
-       </tabs>
-       <tabpanels>
-[% FOR room = ["bath" "bed_1"] %]
-  [% SET r = table_class.search({ name => room }) %]
-         <tabpanel id="[% room %]">
-  [% PROCESS xul/room room = room %]
-         </tabpanel>
-[% END %]
-       </tabpanels>
-     </tabbox>
-   </tabpanel>
-   <tabpanel id="downstairs">
-     <tabbox id="downstairsTabList">
-       <tabs>
-[% FOR room = ["cloak" "kitchen" "lounge" "garden"] %]
-  [% SET r = table_class.search({ name => room }) %]
-         <tab label="[% r.string %]" />
-[% END %]
-       </tabs>
-       <tabpanels>
-[% FOR room = ["cloak" "kitchen" "lounge" "garden"] %]
-  [% SET r = table_class.search({ name => room }) %]
-         <tabpanel id="[% room %]">
-  [% PROCESS xul/room room = room %]
-         </tabpanel>
-[% END %]
-       </tabpanels>
-     </tabbox>
-   </tabpanel>
- </tabpanels>
-</tabbox>
-
-<statusbar>
-  <statusbarpanel label="Status" flex="1" />
-</statusbar>
-',1186344362);
-INSERT INTO "template" VALUES(19,'xul','room','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
-[% SET r = table_class.search({ name => room }) %]
-[% IF r %]
-  <grid flex="1">
-    <columns>
-      <column/>
-      <column flex="1"/>
-    </columns>
-
-    <rows>
-    [% FOR d = r.devices %]
-      [% NEXT UNLESS d.device_controls %]
-      [% PROCESS xul/device device = d %]
-    [% END %]
-    </rows>
-  </grid>
-[% ELSE %]
-  Invalid room ''[% room %]''
-[% END %]
-',1185028972);
-INSERT INTO "template" VALUES(20,'xul','device','<row>
-  <label value="[% device.string %]"/>
-  <hbox flex="1" >
-    [% IF device.type == "Button" %]
-      [% PROCESS xul/buttonset button = device %]
-    [% ELSE %]
-      [% FOR control = device.device_controls %]
-        <button label="[% control.string %]"
-           oncommand="device_func([''args__[% device.name %]'',''args__[% control.name %]''],[''zenah_status'']);return false;" />
-      [% END %]
-    [% END %]
-    <spacer flex="1"/>
-  </hbox>
-</row>
-',1185029088);
-INSERT INTO "template" VALUES(21,'xul','buttonset','[% FOR attribute = device.device_attributes %]
-  [% NEXT UNLESS attribute.name == "button" %]
-  [% SET v = attribute.value.split(":") %]
-  [% SET name = v.0 %]
-  [% SET desc = v.1 || name %]
-  <button label="[% desc %]"
-    oncommand="device_func([''args__[% device.name %]'',''args__[% name %]''],[''zenah_status'']);return false;" />
-[% END %]
-',1185029058);
 INSERT INTO "template" VALUES(22,'config','main','[% # config/main
    #
    # This is the main configuration template which is processed before
@@ -732,28 +604,20 @@ INSERT INTO "template" VALUES(22,'config','main','[% # config/main
 
 -%]
 ',1185028812);
-INSERT INTO "template" VALUES(23,'site','wrapper','[% IF template.name.match(''.(css|js|txt)'') OR template.name.match(''(png|json|text)'');
+INSERT INTO "template" VALUES(23,'site','wrapper','[% IF template.name.match(''.(css|js|txt)'') OR template.name.match(''(png|json|text|fragment)'');
      debug("Passing page through as text: $template.name");
      content;
    ELSE;
-     IF template.name.match(''xul'');
-       debug("Applying XUL wrapper to $template.name
-");
-       content WRAPPER site/xul;
+     IF template.name.match(''dojo'');
+       debug("Applying DOJO wrapper to $template.name");
+       content WRAPPER site/dojo;
      ELSE;
-       IF template.name.match(''dojo'');
-         debug("Applying DOJO wrapper to $template.name
-");
-         content WRAPPER site/dojo;
-       ELSE;
-         debug("Applying HTML wrapper to $template.name
-");
-         content WRAPPER site/html;
-       END;
+       debug("Applying HTML wrapper to $template.name");
+       content WRAPPER site/html;
      END;
    END;
 -%]
-',1188649289);
+',1231328601);
 INSERT INTO "template" VALUES(24,'config','col','[% site.rgb = {
      black   = ''#000000''
      white   = ''#ffffff''
@@ -1011,7 +875,7 @@ div.devicename {
   background-color: #ccffff;
 }
 
-div.devicecontrol {
+a.devicecontrol {
   border-width: 2px 2px 2px 2px;
   padding: 1px 1px 1px 1px;
   border-style: outset outset outset outset;
@@ -1038,18 +902,7 @@ content {
   background: white;
   margin-top: 15px;
 }
-',1185045421);
-INSERT INTO "template" VALUES(29,'site','xul','<?xml version="1.0"?>
-
-<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-
-<window id="zenah-xul-window" title="[% template.title or site.title %]"
-        xmlns:html="http://www.w3.org/1999/xhtml"
-        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-<script src="[% Catalyst.uri_for("/js") %]/ajax.js" type="text/javascript" />
-[% content %]
-</window>
-',1185008913);
+',1231328177);
 INSERT INTO "template" VALUES(30,'html','layout','<div id="header">[% PROCESS html/header %]</div>
 
 <div id="nav">[% PROCESS html/nav %]</div>
@@ -1074,15 +927,26 @@ INSERT INTO "template" VALUES(32,'content','house','[% PROCESS content/upstairs 
 ',1185623448);
 INSERT INTO "template" VALUES(33,'content','default','[% SET t_content = ''content/'' _ (Catalyst.request.param(''content'') || ''house'') %]
 [% PROCESS $t_content %]',1185032774);
-INSERT INTO "template" VALUES(34,'room','default','[% SET t_room = ''room/'' _ (Catalyst.request.param(''room'') || ''name'') %]
-[% PROCESS $t_room %]',1185032816);
+INSERT INTO "template" VALUES(34,'room','wrapper','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
+[% SET r = table_class.search({ name => room }) %]
+[% IF r %]
+  <td valign="top"
+      rowspan="[% r.attribute(''rowspan'') || 1 %]"
+      colspan="[% r.attribute(''colspan'') || 1 %]">
+    [% SET t_room = ''room/'' _ (Catalyst.request.param(''room'') || ''name'') %]
+    [% PROCESS $t_room %]
+  </td>
+[% ELSE %]
+  Invalid room ''[% room %]''
+[% END %]
+',1231335750);
 INSERT INTO "template" VALUES(35,'content','garden','<table cellpadding="0" cellspacing="0" width="80%" border="1">
 <tr>
-  [% PROCESS room/default room = "garden" %]
+  [% PROCESS room/wrapper room = "garden" %]
 </tr>
 </table>
-',1185696008);
-INSERT INTO "template" VALUES(36,'message','error','[% META title = ''Catalyst/TT Error'' %]
+',1231333612);
+INSERT INTO "template" VALUES(36,'site','error','[% META title = ''Catalyst/TT Error'' %]
 <p>
   An error has occurred.  We''re terribly sorry about that, but it''s 
   one of those things that happens from time to time.  Let''s just 
@@ -1092,18 +956,20 @@ INSERT INTO "template" VALUES(36,'message','error','[% META title = ''Catalyst/T
   Here''s the error message, on the off-chance that it means something
   to you: <span class="error">[% error %]</span>
 </p>
-',1185630505);
+',1231325949);
 INSERT INTO "template" VALUES(37,'site','dojo','<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
  <head>
   <title>[% template.title or site.title %]</title>
   <script src="http://www.google.com/jsapi"></script>
   <script type="text/javascript">
-    var djConfig = { isDebug:true, parseOnLoad:true };
-    google.load("dojo", "1.1.1");
+    var djConfig = {
+       isDebug:true, parseOnLoad:true
+    };
+    google.load("dojo", "1.2.3");
   </script>
   <script type="text/javascript">
-    dojo.require("dijit.layout.LayoutContainer");
+    dojo.require("dijit.layout.BorderContainer");
     dojo.require("dijit.layout.ContentPane");
     dojo.require("dijit.layout.TabContainer");
     dojo.require("dijit.form.Button");
@@ -1111,7 +977,7 @@ INSERT INTO "template" VALUES(37,'site','dojo','<!DOCTYPE HTML PUBLIC "-//W3C//D
 
     function button_action(device, action) {
       dojo.xhrGet( {
-        url: "/ajax?args="+device+"&args="+action,
+        url: "[% Catalyst.uri_for("ajax") %]?args="+device+"&args="+action,
         handleAs: "text",
         timeout: 3000,
         load: function(response, ioArgs) {
@@ -1127,8 +993,8 @@ INSERT INTO "template" VALUES(37,'site','dojo','<!DOCTYPE HTML PUBLIC "-//W3C//D
   </script>
 
   <style type="text/css">
-    @import "http://ajax.googleapis.com/ajax/libs/dojo/1.1.1/dojo/resources/dojo.css";
-    @import "http://ajax.googleapis.com/ajax/libs/dojo/1.1.1/dijit/themes/tundra/tundra.css";
+    @import "http://ajax.googleapis.com/ajax/libs/dojo/1.2.3/dojo/resources/dojo.css";
+    @import "http://ajax.googleapis.com/ajax/libs/dojo/1.2.3/dijit/themes/tundra/tundra.css";
 
     html, body {
       width: 100%;	/* make the body expand to fill the visible window */
@@ -1156,7 +1022,7 @@ INSERT INTO "template" VALUES(37,'site','dojo','<!DOCTYPE HTML PUBLIC "-//W3C//D
  <body class="tundra">
 [% content %]
  </body>
-</html>',1188675362);
+</html>',1231325080);
 INSERT INTO "template" VALUES(38,'dojo','device','<b>[% device.string %]:</b>
 [% FOR control = device.device_controls %]
   <button dojoType="dijit.form.Button"
@@ -1166,50 +1032,53 @@ INSERT INTO "template" VALUES(38,'dojo','device','<b>[% device.string %]:</b>
 [% END %]
 <br/>',1188649372);
 INSERT INTO "template" VALUES(39,'dojo','layout','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
-<div id="outer" dojotype="dijit.layout.LayoutContainer"
+<div id="outer" dojotype="dijit.layout.BorderContainer"
      style="width: 100%; height: 100%;">
   <div id="topBar" dojotype="dijit.layout.ContentPane"
-       layoutalign="top"
+       region="top" layoutalign="top"
        style="background-color: [% site.col.head %]; border-bottom: 3px solid [% site.col.nav.border %];">
     <img id="logo" class="logo" height="40" width="40"
          src="[% Catalyst.uri_for("/images") %]/zenah-50.png" />
     <h1 class="title">[% template.title or site.title %]</h1>
     <div id="status">&nbsp;</div>
   </div>
-  <div id="bottomBar" dojotype="dijit.layout.ContentPane"
+  <div id="bottomBar" dojotype="dijit.layout.ContentPane" region="bottom"
        layoutalign="bottom"
        style="background-color: [% site.col.head %]; text-align: center;">
-    <div id="copyright">© [% site.copyright %]</div>
+    <div id="copyright">&copy; [% site.copyright %]</div>
   </div>
 
-    <div id="houseTabContainer" dojotype="dijit.layout.TabContainer"
-         layoutAlign="client">
-      <div id="upstairsTabContainer" dojotype="dijit.layout.TabContainer"
-           title="Upstairs">
-[% FOR room = ["bath" "bed_1"] %]
-  [% SET r = table_class.search({ name => room }) %]
-  [% PROCESS dojo/room room = r %]
-[% END %]
-      </div>
-      <div id="downstairsTabContainer" dojotype="dijit.layout.TabContainer"
-            title="Downstairs">
-[% FOR room = ["cloak" "kitchen" "lounge" "garden"] %]
-  [% SET r = table_class.search({ name => room }) %]
-  [% PROCESS dojo/room room = r %]
-[% END %]
-      </div>
-
+    <div id="mainTabContainer" dojotype="dijit.layout.TabContainer"
+         region="center" layoutAlign="client">
+      [% FOR zone = [''Downstairs'', ''Upstairs'', ''Outside''] %]
+        <div id="[% zone %]TabContainer"
+             dojotype="dijit.layout.TabContainer" title="[% zone %]">
+          [% FOR r = table_class.by_attribute(''zone'', zone) %]
+            <div id="[% r.name %]_tab" dojoType="dijit.layout.ContentPane"
+                 title="[% r.string %]"
+                 href="[% Catalyst.uri_for("/dojofragment/room") _ "?room=" _ r.id %]">
+            </div>
+          [% END %]
+        </div>
+      [% END %]
     </div>
     <div id="fill"></div>
 </div>
-',1188659709);
-INSERT INTO "template" VALUES(40,'dojo','room','<div id="[% room.name %]_tab" dojoType="dijit.layout.ContentPane"
-     title="[% room.string %]">
-  [% FOR d = room.devices %]
-    [% NEXT UNLESS d.device_controls %]
-    [% PROCESS dojo/device device = d %]
-  [% END %]
-</div>',1188650985);
+',1231337530);
+INSERT INTO "template" VALUES(40,'dojofragment','room','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
+[% SET room = table_class.retrieve(Catalyst.request.param(''room'')) %]
+[% FOR d = room.devices %]
+  [% NEXT IF d.type == ''Sensor'' %]
+  [% NEXT UNLESS d.device_controls %]
+  [% PROCESS dojo/device device = d %]
+[% END %]
+<b>Sensors:</b>
+[% FOR d = room.devices %]
+  [% NEXT UNLESS d.type == ''Sensor'' %]
+  [% NEXT UNLESS d.device_controls %]
+  [% PROCESS dojo/sensor device = d %]
+[% END %]
+',1231323494);
 INSERT INTO "template" VALUES(41,'text','completions','[% USE table_class = Class(''ZenAH::Model::CDBI::Device'') -%]
 [% SET q = Catalyst.request.param(''query'') -%]
 [% FOREACH d = table_class.retrieve_all( order_by => ''name'' ) -%]
@@ -1221,6 +1090,69 @@ INSERT INTO "template" VALUES(41,'text','completions','[% USE table_class = Clas
 [% END -%]
 [% END -%] 
 ',1223981035);
+INSERT INTO "template" VALUES(42,'dojo','sensor','[% FOR control = device.device_controls %]
+  <button dojoType="dijit.form.Button"
+    onclick="button_action(''[% device.name %]'',''[% control.name %]'');">
+    [% device.string _ ": " _ control.string %]
+  </button>
+[% END %]
+',1231323391);
+INSERT INTO "template" VALUES(43,'dojofragment','zone','[% USE table_class = Class(''ZenAH::Model::CDBI::Room'') %]
+[% SET zone = Catalyst.request.param(''zone'') %]
+[% FOR r = table_class.by_attribute(''zone'', zone) %]
+  <div id="[% r.name %]_tab" dojoType="dijit.layout.ContentPane"
+    title="[% r.string %]"
+    href="[% Catalyst.uri_for("/dojofragment/room") _ "?room=" _ r.id %]"
+    ></div> 
+[% END %]
+',1231323529);
+INSERT INTO "template" VALUES(44,'room','sensors','<table valign="top" border="0">
+<tr>
+  <th valign="top">[% r.string %]</th>
+</tr>
+[% FOR d = r.devices %]
+  [% NEXT UNLESS d.type == ''Sensor'' %]
+  <tr>
+    <td>
+      [% PROCESS html/sensor device = d %]
+    </td>
+  </tr>
+[% END %]
+</table>
+',1231333960);
+INSERT INTO "template" VALUES(45,'html','sensor','[% USE table_class = Class(''ZenAH::Model::CDBI::State'') %]
+[% IF device.attribute("uid") %]
+  [% SET s = table_class.search({ name => device.name }) %]
+[% ELSE %]
+  [% SET s = [] %]
+[% END %]
+<table valign="top" border="0">
+<tr>
+  <th halign="right" rowspan="3">
+    <div class="devicename">[% device.string %]</div>
+  </th>
+  [% IF s %]
+    [% FOREACH sensor = s %]
+      <th>
+        [% sensor.type %]
+      </th>
+    [% END %]
+    </tr>
+    <tr>
+     [% FOREACH sensor = s %]
+      <td>
+        [% sensor.value %]
+        <small> @
+          [% sensor.to_view(''mtime'') %]
+        </small>
+      </td>
+    [% END %]
+  [% ELSE %]
+    <td rowspan="3">no results</td>
+  [% END %]
+</tr>
+</table>
+',1231335632);
 CREATE TABLE "timestamp" (
   "id" integer PRIMARY KEY,
   "name" varchar(80) default NULL,

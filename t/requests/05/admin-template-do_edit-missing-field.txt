@@ -1,4 +1,4 @@
-/admin/template/do_edit/42?type=content&name=basement
+/admin/template/do_edit/46?type=content&name=basement
 text/html
 200 OK
 
@@ -217,7 +217,7 @@ tr.list-row-1 {
 </div>
 <div id="content">
 <p>You have to fill in all fields.the following are missing: <b>text</b></p>
-<form action="http://localhost//admin/template/do_edit/42"
+<form action="http://localhost//admin/template/do_edit/46"
     method="post">
     type<br/>
     <input name="type" type="text" value="content" />
@@ -226,7 +226,7 @@ tr.list-row-1 {
     <input name="name" type="text" value="basement" />
 <br/>
     text<br/>
-    <textarea cols="80" name="text" rows="10">&#60;table cellpadding=&#34;0&#34; cellspacing=&#34;0&#34; width=&#34;90%&#34; border=&#34;1&#34;&#62;
+    <textarea cols="120" name="text" rows="20">&#60;table cellpadding=&#34;0&#34; cellspacing=&#34;0&#34; width=&#34;90%&#34; border=&#34;1&#34;&#62;
 &#60;tr&#62;
   [% PROCESS room/default room = &#34;node_0&#34; %]
 &#60;/tr&#62;

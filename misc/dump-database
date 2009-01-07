@@ -1,0 +1,27 @@
+#!/usr/bin/perl -w
+use strict;
+use ZenAH::CDBI;
+
+my $table = shift || 'Template';
+my $sort = shift || '';
+my $ignore = shift || '';
+my $class = 'ZenAH::CDBI::'.$table;
+my %ignore = map { $_ => 1 } split /,/, $ignore;
+my @sort = split /,/, $sort;
+
+my @col = sort $class->columns('All');
+my @all = sort $class->retrieve_all;
+if ($sort) {
+  sub key {
+    join '!', map { $_[0]->$_ } @sort
+  }
+  my %keyed = map { key($_) => $_ } @all;
+  @all = map { $keyed{$_} } sort keys %keyed;
+}
+foreach my $obj (@all) {
+  foreach (@col) {
+    next if (exists $ignore{$_});
+    print "$_ =>\n", $obj->$_, "\n";
+  }
+  print "\n\n";
+}

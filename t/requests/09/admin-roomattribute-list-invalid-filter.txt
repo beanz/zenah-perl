@@ -222,6 +222,9 @@ Filter:
       href="http://localhost/admin/roomattribute?filter=none"
        >none</a></span>
     <span class="filterbutton"><a
+      href="http://localhost/admin/roomattribute?filter=rowspan"
+       >rowspan</a></span>
+    <span class="filterbutton"><a
       href="http://localhost/admin/roomattribute?filter=zone"
        >zone</a></span>
 </p>
@@ -247,7 +250,24 @@ Page:
   </tr>
     <tr class="list-row-0">
       <td>zone</td>
-      <td>upstairs</td>
+      <td>Outside</td>
+      <td>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/roomattribute/view/3"
+    >View</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/roomattribute/edit/3"
+    >Edit</a></span>
+        <!-- 
+  <span class="crudbutton"><a
+    href="http://localhost//admin/roomattribute/destroy/3"
+    >Destroy</a></span>
+ -->
+      </td>
+    </tr>
+    <tr class="list-row-1">
+      <td>zone</td>
+      <td>Upstairs</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/view/1"

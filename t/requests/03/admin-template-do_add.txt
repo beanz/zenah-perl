@@ -229,11 +229,11 @@ Filter:
       href="http://localhost/admin/template?filter=dojo"
        >dojo</a></span>
     <span class="filterbutton"><a
+      href="http://localhost/admin/template?filter=dojofragment"
+       >dojofragment</a></span>
+    <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=html"
        >html</a></span>
-    <span class="filterbutton"><a
-      href="http://localhost/admin/template?filter=message"
-       >message</a></span>
     <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=room"
        >room</a></span>
@@ -243,9 +243,6 @@ Filter:
     <span class="filterbutton"><a
       href="http://localhost/admin/template?filter=text"
        >text</a></span>
-    <span class="filterbutton"><a
-      href="http://localhost/admin/template?filter=xul"
-       >xul</a></span>
 </p>
 <p class="pagenav" id="pagenav">
 Page:
@@ -503,14 +500,14 @@ Filter:
 </td>
       <td>
   <span class="crudbutton"><a
-    href="http://localhost//admin/template/view/42"
+    href="http://localhost//admin/template/view/46"
     >View</a></span>
   <span class="crudbutton"><a
-    href="http://localhost//admin/template/edit/42"
+    href="http://localhost//admin/template/edit/46"
     >Edit</a></span>
         <!-- 
   <span class="crudbutton"><a
-    href="http://localhost//admin/template/destroy/42"
+    href="http://localhost//admin/template/destroy/46"
     >Destroy</a></span>
  -->
       </td>

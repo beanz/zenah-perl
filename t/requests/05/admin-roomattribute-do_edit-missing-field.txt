@@ -1,4 +1,4 @@
-/admin/roomattribute/do_edit/4?name=motion_timeout
+/admin/roomattribute/do_edit/5?name=motion_timeout
 text/html
 200 OK
 
@@ -217,7 +217,7 @@ tr.list-row-1 {
 </div>
 <div id="content">
 <p>You have to fill in all fields.the following are missing: <b>value</b></p>
-<form action="http://localhost//admin/roomattribute/do_edit/4"
+<form action="http://localhost//admin/roomattribute/do_edit/5"
     method="post">
     name<br/>
     <input name="name" type="text" value="motion_timeout" />

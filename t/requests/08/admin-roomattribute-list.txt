@@ -221,6 +221,9 @@ Filter:
     <span class="filterbutton"><a
       href="http://localhost/admin/roomattribute?filter=none"
        >none</a></span>
+    <span class="filterbutton"><a
+      href="http://localhost/admin/roomattribute?filter=rowspan"
+       >rowspan</a></span>
     <span class="filterbutton-current">zone</span>
 </p>
 <p class="pagenav" id="pagenav">
@@ -245,7 +248,7 @@ Page:
   </tr>
     <tr class="list-row-0">
       <td>zone</td>
-      <td>upstairs</td>
+      <td>Upstairs</td>
       <td>
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/view/1"

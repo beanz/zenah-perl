@@ -225,7 +225,7 @@ tr.list-row-1 {
     <input name="name" type="text" />
 <br/>
     text<br/>
-    <textarea cols="80" name="text" rows="10"></textarea>
+    <textarea cols="120" name="text" rows="20"></textarea>
 <br/>
   <br/>
   <input type="submit" value="Add"/>

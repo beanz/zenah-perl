@@ -223,7 +223,7 @@ tr.list-row-1 {
   </tr>
   <tr>
     <th class="view-table">value</th>
-    <td class="view-table" colspan="2">upstairs</td>
+    <td class="view-table" colspan="2">Upstairs</td>
   </tr>
 </table>
   <span class="crudbutton"><a

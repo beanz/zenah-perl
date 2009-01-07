@@ -235,16 +235,18 @@ tr.list-row-1 {
 <tr>
   <td valign="top" align="left">
     <select name="attrs" multiple="multiple">
-        <option selected="selected"
-                value="4"
+        <option value="5"
           >motion_timeout&nbsp;= &nbsp;600</option>
         <option selected="selected"
+                value="4"
+          >rowspan&nbsp;= &nbsp;2</option>
+        <option selected="selected"
                 value="2"
-          >zone&nbsp;= &nbsp;downstairs</option>
+          >zone&nbsp;= &nbsp;Downstairs</option>
         <option value="3"
-          >zone&nbsp;= &nbsp;outside</option>
+          >zone&nbsp;= &nbsp;Outside</option>
         <option value="1"
-          >zone&nbsp;= &nbsp;upstairs</option>
+          >zone&nbsp;= &nbsp;Upstairs</option>
     </select>
   </td>
 </tr>

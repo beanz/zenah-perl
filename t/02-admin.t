@@ -80,7 +80,8 @@ sub canonical_content {
   my $s = $_[0];
   $s =~ s/\n\s*\n/\n/g;
   $s =~ s/^\s+//mg;
-  $s =~ s/now =\&gt; \d+/now =\&gt; 1222295230/mg;
+  $s =~ s/now =\&gt; \d+/now =\&gt; 1231343985/mg;
+  $s =~ s/\&quot;time\&quot; =\&gt; \d+/\&quot;time\&quot; =\&gt; 1231343985/mg;
   $s =~ s/dt =\&gt; bless\({.*}, \&quot;DateTime\&quot;\),/dt =\&gt [snip],/msg;
   $s;
 }

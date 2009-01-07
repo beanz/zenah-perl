@@ -69,7 +69,7 @@ is($device->action('red'),
 
 my $room = ZenAH::CDBI::Room->retrieve(1);
 ok($room, 'room retrieve(1)');
-is($room->attribute('zone'), 'downstairs', 'room->attribute("valid")');
+is($room->attribute('zone'), 'Downstairs', 'room->attribute("valid")');
 is($room->attribute('invalid'), undef, 'room->attribute("invalid")');
 my $room_attr = ZenAH::CDBI::RoomAttribute->retrieve(2);
 ok($room_attr, 'room_attribute retrieve(1)');

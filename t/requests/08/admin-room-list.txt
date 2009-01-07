@@ -249,7 +249,7 @@ Page:
       <td>Cloak Room</td>
       <td>Downstairs toilet</td>
       <td>
-        zone=downstairs,&nbsp;
+        zone=Downstairs,&nbsp;
       </td>
       <td>
   <span class="crudbutton"><a
@@ -270,7 +270,7 @@ Page:
       <td>Garden</td>
       <td>Front garden</td>
       <td>
-        zone=outside,&nbsp;
+        zone=Outside,&nbsp;
       </td>
       <td>
   <span class="crudbutton"><a

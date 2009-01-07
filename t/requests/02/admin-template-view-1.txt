@@ -229,11 +229,11 @@ tr.list-row-1 {
     <th class="view-table">text</th>
     <td class="view-table" colspan="2"><small><pre>&#60;table cellpadding=&#34;0&#34; cellspacing=&#34;0&#34; width=&#34;80%&#34; border=&#34;1&#34;&#62;
 &#60;tr&#62;
-  [% PROCESS room/default room = &#34;kitchen&#34; %]
-  [% PROCESS room/default room = &#34;lounge&#34; rowspan=&#34;2&#34; %]
+  [% PROCESS room/wrapper room = &#34;kitchen&#34; %]
+  [% PROCESS room/wrapper room = &#34;lounge&#34; %]
 &#60;/tr&#62;
 &#60;tr&#62;
-  [% PROCESS room/default room = &#34;cloak&#34; %]
+  [% PROCESS room/wrapper room = &#34;cloak&#34; %]
 &#60;/tr&#62;
 &#60;/table&#62;
 </pre></small>

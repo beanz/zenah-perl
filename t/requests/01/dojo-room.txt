@@ -1,0 +1,37 @@
+/dojofragment/room?room=4
+text/html
+200 OK
+
+<b>Light:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bath','on');">
+    On
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bath','off');">
+    Off
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bath','bright');">
+    Bright
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bath','dim');">
+    Dim
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('l_bath','full-fast');">
+    FullFast
+  </button>
+<br/>
+  <b>Blind:</b>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('b_bath','close');">
+    Close
+  </button>
+  <button dojoType="dijit.form.Button"
+    onclick="button_action('b_bath','open');">
+    Open
+  </button>
+<br/>
+<b>Sensors:</b>
