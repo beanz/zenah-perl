@@ -253,7 +253,7 @@ sub ZenAH::CDBI::Rule::to_field {
     $a;
   } elsif ($field eq 'active') {
     my $a = HTML::Element->new('select', name => $field);
-    foreach ([1 => 'Enabled'],[0 => 'Disbled'],) {
+    foreach ([1 => 'Enabled'],[0 => 'Disabled'],) {
       my $opt = HTML::Element->new('option', value => $_->[0]);
       $opt->attr('selected' => 'selected')
         if ( (ref $self && $self->$field == $_->[0]) ||
