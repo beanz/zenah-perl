@@ -128,17 +128,6 @@ sub new {
   return $self;
 }
 
-=head2 C<info(@message)>
-
-Helper method to output informational messages if verbose mode is enabled.
-
-=cut
-
-sub info {
-  my $self = shift;
-  print @_ if ($self->verbose);
-}
-
 =head2 C<read_rules()>
 
 Method to (re)read the rule from the database.  It is called
