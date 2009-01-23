@@ -66,6 +66,7 @@
 [% END %]
 </table>
 [% crudbutton(type, "edit", item.id) %]
+[% crudbutton(type, "copy", item.id) %]
 [% crudbutton(type, "destroy", item.id) %]
 <hr/>
 [% crudbutton(type, "list", "") %]

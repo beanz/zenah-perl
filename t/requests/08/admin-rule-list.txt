@@ -279,6 +279,9 @@ scene [% scene_name %] state=[% xpl.command %]
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/edit/7"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/copy/7"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/destroy/7"
@@ -305,6 +308,9 @@ scene [% scene_name %] state=[% xpl.command %]
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/edit/14"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/copy/14"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/destroy/14"

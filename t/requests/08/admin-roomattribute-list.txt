@@ -256,6 +256,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/edit/1"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/roomattribute/copy/1"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/destroy/1"

@@ -269,6 +269,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/map/edit/1"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/map/copy/1"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/map/destroy/1"
@@ -287,6 +290,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/map/edit/2"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/map/copy/2"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/map/destroy/2"

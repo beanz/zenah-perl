@@ -271,6 +271,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/edit/18"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/copy/18"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/destroy/18"
@@ -297,6 +300,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/edit/19"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/copy/19"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/destroy/19"
@@ -323,6 +329,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/edit/6"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/copy/6"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/destroy/6"
@@ -349,6 +358,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/edit/5"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/copy/5"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/destroy/5"
@@ -375,6 +387,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/edit/3"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/copy/3"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/destroy/3"
@@ -401,6 +416,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/edit/4"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/copy/4"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/destroy/4"
@@ -432,6 +450,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/edit/17"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/copy/17"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/destroy/17"
@@ -457,6 +478,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/edit/16"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/copy/16"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/destroy/16"
@@ -483,6 +507,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/edit/2"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/copy/2"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/destroy/2"
@@ -509,6 +536,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/edit/1"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/copy/1"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/destroy/1"

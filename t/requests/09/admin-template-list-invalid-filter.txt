@@ -369,6 +369,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/template/edit/22"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/copy/22"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/template/destroy/22"
@@ -395,6 +398,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/template/edit/26"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/copy/26"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/template/destroy/26"

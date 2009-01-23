@@ -265,6 +265,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/12"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/12"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/12"
@@ -285,6 +288,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/13"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/13"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/13"
@@ -305,6 +311,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/1"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/1"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/1"
@@ -325,6 +334,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/6"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/6"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/6"
@@ -345,6 +357,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/2"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/2"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/2"
@@ -365,6 +380,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/7"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/7"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/7"
@@ -385,6 +403,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/4"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/4"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/4"
@@ -405,6 +426,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/8"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/8"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/8"
@@ -425,6 +449,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/3"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/3"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/3"
@@ -445,6 +472,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/9"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/9"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/9"
@@ -465,6 +495,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/5"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/5"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/5"
@@ -485,6 +518,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/10"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/10"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/10"
@@ -505,6 +541,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/14"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/14"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/14"
@@ -525,6 +564,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/11"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/11"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/11"

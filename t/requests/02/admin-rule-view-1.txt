@@ -249,6 +249,9 @@ tr.list-row-1 {
     href="http://localhost//admin/rule/edit/1"
     >Edit</a></span>
   <span class="crudbutton"><a
+    href="http://localhost//admin/rule/copy/1"
+    >Copy</a></span>
+  <span class="crudbutton"><a
     href="http://localhost//admin/rule/destroy/1"
     >Destroy</a></span>
 <hr/>

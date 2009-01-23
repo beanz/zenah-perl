@@ -255,6 +255,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/map/edit/5"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/map/copy/5"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/map/destroy/5"
@@ -273,6 +276,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/map/edit/4"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/map/copy/4"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/map/destroy/4"
@@ -291,6 +297,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/map/edit/1"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/map/copy/1"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/map/destroy/1"
@@ -309,6 +318,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/map/edit/2"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/map/copy/2"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/map/destroy/2"
@@ -327,6 +339,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/map/edit/3"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/map/copy/3"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/map/destroy/3"

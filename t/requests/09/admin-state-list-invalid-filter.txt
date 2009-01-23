@@ -295,6 +295,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/1"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/1"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/1"
@@ -315,6 +318,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/6"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/6"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/6"

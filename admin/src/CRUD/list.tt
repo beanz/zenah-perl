@@ -26,6 +26,7 @@
       <td>
         [% crudbutton(type, "view", item.id) %]
         [% crudbutton(type, "edit", item.id) %]
+        [% crudbutton(type, "copy", item.id) %]
         <!-- [% crudbutton(type, "destroy", item.id) %] -->
       </td>
     </tr>

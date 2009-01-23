@@ -282,6 +282,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/edit/5"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/copy/5"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/destroy/5"
@@ -307,6 +310,9 @@ xpl -c osd.basic command=clear text=&#34; Call [% name ? name : xpl.phone %]&#34
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/edit/15"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/copy/15"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/destroy/15"
@@ -331,6 +337,9 @@ xpl -c osd.basic command=clear text=&#34; Call [% name ? name : xpl.phone %]&#34
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/edit/9"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/copy/9"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/destroy/9"
@@ -355,6 +364,9 @@ xpl -c osd.basic command=clear text=&#34; Call [% name ? name : xpl.phone %]&#34
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/edit/1"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/copy/1"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/destroy/1"
@@ -379,6 +391,9 @@ xpl -c osd.basic command=clear text=&#34; Call [% name ? name : xpl.phone %]&#34
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/edit/4"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/copy/4"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/destroy/4"
@@ -407,6 +422,9 @@ disable kettle_warn
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/edit/6"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/copy/6"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/destroy/6"
@@ -431,6 +449,9 @@ disable kettle_warn
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/edit/8"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/copy/8"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/destroy/8"
@@ -462,6 +483,9 @@ disable kettle_warn
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/edit/11"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/copy/11"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/destroy/11"
@@ -497,6 +521,9 @@ disable kettle_warn
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/edit/13"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/copy/13"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/destroy/13"
@@ -528,6 +555,9 @@ disable kettle_warn
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/edit/10"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/rule/copy/10"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/rule/destroy/10"

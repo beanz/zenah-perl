@@ -324,6 +324,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/device/edit/26"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/copy/26"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/device/destroy/26"
@@ -347,6 +350,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/device/edit/9"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/device/copy/9"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/device/destroy/9"

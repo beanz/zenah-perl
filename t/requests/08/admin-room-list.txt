@@ -258,6 +258,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/room/edit/3"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/copy/3"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/room/destroy/3"
@@ -279,6 +282,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/room/edit/6"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/copy/6"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/room/destroy/6"

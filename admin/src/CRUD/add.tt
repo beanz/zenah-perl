@@ -1,9 +1,10 @@
 [% USE table_class = Class(fulltable) %]
+[% SET item = table_class IF !item %]
 <p>[%message%]</p>
 <form action="[% base _ '/admin/' _ type _ '/do_add' %]" method="post">
   [% FOR column = edit_columns %]
     [% column %]<br/>
-    [% table_class.to_field(column).as_XML %]<br/>
+    [% item.to_field(column).as_XML %]<br/>
   [% END %]
   <br/>
   <input type="submit" value="Add"/>

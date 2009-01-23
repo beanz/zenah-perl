@@ -257,6 +257,9 @@ Filter:
   <span class="crudbutton"><a
     href="http://localhost//admin/state/edit/12"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/state/copy/12"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/state/destroy/12"

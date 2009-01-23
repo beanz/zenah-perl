@@ -365,6 +365,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/template/edit/24"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/copy/24"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/template/destroy/24"
@@ -412,6 +415,9 @@ Filter:
   <span class="crudbutton"><a
     href="http://localhost//admin/template/edit/25"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/copy/25"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/template/destroy/25"
@@ -455,6 +461,9 @@ Filter:
   <span class="crudbutton"><a
     href="http://localhost//admin/template/edit/22"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/copy/22"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/template/destroy/22"
@@ -481,6 +490,9 @@ Filter:
   <span class="crudbutton"><a
     href="http://localhost//admin/template/edit/26"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/copy/26"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/template/destroy/26"
@@ -501,6 +513,9 @@ Filter:
   <span class="crudbutton"><a
     href="http://localhost//admin/template/edit/33"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/template/copy/33"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/template/destroy/33"

@@ -259,6 +259,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/15"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/15"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/15"
@@ -276,6 +279,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/16"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/16"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/16"
@@ -293,6 +299,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/17"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/17"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/17"
@@ -310,6 +319,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/18"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/18"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/18"
@@ -327,6 +339,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/19"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/19"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/19"
@@ -344,6 +359,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/10"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/10"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/10"
@@ -361,6 +379,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/11"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/11"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/11"
@@ -378,6 +399,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/12"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/12"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/12"
@@ -395,6 +419,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/13"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/13"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/13"
@@ -412,6 +439,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/14"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/14"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/14"
@@ -429,6 +459,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/30"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/30"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/30"
@@ -446,6 +479,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/31"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/31"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/31"
@@ -463,6 +499,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/33"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/33"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/33"
@@ -480,6 +519,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/32"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/32"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/32"
@@ -497,6 +539,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/9"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/9"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/9"
@@ -514,6 +559,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/4"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/4"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/4"
@@ -531,6 +579,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/5"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/5"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/5"
@@ -548,6 +599,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/6"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/6"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/6"
@@ -565,6 +619,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/7"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/7"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/7"
@@ -582,6 +639,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/edit/8"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/deviceattribute/copy/8"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/deviceattribute/destroy/8"

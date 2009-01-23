@@ -286,6 +286,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/edit/17"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/copy/17"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/destroy/17"
@@ -311,6 +314,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/edit/16"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/devicecontrol/copy/16"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/devicecontrol/destroy/16"

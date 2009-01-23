@@ -247,6 +247,9 @@ Filter:
   <span class="crudbutton"><a
     href="http://localhost//admin/map/edit/4"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/map/copy/4"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/map/destroy/4"

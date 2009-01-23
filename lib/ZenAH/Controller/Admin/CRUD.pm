@@ -185,6 +185,18 @@ sub edit : Private {
   $c->stash->{template} = 'CRUD/edit.tt';
 }
 
+=item copy
+
+Sets a template.
+
+=cut
+
+sub copy : Private {
+  my ( $self, $c, $id ) = @_[0,1,5];
+  my $item = $c->stash->{item} = $c->stash->{fulltable}->retrieve($id);
+  $c->forward('add');
+}
+
 =item list
 
 Sets a template.

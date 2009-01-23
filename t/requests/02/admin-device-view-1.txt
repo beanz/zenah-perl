@@ -308,6 +308,9 @@ tr.list-row-1 {
     href="http://localhost//admin/device/edit/1"
     >Edit</a></span>
   <span class="crudbutton"><a
+    href="http://localhost//admin/device/copy/1"
+    >Copy</a></span>
+  <span class="crudbutton"><a
     href="http://localhost//admin/device/destroy/1"
     >Destroy</a></span>
 <hr/>

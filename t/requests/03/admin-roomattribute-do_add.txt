@@ -253,6 +253,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/edit/5"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/roomattribute/copy/5"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/destroy/5"
@@ -270,6 +273,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/edit/4"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/roomattribute/copy/4"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/destroy/4"
@@ -287,6 +293,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/edit/2"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/roomattribute/copy/2"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/destroy/2"
@@ -304,6 +313,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/edit/3"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/roomattribute/copy/3"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/destroy/3"
@@ -321,6 +333,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/edit/1"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/roomattribute/copy/1"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/roomattribute/destroy/1"

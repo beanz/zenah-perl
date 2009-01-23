@@ -246,6 +246,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/room/edit/4"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/copy/4"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/room/destroy/4"
@@ -267,6 +270,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/room/edit/2"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/copy/2"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/room/destroy/2"
@@ -288,6 +294,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/room/edit/3"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/copy/3"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/room/destroy/3"
@@ -309,6 +318,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/room/edit/6"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/copy/6"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/room/destroy/6"
@@ -330,6 +342,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/room/edit/5"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/copy/5"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/room/destroy/5"
@@ -352,6 +367,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/room/edit/1"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/copy/1"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/room/destroy/1"
@@ -372,6 +390,9 @@ Page:
   <span class="crudbutton"><a
     href="http://localhost//admin/room/edit/7"
     >Edit</a></span>
+  <span class="crudbutton"><a
+    href="http://localhost//admin/room/copy/7"
+    >Copy</a></span>
         <!-- 
   <span class="crudbutton"><a
     href="http://localhost//admin/room/destroy/7"
