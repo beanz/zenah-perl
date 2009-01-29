@@ -10,6 +10,11 @@ use ZenAH::Google::Chart;
 #
 # 'temp.rrd' 'humidity.rrd|side=right'
 #
+# graph for one hour:
+#
+#  --fill --span=3600 --resolution=60 \
+#  --format='!%M' --modulo=4 --format2='!%H'
+#
 # graph for one day:
 #
 #  --fill -format2 '!%w~%a' ...
