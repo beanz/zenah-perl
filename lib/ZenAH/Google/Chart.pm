@@ -5,13 +5,124 @@ use base qw(Class::Accessor);
 use POSIX qw/log10 ceil floor strftime/;
 use RRDs;
 
-__PACKAGE__->mk_accessors(qw(width height
+__PACKAGE__->mk_accessors(qw(preset
+                             width height
                              title type colours
                              data min max legend
-                             start end rrdres
+                             start end span resolution
                              right_data right_min right_max right_legend
-                             xfmt xskip xmod fill x2fmt x2skip x2mod));
+                             xformat xskip xmodulo
+                             xformat2 xskip2 xmodulo2
+                             fill));
 
+my %defaults =
+  (
+   width => 680,
+   height => 300,
+   xmodulo => 4,
+   xmodulo2 => 1,
+   fill => 1,
+   colours => ['0000ff', 'ff0000', 'ffff00',
+               '00ff00', '00ffff', 'ff00ff'],
+   type => 'lc',
+  );
+
+my %presets =
+  (
+   one_hour => {
+                span => 3600,
+                resolution => 60,
+                xformat => '!%M',
+                xformat2 => '!%H',
+               },
+   one_day => {
+               span => 86400,
+               resolution => 1800,
+               xformat => '!%H',
+               xformat2 => '!%w~%a',
+              },
+   one_week => {
+                span => 604800,
+                resolution => 7200,
+                xformat => '!%w~%a',
+                xmodulo => 1,
+                xformat2 => '!%U~%m-%d',
+               },
+   one_month => {
+                 span => 2678400,
+                 resolution => 43200,
+                 xformat => '!%w~%a',
+                 xformat2=>'!%U~%m-%d',
+                },
+
+   three_months => {
+                    span => 8035200,
+                    resolution => 86400,
+                    xformat => '!%U~%m-%d',
+                    xmodulo => 1,
+                    xformat2 => '!%m~%b',
+                   },
+   six_months => {
+                  span => 16070400,
+                  esolution => 86400,
+                  xformat => '!%U~%m-%d',
+                  xmodulo => 1,
+                  xformat2 => '!%m~%b',
+                 },
+   one_year => {
+                span => 31622400,
+                resolution => 172800,
+                xformat => '!%m~%b',
+                xmodulo => 1,
+                xformat2 => '!%Y',
+               },
+   two_years => {
+                 span => 63244800,
+                 resolution => 604800,
+                 xformat => '!%m~%b',
+                 xmodulo => 2,
+                 xformat2 => '!%Y',
+                },
+   four_years => {
+                  span => 126489600,
+                  resolution => 1209600,
+                  xformat => '!%m~%b',
+                  xmodulo => 3,
+                  xformat2 => '!%Y',
+                 }
+  );
+sub new {
+  my ($pkg, $opt) = @_;
+  if (ref $pkg) { $pkg = ref $pkg }
+  $opt = {} unless (defined $opt);
+  my %args = ();
+  my $preset = $opt->{preset};
+  if (defined $preset) {
+    if (exists $presets{$preset}) {
+      %args = %{$presets{$preset}};
+    } else {
+      die "Preset, $preset, is not defined\n";
+    }
+  }
+  my $self = $pkg->SUPER::new({%defaults, %args, %{$opt}}) or return;
+  my $start = $self->start;
+  my $end = $self->end;
+  my $span = $self->span;
+  my $resolution = $self->resolution;
+  if (defined $start) {
+    $start = int($start/$resolution)*$resolution;
+    $end = $start+$resolution*int(0.5+$span/$resolution);
+  } else {
+    $end = int((defined $end ? $end : time)/$resolution)*$resolution;
+    $start = $end-$resolution*int(0.5+$span/$resolution);
+  }
+  $self->start($start);
+  $self->end($end);
+  print STDERR "Time: $start - $end\n";
+  print STDERR "Samples: ", $self->span/$self->resolution, "\n";
+
+  return $self;
+}
 
 sub add_from_source {
   my ($self, $source) = @_;
@@ -45,16 +156,16 @@ sub fetch_from_source {
   my ($self, $source) = @_;
   my ($start, $step, $names, $data) =
     $self->my_rrd_fetch($source->{'file'}, $source->{'cf'},
-                        $self->rrdres,
+                        $self->resolution,
                         $self->start - $source->{'offset_t'},
                         $self->end - $source->{'offset_t'});
 
-  my $rrdres = $self->rrdres;
-  my $step_mod = $rrdres/$step;
+  my $resolution = $self->resolution;
+  my $step_mod = $resolution/$step;
   print STDERR "Adding data from ",$source->{'file'},
     ' ', $source->{'offset_t'}, "\n";
   print STDERR
-    "  rrdres=$rrdres, step=$step, step_mod=$step_mod, length=",
+    "  resolution=$resolution, step=$step, step_mod=$step_mod, length=",
       (scalar @$data), "\n";
   my $side = $source->{'side'};
   my $self_data;
@@ -120,15 +231,16 @@ sub fetch_from_source {
     my $sample = (($count%$step_mod) == 0);
     if ($sample) {
       unless (defined $self_data->[$index]) {
-        print STDERR "Pushing start '$start' to data\n";
+#        print STDERR "Pushing start '$start' to data\n";
 	push @{$self_data->[$index]}, $start;
       }
       foreach my $i (map { $ds_index{$_} } @ds) {
 	my $val = $num[$i] ? $sum[$i]/$num[$i] : undef;
-        print STDERR "Pushing val '$val' to data\n";
+        print STDERR "Pushing val ",
+          (defined $val ? "'$val'" : 'undef'), " to data\n";
 	push @{$self_data->[$index]}, $val;
       }
-      $start += $rrdres;
+      $start += $resolution;
       $index++;
       @sum = ();
       @num = ();
@@ -139,12 +251,12 @@ sub fetch_from_source {
 }
 
 sub my_rrd_fetch {
-  my ($self, $file, $cf, $rrdres, $start, $end) = @_;
+  my ($self, $file, $cf, $resolution, $start, $end) = @_;
   my $key = join '!', @_;
   unless (exists $self->{_cache_rrd}->{$key}) {
-    print STDERR "rrdtool fetch $file $cf -r $rrdres, -s $start -e $end\n";
+    print STDERR "rrdtool fetch $file $cf -r $resolution, -s $start -e $end\n";
     $self->{_cache_rrd}->{$key} =
-      [ RRDs::fetch $file, $cf, '-r', $rrdres, '-s', $start, '-e', $end ];
+      [ RRDs::fetch $file, $cf, '-r', $resolution, '-s', $start, '-e', $end ];
   }
   return
     wantarray ? @{$self->{_cache_rrd}->{$key}} : $self->{_cache_rrd}->{$key};
@@ -169,7 +281,7 @@ sub url {
                                                  scalar @{$colours});
   my $xt = 'x,y';
   $xt .= ',r' if ($has_right_data);
-  $xt .= ',x' if ($self->x2fmt);
+  $xt .= ',x' if ($self->xformat2);
   push @args, 'chxt='.$xt;
   my $index = 0;
   my $xl = $index++.':|'.(join '|', @{$self->x_labels($self->fill)}).'|'.
@@ -177,10 +289,10 @@ sub url {
   $xl .= '|'.$index++.':|'.(join '|', @{$self->y_labels($right_g)})
     if ($has_right_data);
   $xl .= '|'.$index++.':|'.(join '|', @{$self->x_labels(0,
-                                             $self->x2fmt,
-                                             $self->x2mod,
-                                             $self->x2skip,
-                                            )}) if ($self->x2fmt);
+                                             $self->xformat2,
+                                             $self->xmodulo2,
+                                             $self->xskip2,
+                                            )}) if ($self->xformat2);
   push @args, 'chxl='.$xl;
   push @args, $self->fill if ($self->fill);
   my @legend = ();
@@ -266,8 +378,8 @@ sub x_labels {
   my @l = ();
   my $p = '';
   my $fill = shift || 0;
-  my $fmt = shift || $self->xfmt;
-  my $mod = shift || $self->xmod || 1;
+  my $fmt = shift || $self->xformat;
+  my $mod = shift || $self->xmodulo || 1;
   my $skip = shift || $self->xskip || 1;
 
   my $bands = scalar @{$self->data} - 1;

@@ -9,108 +9,13 @@ use ZenAH::Google::Chart;
 # graph of two variables:
 #
 # 'temp.rrd' 'humidity.rrd|side=right'
-#
-# graph for one hour:
-#
-#  --fill --span=3600 --resolution=60 \
-#  --format='!%M' --modulo=4 --format2='!%H'
-#
-# graph for one day:
-#
-#  --fill -format2 '!%w~%a' ...
-#
-# graph for one week:
-#
-#  --fill --span=604800 --resolution=14400 \
-#  --format='!%w~%a' --modulo=1 \
-#  --format2='!%U~%m-%d' --modulo2=1 ...
-#
-# graph for one month
-#
-#  --fill --span=2678400 --resolution=43200 \
-#  --format='!%w~%a' --modulo=4 \
-#  --format2='!%U~%m-%d' --modulo2=1 ...
-#
-# graph for 3 months
-#
-#  --span=8035200 --resolution=86400 \
-#  --format='!%U~%m-%d' --modulo=1 \
-#  --format2='!%m~%b' --modulo2=1 ...
-#
-# graph for 6 months
-#
-#  --span=16070400 --resolution=86400 \
-#  --format='!%U~%m-%d' --modulo=1 \
-#  --format2='!%m~%b' --modulo2=1 ...
-#
-# graph for 1 year
-#
-#  --span=31622400 --resolution=172800 \
-#  --format='!%m~%b' --modulo=1 ...
-#
-# graph for 2 years
-#
-#  --span=63244800 --resolution=604800 \
-#  --format='!%m~%b' --modulo=2 \
-#  --format2='!%Y' --modulo2=1 ...
-#
-# graph for 4 years
-#
-#  --span=126489600 --resolution=1209600 \
-#  --format='!%m~%b' --modulo=3 \
-#  --format2='!%Y' --modulo2=1 ...
-#
 
 my $verbose;
-my $span = 86400;
-my $rrdres = 1800;
-my $end;
-my $start;
-my $fill = 0;
-my $xfmt = '!%H';
-my $xmod = 4;
-my $x2fmt = undef;
-my $x2mod = 1;
+my %opt = ( preset => 'one_day' );
 GetOptions('verbose+' => \$verbose,
-	   'resolution=i' => \$rrdres,
-	   'span=i' => \$span,
-	   'start=i' => \$start,
-	   'end=i' => \$end,
-	   'fill' => \$fill,
-	   'format=s' => \$xfmt,
-           'modulo=s' => \$xmod,
-	   'format2=s' => \$x2fmt,
-           'modulo2=s' => \$x2mod,
-          );
+	   'define=s', \%opt);
 
-if (defined $start) {
-  $start = int($start/$rrdres)*$rrdres;
-  $end = $start+$rrdres*int(0.5+$span/$rrdres);
-} else {
-  $end = int((defined $end ? $end : time)/$rrdres)*$rrdres;
-  $start = $end-$rrdres*int(0.5+$span/$rrdres);
-}
-print STDERR "Time: $start - $end\n";
-print STDERR "Samples: ", $span/$rrdres, "\n";
-
-#use Data::Dumper;
-#print Data::Dumper->Dump([\@chart_data], [qw/d/]);
-my $c = ZenAH::Google::Chart->new({width => 680, height => 300,
-                                   type => 'lc',
-
-                                   start => $start,
-                                   end => $end,
-                                   rrdres => $rrdres,
-                                   span => $span,
-
-#                                   min => 0,
-                                   right_min => 0,
-
-                                   xfmt => $xfmt, xmod => $xmod,
-                                   x2fmt => $x2fmt, x2mod => $x2mod,
-                                   colours => ['0000ff', 'ff0000', 'ffff00',
-					       '00ff00', '00ffff', 'ff00ff'],
-                                   fill => $fill});
+my $c = ZenAH::Google::Chart->new(\%opt);
 
 foreach my $source (@ARGV) {
   $c->add_from_source($source);
