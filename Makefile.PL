@@ -31,3 +31,10 @@ install_script 'bin/hr10-label';
 install_script 'bin/ss13e-label';
 auto_install;
 WriteAll;
+open F, "<Makefile.local" or exit(0);
+open M, ">>Makefile" or exit(0);
+while (<F>) {
+  print M;
+}
+close M;
+close F;
