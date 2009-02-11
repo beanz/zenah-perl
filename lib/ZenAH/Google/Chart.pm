@@ -91,6 +91,7 @@ my %presets =
                   xformat2 => '!%Y',
                  }
   );
+
 sub new {
   my ($pkg, $opt) = @_;
   if (ref $pkg) { $pkg = ref $pkg }
