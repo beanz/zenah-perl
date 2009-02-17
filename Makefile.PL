@@ -13,7 +13,6 @@ requires 'Class::DBI::AsForm';
 requires 'Class::DBI::Loader';
 requires 'Class::DBI::Loader::Relationship';
 requires 'Class::DBI::Sweet';
-requires 'DateTime::Format::Strptime';
 requires 'Template::Plugin::Class';
 
 build_requires 'Module::Install';
