@@ -83,7 +83,6 @@ t/requests/01/dojo.txt
 t/requests/01/invalid.txt
 t/requests/01/room.txt
 t/requests/01/root.txt
-t/requests/01/xul.txt
 t/requests/02/admin-device-add.txt
 t/requests/02/admin-deviceattribute-add.txt
 t/requests/02/admin-deviceattribute-edit-1.txt
