@@ -122,6 +122,7 @@ sub new {
   my %d =
     (
      get => sub { return "not implemented" },
+     set => sub { $self->set(@_) },
     );
 
   $engine->add_stash(rrd => sub { return \%d });
@@ -171,7 +172,7 @@ sub update_rrd {
   my ($var, $fill, $dstype, $min, $max) = @$definition;
   my $rrd = $rrd_dir.'/'.$dev.'/'.$var.'.rrd';
   unless (-f $rrd) {
-    $self->make_rrd($rrd, $definition) or return;
+    $self->make_rrd($rrd, $var, $dstype, $min, $max) or return;
   }
   my $t = $fill ? $time : $last;
   if ($self->{_last}->{$rrd} && $self->{_last}->{$rrd} >= $t) {
@@ -198,8 +199,7 @@ This method creates a new RRD database.
 =cut
 
 sub make_rrd {
-  my ($self, $rrd, $definition) = @_;
-  my ($var, $fill, $dstype, $min, $max) = @$definition;
+  my ($self, $rrd, $var, $dstype, $min, $max) = @_;
   $dstype = $1 if ($dstype =~ /^MAP:([^:]+):/);
   my $dir = $rrd;
   $dir =~ s![^/]+$!!;
@@ -227,6 +227,62 @@ sub make_rrd {
     return;
   }
   return 1;
+}
+
+sub set {
+  my ($self, $device, $uid, $type, $value, $time) = @_;
+  $time = 'N' unless (defined $time);
+  print STDERR "rrd set: $device, $uid, $type, $value, $time\n";
+  my $rrd_type =
+    ZenAH::CDBI::Map->search(type => 'rrd_type',
+                             name => $uid.':'.$type)->first or do {
+      warn "No 'rrd_type' map entry for $uid:$type\n";
+      return;
+    };
+  my ($def, $name) = split /\s*,\s*/, $rrd_type->value;
+  $name = $def unless (defined $name);
+#  print STDERR "rrd set: $name => $def\n";
+  my $rrd_def =
+    ZenAH::CDBI::Map->search(type => 'rrd_def', name => $def)->first or do {
+      warn "No 'rrd_def' map entry for $def\n";
+      return;
+    };
+#  print STDERR "rrd set: ", $rrd_def->value, "\n";
+  my $definition = [split /\s*,\s*/, $rrd_def->value];
+  return $self->rrd_update($self->rrd_dir.'/'.$device.'/'.$name.'.rrd',
+                           $value, $time, $definition);
+}
+
+=head2 C<rrd_update($rrd_dir, $dev, $val, $time, $definition)>
+
+This method updates a single RRD database.
+
+=cut
+
+sub rrd_update {
+  my ($self, $rrd, $value, $time, $definition) = @_;
+  my ($var, $dstype, $min, $max) = @$definition;
+  print STDERR "rrd_update: ", $rrd, " = $value @ $time ($dstype $min $max)\n";
+  return;
+  unless (-f $rrd) {
+    $self->make_rrd($rrd, $var, $dstype, $min, $max) or return;
+  }
+  if ($dstype =~ /^MAP:(?:[^:]+):(.*)$/) {
+    my %map = split /\s*[:=]\s*/, $1;
+    $value = exists $map{$value} ? $map{$value} : 0;
+  }
+  RRDs::update($rrd, '-t', $var, $time.':'.$value);
+  my $err = RRDs::error;
+  if ($err) {
+    warn "ERROR updating $rrd: $err\n";
+    return;
+  }
+  return 1;
+}
+
+sub rrd_dir {
+  my ($self) = @_;
+  return $self->{_engine}->zenah_config('rrd_dir');
 }
 
 # Autoload methods go after =cut, and are processed by the autosplit program.
