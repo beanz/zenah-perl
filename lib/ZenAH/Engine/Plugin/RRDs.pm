@@ -126,70 +126,7 @@ sub new {
     );
 
   $engine->add_stash(rrd => sub { return \%d });
-
-  $engine->add_timer(id => 'update_rrd_files',
-                     timeout => -120,
-                     callback => sub { $self->update_rrd_files(@_); 1 });
-
   return $self;
-}
-
-=head2 C<update_rrd_files()>
-
-This method is registered as a timer callback.  It is called every
-120 seconds to update any defined RRD databases based on the values
-in the state table.
-
-=cut
-
-sub update_rrd_files {
-  my $self = shift;
-  my $time = time;
-  my $rrd_dir = $self->{_engine}->zenah_config('rrd_dir') or do {
-    print STDERR "zenah_config[rrd_dir] is not defined\n";
-    return;
-  };
-  my %types = map { $_->name => [split /\s*,\s*/, $_->value]
-                  } ZenAH::CDBI::Map->search(type => 'rrd_def');
-  foreach my $state (ZenAH::CDBI::State->retrieve_all()) {
-    my $definition = $types{$state->type};
-    next unless (defined $definition);
-    $self->update_rrd($rrd_dir,
-               $time, $state->name, $state->mtime, $state->value,
-               $definition);
-  }
-  return 1;
-}
-
-=head2 C<update_rrd($rrd_dir, $time, $dev, $last, $val, $definition)>
-
-This method updates a single RRD database.
-
-=cut
-
-sub update_rrd {
-  my ($self, $rrd_dir, $time, $dev, $last, $val, $definition) = @_;
-  my ($var, $fill, $dstype, $min, $max) = @$definition;
-  my $rrd = $rrd_dir.'/'.$dev.'/'.$var.'.rrd';
-  unless (-f $rrd) {
-    $self->make_rrd($rrd, $var, $dstype, $min, $max) or return;
-  }
-  my $t = $fill ? $time : $last;
-  if ($self->{_last}->{$rrd} && $self->{_last}->{$rrd} >= $t) {
-    return 1;
-  }
-  $self->{_last}->{$rrd} = $t;
-  if ($dstype =~ /^MAP:(?:[^:]+):(.*)$/) {
-    my %map = split /\s*[:=]\s*/, $1;
-    $val = exists $map{$val} ? $map{$val} : 0;
-  }
-  RRDs::update($rrd, '-t', $var, $t.':'.$val);
-  my $err = RRDs::error;
-  if ($err) {
-    warn "ERROR updating $rrd: $err\n";
-    return;
-  }
-  return 1;
 }
 
 =head2 C<make_rrd($rrd_file, $definition)>
@@ -233,21 +170,19 @@ sub set {
   my ($self, $device, $uid, $type, $value, $time) = @_;
   $time = 'N' unless (defined $time);
   print STDERR "rrd set: $device, $uid, $type, $value, $time\n";
-  my $rrd_type =
+  my $name;
+  my $rrd_alias =
     ZenAH::CDBI::Map->search(type => 'rrd_type',
-                             name => $uid.':'.$type)->first or do {
-      warn "No 'rrd_type' map entry for $uid:$type\n";
-      return;
-    };
-  my ($def, $name) = split /\s*,\s*/, $rrd_type->value;
-  $name = $def unless (defined $name);
-#  print STDERR "rrd set: $name => $def\n";
+                             name => $uid.':'.$type)->first;
+  if ($rrd_alias) {
+    ($type, $name) = split /\s*[:,]\s*/, $rrd_alias->value, 2;
+  }
+  $name = $type unless (defined $name);
   my $rrd_def =
-    ZenAH::CDBI::Map->search(type => 'rrd_def', name => $def)->first or do {
-      warn "No 'rrd_def' map entry for $def\n";
+    ZenAH::CDBI::Map->search(type => 'rrd_def', name => $type)->first or do {
+      warn "No 'rrd_def' map entry for $type\n";
       return;
     };
-#  print STDERR "rrd set: ", $rrd_def->value, "\n";
   my $definition = [split /\s*,\s*/, $rrd_def->value];
   return $self->rrd_update($self->rrd_dir.'/'.$device.'/'.$name.'.rrd',
                            $value, $time, $definition);
@@ -262,9 +197,8 @@ This method updates a single RRD database.
 sub rrd_update {
   my ($self, $rrd, $value, $time, $definition) = @_;
   my ($var, $dstype, $min, $max) = @$definition;
-  print STDERR "rrd_update: ", $rrd, " = $value @ $time ($dstype $min $max)\n";
-  return;
   unless (-f $rrd) {
+    warn "Would create $rrd\n"; return;
     $self->make_rrd($rrd, $var, $dstype, $min, $max) or return;
   }
   if ($dstype =~ /^MAP:(?:[^:]+):(.*)$/) {
