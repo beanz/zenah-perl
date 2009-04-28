@@ -198,7 +198,7 @@ sub rrd_update {
   my ($self, $rrd, $value, $time, $definition) = @_;
   my ($var, $dstype, $min, $max) = @$definition;
   unless (-f $rrd) {
-    warn "Would create $rrd\n"; return;
+    print "Creating $rrd\n";
     $self->make_rrd($rrd, $var, $dstype, $min, $max) or return;
   }
   if ($dstype =~ /^MAP:(?:[^:]+):(.*)$/) {
