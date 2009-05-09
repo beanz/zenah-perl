@@ -43,9 +43,6 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw();
 our $VERSION = qw/$Revision: 2 $/[1];
 
-our $PUT_CONTENT =
-  q{<eeml><environment><data id="0"><value>%s</value></data></environment></eeml>};
-
 # Preloaded methods go here.
 
 =head2 C<new(%params)>
@@ -114,9 +111,12 @@ sub new {
   my $self = {};
   bless $self, $pkg;
 
+  eval { require Net::Pachube; };
+  return $self if ($@);
+
   my %p = @_;
   my $engine = $self->{_engine} = $p{engine};
-  $self->{_ua} = LWP::UserAgent->new;
+  $self->{_pachube} = Net::Pachube->new(key => $self->pachube_api_key);
   my %d =
     (
      get => sub { return "not implemented" },
@@ -142,21 +142,13 @@ sub set {
     }
   }
 
-  my ($feed, $title) = split /\s*,\s*/, $def->value, 2;
-  my $key = $self->pachube_api_key or do {
-    warn "No pachube api key defined\n";
-    return;
+  eval {
+    my ($feed, $title) = split /\s*,\s*/, $def->value, 2;
+    my $feed = $self->{_pachube}->feed($feed, 0);
+    my $r = $feed->update(data => $value) or
+      die "update failed: ", $self->{_pachube}->http_response->status_line,"\n";
   };
-  my $ua = $self->{_ua};
-  $ua->default_header('X-PachubeApiKey' => $key);
-  my $req =
-    HTTP::Request->new('PUT' => 'http://www.pachube.com/api/'.$feed.'.xml');
-  $req->content(sprintf $PUT_CONTENT, $value);
-  my $resp = $ua->request($req);
-  unless ($resp->is_success) {
-    warn "Pachube: ", $resp->status_line(), "\n";
-    return;
-  }
+  warn "Pachube: $@\n" if ($@);
   return 1;
 }
 
