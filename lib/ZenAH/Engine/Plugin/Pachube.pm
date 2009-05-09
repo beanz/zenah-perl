@@ -143,8 +143,8 @@ sub set {
   }
 
   eval {
-    my ($feed, $title) = split /\s*,\s*/, $def->value, 2;
-    my $feed = $self->{_pachube}->feed($feed, 0);
+    my ($feed_id, $title) = split /\s*,\s*/, $def->value, 2;
+    my $feed = $self->{_pachube}->feed($feed_id, 0);
     my $r = $feed->update(data => $value) or
       die "update failed: ", $self->{_pachube}->http_response->status_line,"\n";
   };
