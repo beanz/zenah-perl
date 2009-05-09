@@ -590,7 +590,7 @@ INSERT INTO "template" VALUES(22,'config','main','[% # config/main
    site = {
      title     => ''Zen Automated Home'',
      logo      => Catalyst.uri_for("/images/zenah-150.png"),
-     copyright => ''2006, 2008 Mark Hindess'',
+     copyright => ''2006, 2009 Mark Hindess'',
    };
 
    # load up any other configuration items 

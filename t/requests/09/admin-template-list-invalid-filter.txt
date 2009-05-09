@@ -350,7 +350,7 @@ Page:
    site = {
      title     =&#62; &#39;Zen Automated Home&#39;,
      logo      =&#62; Catalyst.uri_for(&#34;/images/zenah-150.png&#34;),
-     copyright =&#62; &#39;2006, 2008 Mark Hindess&#39;,
+     copyright =&#62; &#39;2006, 2009 Mark Hindess&#39;,
    };
    # load up any other configuration items 
    PROCESS config/col
@@ -415,7 +415,7 @@ Page:
     >Add</a></span>
 </div>
 <div id="footer"><!-- BEGIN site/footer -->
-<div id="copyright">&copy; 2006, 2008 Mark Hindess</div>
+<div id="copyright">&copy; 2006, 2009 Mark Hindess</div>
 <!-- END site/footer -->
 </div>
  </body>

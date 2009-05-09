@@ -354,7 +354,7 @@ content {
 </table>
 </div>
 <div id="footer"><!-- BEGIN footer -->
-<div id="copyright">&copy; 2006, 2008 Mark Hindess</div>
+<div id="copyright">&copy; 2006, 2009 Mark Hindess</div>
 <!-- END footer --></div>
  </body>
 </html>

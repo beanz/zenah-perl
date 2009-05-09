@@ -70,7 +70,7 @@ text/html
   <div id="bottomBar" dojotype="dijit.layout.ContentPane" region="bottom"
        layoutalign="bottom"
        style="background-color: #efefef; text-align: center;">
-    <div id="copyright">&copy; 2006, 2008 Mark Hindess</div>
+    <div id="copyright">&copy; 2006, 2009 Mark Hindess</div>
   </div>
     <div id="mainTabContainer" dojotype="dijit.layout.TabContainer"
          region="center" layoutAlign="client">

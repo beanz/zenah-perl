@@ -295,7 +295,7 @@ Page:
     >Add</a></span>
 </div>
 <div id="footer"><!-- BEGIN site/footer -->
-<div id="copyright">&copy; 2006, 2008 Mark Hindess</div>
+<div id="copyright">&copy; 2006, 2009 Mark Hindess</div>
 <!-- END site/footer -->
 </div>
  </body>

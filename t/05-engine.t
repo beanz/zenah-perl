@@ -7,7 +7,7 @@ use DirHandle;
 use English qw/-no_match_vars/;
 use FileHandle;
 use POSIX qw/strftime/;
-use Test::More tests => 77;
+use Test::More tests => 76;
 use t::Helpers qw/test_error test_warn/;
 
 END {
@@ -145,17 +145,17 @@ my $warn =
               }
             });
 $warn =~ s/\s+at .*?\s+line\s+\d+//msg;
-is($warn, q{ZenAH::Engine->action_enable_rule: requires 'spec' parameter.
-ZenAH::Engine->action_enable_rule: no rule with name: invalid.
-ZenAH::Engine->action_disable_rule: requires 'spec' parameter.
-ZenAH::Engine->action_disable_rule: no rule with name: invalid.
-ZenAH::Engine->action_sleep: requires 'spec' parameter.
-ZenAH::Engine->action_debug: requires 'spec' parameter.
-ZenAH::Engine->action_error: requires 'spec' parameter.
-ZenAH::Engine->action_scene: requires 'spec' parameter.
-ZenAH::Engine->action_xpl: requires 'spec' parameter.
-ZenAH::Engine->action_device: requires 'spec' parameter.
-ZenAH::Engine->action_device: device, invalid, not found.
+is($warn, q{ZenAH::Engine->action_enable_rule: requires 'spec' parameter
+ZenAH::Engine->action_enable_rule: no rule with name: invalid
+ZenAH::Engine->action_disable_rule: requires 'spec' parameter
+ZenAH::Engine->action_disable_rule: no rule with name: invalid
+ZenAH::Engine->action_sleep: requires 'spec' parameter
+ZenAH::Engine->action_debug: requires 'spec' parameter
+ZenAH::Engine->action_error: requires 'spec' parameter
+ZenAH::Engine->action_scene: requires 'spec' parameter
+ZenAH::Engine->action_xpl: requires 'spec' parameter
+ZenAH::Engine->action_device: requires 'spec' parameter
+ZenAH::Engine->action_device: device, invalid, not found
 ZenAH::Engine->action_sleep: sleep for nothing?},
    'ran modified rule');
 
@@ -611,25 +611,7 @@ ok($new_mtime > $mtime, 'state.set stash - mtime changed');
 my $new_ctime = $state->ctime;
 is($new_ctime, $ctime, 'state.set stash - ctime unchanged');
 
-# test rrds
-ZenAH::CDBI::Map->create({
-                          type => 'engine_config',
-                          name => 'rrd_dir',
-                          value => 't/rrd',
-                         });
-ZenAH::CDBI::Map->create({
-                          type => 'rrd_def',
-                          name => 'uv',
-                          value => 'uv,1,GAUGE,0,40',
-                         });
-$engine->reset_timer(update_rrd_files => time - 300);
-$engine->main_loop(1);
-ok(-f 't/rrd/uv138.55/uv.rrd', 'uv.rrd created');
-unlink 't/rrd/uv138.55/uv.rrd';
-rmdir 't/rrd/uv138.55';
-rmdir 't/rrd';
-
-is($engine->info("output\n"), undef, 'engine->info not verbose');
+is($engine->info("output\n"), 0, 'engine->info not verbose');
 my $engine2 = $engine->new(ip => "127.0.0.1",
                            broadcast => "127.0.0.1",
                            verbose => 1, tz => 'Europe/Vienna');
