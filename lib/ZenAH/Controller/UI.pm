@@ -116,6 +116,15 @@ sub ajax : Local {
       ($device_name, $action) = $c->request->param('args');
     }
 
+    if ($device_name eq 'Sensor') {
+      my ($device, $sid, $type) = @action;
+      my $state =
+        ZenAH::Model::CDBI::State->search(type => $type,
+                                          name => $device.'/'.$sid)->first;
+      $c->response->body($type.' = '.$state->value."\n");
+      return 1;
+    }
+
     my $device =
       ZenAH::Model::CDBI::Device->search(name => $device_name)->first;
     unless ($device) {
