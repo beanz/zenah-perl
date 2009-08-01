@@ -206,13 +206,14 @@ sub guess {
     push @devices, $device;
   }
   my @options;
-  return unless (@devices);
+  return [] unless (@devices);
   my %controls = ();
   foreach my $device (@devices) {
     foreach my $control ($device->controls) {
       next unless (match($line, $control));
       push @{$controls{$device}}, $control;
-      push @options, { device => $device, control => $control };
+      push @options, { device => $device, control => $control,
+                       string => $device->name.' '.$control->name };
     }
   }
   return \@options;
