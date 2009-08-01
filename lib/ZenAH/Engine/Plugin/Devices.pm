@@ -142,6 +142,7 @@ sub new {
        }
        return @res;
      },
+     guess => sub { return $self->guess(@_) },
     );
 
   $engine->add_stash(device => sub { return \%d });
@@ -182,7 +183,14 @@ sub action_guess {
   my $self = shift;
   my %p = @_;
   $p{spec} or return $self->{_engine}->ouch("requires 'spec' parameter");
-  my $line = $p{spec};
+  my $options = $self->guess($p{spec}) or return;
+  return unless (scalar @{$options} == 1);
+  my ($device, $control) = ($options->[0]->{device}, $options->[0]->{control});
+  return $self->{_engine}->run_action($device->action($control->name));
+}
+
+sub guess {
+  my ($self, $line) = @_;
   $line =~ s/\b(the|please|of|turn|set)\b//g;
   $line =~ s/\s+/ /g;
   my @words = split /\s+/, $line;
@@ -204,12 +212,10 @@ sub action_guess {
     foreach my $control ($device->controls) {
       next unless (match($line, $control));
       push @{$controls{$device}}, $control;
-      push @options, [$device, $control];
+      push @options, { device => $device, control => $control };
     }
   }
-  return unless (@options == 1);
-  my ($device, $control) = @{$options[0]};
-  return $self->{_engine}->run_action($device->action($control->name));
+  return \@options;
 }
 
 sub match {
