@@ -147,6 +147,8 @@ sub new {
   $engine->add_stash(device => sub { return \%d });
   $engine->add_action(type => "device",
                       callback => sub { $self->action_device(@_); });
+  $engine->add_action(type => "guess",
+                      callback => sub { $self->action_guess(@_); });
   return $self;
 }
 
@@ -166,6 +168,57 @@ sub action_device {
   my $device = ZenAH::CDBI::Device->search(name => $device_name)->first or
     return $self->{_engine}->ouch("device, $device_name, not found");
   return $self->{_engine}->run_action($device->action(@args));
+}
+
+=head2 C<action_guess(%params)>
+
+This method is registered as a callback for the 'guess' action.  It
+takes a string and tries to determine a unique device/control pair
+to apply.
+
+=cut
+
+sub action_guess {
+  my $self = shift;
+  my %p = @_;
+  $p{spec} or return $self->{_engine}->ouch("requires 'spec' parameter");
+  my $line = $p{spec};
+  $line =~ s/\b(the|please|of|turn|set)\b//g;
+  $line =~ s/\s+/ /g;
+  my @words = split /\s+/, $line;
+  my @rooms = ();
+  foreach my $room (ZenAH::CDBI::Room->retrieve_all()) {
+    next unless (match($line, $room));
+    push @rooms, $room;
+  }
+  my @devices;
+  foreach my $device (@rooms ? map { $_->devices } @rooms :
+                      ZenAH::CDBI::Device->retrieve_all) {
+    next unless (match($line, $device));
+    push @devices, $device;
+  }
+  my @options;
+  return unless (@devices);
+  my %controls = ();
+  foreach my $device (@devices) {
+    foreach my $control ($device->controls) {
+      next unless (match($line, $control));
+      push @{$controls{$device}}, $control;
+      push @options, [$device, $control];
+    }
+  }
+  return unless (@options == 1);
+  my ($device, $control) = @{$options[0]};
+  return $self->{_engine}->run_action($device->action($control->name));
+}
+
+sub match {
+  my ($line, $item) = @_;
+  my $match = quotemeta lc $item->name;
+  $match =~ s/[-_]/ /g;
+  $match .= '|' . quotemeta lc $item->name;
+  $match .= '|' . quotemeta lc $item->string;
+  return $line =~ /\b$match\b/;
 }
 
 # Autoload methods go after =cut, and are processed by the autosplit program.
