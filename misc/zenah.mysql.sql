@@ -225,14 +225,3 @@ CREATE TABLE template (
   KEY `name` (`name`),
   KEY `type` (`type`)
 );
-
---
--- Table structure for table `timestamp`
---
-
-CREATE TABLE `timestamp` (
-  id int(11) NOT NULL auto_increment,
-  `name` varchar(80) default NULL,
-  `time` int(11) default NULL,
-  PRIMARY KEY  (id)
-);

@@ -1153,11 +1153,6 @@ INSERT INTO "template" VALUES(45,'html','sensor','[% USE table_class = Class(''Z
 </tr>
 </table>
 ',1231335632);
-CREATE TABLE "timestamp" (
-  "id" integer PRIMARY KEY,
-  "name" varchar(80) default NULL,
-  "time" int(11) default NULL
-);
 CREATE TABLE "device_control" (
   "id" integer PRIMARY KEY,
   "type" varchar(20) default NULL,
