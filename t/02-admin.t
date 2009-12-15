@@ -67,19 +67,25 @@ foreach my $file (sort keys %tests) {
   my $resp = request($req);
   is($resp->status_line, $tests{$file}->{status}, $req.' - status');
   is($resp->content_type, $tests{$file}->{content_type}, $req.' - status');
-  my $got = canonical_content($resp->content);
-  my $expected = canonical_content($tests{$file}->{content});
-  if ($has_test_difference) {
-    eq_or_diff $got, $expected, $file.' - content';
+  my $expected = $tests{$file}->{content};
+  if ($expected =~ /^\s*\/(.*?)\s*$/s) {
+    like($resp->content, qr/\Q$1\E/, $file.' - content');
   } else {
-    is($got, $expected, $file.' - content');
+    my $got = canonical_content($resp->content);
+    $expected = canonical_content($expected);
+    if ($has_test_difference) {
+      eq_or_diff $got, $expected, $file.' - content';
+    } else {
+      is($got, $expected, $file.' - content');
+    }
   }
 }
 
 sub canonical_content {
-  my $s = $_[0];
+  my $s = $_[0] || '';
   $s =~ s/\n\s*\n/\n/g;
   $s =~ s/^\s+//mg;
+  $s =~ s!localhost\/\/!localhost/!mg;
   $s =~ s/now =\&gt; \d+/now =\&gt; 1231343985/mg;
   $s =~ s/\&quot;time\&quot; =\&gt; \d+/\&quot;time\&quot; =\&gt; 1231343985/mg;
   $s =~ s/dt =\&gt; bless\({.*}, \&quot;DateTime\&quot;\),/dt =\&gt [snip],/msg;
