@@ -65,19 +65,25 @@ use_ok 'Catalyst::Test', 'ZenAH';
 foreach my $file (sort keys %tests) {
   my $req = $tests{$file}->{request};
   my $resp = request($req);
-  is($resp->status_line, $tests{$file}->{status}, $req.' - status');
   is($resp->content_type, $tests{$file}->{content_type}, $req.' - status');
-  my $expected = $tests{$file}->{content};
-  if ($expected =~ /^\s*\/(.*?)\s*$/s) {
-    like($resp->content, qr/\Q$1\E/, $file.' - content');
-  } else {
-    my $got = canonical_content($resp->content);
-    $expected = canonical_content($expected);
-    if ($has_test_difference) {
-      eq_or_diff $got, $expected, $file.' - content';
+  is($resp->status_line, $tests{$file}->{status}, $req.' - status');
+  if ($resp->code ne '303') {
+    my $expected = $tests{$file}->{content};
+    if ($expected =~ /^\s*\/(.*?)\s*$/s) {
+      like($resp->content, qr/\Q$1\E/, $file.' - content');
     } else {
-      is($got, $expected, $file.' - content');
+      my $got = canonical_content($resp->content);
+      $expected = canonical_content($expected);
+      if ($has_test_difference) {
+        eq_or_diff $got, $expected, $file.' - content';
+      } else {
+        is($got, $expected, $file.' - content');
+      }
     }
+  } else {
+    my $expected = $tests{$file}->{content};
+    chomp $expected;
+    is($resp->header('Location'), $expected, $file.' - redirect');
   }
 }
 

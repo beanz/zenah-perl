@@ -1,5 +1,4 @@
 /admin/state/do_add?type=motion&name=node_0&value=empty&mtime=1222123816&ctime=1222123816
-
+text/html
 303 See Other
-
-<html><body><p>This item has moved <a href="http://localhost/admin/list">here</a>.</p></body></html>
+http://localhost/admin/list

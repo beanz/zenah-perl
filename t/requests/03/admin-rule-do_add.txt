@@ -1,5 +1,4 @@
 /admin/rule/do_add?name=callerid&active=1&type=xpl&trig=message_type%3d%22xpl-trig%22%20class%3d%22cid.basic%22%20calltype%3dinbound&action=%5b%25%20SET%20name%20%3d%20zenah.map.reverse(%27phonebook%27%2c%20xpl.phone)%20%25%5d%0axpl%20-c%20osd.basic%20command%3dclear%20text%3d%22%20Call%20%5b%25%20name%20%3f%20name%20%3a%20xpl.phone%20%25%5d%22%0a&ftime=&mtime=
-
+text/html
 303 See Other
-
-<html><body><p>This item has moved <a href="http://localhost/admin/list">here</a>.</p></body></html>
+http://localhost/admin/list

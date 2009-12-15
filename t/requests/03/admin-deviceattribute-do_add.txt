@@ -1,5 +1,4 @@
 /admin/deviceattribute/do_add?name=open_relay&value=05.667788000000
-
+text/html
 303 See Other
-
-<html><body><p>This item has moved <a href="http://localhost/admin/list">here</a>.</p></body></html>
+http://localhost/admin/list

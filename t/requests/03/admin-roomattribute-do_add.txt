@@ -1,5 +1,4 @@
 /admin/roomattribute/do_add?name=motion_timeout&value=300
-
+text/html
 303 See Other
-
-<html><body><p>This item has moved <a href="http://localhost/admin/list">here</a>.</p></body></html>
+http://localhost/admin/list
