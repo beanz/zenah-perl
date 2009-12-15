@@ -10,7 +10,7 @@ use warnings;
 # Static::Simple: will serve static files from the application's root
 # directory
 #
-use Catalyst qw/-Debug ConfigLoader FormValidator DefaultEnd SubRequest/;
+use Catalyst qw/-Debug ConfigLoader FormValidator SubRequest/;
 
 our $VERSION = '0.01';
 
