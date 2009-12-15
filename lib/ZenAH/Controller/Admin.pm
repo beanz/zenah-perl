@@ -137,6 +137,7 @@ sub default : Private {
     @args = ();
   }
 
+  $c->stash(current_view => 'Site');
   $c->stash(type => $type);
   $crud{$type}->{edit_columns} = $crud{$type}->{column_order}
     unless (exists $crud{$type}->{edit_columns});
@@ -146,6 +147,8 @@ sub default : Private {
   $c->stash('fulltable' => 'ZenAH::Model::CDBI::'.$crud{$type}->{table});
   $c->forward('ZenAH::Controller::Admin::CRUD', $view||'default', @args)
 }
+
+sub end : ActionClass('RenderView') {}
 
 =head1 SEE ALSO
 

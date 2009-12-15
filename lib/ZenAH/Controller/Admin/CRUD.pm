@@ -1,7 +1,8 @@
 package ZenAH::Controller::Admin::CRUD;
 
 use strict;
-use base 'Catalyst::Base';
+use warnings;
+use base 'Catalyst::Controller';
 
 =head1 NAME
 

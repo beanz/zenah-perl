@@ -265,6 +265,8 @@ sub process_template : Private {
   return $output;
 }
 
+sub end : ActionClass('RenderView') {}
+
 =head1 SEE ALSO
 
 Project website: http://www.zenah.org.uk/
