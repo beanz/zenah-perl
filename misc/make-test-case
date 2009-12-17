@@ -26,6 +26,10 @@ my $fh = FileHandle->new('>'.$file);
 my $ct = $resp->content_type;
 $ct =~ s/charset=utf-8$//;
 print $fh $req, "\n", $ct, "\n", $resp->status_line, "\n\n";
-print $fh $content;
+if ($resp->code == '303') {
+  print $fh $resp->location,"\n";
+} else {
+  print $fh $content;
+}
 
 $fh->close or die "$file close error: $!\n";
