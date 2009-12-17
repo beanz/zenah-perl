@@ -1,4 +1,4 @@
 /admin/roomattribute/do_add?name=motion_timeout&value=300
 text/html
 303 See Other
-http://localhost/admin/list
+http://localhost/admin/roomattribute/list

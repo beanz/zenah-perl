@@ -51,7 +51,7 @@ Destroys a row and forwards to list.
 sub destroy : Private {
     my ( $self, $c, $id ) = @_[0,1,5];
     $c->stash->{fulltable}->retrieve($id)->delete;
-    $c->response->redirect($c->uri_for('list'), 303);
+    $c->response->redirect($c->uri_for($c->stash->{type}, 'list'), 303);
 }
 
 =item do_add
@@ -73,7 +73,8 @@ sub do_add : Private {
 	join(', ',$c->form->invalid()).'</b>';
     } else {
 	$c->stash->{fulltable}->create_from_form( $c->form );
-        return $c->response->redirect($c->uri_for('list'), 303);
+        return
+          $c->response->redirect($c->uri_for($c->stash->{type}, 'list'), 303);
     }
     $c->forward('add');
 }

@@ -1,4 +1,4 @@
 /admin/room/do_add?name=node_0&string=Node%200&description=Node%20Zero
 text/html
 303 See Other
-http://localhost/admin/list
+http://localhost/admin/room/list

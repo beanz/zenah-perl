@@ -1,4 +1,4 @@
 /admin/map/do_add?type=phonebook&name=emergency&value=999
 text/html
 303 See Other
-http://localhost/admin/list
+http://localhost/admin/map/list

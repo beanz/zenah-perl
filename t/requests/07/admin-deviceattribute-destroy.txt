@@ -1,4 +1,4 @@
 /admin/deviceattribute/destroy/34
 text/html
 303 See Other
-http://localhost/admin/list
+http://localhost/admin/deviceattribute/list

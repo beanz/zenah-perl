@@ -1,4 +1,4 @@
 /admin/rule/destroy/15
 text/html
 303 See Other
-http://localhost/admin/list
+http://localhost/admin/rule/list
