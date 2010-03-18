@@ -45,7 +45,7 @@ use List::Util;
 use Time::HiRes;
 use xPL::Client;
 use Module::Pluggable instantiate => 'new';
-use ZenAH::CDBI;
+use ZenAH::DBIC;
 
 require Exporter;
 use AutoLoader qw(AUTOLOAD);
@@ -89,6 +89,7 @@ sub new {
   $pkg = ref($pkg) if (ref($pkg));
 
   my $self = $pkg->SUPER::new(vendor_id => 'bnz', device_id => 'zenah', @_);
+  $self->{_db} = ZenAH::DBIC->schema();
 
   $self->init_triggers();
   $self->init_actions();
@@ -138,11 +139,11 @@ automatically on startup and again every 120 seconds.
 sub read_rules {
   my $self = shift;
 
-  ZenAH::CDBI::Rule->clear_object_index();
+  # TOFIX: ZenAH::CDBI::Rule->clear_object_index();
 
-  my $iter = ZenAH::CDBI::Rule->retrieve_all();
+  my $rs = $self->{_db}->resultset('Rule')->search;
 
-  while (my $rule = $iter->next) {
+  while (my $rule = $rs->next) {
     $self->read_rule($rule);
   }
 
@@ -192,6 +193,7 @@ sub read_rule {
   my $trig = $rule->trig;
 
   my $parser = $self->{_template}->{parser};
+
   unless ($rule->action) {
     return $self->ouch('Action template is empty')
   }
@@ -378,7 +380,7 @@ the "last fired" time, C<ftime>, field in the database.
 sub trigger_rule_by_name {
   my $self = shift;
   my $name = shift;
-  my $rule = ZenAH::CDBI::Rule->search(name => $name)->first;
+  my $rule = $self->{_db}->resultset('Rule')->single({ name => $name });
   unless ($rule) {
     return $self->ouch('no rule with name: '.$name);
   }
@@ -421,7 +423,7 @@ sub action_enable_rule {
   my %p = @_;
   $p{spec} or return $self->ouch("requires 'spec' parameter");
   my $name = $p{spec};
-  my $rule = ZenAH::CDBI::Rule->search(name => $name)->first;
+  my $rule = $self->{_db}->resultset('Rule')->single({ name => $name });
   unless ($rule) {
     return $self->ouch('no rule with name: '.$name);
   }
@@ -437,8 +439,7 @@ This method marks the given rule as enabled in the database.
 sub enable_rule {
   my $self = shift;
   my $rule = shift;
-  $rule->active(1);
-  $rule->update();
+  $rule->update({ active => 1 });
   return $self->read_rule($rule);
 }
 
@@ -455,7 +456,7 @@ sub action_disable_rule {
   my %p = @_;
   $p{spec} or return $self->ouch("requires 'spec' parameter");
   my $name = $p{spec};
-  my $rule = ZenAH::CDBI::Rule->search(name => $name)->first;
+  my $rule = $self->{_db}->resultset('Rule')->single({ name => $name });
   unless ($rule) {
     return $self->ouch('no rule with name: '.$name);
   }
@@ -471,8 +472,7 @@ This method marks the given rule as disabled in the database.
 sub disable_rule {
   my $self = shift;
   my $rule = shift;
-  $rule->active(0);
-  $rule->update();
+  $rule->update({ active => 0 });
   return $self->read_rule($rule);
 }
 
@@ -537,7 +537,7 @@ sub action_debug {
 
 This method is used to lookup configuration items for the
 L<ZenAH::Engine> from the database.  These configuration items are
-stored in the L<ZenAH::CDBI::Map> table with a 'type' value of
+stored in the C<map> table with a 'type' value of
 'engine_config'.
 
 =cut
@@ -545,8 +545,9 @@ stored in the L<ZenAH::CDBI::Map> table with a 'type' value of
 sub zenah_config {
   my $self = shift;
   my $key = shift;
-  my $conf = ZenAH::CDBI::Map->search(type => 'engine_config',
-                                      name => $key)->first or return;
+  my $conf =
+    $self->{_db}->resultset('Map')->single({ type => 'engine_config',
+                                             name => $key }) or return;
   return $conf->value;
 }
 

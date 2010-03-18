@@ -30,11 +30,13 @@ my $engine = ZenAH::Engine->new(ip => "127.0.0.1",
                                 broadcast => "127.0.0.1");
 ok($engine);
 
+my $schema = $engine->{_db};
+
 $engine->main_loop(1);
 my $count = $engine->timer_callback_count('rules_timer');
 
 # Check if rule is removed when disabled
-my $cuckoo = ZenAH::CDBI::Rule->search(name => 'cuckoo')->first;
+my $cuckoo = $schema->resultset('Rule')->single({ name => 'cuckoo' });
 ok($engine->exists_rule($cuckoo), 'rule "cuckoo" found');
 $engine->disable_rule($cuckoo);
 
@@ -67,7 +69,7 @@ $cuckoo->update();
 $engine->disable_rule($cuckoo);
 $engine->enable_rule($cuckoo);
 ok($engine->exists_rule($cuckoo), 'rule "cuckoo" added');
-my $dusk = ZenAH::CDBI::Rule->search(name => 'dusk')->first;
+my $dusk = $schema->resultset('Rule')->single({ name => 'dusk' });
 $engine->disable_rule($dusk);
 ok(!$engine->exists_rule($dusk), 'rule "dusk" disabled');
 
@@ -97,8 +99,8 @@ is(test_warn(sub {
              }), 'no action defined for \'invalid\'', 'ran new rule');
 $engine->disable_rule($cuckoo);
 ok($engine->exists_rule($dusk), 'rule "dusk" enabled');
-my $cleaner_prep =
-  ZenAH::CDBI::Rule->search(name => 'cleaner_prep')->first;
+my $cleaner_prep = 
+  $schema->resultset('Rule')->single({ name => 'cleaner_prep' });
 ok(!$engine->exists_rule($cleaner_prep), 'rule "cleaner_prep" disabled');
 
 my $sleeper;
@@ -197,8 +199,9 @@ xpl
 !,
    'ran debug rule');
 
+
 my $kettle_warn =
-  ZenAH::CDBI::Rule->search(name => 'kettle_warn')->first;
+  $schema->resultset('Rule')->single({ name => 'kettle_warn' });
 ok(!$engine->exists_rule($kettle_warn), 'rule "kettle_warn" disabled');
 
 $cuckoo->action('scene kettle state=on');
@@ -233,34 +236,35 @@ $engine->disable_rule($cuckoo);
 
 # remove a scene rule
 my $kettle =
-  ZenAH::CDBI::Rule->search(name => 'kettle')->first;
+  $schema->resultset('Rule')->single({ name => 'kettle' });
 ok($engine->exists_rule($kettle), 'rule "kettle" enabled');
 $engine->disable_rule($kettle);
 ok(!$engine->exists_rule($kettle), 'rule "kettle" disabled');
 
 # remove an xpl rule
 my $light_state =
-  ZenAH::CDBI::Rule->search(name => 'light_state')->first;
+  $schema->resultset('Rule')->single({ name => 'light_state' });
 ok($engine->exists_xpl_callback('trigger-for-rule-'.$light_state),
    'rule "light_state" enabled');
 $engine->disable_rule($light_state);
 ok(!$engine->exists_xpl_callback('trigger-for-rule-'.$light_state),
    'rule "light_state" disabled');
 
-my $test_rule = ZenAH::CDBI::Rule->create({
-                                           name => 'test',
-                                           type => 'at',
-                                           trig => '100',
-                                           action => 'debug test',
-                                          }
-                                         );
+my $test_rule =
+  $schema->resultset('Rule')->create({
+                                      name => 'test',
+                                      type => 'at',
+                                      trig => '100',
+                                      action => 'debug test',
+                                     });
 ok($test_rule, 'test_rule added to db');
 $engine->enable_rule($test_rule);
 
 sub process_test_rule {
   my $action = shift;
   my $stash = shift || {};
-  $test_rule->action($action ? "debug ...\n".$action : $action) or return;
+  $test_rule->update({ action => $action ? "debug ...\n".$action : $action })
+    or return;
   $engine->disable_rule($test_rule);
   $engine->enable_rule($test_rule) or return;
   my $res =
@@ -593,7 +597,7 @@ light
    'state.set stash');
 
 my $state =
-  ZenAH::CDBI::State->search(type => 'uv', name => 'uv138.55')->first;
+  $schema->resultset('State')->single({ type => 'uv', name => 'uv138.55' });
 my $ctime = $state->ctime;
 my $mtime = $state->mtime;
 sleep 2;
@@ -606,6 +610,7 @@ is(process_test_rule(q{
 },
    'state.set stash - mtime change');
 
+$state->discard_changes();
 my $new_mtime = $state->mtime;
 ok($new_mtime > $mtime, 'state.set stash - mtime changed');
 my $new_ctime = $state->ctime;
