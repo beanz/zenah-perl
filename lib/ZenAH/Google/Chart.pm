@@ -160,7 +160,7 @@ sub fetch_from_source {
                         $self->resolution,
                         $self->start - $source->{'offset_t'},
                         $self->end - $source->{'offset_t'});
-
+  return unless (defined $step);
   my $resolution = $self->resolution;
   my $step_mod = $resolution/$step;
   print STDERR "Adding data from ",$source->{'file'},
@@ -231,7 +231,10 @@ sub fetch_from_source {
     }
     my $sample = (($count%$step_mod) == 0);
     if ($sample) {
-      unless (defined $self_data->[$index]) {
+      my $has_prev;
+      if (defined $self_data->[$index]) {
+        $has_prev = 1;
+      } else {
 #        print STDERR "Pushing start '$start' to data\n";
 	push @{$self_data->[$index]}, $start;
       }
@@ -239,6 +242,9 @@ sub fetch_from_source {
 	my $val = $num[$i] ? $sum[$i]/$num[$i] : undef;
         print STDERR "Pushing val ",
           (defined $val ? "'$val'" : 'undef'), " to data\n";
+        if ($source->{stack} && $has_prev) {
+          $val += $self_data->[$index]->[-1+scalar @{$self_data->[$index]}];
+        }
 	push @{$self_data->[$index]}, $val;
       }
       $start += $resolution;
