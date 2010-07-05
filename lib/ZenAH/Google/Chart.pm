@@ -13,7 +13,7 @@ __PACKAGE__->mk_accessors(qw(preset
                              right_data right_min right_max right_legend
                              xformat xskip xmodulo
                              xformat2 xskip2 xmodulo2
-                             fill));
+                             fill xgrid ygrid));
 
 my %defaults =
   (
@@ -25,6 +25,8 @@ my %defaults =
    colours => ['0000ff', 'ff0000', 'ffff00',
                '00ff00', '00ffff', 'ff00ff'],
    type => 'lc',
+   xgrid => undef,
+   ygrid => undef,
   );
 
 my %presets =
@@ -302,6 +304,10 @@ sub url {
                                             )}) if ($self->xformat2);
   push @args, 'chxl='.$xl;
   push @args, $self->fill if ($self->fill);
+  if ($self->xgrid || $self->ygrid) {
+    push @args, 'chg='.($self->xgrid ? 100/(@{$self->x_labels(0)}) : 100).
+      ','.($self->ygrid ? 100/(@{$self->y_labels($g)}) : 100);
+  }
   my @legend = ();
   push @legend, @{$self->legend};
   push @legend, @{$self->right_legend} if ($has_right_data);
