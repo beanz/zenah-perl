@@ -138,10 +138,14 @@ foreach my $i (0..7) {
   $gfx->fillstroke(1);
   $c = $c eq $c1 ? $c2 : $c1;
   my ($str, $left, $right) = split(/\|/, ($ARGV[$i] || 'Label #'.($i+1)), 3);
-  centerstring($text,
-               $ox+$pad, $ox+($width-$pad*2),
-               $py-($oy+$offset+$b_height*($i+.6)),
-               $str, $font, $fontsize);
+  if ($str =~ /^!(.*)/) {
+    centerimage($1, $ox + $cx, ($oy+$offset+$b_height*($i+.5)), .4);
+  } else {
+    centerstring($text,
+                 $ox+$pad, $ox+($width-$pad*2),
+                 $py-($oy+$offset+$b_height*($i+.6)),
+                 $str, $font, $fontsize);
+  }
   centerstring($text,
                $ox+$pad, $ox+$pad*4,
                $py-($oy+$offset+$b_height*($i+.9)),
@@ -152,19 +156,29 @@ foreach my $i (0..7) {
                $right, $font, 5) if ($right);
 }
 
-if (-f $image) {
-  my $img = PDF::API2::Resource::XObject::Image::PNG->new_api($pdf, $image);
-  my $ix = $img->width;
-  my $iy = $img->height;
-  my $w = $width*.8;
-  my $s = $w/$ix;
-  $gfx->image($img, $ox+$cx-$w/2, $py-($oy+$cy+$w/2), $s);
-} else {
-  warn "Image file, $image, does not exist, skipping\n";
-}
+centerimage($image);
 
 $pdf->saveas($output);
 $pdf->end();
+
+sub centerimage {
+  my ($file, $x, $y, $scale) = @_;
+  $x = $ox + $cx unless (defined $x);
+  $y = $oy + $cy unless (defined $y);
+  $scale = $1 if ($file =~ s/%(.*)$//);
+  $y += $1 if ($scale =~ s/\+(.*)$//);
+  $scale = .8 unless (defined $scale);
+  if (-f $file) {
+    my $img = PDF::API2::Resource::XObject::Image::PNG->new_api($pdf, $file);
+    my $ix = $img->width;
+    my $iy = $img->height;
+    my $w = $width*$scale;
+    my $s = $w/$ix;
+    $gfx->image($img, $x-$w/2, $py-($y+$w/2), $s);
+  } else {
+    warn "Image file, $image, does not exist, skipping\n";
+  }
+}
 
 sub centerstring {
   my $text = shift;
