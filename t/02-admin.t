@@ -89,6 +89,7 @@ foreach my $file (sort keys %tests) {
 
 sub canonical_content {
   my $s = $_[0] || '';
+  $s =~ s/\r//g;
   $s =~ s/\n\s*\n/\n/g;
   $s =~ s/^\s+//mg;
   $s =~ s!localhost\/\/!localhost/!mg;

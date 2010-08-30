@@ -37,8 +37,11 @@ ok(!$t[0], 'invalid in array context - result');
 is($t[1], 'invalid: not found', 'invalid in array context - reason');
 ok($t[2] < time + 3 && $t[2] > time - 3, 'invalid in array context - time');
 
-is($templates->_template_content('html/footer'),
-   qq{<!-- BEGIN footer -->\r
-<div id="copyright">\&copy; [% site.copyright %]</div>\r
-<!-- END footer -->\r
+
+my $content = $templates->_template_content('html/footer');
+$content =~ s/\r//g;
+is($content,
+   qq{<!-- BEGIN footer -->
+<div id="copyright">\&copy; [% site.copyright %]</div>
+<!-- END footer -->
 }, 'valid in scalar context');
