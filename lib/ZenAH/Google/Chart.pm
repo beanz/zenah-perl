@@ -474,6 +474,7 @@ sub loose_label {
   $steps = 8 if (!defined $steps);
   $steps = 2 if ($steps < 2);
 
+  $max++ if ($max == $min);
   my $range = nice_number($max - $min);
   my $delta = nice_number($range/($steps - 1), 1);
   my $gmin = $delta * floor($min/$delta);
