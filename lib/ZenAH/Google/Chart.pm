@@ -66,7 +66,7 @@ my %presets =
                    },
    six_months => {
                   span => 16070400,
-                  esolution => 86400,
+                  resolution => 86400,
                   xformat => '!%U~%m-%d',
                   xmodulo => 1,
                   xformat2 => '!%m~%b',
