@@ -136,7 +136,7 @@ sub add {
   }
 
   $self->{_engine}->add_xpl_callback(id => 'trigger-for-rule-'.$rule,
-                                     targetted => 0,
+                                     targeted => 0,
                                      self_skip => 0,
                                      filter => \%filter,
                                      callback => sub {

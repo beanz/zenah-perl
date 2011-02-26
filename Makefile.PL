@@ -5,7 +5,7 @@ all_from 'lib/ZenAH.pm';
 
 requires Catalyst => '5.64';
 requires 'Template::Provider' => '2.93';
-requires 'xPL::Base' => '0.05';
+requires 'xPL::Base' => '0.11';
 requires 'Catalyst::Plugin::FormValidator';
 requires 'Catalyst::Plugin::SubRequest';
 requires 'Class::DBI::FromForm';
@@ -22,7 +22,7 @@ build_requires  'Test::More' => undef;
 build_requires  'Test::Differences' => undef;
 build_requires  'Test::WWW::Mechanize' => undef;
 
-catalyst;
+#catalyst;
 
 install_script glob('script/*.pl');
 install_script 'bin/zenah';
