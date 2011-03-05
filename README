@@ -1,3 +1,7 @@
+Zen Automated Home
+==================
+
+
 perl Makefile.PL
 make
 
@@ -35,6 +39,12 @@ Point your browser at one of:
   http://hostname:3000/xul
 
 
+MAILING LISTS
+
+See https://github.com/beanz/zenah-perl/wiki/MailingLists for details
+of mailing lists for Zen Automated Home.
+
+
 THIRD PARTY SOFTWARE
 
 This distribution also contains copies of code from:
@@ -43,9 +53,10 @@ This distribution also contains copies of code from:
   http://www.prototypejs.org/
   http://dojotoolkit.org/
 
+
 COPYRIGHT AND LICENSE
 
-Copyright (C) 2006, 2007 by Mark Hindess
+Copyright (C) 2006, 2011 by Mark Hindess
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.7 or,
