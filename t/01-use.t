@@ -7,7 +7,16 @@ use English qw/-no_match_vars/;
 use FileHandle;
 my @modules;
 
+END {
+  unlink 't/zenah.db';
+}
+
 BEGIN {
+  $ENV{ZENAH_DBI_CONFIG}='t/dbi.conf';
+  unlink 't/zenah.db';
+  0 == system 'sqlite3 t/zenah.db <zenah.sample.sql3' or
+    die "sqlite3 failed to create database: $! $@\n";
+
   my $fh = FileHandle->new('<MANIFEST') or
     die 'Open of MANIFEST failed: '.$ERRNO;
   while(<$fh>) {
