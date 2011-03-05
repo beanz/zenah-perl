@@ -22,7 +22,7 @@ CAUTION:
 
 To start the test server on http://hostname:3000/ run:
 
-  perl -Iblib/lib blib/script/zenah_server.pl
+  perl -Iblib/lib script/zenah_server.pl
 
 In another terminal, start the xPL rules engine with:
 
