@@ -96,5 +96,7 @@ sub canonical_content {
   $s =~ s/now =\&gt; \d+/now =\&gt; 1231343985/mg;
   $s =~ s/\&quot;time\&quot; =\&gt; \d+/\&quot;time\&quot; =\&gt; 1231343985/mg;
   $s =~ s/dt =\&gt; bless\({.*}, \&quot;DateTime\&quot;\),/dt =\&gt [snip],/msg;
+  $s =~ s/\n$//g;
+  $s .= "\n";
   $s;
 }

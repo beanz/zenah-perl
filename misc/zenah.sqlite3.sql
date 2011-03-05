@@ -739,10 +739,6 @@ INSERT INTO "template" VALUES(27,'site','html','<!DOCTYPE HTML PUBLIC "-//W3C//D
     google.load("prototype", "1.6");
     google.load("scriptaculous", "1.8.1");
   </script>
-  <script src="[% Catalyst.uri_for("/js") %]/excanvas/excanvas.js"
-          type="text/javascript"></script>
-  <script src="[% Catalyst.uri_for("/js") %]/plotr/plotr.js"
-          type="text/javascript"></script>
   <script src="[% Catalyst.uri_for("/js") %]/ajax.js"
           type="text/javascript"></script>
  </head>
