@@ -11,7 +11,7 @@ sub new {
   my ( $class, $attrs ) = @_;
   my $t = time;
   foreach (qw/ctime mtime/) {
-    $attrs->{$_} = $t unless (defined $attrs->{mtime});
+    $attrs->{$_} = $t unless (defined $attrs->{$_});
   }
   return $class->next::method($attrs);
 }
