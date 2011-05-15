@@ -93,6 +93,9 @@ sub new {
          ZenAH::CDBI::Room->retrieve_all({ order_by => 'name'});
        return @rooms;
      },
+     by_name => sub {
+       return ZenAH::CDBI::Room->search(name => $_[0])->first;
+     },
      by_attr => sub {
        return ZenAH::CDBI::Room->by_attribute($_[0], $_[1])->first;
      },
