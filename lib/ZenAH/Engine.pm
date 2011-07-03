@@ -43,6 +43,7 @@ use Template::Stash;
 
 use List::Util;
 use Time::HiRes;
+use AnyEvent;
 use xPL::Client;
 use Module::Pluggable instantiate => 'new';
 use ZenAH::DBIC;
