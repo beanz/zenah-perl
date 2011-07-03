@@ -28,6 +28,7 @@ lib/ZenAH/Controller/Admin.pm
 lib/ZenAH/Controller/UI.pm
 lib/ZenAH/Engine/Plugin/Devices.pm
 lib/ZenAH/Engine/Plugin/Maps.pm
+lib/ZenAH/Engine/Plugin/MQTT.pm
 lib/ZenAH/Engine/Plugin/Pachube.pm
 lib/ZenAH/Engine/Plugin/Rooms.pm
 lib/ZenAH/Engine/Plugin/RRDs.pm
