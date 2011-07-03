@@ -283,7 +283,7 @@ Page:
       <td>at</td>
       <td><small><small>recurrence freq=hourly minutes=&#34;[0,15,30,45]&#34;</small></small>
 </td>
-      <td><small><small>xpl -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
+      <td><small><small>xpl -m xpl-cmnd -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
 </small></small>
 </td>
       <td>2007-08-10 21:45:02</td>

@@ -232,7 +232,7 @@ tr.list-row-1 {
     <textarea cols="80" name="trig" rows="2">recurrence freq=hourly minutes=&#34;[0,15,30,45]&#34;</textarea>
 <br/>
     action<br/>
-    <textarea cols="80" name="action" rows="10">xpl -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
+    <textarea cols="80" name="action" rows="10">xpl -m xpl-cmnd -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
 </textarea>
 <br/>
   <input type="submit" value="Edit"/>

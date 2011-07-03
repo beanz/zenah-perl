@@ -233,7 +233,7 @@ tr.list-row-1 {
 <br/>
     action<br/>
     <textarea cols="80" name="action" rows="10">[% SET name = zenah.map.reverse(&#39;phonebook&#39;, xpl.phone) %]
-xpl -c osd.basic command=write text=&#34; Call [% name ? name : xpl.phone %]&#34;
+xpl -m xpl-cmnd -c osd.basic command=write text=&#34; Call [% name ? name : xpl.phone %]&#34;
 </textarea>
 <br/>
   <input type="submit" value="Edit"/>

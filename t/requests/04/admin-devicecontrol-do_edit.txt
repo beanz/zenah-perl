@@ -234,7 +234,7 @@ tr.list-row-1 {
     definition<br/>
     <textarea cols="80" name="definition" rows="4">[% SET relay = device.attribute(&#39;open_relay&#39;) %]
 [% IF relay %]
-  xpl -c control.basic device=[% relay %] type=output current=pulse
+  xpl -m xpl-cmnd -c control.basic device=[% relay %] type=output current=pulse
 [% ELSE %]
   error &#39;invalid door device&#39;
 [% END %]

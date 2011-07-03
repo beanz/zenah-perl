@@ -279,7 +279,7 @@ Page:
       <td></td>
       <td>[% SET relay = device.attribute('close_relay') %]
 [% IF relay %]
-  xpl -c control.basic device=[% relay %] type=output current=pulse
+  xpl -m xpl-cmnd -c control.basic device=[% relay %] type=output current=pulse
 [% ELSE %]
   error 'invalid device'
 [% END %]
@@ -308,7 +308,7 @@ Page:
       <td></td>
       <td>[% SET relay = device.attribute('open_relay') %]
 [% IF relay %]
-  xpl -c control.basic device=[% relay %] type=output current=pulse
+  xpl -m xpl-cmnd -c control.basic device=[% relay %] type=output current=pulse
 [% ELSE %]
   error 'invalid device'
 [% END %]

@@ -274,7 +274,7 @@ CREATE TABLE "rule" (
   "mtime" int(11) default NULL,
   "ftime" int(11) default NULL
 );
-INSERT INTO "rule" VALUES(1,'cuckoo','recurrence freq=hourly minutes="[0,15,30,45]"','at','xpl -c osd.basic command=clear text="It is [% zenah.datetime.strftime("%H:%M") %]" delay=10
+INSERT INTO "rule" VALUES(1,'cuckoo','recurrence freq=hourly minutes="[0,15,30,45]"','at','xpl -m xpl-cmnd c osd.basic command=clear text="It is [% zenah.datetime.strftime("%H:%M") %]" delay=10
 ',1,1186321944,1186778702);
 INSERT INTO "rule" VALUES(2,'x10lamp_trigger','message_type="xpl-trig" class="x10.basic" command=(on|off|bright|dim)','xpl','[% SET lamp_name = zenah.map.lookup(''x10lamp_trigger'',xpl.device) %]
 [% IF lamp_name %]
@@ -320,7 +320,7 @@ INSERT INTO "rule" VALUES(7,'scene_trigger','message_type="xpl-trig" class="x10.
 scene [% scene_name %] state=[% xpl.command %]
 [% END %]
 ',1,1186334285,2007);
-INSERT INTO "rule" VALUES(8,'kettle_warn','30','at','xpl -c osd.basic command=clear row=3 text="Kettle is on" delay=5
+INSERT INTO "rule" VALUES(8,'kettle_warn','30','at','xpl -m xpl-cmnd -c osd.basic command=clear row=3 text="Kettle is on" delay=5
 ',0,1186322063,NULL);
 INSERT INTO "rule" VALUES(9,'cleaner_prep','recurrence freq=weekly hours=11 minutes=30 days=th','at','scene all_windows state=on
 # device washing_machine on',1,1186340154,NULL);
@@ -1187,14 +1187,14 @@ INSERT INTO "device_control" VALUES(4,'x10','dim','[% SET unit = device.attribut
 ','Dim',NULL);
 INSERT INTO "device_control" VALUES(5,'curtain','open','[% SET relay = device.attribute(''open_relay'') %]
 [% IF relay %]
-  xpl -c control.basic device=[% relay %] type=output current=pulse
+  xpl -m xpl-cmnd -c control.basic device=[% relay %] type=output current=pulse
 [% ELSE %]
   error ''invalid device''
 [% END %]
 ','Open',NULL);
 INSERT INTO "device_control" VALUES(6,'curtain','close','[% SET relay = device.attribute(''close_relay'') %]
 [% IF relay %]
-  xpl -c control.basic device=[% relay %] type=output current=pulse
+  xpl -m xpl-cmnd -c control.basic device=[% relay %] type=output current=pulse
 [% ELSE %]
   error ''invalid device''
 [% END %]
@@ -1226,14 +1226,14 @@ INSERT INTO "device_control" VALUES(17,'x10','flash','[% USE String %]
 ');
 INSERT INTO "device_control" VALUES(18,'blind','close','[% SET relay = device.attribute(''close_relay'') %]
 [% IF relay %]
-  xpl -c control.basic device=[% relay %] type=output current=pulse
+  xpl -m xpl-cmnd -c control.basic device=[% relay %] type=output current=pulse
 [% ELSE %]
   error ''invalid device''
 [% END %]
 ','Close',NULL);
 INSERT INTO "device_control" VALUES(19,'blind','open','[% SET relay = device.attribute(''open_relay'') %]
 [% IF relay %]
-  xpl -c control.basic device=[% relay %] type=output current=pulse
+  xpl -m xpl-cmnd -c control.basic device=[% relay %] type=output current=pulse
 [% ELSE %]
   error ''invalid device''
 [% END %]

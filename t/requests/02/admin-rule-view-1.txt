@@ -236,7 +236,7 @@ tr.list-row-1 {
   </tr>
   <tr>
     <th class="view-table">action</th>
-    <td class="view-table" colspan="2"><small><pre>xpl -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
+    <td class="view-table" colspan="2"><small><pre>xpl -m xpl-cmnd -c osd.basic command=clear text=&#34;It is [% zenah.datetime.strftime(&#34;%H:%M&#34;) %]&#34; delay=10
 </pre></small>
 </td>
   </tr>
