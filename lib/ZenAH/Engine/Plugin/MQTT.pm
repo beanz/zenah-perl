@@ -28,6 +28,7 @@ use 5.006;
 use strict;
 use warnings;
 use AnyEvent::MQTT;
+use xPL::Base qw/simple_tokenizer/;
 
 require Exporter;
 
@@ -148,8 +149,11 @@ sub action_mqtt {
   my %p = @_;
   my $spec = $p{spec}
     or return $self->{_engine}->ouch("requires 'spec' parameter");
-  my ($topic, $message) = split /\s+/, $spec, 2;
-  $self->{_mqtt}->publish(topic => $topic, message => $message);
+  my %spec = simple_tokenizer($spec);
+  $spec{message} = '' unless (defined $spec{message});
+  $spec{topic} = '/zenah/missing-topic' unless (defined $spec{topic});
+  $spec{qos} = 0 unless (defined $spec{qos});
+  $self->{_mqtt}->publish(%spec);
   return 1;
 }
 
