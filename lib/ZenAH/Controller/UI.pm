@@ -115,6 +115,7 @@ sub ajax : Local {
     } else {
       ($device_name, $action) = $c->request->param('args');
     }
+    $action =~ s/[^-a-z0-9_\.]/_/ig; # sanitize action
 
     if ($device_name eq 'Sensor') {
       my ($device, $sid, $type) = @action;
@@ -132,9 +133,16 @@ sub ajax : Local {
       return 1;
     }
     my $type_name = $device->type;
+    my $action_str = $action;
     my $control =
       $device->device_controls("device_control.name" => $action)->first;
-    $action =~ s/[^-a-z0-9_\.]/_/ig;
+    my %synonyms = ( 'on' => ['open', 'wake'], 'off' => ['close'], );
+    my @syn = @{$synonyms{$action} || []};
+    while (!defined $control and my $syn = shift @syn) {
+      $control =
+        $device->device_controls("device_control.name" => $syn)->first
+          and $action_str = $syn;
+    }
     my $definition;
     if ($control) {
       $definition = $control->definition;
@@ -151,7 +159,37 @@ sub ajax : Local {
     }
     $c->response->body($self->evaluate_action($definition,
                                               { device => $device }) ||
-                       "Invoked action, $action, on device, $device_name\n");
+                       "Invoked action, $action_str, on device, $device_name\n"
+                      );
+}
+
+=head2 C<completions>
+
+Shows device/action completions.
+
+=cut
+
+sub completions : Local {
+  my ( $self, $c, $device_name, @query ) = @_;
+  $c->response->content_type('text/plain');
+  my $full = join '/', $device_name, @query;
+  my @res;
+  my %synonyms = ( 'open' => 'on', 'wake' => 'on', 'close' => 'off' );
+  foreach my $dev
+    (ZenAH::Model::CDBI::Device->search_like(name => $device_name.'%',
+                                             { order_by => 'name' })) {
+    foreach my $control ($dev->device_controls) {
+      my $name = $control->name;
+      my @names = $name;
+      push @names, $synonyms{$name} if (exists $synonyms{$name});
+      foreach my $c (@names) {
+        my $s = $dev->name.'/'.$c;
+        next unless ((substr $s, 0, length $full) eq $full);
+        push @res, $s;
+      }
+    }
+  }
+  $c->response->body((join "\n", @res)."\n");
 }
 
 =head2 C<action>
