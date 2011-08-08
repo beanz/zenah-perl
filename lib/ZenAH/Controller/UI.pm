@@ -178,15 +178,18 @@ sub completions : Local {
   foreach my $dev
     (ZenAH::Model::CDBI::Device->search_like(name => $device_name.'%',
                                              { order_by => 'name' })) {
+    my $dev_name = $dev->name;
     foreach my $control ($dev->device_controls) {
       my $name = $control->name;
-      my @names = $name;
-      push @names, $synonyms{$name} if (exists $synonyms{$name});
-      foreach my $c (@names) {
-        my $s = $dev->name.'/'.$c;
-        next unless ((substr $s, 0, length $full) eq $full);
+      my $s = $dev_name.'/'.$name;
+      if ((substr $s, 0, length $full) eq $full) {
         push @res, $s;
+        next; # only look at synonyms if there is no match without it
       }
+      next unless (exists $synonyms{$name});
+      $s = $dev_name.'/'.$synonyms{$name};
+      next unless ((substr $s, 0, length $full) eq $full);
+      push @res, $s;
     }
   }
   $c->response->body((join "\n", @res)."\n");
