@@ -2,9 +2,7 @@
 
 =head1 NAME
 
-zah - NAME
-
-xpl-rfxcom - Perl script for an xPL RFXCOM RF receiver application
+zah - Perl script to control Zen Automated Home
 
 =head1 SYNOPSIS
 
@@ -42,6 +40,7 @@ use Getopt::Long;
 use LWP::UserAgent;
 use Pod::Usage;
 
+my $command = $0; $command =~ s!.*/!!;
 my $verbose;
 my $complete;
 my $man;
@@ -60,7 +59,10 @@ my $url = $ENV{ZENAH_URL};
 my $ua = LWP::UserAgent->new;
 if ($complete) {
   my $q = shift || '';
-  req('/text/completions?query='.$q);
+  my $res = req('/text/completions?query='.$q) or exit;
+  foreach my $c (@$res) {
+    print $c, "\n" if ($command eq 'zah' || $c =~ s!/$command$!!o);
+  }
   exit;
 }
 if ($bash) {
@@ -68,25 +70,24 @@ if ($bash) {
 # edit the URL below to point to your ZenAH server
 ZENAH_URL=http://localhost:3000/ ; export ZENAH_URL
 
-_zah()
+_zah_!.$command.q!()
 {
   if [ $COMP_CWORD -eq 1 ]; then
-    COMPREPLY=( $(zah --complete ${COMP_WORDS[COMP_CWORD]}) )
+    COMPREPLY=( $(!.$0.q! --complete ${COMP_WORDS[COMP_CWORD]}) )
   else
     COMPREPLY=()
   fi
   return 0
 }
-complete -F _zah zah
+complete -F _zah_!.$command.' '.$command."\n\n";
 
-!;
   exit;
 }
 
 my $a = shift or pod2usage(1);
 $a =~ s/\/$//;
-$a =~ s/\//&args=/g;
-req('/ajax?fname=device_func&args='.$a);
+my $res = req('/ajax/'.$a.'/'.($command eq 'zah' ? '' : $command)) or exit;
+print map { $_."\n" } @$res;
 exit;
 
 sub req {
@@ -95,12 +96,11 @@ sub req {
   my $res = LWP::UserAgent->new->get($url);
   if ($res->is_success) {
     my $content = $res->content;
-    $content =~ s/\r?\n/\n/g;
-    print $content, "\n";
+    return [ split /\r?\n/, $content ];
   } elsif ($verbose || !$complete) {
     die $res->status_line, "\n", $verbose ? $res->content : '';
   }
-  exit;
+  return
 }
 
 =head1 SEE ALSO
