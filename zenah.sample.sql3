@@ -274,7 +274,7 @@ CREATE TABLE "rule" (
   "mtime" int(11) default NULL,
   "ftime" int(11) default NULL
 );
-INSERT INTO "rule" VALUES(1,'cuckoo','recurrence freq=hourly minutes="[0,15,30,45]"','at','xpl -m xpl-cmnd c osd.basic command=clear text="It is [% zenah.datetime.strftime("%H:%M") %]" delay=10
+INSERT INTO "rule" VALUES(1,'cuckoo','recurrence freq=hourly minutes="[0,15,30,45]"','at','xpl -m xpl-cmnd -c osd.basic command=clear text="It is [% zenah.datetime.strftime("%H:%M") %]" delay=10
 ',1,1186321944,1186778702);
 INSERT INTO "rule" VALUES(2,'x10lamp_trigger','message_type="xpl-trig" class="x10.basic" command=(on|off|bright|dim)','xpl','[% SET lamp_name = zenah.map.lookup(''x10lamp_trigger'',xpl.device) %]
 [% IF lamp_name %]
