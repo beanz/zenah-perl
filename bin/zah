@@ -59,7 +59,7 @@ my $url = $ENV{ZENAH_URL};
 my $ua = LWP::UserAgent->new;
 if ($complete) {
   my $q = shift || '';
-  my $res = req('/text/completions?query='.$q) or exit;
+  my $res = req('/completions/'.$q) or exit;
   foreach my $c (@$res) {
     print $c, "\n" if ($command eq 'zah' || $c =~ s!/$command$!!o);
   }
