@@ -61,14 +61,16 @@ if ($complete) {
   my $q = shift || '';
   my $res = req('/completions/'.$q) or exit;
   foreach my $c (@$res) {
-    print $c, "\n" if ($command eq 'zah' || $c =~ s!/$command$!!o);
+    print $c, "\n" if ($command eq 'zah' || $c =~ s!/$command$!!o ||
+                      ($command eq 'off' && $c =~ s!/close$!!) ||
+                      ($command eq 'on' && $c =~ s!/open$!!));
   }
   exit;
 }
 if ($bash) {
   print q!
 # edit the URL below to point to your ZenAH server
-ZENAH_URL=http://localhost:3000/ ; export ZENAH_URL
+ZENAH_URL=http://localhost:3000 ; export ZENAH_URL
 
 _zah_!.$command.q!()
 {
