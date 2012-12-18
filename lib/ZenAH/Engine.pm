@@ -49,7 +49,6 @@ use Module::Pluggable instantiate => 'new';
 use ZenAH::DBIC;
 
 require Exporter;
-use AutoLoader qw(AUTOLOAD);
 
 our @ISA = qw(xPL::Client);
 our %EXPORT_TAGS = ( 'all' => [ qw() ] );

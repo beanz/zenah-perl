@@ -32,7 +32,6 @@ use warnings;
 use ZenAH::CDBI;
 
 require Exporter;
-use AutoLoader qw(AUTOLOAD);
 
 our @ISA = qw(Exporter);
 our %EXPORT_TAGS = ( 'all' => [ qw() ] );

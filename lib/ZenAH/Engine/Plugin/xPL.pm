@@ -33,7 +33,6 @@ use xPL::Message;
 use xPL::Base qw/simple_tokenizer/;
 
 require Exporter;
-use AutoLoader qw(AUTOLOAD);
 
 our @ISA = qw(xPL::Base);
 our %EXPORT_TAGS = ( 'all' => [ qw() ] );
