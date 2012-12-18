@@ -12,4 +12,8 @@ __PACKAGE__->has_many('room_attribute_links' =>
 __PACKAGE__->many_to_many('attributes' => 'room_attribute_links',
                           'room_attribute');
 
+__PACKAGE__->has_many('room_device_links' => 'ZenAH::DBIC::RoomDeviceLink',
+                      'room');
+__PACKAGE__->many_to_many('devices' => 'room_device_links', 'device');
+
 1;
