@@ -341,7 +341,7 @@ sub run_action {
       warn "no action defined for '$type'";
       next;
     }
-    $self->info('Action: ', $type, ' ', (defined $spec ? $spec : 'undef'),"\n");
+    #$self->info('Action: ', $type, ' ', (defined $spec ? $spec : 'undef'),"\n");
     my $res = $self->action_callback($type)->(spec => $spec,
                                               remaining => $remaining,
                                               stash => $stash);
