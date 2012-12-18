@@ -29,6 +29,7 @@ use strict;
 use warnings;
 use AnyEvent::MQTT;
 use xPL::Base qw/simple_tokenizer/;
+use JSON;
 
 require Exporter;
 
@@ -68,6 +69,7 @@ sub new {
 
   my %p = @_;
   my $engine = $self->{_engine} = $p{engine};
+  my $json = $self->{_json} = JSON->new;
 
   my $mqtt = $self->{_mqtt} =
     AnyEvent::MQTT->new(keep_alive_timer => 30,
@@ -86,6 +88,11 @@ sub new {
 
   $engine->add_action(type => "mqtt",
                       callback => sub { $self->action_mqtt(@_) });
+
+  $engine->add_timer(id => 'mqtt_timer',
+                     timeout => -300,
+                     callback => sub { $self->read(); 1; });
+
   return $self;
 }
 
@@ -118,7 +125,7 @@ which have the type 'mqtt'.
 
 sub remove {
   my ($self, $rule) = @_;
-  $self->{_engine}->remove_mqtt_callback('trigger-for-rule-'.$rule);
+  $self->{_mqtt}->unsubscribe($rule->trig);
   delete $self->{_mqtt_sub}->{$rule};
   return 1;
 }
@@ -155,6 +162,46 @@ sub action_mqtt {
   $spec{qos} = 0 unless (defined $spec{qos});
   $self->{_mqtt}->publish(%spec);
   return 1;
+}
+
+=head2 C<read(%params)>
+
+This timer callback reads the device/room details and publishes them
+to MQTT.
+
+=cut
+
+sub read {
+  my $self = shift;
+  my $rs = $self->{_engine}->{_db}->resultset('Device')->search;
+
+  while (my $device = $rs->next) {
+    my %rec =
+      (
+       name => $device->name,
+       string => $device->string,
+       rooms => [ map { $_->name } $device->rooms ],
+       controls => [ map { { name => $_->name, string => $_->string }
+                         } $device->controls ],
+      );
+    $self->{_mqtt}->publish(topic => '/zenah/bnz/device/'.$device->name,
+                            message => $self->{_json}->encode(\%rec),
+                            retain => 1);
+  }
+
+  $rs = $self->{_engine}->{_db}->resultset('Room')->search;
+
+  while (my $room = $rs->next) {
+    my %rec =
+      (
+       name => $room->name,
+       string => $room->string,
+       devices => [ map { $_->name } $room->devices ],
+      );
+    $self->{_mqtt}->publish(topic => '/zenah/bnz/room/'.$room->name,
+                            message => $self->{_json}->encode(\%rec),
+                            retain => 1);
+  }
 }
 
 # Autoload methods go after =cut, and are processed by the autosplit program.
