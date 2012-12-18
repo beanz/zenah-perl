@@ -87,8 +87,8 @@ sub new {
                        add_callback => sub { $self->add(@_) },
                        remove_callback => sub { $self->remove(@_) });
 
-  $engine->add_action(type => "redis",
-                      callback => sub { $self->action_mqtt(@_) });
+  $engine->add_action(type => 'redis',
+                      callback => sub { $self->action_redis(@_) });
 
   $engine->add_timer(id => 'redis_timer',
                      timeout => -300,
@@ -134,18 +134,19 @@ sub remove {
 =head2 C<fire($rule, %params)>
 
 This method is the callback that triggers rules when an Redis message is
-matched.  It passes the mqtt message object to the action template as
-the 'mqtt' entry in the stash.
+matched.  It passes the redis message object to the action template as
+the 'redis' entry in the stash.
 
 =cut
 
 sub fire {
-  my ($self, $rule, $topic, $message, $obj) = @_;
-  $self->{_engine}->trigger_rule($rule, { mqtt => $obj });
+  my ($self, $rule, $message, $topic, $pattern) = @_;
+  $self->{_engine}->trigger_rule($rule,
+                                 { message => $message, topic => $topic });
   return 1;
 }
 
-=head2 C<action_mqtt(%params)>
+=head2 C<action_redis(%params)>
 
 This method is registered as a callback for the 'redis' action.  It
 takes Redis command and arguments as arguments.
@@ -184,9 +185,11 @@ sub read {
       (
        name => $device->name,
        string => $device->string,
-       rooms => [ map { $_->name } $device->rooms ],
-       controls => [ map { { name => $_->name, string => $_->string }
-                         } $device->controls ],
+       rooms => $self->{_json}->encode([ map { $_->name } $device->rooms ]),
+       controls =>
+         $self->{_json}->encode([ map {
+           { name => $_->name, string => $_->string }
+         } $device->controls ]),
       );
     my $cv = $self->{_redis}->hmset('device.'.$device->name, %rec);
     $self->{_cv}->{$cv} = $cv;
@@ -205,7 +208,7 @@ sub read {
       (
        name => $room->name,
        string => $room->string,
-       devices => [ map { $_->name } $room->devices ],
+       devices => $self->{_json}->encode([ map { $_->name } $room->devices ]),
       );
     my $cv = $self->{_redis}->hmset('room.'.$room->name, %rec);
     $self->{_cv}->{$cv} = $cv;
