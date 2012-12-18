@@ -363,7 +363,7 @@ the "last fired" time, C<ftime>, field in the database.
 sub trigger_rule {
   my $self = shift;
   my $rule = shift;
-  print "Triggered rule: ", $rule->name, "\n";
+  #print "Triggered rule: ", $rule->name, "\n";
   my $action = $self->rule_template_document($rule);
   $rule->ftime(time);
   $rule->update();
