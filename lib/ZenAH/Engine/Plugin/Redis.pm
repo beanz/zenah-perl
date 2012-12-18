@@ -208,7 +208,7 @@ sub read {
       (
        name => $room->name,
        string => $room->string,
-       devices => $self->{_json}->encode([ map { $_->name } $room->devices ]),
+       #devices => $self->{_json}->encode([ map { $_->name } $room->devices ]),
       );
     my $cv = $self->{_redis}->hmset('room.'.$room->name, %rec);
     $self->{_cv}->{$cv} = $cv;
