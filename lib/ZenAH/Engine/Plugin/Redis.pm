@@ -141,8 +141,9 @@ the 'redis' entry in the stash.
 
 sub fire {
   my ($self, $rule, $message, $topic, $pattern) = @_;
-  $self->{_engine}->trigger_rule($rule,
-                                 { message => $message, topic => $topic });
+  my %args = ( message => $message, topic => $topic );
+  eval { my $data = $self->{_json}->decode($message); $args{data} = $data; };
+  $self->{_engine}->trigger_rule($rule, \%args);
   return 1;
 }
 
