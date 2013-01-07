@@ -96,7 +96,7 @@ is supported with the following syntax:
 Filters xPL messages depending on whether the value of the device field
 appears as a 'name' in the Map table with the given type.  This is used
 to avoid firing rules that will do lookups using the 'map' stash in the
-template but fail becuase no entry is found.
+template but fail because no entry is found.
 
 =item C<lookup_blah(arg1,arg2,...)>
 
