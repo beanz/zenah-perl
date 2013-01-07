@@ -98,7 +98,7 @@ my %crud =
        required => [ qw/name type active/ ],
        optional => [ qw/trig action/ ],
        constraint_methods => {
-         type => qr/^(?:xpl|scene|at)$/,
+         type => qr/^(?:xpl|scene|at|redis|mqtt)$/,
          active => qr/^[01]$/,
        },
      },
